@@ -1,0 +1,18 @@
+pyLottoverwaltung
+
+Installieren:
+
+Das Programm benötigt Python 2.7 dazu. www.python.org/download/ 
+und Qt4 für Python 2.7 www.riverbankcomputing.com/software/pyqt/download
+
+Start mit: 
+python lotto.pyw
+
+Das Layout (lotto_dateneing.ui) kann mit den Qt4-Designer bearbeitet werden,
+kann dann mit diesem Befehl wieder in Python umgewandelt werden:
+
+cd lotto
+ lotto_ui_zu_py.bat
+
+Das Programm hat die Creative Commons by-sa Lizenz
+http://creativecommons.org/licenses/by-sa/3.0/deed.de
