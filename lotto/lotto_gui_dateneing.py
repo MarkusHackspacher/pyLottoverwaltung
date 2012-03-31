@@ -466,6 +466,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
        self.gz_laden_aktiv = False
             
     def onBtn_Zufall(self):
+        """ Die Zufallszahen generieren
+        """
         from zufallszahl import zufallszahlen
         i_anzahl=6
         i_hochste=49

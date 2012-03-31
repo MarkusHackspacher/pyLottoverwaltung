@@ -3,3 +3,7 @@
 *.pyo
 *.pyt
 *.pytc
+.eric4project/
+lotto/.directory
+lotto/datenbank.sqlite
+pyLottoverwaltung.e4p
