@@ -1,6 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-__rev_id__ = """$Id: lotto_gui_dateneing.py,v 0.1 2010/12/28 Markus Hackspacher cc by-sa $"""
+"""
+Das Hauptprogramm
+"""
+
+import sys
 import sqlite3
 from PyQt4 import QtGui, QtCore
 
@@ -29,16 +33,16 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
 
         # Slots einrichten 
         #Datenbank Funktionen
-        self.connect(self.Btn_gz_anzeigen,QtCore.SIGNAL("clicked()"),self.onBtn_gz_anzeigen)
-        self.connect(self.Btn_ls_anzeigen,QtCore.SIGNAL("clicked()"),self.onBtn_gz_anzeigen)
-        self.connect(self.Btn_gz_loeschen,QtCore.SIGNAL("clicked()"),self.onBtn_gz_loeschen)
-        self.connect(self.Btn_ls_loeschen,QtCore.SIGNAL("clicked()"),self.onBtn_gz_loeschen)
-        self.connect(self.Btn_gz_auswerten,QtCore.SIGNAL("clicked()"),self.onBtn_gz_auswerten)
-        self.connect(self.Btn_ls_auswerten,QtCore.SIGNAL("clicked()"),self.onBtn_ls_auswerten)
+        self.connect(self.Btn_gz_anzeigen,QtCore.SIGNAL("clicked()"), self.onBtn_gz_anzeigen)
+        self.connect(self.Btn_ls_anzeigen,QtCore.SIGNAL("clicked()"), self.onBtn_gz_anzeigen)
+        self.connect(self.Btn_gz_loeschen,QtCore.SIGNAL("clicked()"), self.onBtn_gz_loeschen)
+        self.connect(self.Btn_ls_loeschen,QtCore.SIGNAL("clicked()"), self.onBtn_gz_loeschen)
+        self.connect(self.Btn_gz_auswerten,QtCore.SIGNAL("clicked()"), self.onBtn_gz_auswerten)
+        self.connect(self.Btn_ls_auswerten,QtCore.SIGNAL("clicked()"), self.onBtn_ls_auswerten)
 
         #Felder mit Zufallszahen ausfüllen und der jeweiligen Datenbank hinzufügen
-        self.connect(self.Btn_Zufall,QtCore.SIGNAL("clicked()"),self.onBtn_Zufall)
-        self.connect(self.Btn_hinzu,QtCore.SIGNAL("clicked()"),self.onBtn_hinzu) 
+        self.connect(self.Btn_Zufall,QtCore.SIGNAL("clicked()"), self.onBtn_Zufall)
+        self.connect(self.Btn_hinzu,QtCore.SIGNAL("clicked()"), self.onBtn_hinzu) 
 
         #Zahlenfelder
         self.connect(self.pushButton, QtCore.SIGNAL("clicked()"), self.spinBox_1clear)
@@ -48,18 +52,18 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.connect(self.pushButton_5, QtCore.SIGNAL("clicked()"), self.spinBox_5clear)
         self.connect(self.pushButton_6, QtCore.SIGNAL("clicked()"), self.spinBox_6clear)
         self.connect(self.pushButton_7, QtCore.SIGNAL("clicked()"), self.spinBox_7clear)
-        self.connect(self.spinBox_1,QtCore.SIGNAL("valueChanged(int)"),self.focusSpinBox_1)
-        self.connect(self.spinBox_2,QtCore.SIGNAL("valueChanged(int)"),self.focusSpinBox_2)
-        self.connect(self.spinBox_3,QtCore.SIGNAL("valueChanged(int)"),self.focusSpinBox_3)
-        self.connect(self.spinBox_4,QtCore.SIGNAL("valueChanged(int)"),self.focusSpinBox_4)
-        self.connect(self.spinBox_5,QtCore.SIGNAL("valueChanged(int)"),self.focusSpinBox_5)
-        self.connect(self.spinBox_6,QtCore.SIGNAL("valueChanged(int)"),self.focusSpinBox_6)
-        self.connect(self.spinBox_7,QtCore.SIGNAL("valueChanged(int)"),self.focusSpinBox_7)
+        self.connect(self.spinBox_1,QtCore.SIGNAL("valueChanged(int)"), self.focusSpinBox_1)
+        self.connect(self.spinBox_2,QtCore.SIGNAL("valueChanged(int)"), self.focusSpinBox_2)
+        self.connect(self.spinBox_3,QtCore.SIGNAL("valueChanged(int)"), self.focusSpinBox_3)
+        self.connect(self.spinBox_4,QtCore.SIGNAL("valueChanged(int)"), self.focusSpinBox_4)
+        self.connect(self.spinBox_5,QtCore.SIGNAL("valueChanged(int)"), self.focusSpinBox_5)
+        self.connect(self.spinBox_6,QtCore.SIGNAL("valueChanged(int)"), self.focusSpinBox_6)
+        self.connect(self.spinBox_7,QtCore.SIGNAL("valueChanged(int)"), self.focusSpinBox_7)
 
-        self.connect(self.com_modus,QtCore.SIGNAL("currentIndexChanged(int)"),self.onmodus)
-        self.connect(self.com_laufzeit,QtCore.SIGNAL("currentIndexChanged(int)"),self.onlaufzeit)
+        self.connect(self.com_modus,QtCore.SIGNAL("currentIndexChanged(int)"), self.onmodus)
+        self.connect(self.com_laufzeit,QtCore.SIGNAL("currentIndexChanged(int)"), self.onlaufzeit)
 
-        self.connect(self.calendarWidget,QtCore.SIGNAL("selectionChanged()"),self.oncalendarWidget)
+        self.connect(self.calendarWidget,QtCore.SIGNAL("selectionChanged()"), self.oncalendarWidget)
 
         # 1 bis 49 Felder
         self.connect(self.Btn_1,QtCore.SIGNAL("clicked()"),self.onEingabefeld_1)
@@ -132,7 +136,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
                self.c.execute("select * from ziehung")
            lottodaten = self.c.fetchall()
            text =('Datum: {0} Zahlen: {1} {2} {3} {4} {5} {6}' \
-            .format(lottodaten[block][0],lottodaten[block][1], lottodaten[block][2],lottodaten[block][3],lottodaten[block][4],lottodaten[block][5], lottodaten[block][6]))
+            .format(lottodaten[block][0],lottodaten[block][1], lottodaten[block][2], lottodaten[block][3], lottodaten[block][4],lottodaten[block][5], lottodaten[block][6]))
            self.lab_daten_gewinnz.setText(text)
         
     def ondaten_lottoschein(self):
@@ -761,17 +765,10 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.geaendert()
 
 def gui():
-  import sys 
   app = QtGui.QApplication(sys.argv) 
   dialog = MeinDialog() 
   dialog.show() 
   sys.exit(app.exec_())
 
 if __name__ == "__main__":
-  import sys 
-  app = QtGui.QApplication(sys.argv) 
-  dialog = MeinDialog() 
-  dialog.show() 
-  sys.exit(app.exec_())
-else:
-  print 'wird als Modul aufgerufen'
+  gui()
