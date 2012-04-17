@@ -16,6 +16,15 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """Fenster oeffnen und Werte zuweisen"""
         QtGui.QDialog.__init__(self) 
         self.setupUi(self)
+        self.Btn = []
+        for button in xrange(49):
+            self.Btn.append(QtGui.QPushButton(self.gridLayoutWidget))
+        for button in xrange(49):
+            self.Btn[button].setMaximumSize(QtCore.QSize(58, 16777215))
+            self.gridLayout.addWidget(self.Btn[button], int(button / 7),  int(button % 7), 1, 1)
+            self.Btn[button].setAutoFillBackground(False)
+            self.Btn[button].setText(QtGui.QApplication.translate("MainWindow", str(button + 1), None, QtGui.QApplication.UnicodeUTF8))
+  
         self.spinBox_1.clear()
         self.spinBox_2.clear()
         self.spinBox_3.clear()
@@ -28,9 +37,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.conn = sqlite3.connect('datenbank.sqlite')
         self.c = self.conn.cursor()
         self.onBtn_gz_laden()
-        self.onBtn_ls_laden()
+        self.onBtn_ls_laden()        
         
-
         # Slots einrichten 
         #Datenbank Funktionen
         self.connect(self.Btn_gz_anzeigen,QtCore.SIGNAL("clicked()"), self.onBtn_gz_anzeigen)
@@ -66,55 +74,55 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.connect(self.calendarWidget,QtCore.SIGNAL("selectionChanged()"), self.oncalendarWidget)
 
         # 1 bis 49 Felder
-        self.connect(self.Btn_1,QtCore.SIGNAL("clicked()"),self.onEingabefeld_1)
-        self.connect(self.Btn_2,QtCore.SIGNAL("clicked()"),self.onEingabefeld_2)
-        self.connect(self.Btn_3,QtCore.SIGNAL("clicked()"),self.onEingabefeld_3)
-        self.connect(self.Btn_4,QtCore.SIGNAL("clicked()"),self.onEingabefeld_4)
-        self.connect(self.Btn_5,QtCore.SIGNAL("clicked()"),self.onEingabefeld_5)
-        self.connect(self.Btn_6,QtCore.SIGNAL("clicked()"),self.onEingabefeld_6)
-        self.connect(self.Btn_7,QtCore.SIGNAL("clicked()"),self.onEingabefeld_7)
-        self.connect(self.Btn_8,QtCore.SIGNAL("clicked()"),self.onEingabefeld_8)
-        self.connect(self.Btn_9,QtCore.SIGNAL("clicked()"),self.onEingabefeld_9)
-        self.connect(self.Btn_10,QtCore.SIGNAL("clicked()"),self.onEingabefeld_10)
-        self.connect(self.Btn_11,QtCore.SIGNAL("clicked()"),self.onEingabefeld_11)
-        self.connect(self.Btn_12,QtCore.SIGNAL("clicked()"),self.onEingabefeld_12)
-        self.connect(self.Btn_13,QtCore.SIGNAL("clicked()"),self.onEingabefeld_13)
-        self.connect(self.Btn_14,QtCore.SIGNAL("clicked()"),self.onEingabefeld_14)
-        self.connect(self.Btn_15,QtCore.SIGNAL("clicked()"),self.onEingabefeld_15)
-        self.connect(self.Btn_16,QtCore.SIGNAL("clicked()"),self.onEingabefeld_16)
-        self.connect(self.Btn_17,QtCore.SIGNAL("clicked()"),self.onEingabefeld_17)
-        self.connect(self.Btn_18,QtCore.SIGNAL("clicked()"),self.onEingabefeld_18)
-        self.connect(self.Btn_19,QtCore.SIGNAL("clicked()"),self.onEingabefeld_19)
-        self.connect(self.Btn_20,QtCore.SIGNAL("clicked()"),self.onEingabefeld_20)
-        self.connect(self.Btn_21,QtCore.SIGNAL("clicked()"),self.onEingabefeld_21)
-        self.connect(self.Btn_22,QtCore.SIGNAL("clicked()"),self.onEingabefeld_22)
-        self.connect(self.Btn_23,QtCore.SIGNAL("clicked()"),self.onEingabefeld_23)
-        self.connect(self.Btn_24,QtCore.SIGNAL("clicked()"),self.onEingabefeld_24)
-        self.connect(self.Btn_25,QtCore.SIGNAL("clicked()"),self.onEingabefeld_25)
-        self.connect(self.Btn_26,QtCore.SIGNAL("clicked()"),self.onEingabefeld_26)
-        self.connect(self.Btn_27,QtCore.SIGNAL("clicked()"),self.onEingabefeld_27)
-        self.connect(self.Btn_28,QtCore.SIGNAL("clicked()"),self.onEingabefeld_28)
-        self.connect(self.Btn_29,QtCore.SIGNAL("clicked()"),self.onEingabefeld_29)
-        self.connect(self.Btn_30,QtCore.SIGNAL("clicked()"),self.onEingabefeld_30)
-        self.connect(self.Btn_31,QtCore.SIGNAL("clicked()"),self.onEingabefeld_31)
-        self.connect(self.Btn_32,QtCore.SIGNAL("clicked()"),self.onEingabefeld_32)
-        self.connect(self.Btn_33,QtCore.SIGNAL("clicked()"),self.onEingabefeld_33)
-        self.connect(self.Btn_34,QtCore.SIGNAL("clicked()"),self.onEingabefeld_34)
-        self.connect(self.Btn_35,QtCore.SIGNAL("clicked()"),self.onEingabefeld_35)
-        self.connect(self.Btn_36,QtCore.SIGNAL("clicked()"),self.onEingabefeld_36)
-        self.connect(self.Btn_37,QtCore.SIGNAL("clicked()"),self.onEingabefeld_37)
-        self.connect(self.Btn_38,QtCore.SIGNAL("clicked()"),self.onEingabefeld_38)
-        self.connect(self.Btn_39,QtCore.SIGNAL("clicked()"),self.onEingabefeld_39)
-        self.connect(self.Btn_40,QtCore.SIGNAL("clicked()"),self.onEingabefeld_40)
-        self.connect(self.Btn_41,QtCore.SIGNAL("clicked()"),self.onEingabefeld_41)
-        self.connect(self.Btn_42,QtCore.SIGNAL("clicked()"),self.onEingabefeld_42)
-        self.connect(self.Btn_43,QtCore.SIGNAL("clicked()"),self.onEingabefeld_43)
-        self.connect(self.Btn_44,QtCore.SIGNAL("clicked()"),self.onEingabefeld_44)
-        self.connect(self.Btn_45,QtCore.SIGNAL("clicked()"),self.onEingabefeld_45)
-        self.connect(self.Btn_46,QtCore.SIGNAL("clicked()"),self.onEingabefeld_46)
-        self.connect(self.Btn_47,QtCore.SIGNAL("clicked()"),self.onEingabefeld_47)
-        self.connect(self.Btn_48,QtCore.SIGNAL("clicked()"),self.onEingabefeld_48)
-        self.connect(self.Btn_49,QtCore.SIGNAL("clicked()"),self.onEingabefeld_49)
+        self.connect(self.Btn[0],QtCore.SIGNAL("clicked()"),self.onEingabefeld_1)
+        self.connect(self.Btn[1],QtCore.SIGNAL("clicked()"),self.onEingabefeld_2)        
+        self.connect(self.Btn[2],QtCore.SIGNAL("clicked()"),self.onEingabefeld_3)
+        self.connect(self.Btn[3],QtCore.SIGNAL("clicked()"),self.onEingabefeld_4)
+        self.connect(self.Btn[4],QtCore.SIGNAL("clicked()"),self.onEingabefeld_5)
+        self.connect(self.Btn[5],QtCore.SIGNAL("clicked()"),self.onEingabefeld_6)
+        self.connect(self.Btn[6],QtCore.SIGNAL("clicked()"),self.onEingabefeld_7)
+        self.connect(self.Btn[7],QtCore.SIGNAL("clicked()"),self.onEingabefeld_8)
+        self.connect(self.Btn[8],QtCore.SIGNAL("clicked()"),self.onEingabefeld_9)
+        self.connect(self.Btn[9],QtCore.SIGNAL("clicked()"),self.onEingabefeld_10)
+        self.connect(self.Btn[10],QtCore.SIGNAL("clicked()"),self.onEingabefeld_11)
+        self.connect(self.Btn[11],QtCore.SIGNAL("clicked()"),self.onEingabefeld_12)
+        self.connect(self.Btn[12],QtCore.SIGNAL("clicked()"),self.onEingabefeld_13)
+        self.connect(self.Btn[13],QtCore.SIGNAL("clicked()"),self.onEingabefeld_14)
+        self.connect(self.Btn[14],QtCore.SIGNAL("clicked()"),self.onEingabefeld_15)
+        self.connect(self.Btn[15],QtCore.SIGNAL("clicked()"),self.onEingabefeld_16)
+        self.connect(self.Btn[16],QtCore.SIGNAL("clicked()"),self.onEingabefeld_17)
+        self.connect(self.Btn[17],QtCore.SIGNAL("clicked()"),self.onEingabefeld_18)
+        self.connect(self.Btn[18],QtCore.SIGNAL("clicked()"),self.onEingabefeld_19)
+        self.connect(self.Btn[19],QtCore.SIGNAL("clicked()"),self.onEingabefeld_20)
+        self.connect(self.Btn[20],QtCore.SIGNAL("clicked()"),self.onEingabefeld_21)
+        self.connect(self.Btn[21],QtCore.SIGNAL("clicked()"),self.onEingabefeld_22)
+        self.connect(self.Btn[22],QtCore.SIGNAL("clicked()"),self.onEingabefeld_23)
+        self.connect(self.Btn[23],QtCore.SIGNAL("clicked()"),self.onEingabefeld_24)
+        self.connect(self.Btn[24],QtCore.SIGNAL("clicked()"),self.onEingabefeld_25)
+        self.connect(self.Btn[25],QtCore.SIGNAL("clicked()"),self.onEingabefeld_26)
+        self.connect(self.Btn[26],QtCore.SIGNAL("clicked()"),self.onEingabefeld_27)
+        self.connect(self.Btn[27],QtCore.SIGNAL("clicked()"),self.onEingabefeld_28)
+        self.connect(self.Btn[28],QtCore.SIGNAL("clicked()"),self.onEingabefeld_29)
+        self.connect(self.Btn[29],QtCore.SIGNAL("clicked()"),self.onEingabefeld_30)
+        self.connect(self.Btn[30],QtCore.SIGNAL("clicked()"),self.onEingabefeld_31)
+        self.connect(self.Btn[31],QtCore.SIGNAL("clicked()"),self.onEingabefeld_32)
+        self.connect(self.Btn[32],QtCore.SIGNAL("clicked()"),self.onEingabefeld_33)
+        self.connect(self.Btn[33],QtCore.SIGNAL("clicked()"),self.onEingabefeld_34)
+        self.connect(self.Btn[34],QtCore.SIGNAL("clicked()"),self.onEingabefeld_35)
+        self.connect(self.Btn[35],QtCore.SIGNAL("clicked()"),self.onEingabefeld_36)
+        self.connect(self.Btn[36],QtCore.SIGNAL("clicked()"),self.onEingabefeld_37)
+        self.connect(self.Btn[37],QtCore.SIGNAL("clicked()"),self.onEingabefeld_38)
+        self.connect(self.Btn[38],QtCore.SIGNAL("clicked()"),self.onEingabefeld_39)
+        self.connect(self.Btn[39],QtCore.SIGNAL("clicked()"),self.onEingabefeld_40)
+        self.connect(self.Btn[40],QtCore.SIGNAL("clicked()"),self.onEingabefeld_41)
+        self.connect(self.Btn[41],QtCore.SIGNAL("clicked()"),self.onEingabefeld_42)
+        self.connect(self.Btn[42],QtCore.SIGNAL("clicked()"),self.onEingabefeld_43)
+        self.connect(self.Btn[43],QtCore.SIGNAL("clicked()"),self.onEingabefeld_44)
+        self.connect(self.Btn[44],QtCore.SIGNAL("clicked()"),self.onEingabefeld_45)
+        self.connect(self.Btn[45],QtCore.SIGNAL("clicked()"),self.onEingabefeld_46)
+        self.connect(self.Btn[46],QtCore.SIGNAL("clicked()"),self.onEingabefeld_47)
+        self.connect(self.Btn[47],QtCore.SIGNAL("clicked()"),self.onEingabefeld_48)
+        self.connect(self.Btn[48],QtCore.SIGNAL("clicked()"),self.onEingabefeld_49)
         
         self.statusBar().showMessage('Bereit')
 
@@ -380,23 +388,23 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         text = 'Daten hinzugefügt '+str(datum.day())+ '.' + str(datum.month())+ '.' + str(datum.year())
         
         if self.com_modus.currentIndex()==0:
-	   try:
+            try:
                self.c.execute('select * from ziehung')
-           except:
+            except:
                self.c.execute("create table ziehung (d date, zahl_1 INTEGER, zahl_2 INTEGER, zahl_3 INTEGER, \
                  zahl_4 INTEGER, zahl_5 INTEGER, zahl_6 INTEGER, zahl_zusatz INTEGER, \
                  zahl_super INTEGER, zahl_spiel77 INTEGER, zahl_spielsuper6 INTEGER)")
-           self.c.execute("insert into ziehung(d, zahl_1, zahl_2,zahl_3,zahl_4,zahl_5,zahl_6, \
+            self.c.execute("insert into ziehung(d, zahl_1, zahl_2,zahl_3,zahl_4,zahl_5,zahl_6, \
              zahl_zusatz,zahl_super , zahl_spiel77,zahl_spielsuper6) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
              (day, self.spinBox_1.value(), self.spinBox_2.value(), self.spinBox_3.value(), \
              self.spinBox_4.value(),self.spinBox_5.value(),self.spinBox_6.value(),self.spinBox_7.value(),\
              self.spinBox_superz.value(),self.spinBox_spiel77.value(),self.spinBox_super6.value()))
-           self.edi_daten_gewinnz.appendPlainText(text)
+            self.edi_daten_gewinnz.appendPlainText(text)
 
 
         else:
             self.spinBox_1.value()
-	    try:
+            try:
                 self.c.execute('select * from schein')
             except:
                 self.c.execute("create table schein (d date, zahl_1 INTEGER, zahl_2 INTEGER, zahl_3 INTEGER, \
@@ -519,10 +527,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
            self.pushButton_7.setVisible(True)
 
     def onlaufzeit(self):
-        print 'onlaufzeit',self.com_laufzeit.currentIndex()
-        
-        
-        
+        print 'onlaufzeit',self.com_laufzeit.currentIndex()        
+
     def geaendert(self):
         """Überprüfen der SpinBoxen damit nicht zwei den gleichen Wert haben
         """
@@ -534,205 +540,14 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         a.append(self.spinBox_5.value())
         a.append(self.spinBox_6.value())
         a.append(self.spinBox_7.value())
-	    
+    
         #Setzen der Botton je nach Wert der Spinbox
-        if 1 in a:
-            self.Btn_1.setFlat(False)
-        else:
-            self.Btn_1.setFlat(True)
-        if 2 in a:
-            self.Btn_2.setFlat(False)
-        else:
-            self.Btn_2.setFlat(True)
-        if 3 in a:
-            self.Btn_3.setFlat(False)
-        else:
-            self.Btn_3.setFlat(True)
-        if 4 in a:
-            self.Btn_4.setFlat(False)
-        else:
-            self.Btn_4.setFlat(True)
-        if 5 in a:
-            self.Btn_5.setFlat(False)
-        else:
-            self.Btn_5.setFlat(True)
-        if 6 in a:
-            self.Btn_6.setFlat(False)
-        else:
-            self.Btn_6.setFlat(True)
-        if 7 in a:
-            self.Btn_7.setFlat(False)
-        else:
-            self.Btn_7.setFlat(True)
-        if 8 in a:
-            self.Btn_8.setFlat(False)
-        else:
-            self.Btn_8.setFlat(True)
-        if 9 in a:
-            self.Btn_9.setFlat(False)
-        else:
-            self.Btn_9.setFlat(True)
-        if 10 in a:
-            self.Btn_10.setFlat(False)
-        else:
-            self.Btn_10.setFlat(True)
-        if 11 in a:
-            self.Btn_11.setFlat(False)
-        else:
-            self.Btn_11.setFlat(True)
-        if 12 in a:
-            self.Btn_12.setFlat(False)
-        else:
-            self.Btn_12.setFlat(True)
-        if 13 in a:
-            self.Btn_13.setFlat(False)
-        else:
-            self.Btn_13.setFlat(True)
-        if 14 in a:
-            self.Btn_14.setFlat(False)
-        else:
-            self.Btn_14.setFlat(True)
-        if 15 in a:
-            self.Btn_15.setFlat(False)
-        else:
-            self.Btn_15.setFlat(True)
-        if 16 in a:
-            self.Btn_16.setFlat(False)
-        else:
-            self.Btn_16.setFlat(True)
-        if 17 in a:
-            self.Btn_17.setFlat(False)
-        else:
-            self.Btn_17.setFlat(True)
-        if 18 in a:
-            self.Btn_18.setFlat(False)
-        else:
-            self.Btn_18.setFlat(True)
-        if 19 in a:
-            self.Btn_19.setFlat(False)
-        else:
-            self.Btn_19.setFlat(True)
-        if 20 in a:
-            self.Btn_20.setFlat(False)
-        else:
-            self.Btn_20.setFlat(True)
-        if 21 in a:
-            self.Btn_21.setFlat(False)
-        else:
-            self.Btn_21.setFlat(True)
-        if 22 in a:
-            self.Btn_22.setFlat(False)
-        else:
-            self.Btn_22.setFlat(True)
-        if 23 in a:
-            self.Btn_23.setFlat(False)
-        else:
-            self.Btn_23.setFlat(True)
-        if 24 in a:
-            self.Btn_24.setFlat(False)
-        else:
-            self.Btn_24.setFlat(True)
-        if 25 in a:
-            self.Btn_25.setFlat(False)
-        else:
-            self.Btn_25.setFlat(True)
-        if 26 in a:
-            self.Btn_26.setFlat(False)
-        else:
-            self.Btn_26.setFlat(True)
-        if 27 in a:
-            self.Btn_27.setFlat(False)
-        else:
-            self.Btn_27.setFlat(True)
-        if 28 in a:
-            self.Btn_28.setFlat(False)
-        else:
-            self.Btn_28.setFlat(True)
-        if 29 in a:
-            self.Btn_29.setFlat(False)
-        else:
-            self.Btn_29.setFlat(True)
-        if 30 in a:
-            self.Btn_30.setFlat(False)
-        else:
-            self.Btn_30.setFlat(True)
-        if 31 in a:
-            self.Btn_31.setFlat(False)
-        else:
-            self.Btn_31.setFlat(True)
-        if 32 in a:
-            self.Btn_32.setFlat(False)
-        else:
-            self.Btn_32.setFlat(True)
-        if 33 in a:
-            self.Btn_33.setFlat(False)
-        else:
-            self.Btn_33.setFlat(True)
-        if 34 in a:
-            self.Btn_34.setFlat(False)
-        else:
-            self.Btn_34.setFlat(True)
-        if 35 in a:
-            self.Btn_35.setFlat(False)
-        else:
-            self.Btn_35.setFlat(True)
-        if 36 in a:
-            self.Btn_36.setFlat(False)
-        else:
-            self.Btn_36.setFlat(True)
-        if 37 in a:
-            self.Btn_37.setFlat(False)
-        else:
-            self.Btn_37.setFlat(True)
-        if 38 in a:
-            self.Btn_38.setFlat(False)
-        else:
-            self.Btn_38.setFlat(True)
-        if 39 in a:
-            self.Btn_39.setFlat(False)
-        else:
-            self.Btn_39.setFlat(True)
-        if 40 in a:
-            self.Btn_40.setFlat(False)
-        else:
-            self.Btn_40.setFlat(True)
-        if 41 in a:
-            self.Btn_41.setFlat(False)
-        else:
-            self.Btn_41.setFlat(True)
-        if 42 in a:
-            self.Btn_42.setFlat(False)
-        else:
-            self.Btn_42.setFlat(True)
-        if 43 in a:
-            self.Btn_43.setFlat(False)
-        else:
-            self.Btn_43.setFlat(True)
-        if 44 in a:
-            self.Btn_44.setFlat(False)
-        else:
-            self.Btn_44.setFlat(True)
-        if 45 in a:
-            self.Btn_45.setFlat(False)
-        else:
-            self.Btn_45.setFlat(True)
-        if 46 in a:
-            self.Btn_46.setFlat(False)
-        else:
-            self.Btn_46.setFlat(True)
-        if 47 in a:
-            self.Btn_47.setFlat(False)
-        else:
-            self.Btn_47.setFlat(True)
-        if 48 in a:
-            self.Btn_48.setFlat(False)
-        else:
-            self.Btn_48.setFlat(True)
-        if 49 in a:
-            self.Btn_49.setFlat(False)
-        else:
-            self.Btn_49.setFlat(True)  
-        
+        for button in xrange(49):
+            if button + 1 in a:
+                self.Btn[button].setFlat(False)
+            else:
+                self.Btn[button].setFlat(True)
+                
     def geaendert_btn(self):
         if self.spinBox_1.value()==0:
             self.spinBox_1.setValue(self.zahl)
@@ -765,10 +580,10 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.geaendert()
 
 def gui():
-  app = QtGui.QApplication(sys.argv) 
-  dialog = MeinDialog() 
-  dialog.show() 
-  sys.exit(app.exec_())
+    app = QtGui.QApplication(sys.argv) 
+    dialog = MeinDialog() 
+    dialog.show() 
+    sys.exit(app.exec_())
 
 if __name__ == "__main__":
-  gui()
+    gui()
