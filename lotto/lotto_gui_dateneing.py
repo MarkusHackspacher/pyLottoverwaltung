@@ -415,14 +415,14 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
                  zahl_super INTEGER, zahl_spiel77 INTEGER, zahl_spielsuper6 INTEGER)")
             self.c.execute("insert into ziehung(d, zahl_1, zahl_2,zahl_3,zahl_4,zahl_5,zahl_6, \
              zahl_zusatz,zahl_super , zahl_spiel77,zahl_spielsuper6) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
-             (day, self.spinBox_1.value(), self.spinBox_2.value(), self.spinBox_3.value(), \
-             self.spinBox_4.value(), self.spinBox_5.value(), self.spinBox_6.value(), self.spinBox_7.value(), \
+             (day, self.spinBox_Zahlen[0].value(), self.spinBox_Zahlen[1].value(), self.spinBox_Zahlen[2].value(), \
+             self.spinBox_Zahlen[3].value(), self.spinBox_Zahlen[4].value(), self.spinBox_Zahlen[5].value(), self.spinBox_Zahlen[6].value(), \
              self.spinBox_superz.value(), self.spinBox_spiel77.value(), self.spinBox_super6.value()))
             self.edi_daten_gewinnz.appendPlainText(text)
 
 
         else:
-            self.spinBox_1.value()
+            self.spinBox_Zahlen[0].value()
             try:
                 self.c.execute('select * from schein')
             except:
@@ -430,8 +430,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
                  zahl_4 INTEGER, zahl_5 INTEGER, zahl_6 INTEGER, laufzeit INTEGER)")
             self.c.execute("insert into schein(d, zahl_1, zahl_2,zahl_3,zahl_4,zahl_5,zahl_6, \
              laufzeit) values (?, ?, ?, ?, ?, ?, ?, ?)", \
-             (day, self.spinBox_1.value(), self.spinBox_2.value(), self.spinBox_3.value(), \
-             self.spinBox_4.value(), self.spinBox_5.value(), self.spinBox_6.value(), self.com_laufzeit.currentIndex()))
+             (day, self.spinBox_Zahlen[0].value(), self.spinBox_Zahlen[1].value(), self.spinBox_Zahlen[2].value(), \
+             self.spinBox_Zahlen[3].value(), self.spinBox_Zahlen[4].value(), self.spinBox_Zahlen[5].value(), self.com_laufzeit.currentIndex()))
             self.edi_daten_lottoschein.appendPlainText(text)
         self.conn.commit()
 
@@ -522,7 +522,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
            self.spinBox_super6.setVisible(False)
            self.lab_super6.setVisible(False)
            self.lab_zusatz.setVisible(False)
-           self.pinBox_Zahlen[6].setVisible(False)
+           self.spinBox_Zahlen[6].setVisible(False)
            self.Btn_delete_Number[6].setVisible(False)
            self.spinBox_7clear()
            self.geaendert()
@@ -555,7 +555,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         a.append(self.spinBox_Zahlen[4].value())
         a.append(self.spinBox_Zahlen[5].value())
         a.append(self.spinBox_Zahlen[6].value())
-    
+        
         #Setzen der Botton je nach Wert der Spinbox
         for button in xrange(49):
             if button + 1 in a:
@@ -564,31 +564,40 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
                 self.Btn_Numerary_1to49[button].setFlat(True)
                 
     def geaendert_btn(self):
-        if self.spinBox_Zahlen[0].value()==0:
+        a=[]
+        a.append(self.spinBox_Zahlen[0].value())        
+        a.append(self.spinBox_Zahlen[1].value())
+        a.append(self.spinBox_Zahlen[2].value())
+        a.append(self.spinBox_Zahlen[3].value())
+        a.append(self.spinBox_Zahlen[4].value())
+        a.append(self.spinBox_Zahlen[5].value())
+        a.append(self.spinBox_Zahlen[6].value())
+        
+        if self.spinBox_Zahlen[0].value()==0 and not (self.zahl in a):
             self.spinBox_Zahlen[0].setValue(self.zahl)
         elif self.zahl == self.spinBox_Zahlen[0].value():
             self.spinBox_1clear()
-        elif self.spinBox_Zahlen[1].value()==0:
+        elif self.spinBox_Zahlen[1].value()==0 and not (self.zahl in a):
             self.spinBox_Zahlen[1].setValue(self.zahl)
         elif self.zahl == self.spinBox_Zahlen[1].value():
             self.spinBox_2clear()
-        elif self.spinBox_Zahlen[2].value()==0:
+        elif self.spinBox_Zahlen[2].value()==0 and not (self.zahl in a):
             self.spinBox_Zahlen[2].setValue(self.zahl)
         elif self.zahl == self.spinBox_Zahlen[2].value():
             self.spinBox_3clear()
-        elif self.spinBox_Zahlen[3].value()==0:
+        elif self.spinBox_Zahlen[3].value()==0 and not (self.zahl in a):
             self.spinBox_Zahlen[3].setValue(self.zahl)
         elif self.zahl == self.spinBox_Zahlen[3].value():
             self.spinBox_4clear()
-        elif self.spinBox_Zahlen[4].value()==0:
+        elif self.spinBox_Zahlen[4].value()==0 and not (self.zahl in a):
             self.spinBox_Zahlen[4].setValue(self.zahl)
         elif self.zahl == self.spinBox_Zahlen[4].value():
             self.spinBox_5clear()
-        elif self.spinBox_Zahlen[5].value()==0:
+        elif self.spinBox_Zahlen[5].value()==0 and not (self.zahl in a):
             self.spinBox_Zahlen[5].setValue(self.zahl)
         elif self.zahl == self.spinBox_Zahlen[5].value():
             self.spinBox_6clear()
-        elif self.spinBox_Zahlen[6].value()==0 and self.com_modus.currentIndex()==0:
+        elif self.spinBox_Zahlen[6].value()==0 and self.com_modus.currentIndex()==0 and not (self.zahl in a):
             self.spinBox_Zahlen[6].setValue(self.zahl)
         elif self.zahl == self.spinBox_Zahlen[6].value() or self.com_modus.currentIndex()==1:
             self.spinBox_7clear()
