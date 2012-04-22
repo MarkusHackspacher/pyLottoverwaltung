@@ -7,6 +7,7 @@ Das Hauptprogramm
 import sys
 import sqlite3
 from PyQt4 import QtGui, QtCore
+import functools
 
 from lotto_dateneing import Ui_MainWindow as Dlg
 
@@ -91,55 +92,9 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.connect(self.calendarWidget,QtCore.SIGNAL("selectionChanged()"), self.oncalendarWidget)
 
         # 1 bis 49 Felder
-        self.connect(self.Btn_Numerary_1to49[0],QtCore.SIGNAL("clicked()"),self.onEingabefeld_1)
-        self.connect(self.Btn_Numerary_1to49[1],QtCore.SIGNAL("clicked()"),self.onEingabefeld_2)        
-        self.connect(self.Btn_Numerary_1to49[2],QtCore.SIGNAL("clicked()"),self.onEingabefeld_3)
-        self.connect(self.Btn_Numerary_1to49[3],QtCore.SIGNAL("clicked()"),self.onEingabefeld_4)
-        self.connect(self.Btn_Numerary_1to49[4],QtCore.SIGNAL("clicked()"),self.onEingabefeld_5)
-        self.connect(self.Btn_Numerary_1to49[5],QtCore.SIGNAL("clicked()"),self.onEingabefeld_6)
-        self.connect(self.Btn_Numerary_1to49[6],QtCore.SIGNAL("clicked()"),self.onEingabefeld_7)
-        self.connect(self.Btn_Numerary_1to49[7],QtCore.SIGNAL("clicked()"),self.onEingabefeld_8)
-        self.connect(self.Btn_Numerary_1to49[8],QtCore.SIGNAL("clicked()"),self.onEingabefeld_9)
-        self.connect(self.Btn_Numerary_1to49[9],QtCore.SIGNAL("clicked()"),self.onEingabefeld_10)
-        self.connect(self.Btn_Numerary_1to49[10],QtCore.SIGNAL("clicked()"),self.onEingabefeld_11)
-        self.connect(self.Btn_Numerary_1to49[11],QtCore.SIGNAL("clicked()"),self.onEingabefeld_12)
-        self.connect(self.Btn_Numerary_1to49[12],QtCore.SIGNAL("clicked()"),self.onEingabefeld_13)
-        self.connect(self.Btn_Numerary_1to49[13],QtCore.SIGNAL("clicked()"),self.onEingabefeld_14)
-        self.connect(self.Btn_Numerary_1to49[14],QtCore.SIGNAL("clicked()"),self.onEingabefeld_15)
-        self.connect(self.Btn_Numerary_1to49[15],QtCore.SIGNAL("clicked()"),self.onEingabefeld_16)
-        self.connect(self.Btn_Numerary_1to49[16],QtCore.SIGNAL("clicked()"),self.onEingabefeld_17)
-        self.connect(self.Btn_Numerary_1to49[17],QtCore.SIGNAL("clicked()"),self.onEingabefeld_18)
-        self.connect(self.Btn_Numerary_1to49[18],QtCore.SIGNAL("clicked()"),self.onEingabefeld_19)
-        self.connect(self.Btn_Numerary_1to49[19],QtCore.SIGNAL("clicked()"),self.onEingabefeld_20)
-        self.connect(self.Btn_Numerary_1to49[20],QtCore.SIGNAL("clicked()"),self.onEingabefeld_21)
-        self.connect(self.Btn_Numerary_1to49[21],QtCore.SIGNAL("clicked()"),self.onEingabefeld_22)
-        self.connect(self.Btn_Numerary_1to49[22],QtCore.SIGNAL("clicked()"),self.onEingabefeld_23)
-        self.connect(self.Btn_Numerary_1to49[23],QtCore.SIGNAL("clicked()"),self.onEingabefeld_24)
-        self.connect(self.Btn_Numerary_1to49[24],QtCore.SIGNAL("clicked()"),self.onEingabefeld_25)
-        self.connect(self.Btn_Numerary_1to49[25],QtCore.SIGNAL("clicked()"),self.onEingabefeld_26)
-        self.connect(self.Btn_Numerary_1to49[26],QtCore.SIGNAL("clicked()"),self.onEingabefeld_27)
-        self.connect(self.Btn_Numerary_1to49[27],QtCore.SIGNAL("clicked()"),self.onEingabefeld_28)
-        self.connect(self.Btn_Numerary_1to49[28],QtCore.SIGNAL("clicked()"),self.onEingabefeld_29)
-        self.connect(self.Btn_Numerary_1to49[29],QtCore.SIGNAL("clicked()"),self.onEingabefeld_30)
-        self.connect(self.Btn_Numerary_1to49[30],QtCore.SIGNAL("clicked()"),self.onEingabefeld_31)
-        self.connect(self.Btn_Numerary_1to49[31],QtCore.SIGNAL("clicked()"),self.onEingabefeld_32)
-        self.connect(self.Btn_Numerary_1to49[32],QtCore.SIGNAL("clicked()"),self.onEingabefeld_33)
-        self.connect(self.Btn_Numerary_1to49[33],QtCore.SIGNAL("clicked()"),self.onEingabefeld_34)
-        self.connect(self.Btn_Numerary_1to49[34],QtCore.SIGNAL("clicked()"),self.onEingabefeld_35)
-        self.connect(self.Btn_Numerary_1to49[35],QtCore.SIGNAL("clicked()"),self.onEingabefeld_36)
-        self.connect(self.Btn_Numerary_1to49[36],QtCore.SIGNAL("clicked()"),self.onEingabefeld_37)
-        self.connect(self.Btn_Numerary_1to49[37],QtCore.SIGNAL("clicked()"),self.onEingabefeld_38)
-        self.connect(self.Btn_Numerary_1to49[38],QtCore.SIGNAL("clicked()"),self.onEingabefeld_39)
-        self.connect(self.Btn_Numerary_1to49[39],QtCore.SIGNAL("clicked()"),self.onEingabefeld_40)
-        self.connect(self.Btn_Numerary_1to49[40],QtCore.SIGNAL("clicked()"),self.onEingabefeld_41)
-        self.connect(self.Btn_Numerary_1to49[41],QtCore.SIGNAL("clicked()"),self.onEingabefeld_42)
-        self.connect(self.Btn_Numerary_1to49[42],QtCore.SIGNAL("clicked()"),self.onEingabefeld_43)
-        self.connect(self.Btn_Numerary_1to49[43],QtCore.SIGNAL("clicked()"),self.onEingabefeld_44)
-        self.connect(self.Btn_Numerary_1to49[44],QtCore.SIGNAL("clicked()"),self.onEingabefeld_45)
-        self.connect(self.Btn_Numerary_1to49[45],QtCore.SIGNAL("clicked()"),self.onEingabefeld_46)
-        self.connect(self.Btn_Numerary_1to49[46],QtCore.SIGNAL("clicked()"),self.onEingabefeld_47)
-        self.connect(self.Btn_Numerary_1to49[47],QtCore.SIGNAL("clicked()"),self.onEingabefeld_48)
-        self.connect(self.Btn_Numerary_1to49[48],QtCore.SIGNAL("clicked()"),self.onEingabefeld_49)
+        for button in xrange(49):
+            self.onEingabefeld = functools.partial(self.onEingabefeld_1to49, button + 1)
+            self.connect(self.Btn_Numerary_1to49[button], QtCore.SIGNAL("clicked()"), self.onEingabefeld)
         
         self.statusBar().showMessage('Bereit')
 
@@ -234,154 +189,10 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.spinBox_Zahlen[6].setValue(0)
         self.spinBox_Zahlen[6].clear()
 
-    def onEingabefeld_1(self):
-        self.zahl = 1
+    def onEingabefeld_1to49(self,zahl):
+        self.zahl = zahl
         self.geaendert_btn()
-    def onEingabefeld_2(self):
-        self.zahl = 2
-        self.geaendert_btn()
-    def onEingabefeld_3(self):
-        self.zahl = 3
-        self.geaendert_btn()
-    def onEingabefeld_4(self):
-        self.zahl = 4
-        self.geaendert_btn()
-    def onEingabefeld_5(self):
-        self.zahl = 5
-        self.geaendert_btn()
-    def onEingabefeld_6(self):
-        self.zahl = 6
-        self.geaendert_btn()
-    def onEingabefeld_7(self):
-        self.zahl = 7
-        self.geaendert_btn()
-    def onEingabefeld_8(self):
-        self.zahl = 8
-        self.geaendert_btn()
-    def onEingabefeld_9(self):
-        self.zahl = 9
-        self.geaendert_btn()
-    def onEingabefeld_10(self):
-        self.zahl = 10
-        self.geaendert_btn()
-    def onEingabefeld_11(self):
-        self.zahl = 11
-        self.geaendert_btn()
-    def onEingabefeld_12(self):
-        self.zahl = 12
-        self.geaendert_btn()
-    def onEingabefeld_13(self):
-        self.zahl = 13
-        self.geaendert_btn()
-    def onEingabefeld_14(self):
-        self.zahl = 14
-        self.geaendert_btn()
-    def onEingabefeld_15(self):
-        self.zahl = 15
-        self.geaendert_btn()
-    def onEingabefeld_16(self):
-        self.zahl = 16
-        self.geaendert_btn()
-    def onEingabefeld_17(self):
-        self.zahl = 17
-        self.geaendert_btn()
-    def onEingabefeld_18(self):
-        self.zahl = 18
-        self.geaendert_btn()
-    def onEingabefeld_19(self):
-        self.zahl = 19
-        self.geaendert_btn()
-    def onEingabefeld_20(self):
-        self.zahl = 20
-        self.geaendert_btn()
-    def onEingabefeld_21(self):
-        self.zahl = 21
-        self.geaendert_btn()
-    def onEingabefeld_22(self):
-        self.zahl = 22
-        self.geaendert_btn()
-    def onEingabefeld_23(self):
-        self.zahl = 23
-        self.geaendert_btn()
-    def onEingabefeld_24(self):
-        self.zahl = 24
-        self.geaendert_btn()
-    def onEingabefeld_25(self):
-        self.zahl = 25
-        self.geaendert_btn()
-    def onEingabefeld_26(self):
-        self.zahl = 26
-        self.geaendert_btn()
-    def onEingabefeld_27(self):
-        self.zahl = 27
-        self.geaendert_btn()
-    def onEingabefeld_28(self):
-        self.zahl = 28
-        self.geaendert_btn()
-    def onEingabefeld_29(self):
-        self.zahl = 29
-        self.geaendert_btn()
-    def onEingabefeld_30(self):
-        self.zahl = 30
-        self.geaendert_btn()
-    def onEingabefeld_31(self):
-        self.zahl = 31
-        self.geaendert_btn()
-    def onEingabefeld_32(self):
-        self.zahl = 32
-        self.geaendert_btn()
-    def onEingabefeld_33(self):
-        self.zahl = 33
-        self.geaendert_btn()
-    def onEingabefeld_34(self):
-        self.zahl = 34
-        self.geaendert_btn()
-    def onEingabefeld_35(self):
-        self.zahl = 35
-        self.geaendert_btn()
-    def onEingabefeld_36(self):
-        self.zahl = 36
-        self.geaendert_btn()
-    def onEingabefeld_37(self):
-        self.zahl = 37
-        self.geaendert_btn()
-    def onEingabefeld_38(self):
-        self.zahl = 38
-        self.geaendert_btn()
-    def onEingabefeld_39(self):
-        self.zahl = 39
-        self.geaendert_btn()
-    def onEingabefeld_40(self):
-        self.zahl = 40
-        self.geaendert_btn()
-    def onEingabefeld_41(self):
-        self.zahl = 41
-        self.geaendert_btn()
-    def onEingabefeld_42(self):
-        self.zahl = 42
-        self.geaendert_btn()
-    def onEingabefeld_43(self):
-        self.zahl = 43
-        self.geaendert_btn()
-    def onEingabefeld_44(self):
-        self.zahl = 44
-        self.geaendert_btn()
-    def onEingabefeld_45(self):
-        self.zahl = 45
-        self.geaendert_btn()
-    def onEingabefeld_46(self):
-        self.zahl = 46
-        self.geaendert_btn()
-    def onEingabefeld_47(self):
-        self.zahl = 47
-        self.geaendert_btn()
-    def onEingabefeld_48(self):
-        self.zahl = 48
-        self.geaendert_btn()
-    def onEingabefeld_49(self):
-        self.zahl = 49
-        self.geaendert_btn()
-    
+            
     def focusSpinBox_1(self):
         self.geaendert()
     def focusSpinBox_2(self):
