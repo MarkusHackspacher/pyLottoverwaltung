@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Das Hauptprogramm
+the main programm
 """
 
 import sys
@@ -71,24 +71,14 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.connect(self.Btn_hinzu,QtCore.SIGNAL("clicked()"), self.onBtn_hinzu) 
 
         #Zahlenfelder
-        self.connect(self.Btn_delete_Number[0], QtCore.SIGNAL("clicked()"), self.spinBox_1clear)
-        self.connect(self.Btn_delete_Number[1], QtCore.SIGNAL("clicked()"), self.spinBox_2clear)
-        self.connect(self.Btn_delete_Number[2], QtCore.SIGNAL("clicked()"), self.spinBox_3clear)
-        self.connect(self.Btn_delete_Number[3], QtCore.SIGNAL("clicked()"), self.spinBox_4clear)
-        self.connect(self.Btn_delete_Number[4], QtCore.SIGNAL("clicked()"), self.spinBox_5clear)
-        self.connect(self.Btn_delete_Number[5], QtCore.SIGNAL("clicked()"), self.spinBox_6clear)
-        self.connect(self.Btn_delete_Number[6], QtCore.SIGNAL("clicked()"), self.spinBox_7clear)
-        self.connect(self.spinBox_Zahlen[0],QtCore.SIGNAL("valueChanged(int)"), self.focusSpinBox_1)
-        self.connect(self.spinBox_Zahlen[1],QtCore.SIGNAL("valueChanged(int)"), self.focusSpinBox_2)
-        self.connect(self.spinBox_Zahlen[2],QtCore.SIGNAL("valueChanged(int)"), self.focusSpinBox_3)
-        self.connect(self.spinBox_Zahlen[3],QtCore.SIGNAL("valueChanged(int)"), self.focusSpinBox_4)
-        self.connect(self.spinBox_Zahlen[4],QtCore.SIGNAL("valueChanged(int)"), self.focusSpinBox_5)
-        self.connect(self.spinBox_Zahlen[5],QtCore.SIGNAL("valueChanged(int)"), self.focusSpinBox_6)
-        self.connect(self.spinBox_Zahlen[6],QtCore.SIGNAL("valueChanged(int)"), self.focusSpinBox_7)
+        for number in xrange(7):
+            self.spinBox_clear = functools.partial(self.spinBox_1to7_clear, number)
+            self.connect(self.Btn_delete_Number[0], QtCore.SIGNAL("clicked()"), self.spinBox_clear)
+            self.focusSpinBox = functools.partial(self.focusSpinBox_1to7, number)
+            self.connect(self.spinBox_Zahlen[0],QtCore.SIGNAL("valueChanged(int)"), self.focusSpinBox)
 
         self.connect(self.com_modus,QtCore.SIGNAL("currentIndexChanged(int)"), self.onmodus)
         self.connect(self.com_laufzeit,QtCore.SIGNAL("currentIndexChanged(int)"), self.onlaufzeit)
-
         self.connect(self.calendarWidget,QtCore.SIGNAL("selectionChanged()"), self.oncalendarWidget)
 
         # 1 bis 49 Felder
@@ -133,8 +123,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
            text =('Datum: {0} Zahlen: {1} {2} {3} {4} {5} {6}' \
             .format(lottodaten[block][0], lottodaten[block][1], lottodaten[block][2], lottodaten[block][3],
              lottodaten[block][4], lottodaten[block][5], lottodaten[block][6]))
-           self.lab_daten_lottoschein.setText(text)
-        
+           self.lab_daten_lottoschein.setText(text)       
  
     def onHilfe(self):
         """ Öffnen der Hilfe Datei im Browser
@@ -167,46 +156,17 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             event.ignore()
 
 
-    def spinBox_1clear(self):
-        self.spinBox_Zahlen[0].setValue(0)
-        self.spinBox_Zahlen[0].clear()
-    def spinBox_2clear(self):
-        self.spinBox_Zahlen[1].setValue(0)
-        self.spinBox_Zahlen[1].clear()
-    def spinBox_3clear(self):
-        self.spinBox_Zahlen[2].setValue(0)
-        self.spinBox_Zahlen[2].clear()
-    def spinBox_4clear(self):
-        self.spinBox_Zahlen[3].setValue(0)
-        self.spinBox_Zahlen[3].clear()
-    def spinBox_5clear(self):
-        self.spinBox_Zahlen[4].setValue(0)
-        self.spinBox_Zahlen[4].clear()
-    def spinBox_6clear(self):
-        self.spinBox_Zahlen[5].setValue(0)
-        self.spinBox_Zahlen[5].clear()
-    def spinBox_7clear(self):
-        self.spinBox_Zahlen[6].setValue(0)
-        self.spinBox_Zahlen[6].clear()
+    def spinBox_1to7_clear(self, number):
+        self.spinBox_Zahlen[number].setValue(0)
+        self.spinBox_Zahlen[number].clear()
 
     def onEingabefeld_1to49(self,zahl):
         self.zahl = zahl
         self.geaendert_btn()
             
-    def focusSpinBox_1(self):
+    def focusSpinBox_1to7(self, number):
         self.geaendert()
-    def focusSpinBox_2(self):
-        self.geaendert()
-    def focusSpinBox_3(self):
-        self.geaendert()
-    def focusSpinBox_4(self):
-        self.geaendert()
-    def focusSpinBox_5(self):
-        self.geaendert()
-    def focusSpinBox_6(self):
-        self.geaendert()
-    def focusSpinBox_7(self):
-        self.geaendert()
+
     def oncalendarWidget(self):
         print 'oncalendarWidget'
         print self.calendarWidget.selectedDate()
@@ -230,7 +190,6 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
              self.spinBox_Zahlen[3].value(), self.spinBox_Zahlen[4].value(), self.spinBox_Zahlen[5].value(), self.spinBox_Zahlen[6].value(), \
              self.spinBox_superz.value(), self.spinBox_spiel77.value(), self.spinBox_super6.value()))
             self.edi_daten_gewinnz.appendPlainText(text)
-
 
         else:
             self.spinBox_Zahlen[0].value()
@@ -335,7 +294,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
            self.lab_zusatz.setVisible(False)
            self.spinBox_Zahlen[6].setVisible(False)
            self.Btn_delete_Number[6].setVisible(False)
-           self.spinBox_7clear()
+           self.spinBox_1to7_clear(6)
            self.geaendert()
 
         else:
@@ -358,15 +317,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
     def geaendert(self):
         """Überprüfen der SpinBoxen damit nicht zwei den gleichen Wert haben
         """
-        a=[]
-        a.append(self.spinBox_Zahlen[0].value())        
-        a.append(self.spinBox_Zahlen[1].value())
-        a.append(self.spinBox_Zahlen[2].value())
-        a.append(self.spinBox_Zahlen[3].value())
-        a.append(self.spinBox_Zahlen[4].value())
-        a.append(self.spinBox_Zahlen[5].value())
-        a.append(self.spinBox_Zahlen[6].value())
-        
+        a = self.draw_numbers()        
         #Setzen der Botton je nach Wert der Spinbox
         for button in xrange(49):
             if button + 1 in a:
@@ -375,6 +326,27 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
                 self.Btn_Numerary_1to49[button].setFlat(True)
                 
     def geaendert_btn(self):
+        a = self.draw_numbers()        
+
+        for number in xrange(6):
+            if self.spinBox_Zahlen[number].value()==0 and not (self.zahl in a):
+                self.spinBox_Zahlen[number].setValue(self.zahl)
+                break
+            elif self.zahl == self.spinBox_Zahlen[number].value():
+                self.spinBox_1to7_clear(number)
+                self.zahl = 0
+                
+        a = self.draw_numbers()          
+        if self.spinBox_Zahlen[6].value()==0 and self.com_modus.currentIndex()==0 and not (self.zahl in a):
+            self.spinBox_Zahlen[6].setValue(self.zahl)
+        elif self.zahl == self.spinBox_Zahlen[6].value() or self.com_modus.currentIndex()==1:
+            self.spinBox_1to7_clear(6)
+        self.geaendert()
+
+    def draw_numbers(self):
+        """
+        this numbers are in the draw
+        """
         a=[]
         a.append(self.spinBox_Zahlen[0].value())        
         a.append(self.spinBox_Zahlen[1].value())
@@ -383,36 +355,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         a.append(self.spinBox_Zahlen[4].value())
         a.append(self.spinBox_Zahlen[5].value())
         a.append(self.spinBox_Zahlen[6].value())
-        
-        if self.spinBox_Zahlen[0].value()==0 and not (self.zahl in a):
-            self.spinBox_Zahlen[0].setValue(self.zahl)
-        elif self.zahl == self.spinBox_Zahlen[0].value():
-            self.spinBox_1clear()
-        elif self.spinBox_Zahlen[1].value()==0 and not (self.zahl in a):
-            self.spinBox_Zahlen[1].setValue(self.zahl)
-        elif self.zahl == self.spinBox_Zahlen[1].value():
-            self.spinBox_2clear()
-        elif self.spinBox_Zahlen[2].value()==0 and not (self.zahl in a):
-            self.spinBox_Zahlen[2].setValue(self.zahl)
-        elif self.zahl == self.spinBox_Zahlen[2].value():
-            self.spinBox_3clear()
-        elif self.spinBox_Zahlen[3].value()==0 and not (self.zahl in a):
-            self.spinBox_Zahlen[3].setValue(self.zahl)
-        elif self.zahl == self.spinBox_Zahlen[3].value():
-            self.spinBox_4clear()
-        elif self.spinBox_Zahlen[4].value()==0 and not (self.zahl in a):
-            self.spinBox_Zahlen[4].setValue(self.zahl)
-        elif self.zahl == self.spinBox_Zahlen[4].value():
-            self.spinBox_5clear()
-        elif self.spinBox_Zahlen[5].value()==0 and not (self.zahl in a):
-            self.spinBox_Zahlen[5].setValue(self.zahl)
-        elif self.zahl == self.spinBox_Zahlen[5].value():
-            self.spinBox_6clear()
-        elif self.spinBox_Zahlen[6].value()==0 and self.com_modus.currentIndex()==0 and not (self.zahl in a):
-            self.spinBox_Zahlen[6].setValue(self.zahl)
-        elif self.zahl == self.spinBox_Zahlen[6].value() or self.com_modus.currentIndex()==1:
-            self.spinBox_7clear()
-        self.geaendert()
+        return a
 
 def gui():
     app = QtGui.QApplication(sys.argv) 
