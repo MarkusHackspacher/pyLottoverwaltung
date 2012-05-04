@@ -95,6 +95,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.connect(self.edi_daten_lottoschein, QtCore.SIGNAL('cursorPositionChanged()'), self.ondaten_lottoschein)
  
     def ondaten_gewinnz(self):
+       """Die Daten der Gewinnzahlen bzw. Auslosung in der Datenbank speichern"""
        if not self.gz_laden_aktiv:
            block=self.edi_daten_gewinnz.textCursor().blockNumber()
            try:
@@ -111,6 +112,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
            self.lab_daten_gewinnz.setText(text)
         
     def ondaten_lottoschein(self):
+       """Die Daten des Lottoscheins in der Datenbank speichern"""
        if not self.ls_laden_aktiv:
            block=self.edi_daten_lottoschein.textCursor().blockNumber()
            try:
@@ -144,6 +146,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         a.exec_()
         
     def closeEvent(self, event):
+        """ Das Fenster wird geschlossen """
         self.c.close()
         return
         reply = QtGui.QMessageBox.question(self, 'Message',
@@ -157,17 +160,21 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
 
 
     def spinBox_1to7_clear(self, number):
+        """Die SpinBoxen 1 bis 6 und Zusatzzahl löschen"""
         self.spinBox_Zahlen[number].setValue(0)
         self.spinBox_Zahlen[number].clear()
 
     def onEingabefeld_1to49(self,zahl):
+        """Ein Zahlenfelder 1 bis 49 wurde angeklickt"""
         self.zahl = zahl
         self.geaendert_btn()
             
     def focusSpinBox_1to7(self, number):
+        """Ein Auswahlfelder der 7 Gewinnzahlen oder Lottoscheins hat sich geaendert"""
         self.geaendert()
 
     def oncalendarWidget(self):
+        """Tag der Ziehung oder der Beginn des Lottoscheins"""
         print 'oncalendarWidget'
         print self.calendarWidget.selectedDate()
      
@@ -206,25 +213,43 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.conn.commit()
 
     def onBtn_gz_auswerten(self):
+        """Gewinnzahlen auswerten
+            ToDo: noch programmieren
+        """
         print 'onBtn_gz_auswerten', self.edi_daten_gewinnz.textCursor().blockNumber()
 
     def onBtn_ls_auswerten(self):
+        """Lottoschein auswerten
+            ToDo: noch programmieren
+        """
         print 'onBtn_ls_auswerten', self.edi_daten_gewinnz.textCursor().blockNumber()
 
 
     def onBtn_gz_anzeigen(self):
+        """Gewinnzahlen anzeigen
+            ToDo: noch programmieren
+        """
         print 'onBtn_gz_anzeigen', self.edi_daten_gewinnz.textCursor().blockNumber()
 
     def onBtn_ls_anzeigen(self):
+        """Lottoschein anzeigen
+            ToDo: noch programmieren
+        """
         print 'onBtn_ls_anzeigen', self.edi_daten_gewinnz.textCursor().blockNumber()
         
     def onBtn_gz_loeschen(self):
+        """Gewinnzahlen aus der Datenbank loeschen
+            ToDo: noch programmieren
+        """
         #self.c.rowcount = self.edi_daten_gewinnz.textCursor().blockNumber()
         #self.c.execute('DELETE FROM table')
         #self.conn.commit()
         self.onBtn_gz_laden()
 
     def onBtn_ls_loeschen(self):
+        """Lottoschein aus der Datenbank loeschen
+            ToDo: noch programmieren
+        """
         print 'onBtn_loesch', self.edi_daten_gewinnz.textCursor().blockNumber()
 
     def onBtn_ls_laden(self):
@@ -312,6 +337,9 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
            self.Btn_delete_Number[6].setVisible(True)
 
     def onlaufzeit(self):
+        """Laufzeit des Lottoscheins
+        ToDo: noch programmieren
+        """
         print 'onlaufzeit',self.com_laufzeit.currentIndex()        
 
     def geaendert(self):
@@ -326,6 +354,9 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
                 self.Btn_Numerary_1to49[button].setFlat(True)
                 
     def geaendert_btn(self):
+        """in den SpinBoxen die Nummern der Zahlen 1 bis 49 anzeigen
+        wenn die Zahl abgwaehlt wird, wird auch der Wert der entsprechende Spinbox geloescht
+        """
         a = self.draw_numbers()        
 
         for number in xrange(6):
