@@ -230,19 +230,22 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             ToDo: noch programmieren
         """
         print 'onBtn_gz_anzeigen', self.edi_daten_gewinnz.textCursor().blockNumber()
+        self.onBtn_gz_laden()
 
     def onBtn_ls_anzeigen(self):
         """Lottoschein anzeigen
             ToDo: noch programmieren
         """
         print 'onBtn_ls_anzeigen', self.edi_daten_gewinnz.textCursor().blockNumber()
+        self.onBtn_ls_laden()
         
     def onBtn_gz_loeschen(self):
         """Gewinnzahlen aus der Datenbank loeschen
             ToDo: noch programmieren
         """
+        
         #self.c.rowcount = self.edi_daten_gewinnz.textCursor().blockNumber()
-        #self.c.execute('DELETE FROM table')
+        #self.c.execute('DELETE FROM ziehung where rowid= 3')
         #self.conn.commit()
         self.onBtn_gz_laden()
 
