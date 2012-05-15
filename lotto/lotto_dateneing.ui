@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>859</width>
+    <width>881</width>
     <height>646</height>
    </rect>
   </property>
@@ -57,7 +57,7 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
      <rect>
       <x>470</x>
       <y>30</y>
-      <width>381</width>
+      <width>401</width>
       <height>151</height>
      </rect>
     </property>
@@ -111,7 +111,7 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
    <widget class="QPushButton" name="Btn_gz_loeschen">
     <property name="geometry">
      <rect>
-      <x>750</x>
+      <x>780</x>
       <y>240</y>
       <width>91</width>
       <height>25</height>
@@ -362,7 +362,7 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
    <widget class="QPushButton" name="Btn_ls_loeschen">
     <property name="geometry">
      <rect>
-      <x>750</x>
+      <x>780</x>
       <y>560</y>
       <width>91</width>
       <height>25</height>
@@ -390,7 +390,7 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
      <rect>
       <x>470</x>
       <y>340</y>
-      <width>381</width>
+      <width>401</width>
       <height>161</height>
      </rect>
     </property>
@@ -438,7 +438,7 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
      <rect>
       <x>470</x>
       <y>180</y>
-      <width>381</width>
+      <width>401</width>
       <height>51</height>
      </rect>
     </property>
@@ -451,7 +451,7 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
      <rect>
       <x>470</x>
       <y>500</y>
-      <width>381</width>
+      <width>401</width>
       <height>51</height>
      </rect>
     </property>
@@ -491,7 +491,7 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>859</width>
+     <width>881</width>
      <height>21</height>
     </rect>
    </property>

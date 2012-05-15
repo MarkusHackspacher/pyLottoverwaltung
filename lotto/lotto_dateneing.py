@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'lotto_dateneing.ui'
 #
-# Created: Sat Apr 21 12:25:02 2012
+# Created: Tue May 15 21:46:35 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(859, 646)
+        MainWindow.resize(881, 646)
         self.Lottozahlen = QtGui.QWidget(MainWindow)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -39,7 +39,7 @@ class Ui_MainWindow(object):
         self.gridLayout.setMargin(0)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.edi_daten_gewinnz = QtGui.QPlainTextEdit(self.Lottozahlen)
-        self.edi_daten_gewinnz.setGeometry(QtCore.QRect(470, 30, 381, 151))
+        self.edi_daten_gewinnz.setGeometry(QtCore.QRect(470, 30, 401, 151))
         self.edi_daten_gewinnz.setAutoFillBackground(False)
         self.edi_daten_gewinnz.setUndoRedoEnabled(False)
         self.edi_daten_gewinnz.setReadOnly(True)
@@ -57,7 +57,7 @@ class Ui_MainWindow(object):
         self.Btn_hinzu.setGeometry(QtCore.QRect(220, 260, 231, 25))
         self.Btn_hinzu.setObjectName(_fromUtf8("Btn_hinzu"))
         self.Btn_gz_loeschen = QtGui.QPushButton(self.Lottozahlen)
-        self.Btn_gz_loeschen.setGeometry(QtCore.QRect(750, 240, 91, 25))
+        self.Btn_gz_loeschen.setGeometry(QtCore.QRect(780, 240, 91, 25))
         self.Btn_gz_loeschen.setObjectName(_fromUtf8("Btn_gz_loeschen"))
         self.Btn_gz_auswerten = QtGui.QPushButton(self.Lottozahlen)
         self.Btn_gz_auswerten.setGeometry(QtCore.QRect(470, 240, 91, 25))
@@ -122,13 +122,13 @@ class Ui_MainWindow(object):
         self.lab_laufzeit.setGeometry(QtCore.QRect(280, 360, 69, 18))
         self.lab_laufzeit.setObjectName(_fromUtf8("lab_laufzeit"))
         self.Btn_ls_loeschen = QtGui.QPushButton(self.Lottozahlen)
-        self.Btn_ls_loeschen.setGeometry(QtCore.QRect(750, 560, 91, 25))
+        self.Btn_ls_loeschen.setGeometry(QtCore.QRect(780, 560, 91, 25))
         self.Btn_ls_loeschen.setObjectName(_fromUtf8("Btn_ls_loeschen"))
         self.Btn_ls_auswerten = QtGui.QPushButton(self.Lottozahlen)
         self.Btn_ls_auswerten.setGeometry(QtCore.QRect(470, 560, 91, 25))
         self.Btn_ls_auswerten.setObjectName(_fromUtf8("Btn_ls_auswerten"))
         self.edi_daten_lottoschein = QtGui.QPlainTextEdit(self.Lottozahlen)
-        self.edi_daten_lottoschein.setGeometry(QtCore.QRect(470, 340, 381, 161))
+        self.edi_daten_lottoschein.setGeometry(QtCore.QRect(470, 340, 401, 161))
         self.edi_daten_lottoschein.setAutoFillBackground(False)
         self.edi_daten_lottoschein.setUndoRedoEnabled(False)
         self.edi_daten_lottoschein.setReadOnly(True)
@@ -140,10 +140,10 @@ class Ui_MainWindow(object):
         self.label_2.setGeometry(QtCore.QRect(600, 0, 111, 20))
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.lab_daten_gewinnz = QtGui.QLabel(self.Lottozahlen)
-        self.lab_daten_gewinnz.setGeometry(QtCore.QRect(470, 180, 381, 51))
+        self.lab_daten_gewinnz.setGeometry(QtCore.QRect(470, 180, 401, 51))
         self.lab_daten_gewinnz.setObjectName(_fromUtf8("lab_daten_gewinnz"))
         self.lab_daten_lottoschein = QtGui.QLabel(self.Lottozahlen)
-        self.lab_daten_lottoschein.setGeometry(QtCore.QRect(470, 500, 381, 51))
+        self.lab_daten_lottoschein.setGeometry(QtCore.QRect(470, 500, 401, 51))
         self.lab_daten_lottoschein.setObjectName(_fromUtf8("lab_daten_lottoschein"))
         self.Btn_gz_anzeigen = QtGui.QPushButton(self.Lottozahlen)
         self.Btn_gz_anzeigen.setGeometry(QtCore.QRect(620, 240, 98, 25))
@@ -153,7 +153,7 @@ class Ui_MainWindow(object):
         self.Btn_ls_anzeigen.setObjectName(_fromUtf8("Btn_ls_anzeigen"))
         MainWindow.setCentralWidget(self.Lottozahlen)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 859, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 881, 21))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         self.menuDatei = QtGui.QMenu(self.menubar)
         self.menuDatei.setObjectName(_fromUtf8("menuDatei"))

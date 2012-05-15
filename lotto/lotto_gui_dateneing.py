@@ -53,6 +53,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.onmodus()
         self.geaendert()
         self.conn = sqlite3.connect('datenbank.sqlite')
+        self.conn.row_factory = sqlite3.Row
         self.c = self.conn.cursor()
         self.onBtn_gz_laden()
         self.onBtn_ls_laden()        
@@ -243,10 +244,20 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """Gewinnzahlen aus der Datenbank loeschen
             ToDo: noch programmieren
         """
+        if not self.gz_laden_aktiv:
+           block=self.edi_daten_gewinnz.textCursor().blockNumber()
+           try:
+               self.c.execute('select rowid, * from ziehung')
+           except:
+               self.c.execute("create table ziehung (d date, zahl_1 INTEGER, zahl_2 INTEGER, zahl_3 INTEGER, \
+                zahl_4 INTEGER, zahl_5 INTEGER, zahl_6 INTEGER, zahl_zusatz INTEGER, \
+                zahl_super INTEGER, zahl_spiel77 INTEGER, zahl_spielsuper6 INTEGER)")
+               self.c.execute("select  rowid, * from ziehung")
+           lottodaten = self.c.fetchall()
+           
         
-        #self.c.rowcount = self.edi_daten_gewinnz.textCursor().blockNumber()
-        #self.c.execute('DELETE FROM ziehung where rowid= 3')
-        #self.conn.commit()
+        self.c.execute('DELETE FROM ziehung where rowid in ({seq})'.format( seq = lottodaten[block][0]))
+        self.conn.commit()
         self.onBtn_gz_laden()
 
     def onBtn_ls_loeschen(self):
