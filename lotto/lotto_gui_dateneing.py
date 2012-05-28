@@ -10,6 +10,7 @@ from PyQt4 import QtGui, QtCore
 import functools
 
 from lotto_dateneing import Ui_MainWindow as Dlg
+from datahandler import Datahandler
 
 
 class MeinDialog(QtGui.QMainWindow, Dlg): 
@@ -52,9 +53,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
  
         self.onmodus()
         self.geaendert()
-        self.conn = sqlite3.connect('datenbank.sqlite')
-        self.conn.row_factory = sqlite3.Row
-        self.c = self.conn.cursor()
+        self.data_handler = Datahandler('datenbank.sqlite')
         self.onBtn_gz_laden()
         self.onBtn_ls_laden()        
         
@@ -148,7 +147,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         
     def closeEvent(self, event):
         """ Das Fenster wird geschlossen """
-        self.c.close()
+        self.data_handler.close()
         return
         reply = QtGui.QMessageBox.question(self, 'Message',
             "Wirklich Beenden?", QtGui.QMessageBox.Yes | 
@@ -186,32 +185,15 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         text = 'Daten hinzugefügt '+str(datum.day())+ '.' + str(datum.month())+ '.' + str(datum.year())
         
         if self.com_modus.currentIndex()==0:
-            try:
-               self.c.execute('select * from ziehung')
-            except:
-               self.c.execute("create table ziehung (d date, zahl_1 INTEGER, zahl_2 INTEGER, zahl_3 INTEGER, \
-                 zahl_4 INTEGER, zahl_5 INTEGER, zahl_6 INTEGER, zahl_zusatz INTEGER, \
-                 zahl_super INTEGER, zahl_spiel77 INTEGER, zahl_spielsuper6 INTEGER)")
-            self.c.execute("insert into ziehung(d, zahl_1, zahl_2,zahl_3,zahl_4,zahl_5,zahl_6, \
-             zahl_zusatz,zahl_super , zahl_spiel77,zahl_spielsuper6) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
-             (day, self.spinBox_Zahlen[0].value(), self.spinBox_Zahlen[1].value(), self.spinBox_Zahlen[2].value(), \
+            self.data_handler.insert_user((day, self.spinBox_Zahlen[0].value(), self.spinBox_Zahlen[1].value(), self.spinBox_Zahlen[2].value(), \
              self.spinBox_Zahlen[3].value(), self.spinBox_Zahlen[4].value(), self.spinBox_Zahlen[5].value(), self.spinBox_Zahlen[6].value(), \
              self.spinBox_superz.value(), self.spinBox_spiel77.value(), self.spinBox_super6.value()))
             self.edi_daten_gewinnz.appendPlainText(text)
 
         else:
-            self.spinBox_Zahlen[0].value()
-            try:
-                self.c.execute('select * from schein')
-            except:
-                self.c.execute("create table schein (d date, zahl_1 INTEGER, zahl_2 INTEGER, zahl_3 INTEGER, \
-                 zahl_4 INTEGER, zahl_5 INTEGER, zahl_6 INTEGER, laufzeit INTEGER)")
-            self.c.execute("insert into schein(d, zahl_1, zahl_2,zahl_3,zahl_4,zahl_5,zahl_6, \
-             laufzeit) values (?, ?, ?, ?, ?, ?, ?, ?)", \
-             (day, self.spinBox_Zahlen[0].value(), self.spinBox_Zahlen[1].value(), self.spinBox_Zahlen[2].value(), \
+            self.data_handler.insert_schein (day, self.spinBox_Zahlen[0].value(), self.spinBox_Zahlen[1].value(), self.spinBox_Zahlen[2].value(), \
              self.spinBox_Zahlen[3].value(), self.spinBox_Zahlen[4].value(), self.spinBox_Zahlen[5].value(), self.com_laufzeit.currentIndex()))
             self.edi_daten_lottoschein.appendPlainText(text)
-        self.conn.commit()
 
     def onBtn_gz_auswerten(self):
         """Gewinnzahlen auswerten
