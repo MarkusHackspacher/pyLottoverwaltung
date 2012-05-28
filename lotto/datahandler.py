@@ -1,3 +1,9 @@
+# coding: utf-8
+
+"""
+the data handler
+for insert, get and delete data in the database
+"""
 import sqlite3
 import datetime
 
@@ -37,6 +43,7 @@ class Datahandler(object):
         c.close()
 
     def get_ziehung(self, id=None):    
+        """Daten der Ziehung der Lottozahlen auslesen"""
         c = self.connection.cursor()
         if id:
             c.execute("select * from ziehung where id=?", (id,))
@@ -48,6 +55,7 @@ class Datahandler(object):
         return data
         
     def get_schein(self, id=None):    
+        """Daten des Lottoscheines auslesen"""
         c = self.connection.cursor()
         if id:
             c.execute("select * from schein where id=?", (id,))
@@ -59,12 +67,14 @@ class Datahandler(object):
         return data
         
     def delete_ziehung(self, id):
+        """Daten der Ziehung der Lottozahlen löschen"""
         c = self.connection.cursor()
         c.execute("delete from ziehung where rowid=?", (id,))
         self.connection.commit()
         c.close()
 
     def delete_schein(self, id):
+        """Daten eines  Lottoscheines löschen"""
         c = self.connection.cursor()
         c.execute("delete from schein where rowid=?", (id,))
         self.connection.commit()
