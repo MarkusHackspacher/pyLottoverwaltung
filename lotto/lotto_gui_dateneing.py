@@ -60,9 +60,9 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         # Slots einrichten 
         #Datenbank Funktionen
         self.connect(self.Btn_gz_anzeigen,QtCore.SIGNAL("clicked()"), self.onBtn_gz_anzeigen)
-        self.connect(self.Btn_ls_anzeigen,QtCore.SIGNAL("clicked()"), self.onBtn_gz_anzeigen)
+        self.connect(self.Btn_ls_anzeigen,QtCore.SIGNAL("clicked()"), self.onBtn_ls_anzeigen)
         self.connect(self.Btn_gz_loeschen,QtCore.SIGNAL("clicked()"), self.onBtn_gz_loeschen)
-        self.connect(self.Btn_ls_loeschen,QtCore.SIGNAL("clicked()"), self.onBtn_gz_loeschen)
+        self.connect(self.Btn_ls_loeschen,QtCore.SIGNAL("clicked()"), self.onBtn_ls_loeschen)
         self.connect(self.Btn_gz_auswerten,QtCore.SIGNAL("clicked()"), self.onBtn_gz_auswerten)
         self.connect(self.Btn_ls_auswerten,QtCore.SIGNAL("clicked()"), self.onBtn_ls_auswerten)
 
@@ -95,37 +95,22 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.connect(self.edi_daten_lottoschein, QtCore.SIGNAL('cursorPositionChanged()'), self.ondaten_lottoschein)
  
     def ondaten_gewinnz(self):
-       """Die Daten der Gewinnzahlen bzw. Auslosung in der Datenbank speichern"""
-       if not self.gz_laden_aktiv:
-           block=self.edi_daten_gewinnz.textCursor().blockNumber()
-           try:
-               self.c.execute('select * from ziehung')
-           except:
-               self.c.execute("create table ziehung (d date, zahl_1 INTEGER, zahl_2 INTEGER, zahl_3 INTEGER, \
-                zahl_4 INTEGER, zahl_5 INTEGER, zahl_6 INTEGER, zahl_zusatz INTEGER, \
-                zahl_super INTEGER, zahl_spiel77 INTEGER, zahl_spielsuper6 INTEGER)")
-               self.c.execute("select * from ziehung")
-           lottodaten = self.c.fetchall()
-           text =('Datum: {0} Zahlen: {1} {2} {3} {4} {5} {6}' \
-            .format(lottodaten[block][0], lottodaten[block][1], lottodaten[block][2], lottodaten[block][3], 
-             lottodaten[block][4], lottodaten[block][5], lottodaten[block][6]))
-           self.lab_daten_gewinnz.setText(text)
+       """Anzeigen der Gewinnzahlen an den Auswahlfeld"""
+       block=self.edi_daten_gewinnz.textCursor().blockNumber()
+       lottodaten = self.data_handler.get_ziehung()
+       text =('Datum: {0} Zahlen: {1} {2} {3} {4} {5} {6}' \
+        .format(lottodaten[block][1], lottodaten[block][2], lottodaten[block][3], lottodaten[block][4], 
+         lottodaten[block][5], lottodaten[block][6], lottodaten[block][7]))
+       self.lab_daten_gewinnz.setText(text)
         
     def ondaten_lottoschein(self):
-       """Die Daten des Lottoscheins in der Datenbank speichern"""
-       if not self.ls_laden_aktiv:
-           block=self.edi_daten_lottoschein.textCursor().blockNumber()
-           try:
-               self.c.execute('select * from schein')
-           except:
-               self.c.execute("create table schein (d date, zahl_1 INTEGER, zahl_2 INTEGER, zahl_3 INTEGER, \
-                zahl_4 INTEGER, zahl_5 INTEGER, zahl_6 INTEGER, laufzeit INTEGER)")
-               self.c.execute("select * from schein")
-           lottodaten = self.c.fetchall()
-           text =('Datum: {0} Zahlen: {1} {2} {3} {4} {5} {6}' \
-            .format(lottodaten[block][0], lottodaten[block][1], lottodaten[block][2], lottodaten[block][3],
-             lottodaten[block][4], lottodaten[block][5], lottodaten[block][6]))
-           self.lab_daten_lottoschein.setText(text)       
+       """Anzeigen der Daten des Lottoscheins an den Auswahlfeld"""
+       block=self.edi_daten_lottoschein.textCursor().blockNumber()               
+       lottodaten = self.data_handler.get_schein()
+       text =('Datum: {0} Zahlen: {1} {2} {3} {4} {5} {6}' \
+        .format(lottodaten[block][1], lottodaten[block][2], lottodaten[block][3], lottodaten[block][4],
+         lottodaten[block][5], lottodaten[block][6], lottodaten[block][7]))
+       self.lab_daten_lottoschein.setText(text)       
  
     def onHilfe(self):
         """ Öffnen der Hilfe Datei im Browser
@@ -182,17 +167,17 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """Datensatz hinzufügen"""
         datum = self.calendarWidget.selectedDate()
         day = datum.toPyDate()
-        text = 'Daten hinzugefügt '+str(datum.day())+ '.' + str(datum.month())+ '.' + str(datum.year())
+        text = u'Daten hinzugefügt '+str(datum.day())+ '.' + str(datum.month())+ '.' + str(datum.year())
         
         if self.com_modus.currentIndex()==0:
-            self.data_handler.insert_user((day, self.spinBox_Zahlen[0].value(), self.spinBox_Zahlen[1].value(), self.spinBox_Zahlen[2].value(), \
+            self.data_handler.insert_ziehung(day, self.spinBox_Zahlen[0].value(), self.spinBox_Zahlen[1].value(), self.spinBox_Zahlen[2].value(), \
              self.spinBox_Zahlen[3].value(), self.spinBox_Zahlen[4].value(), self.spinBox_Zahlen[5].value(), self.spinBox_Zahlen[6].value(), \
-             self.spinBox_superz.value(), self.spinBox_spiel77.value(), self.spinBox_super6.value()))
+             self.spinBox_superz.value(), self.spinBox_spiel77.value(), self.spinBox_super6.value())
             self.edi_daten_gewinnz.appendPlainText(text)
 
         else:
-            self.data_handler.insert_schein (day, self.spinBox_Zahlen[0].value(), self.spinBox_Zahlen[1].value(), self.spinBox_Zahlen[2].value(), \
-             self.spinBox_Zahlen[3].value(), self.spinBox_Zahlen[4].value(), self.spinBox_Zahlen[5].value(), self.com_laufzeit.currentIndex()))
+            self.data_handler.insert_schein(day, self.spinBox_Zahlen[0].value(), self.spinBox_Zahlen[1].value(), self.spinBox_Zahlen[2].value(), \
+             self.spinBox_Zahlen[3].value(), self.spinBox_Zahlen[4].value(), self.spinBox_Zahlen[5].value(), self.com_laufzeit.currentIndex())
             self.edi_daten_lottoschein.appendPlainText(text)
 
     def onBtn_gz_auswerten(self):
@@ -205,7 +190,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """Lottoschein auswerten
             ToDo: noch programmieren
         """
-        print 'onBtn_ls_auswerten', self.edi_daten_gewinnz.textCursor().blockNumber()
+        print 'onBtn_ls_auswerten', self.edi_daten_lottoschein.textCursor().blockNumber()
 
 
     def onBtn_gz_anzeigen(self):
@@ -219,73 +204,47 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """Lottoschein anzeigen
             ToDo: noch programmieren
         """
-        print 'onBtn_ls_anzeigen', self.edi_daten_gewinnz.textCursor().blockNumber()
+        print 'onBtn_ls_anzeigen', self.edi_daten_lottoschein.textCursor().blockNumber()
         self.onBtn_ls_laden()
         
     def onBtn_gz_loeschen(self):
-        """Gewinnzahlen aus der Datenbank loeschen
-            ToDo: noch programmieren
+        """Gewinnzahlen einer Ziehung aus der Datenbank loeschen
         """
-        if not self.gz_laden_aktiv:
-           block=self.edi_daten_gewinnz.textCursor().blockNumber()
-           try:
-               self.c.execute('select rowid, * from ziehung')
-           except:
-               self.c.execute("create table ziehung (d date, zahl_1 INTEGER, zahl_2 INTEGER, zahl_3 INTEGER, \
-                zahl_4 INTEGER, zahl_5 INTEGER, zahl_6 INTEGER, zahl_zusatz INTEGER, \
-                zahl_super INTEGER, zahl_spiel77 INTEGER, zahl_spielsuper6 INTEGER)")
-               self.c.execute("select  rowid, * from ziehung")
-           lottodaten = self.c.fetchall()
+        block=self.edi_daten_gewinnz.textCursor().blockNumber()
+        lottodaten = self.data_handler.get_ziehung()
            
-        
-        self.c.execute('DELETE FROM ziehung where rowid in ({seq})'.format( seq = lottodaten[block][0]))
-        self.conn.commit()
+        self.data_handler.delete_ziehung(lottodaten[block][0])
         self.onBtn_gz_laden()
 
     def onBtn_ls_loeschen(self):
         """Lottoschein aus der Datenbank loeschen
             ToDo: noch programmieren
         """
-        print 'onBtn_loesch', self.edi_daten_gewinnz.textCursor().blockNumber()
+        block=self.edi_daten_lottoschein.textCursor().blockNumber()
+        lottodaten = self.data_handler.get_schein()
+           
+        self.data_handler.delete_schein(lottodaten[block][0])
+        self.onBtn_ls_laden()
 
     def onBtn_ls_laden(self):
-       """Read the Lottoschein from the Database
-       loading into the QPlainTextEdit
-       """
-       self.ls_laden_aktiv = True
-       self.edi_daten_lottoschein.setPlainText("")
-       try:
-            self.c.execute('select * from schein')
-       except:
-            self.c.execute("create table schein (d date, zahl_1 INTEGER, zahl_2 INTEGER, zahl_3 INTEGER, \
-             zahl_4 INTEGER, zahl_5 INTEGER, zahl_6 INTEGER, laufzeit INTEGER)")
-            self.c.execute("select * from schein")
-       lottodaten = self.c.fetchone()
-       while lottodaten!=None:
+        """Read the Lottoschein from the Database
+        loading into the QPlainTextEdit
+        """
+        self.edi_daten_lottoschein.setPlainText("")
+        lottodaten = self.data_handler.get_schein()
+        for schein in lottodaten:
             self.edi_daten_lottoschein.appendPlainText('Datum: {0} Zahlen: {1} {2} {3} {4} {5} {6}' \
-             .format(lottodaten[0], lottodaten[1], lottodaten[2], lottodaten[3], lottodaten[4], lottodaten[5], lottodaten[6]))
-            lottodaten = self.c.fetchone()
-       self.ls_laden_aktiv = False
+             .format(schein[1], schein[2], schein[3], schein[4], schein[5], schein[6], schein[7]))
 
     def onBtn_gz_laden(self):
-       """Read the Gewinnzahlen from the Database
-       loading into the QPlainTextEdit
-       """
-       self.gz_laden_aktiv = True
-       self.edi_daten_gewinnz.setPlainText("")
-       try:
-           self.c.execute('select * from ziehung')
-       except:
-           self.c.execute("create table ziehung (d date, zahl_1 INTEGER, zahl_2 INTEGER, zahl_3 INTEGER, \
-             zahl_4 INTEGER, zahl_5 INTEGER, zahl_6 INTEGER, zahl_zusatz INTEGER, \
-             zahl_super INTEGER, zahl_spiel77 INTEGER, zahl_spielsuper6 INTEGER)")
-           self.c.execute("select * from ziehung")
-       lottodaten = self.c.fetchone()
-       while lottodaten!=None:
+        """Read the Gewinnzahlen from the Database
+        loading into the QPlainTextEdit
+        """
+        self.edi_daten_gewinnz.setPlainText("")
+        lottodaten = self.data_handler.get_ziehung()
+        for i in lottodaten:
            self.edi_daten_gewinnz.appendPlainText('Datum: {0} Zahlen: {1} {2} {3} {4} {5} {6}' \
-             .format(lottodaten[0], lottodaten[1], lottodaten[2],lottodaten[3],lottodaten[4],lottodaten[5],lottodaten[6]))
-           lottodaten = self.c.fetchone()
-       self.gz_laden_aktiv = False
+            .format(i[1], i[2], i[3], i[4], i[5], i[6], i[7]))
             
     def onBtn_Zufall(self):
         """ Die Zufallszahen generieren

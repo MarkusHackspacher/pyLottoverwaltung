@@ -23,7 +23,7 @@ class Datahandler(object):
         c = self.connection.cursor()
         c.execute("insert into ziehung(d, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
              zahl_zusatz,zahl_super , zahl_spiel77, zahl_spielsuper6) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
-             (day, zahl_1, zahl_2,zahl_3,zahl_4,zahl_5,zahl_6, zahl_zusatz,zahl_super, zahl_spiel77, zahl_spielsuper6)
+             (day, zahl_1, zahl_2,zahl_3,zahl_4,zahl_5,zahl_6, zahl_zusatz,zahl_super, zahl_spiel77, zahl_spielsuper6))
         self.connection.commit()
         c.close()
 
@@ -32,36 +32,41 @@ class Datahandler(object):
         c = self.connection.cursor()
         c.execute("insert into schein(d, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
              laufzeit) values (?, ?, ?, ?, ?, ?, ?, ?)", \
-             (day, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, laufzeit)
+             (day, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, laufzeit))
         self.connection.commit()
         c.close()
 
-        
-        
-        
-
-    def get_users(self, id=None):
+    def get_ziehung(self, id=None):    
         c = self.connection.cursor()
         if id:
-            c.execute("select name from user where id=?", (id,))
+            c.execute("select * from ziehung where id=?", (id,))
         else:
-            c.execute("select * from users")
+            c.execute("select rowid,* from ziehung")
         self.connection.commit()
         data = c.fetchall()
         c.close()
         return data
-
-    def get_user_names(self):
+        
+    def get_schein(self, id=None):    
         c = self.connection.cursor()
-        c.execute("select name from users")
+        if id:
+            c.execute("select * from schein where id=?", (id,))
+        else:
+            c.execute("select rowid,* from schein")
         self.connection.commit()
         data = c.fetchall()
         c.close()
         return data
-
-    def delete_user(self, id):
+        
+    def delete_ziehung(self, id):
         c = self.connection.cursor()
-        c.execute("delete from users where id=?", (id,))
+        c.execute("delete from ziehung where rowid=?", (id,))
+        self.connection.commit()
+        c.close()
+
+    def delete_schein(self, id):
+        c = self.connection.cursor()
+        c.execute("delete from schein where rowid=?", (id,))
         self.connection.commit()
         c.close()
 
