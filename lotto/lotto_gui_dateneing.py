@@ -11,7 +11,16 @@ import functools
 
 from lotto_dateneing import Ui_MainWindow as Dlg
 from datahandler import Datahandler
+from lotto_dialog import Ui_Dialog
 
+
+class ui_lotto_Dialog(QtGui.QDialog, Ui_Dialog): 
+    def __init__(self):
+        """Fenster oeffnen und Werte zuweisen"""
+        QtGui.QDialog.__init__(self) 
+        self.setupUi(self)
+        self.buttonBox.accepted.connect(self.accept)
+        self.buttonBox.rejected.connect(self.close)
 
 class MeinDialog(QtGui.QMainWindow, Dlg): 
     def __init__(self):
@@ -184,6 +193,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """Gewinnzahlen auswerten
             ToDo: noch programmieren
         """
+        dlg = ui_lotto_Dialog()
+        dlg.exec_()
         print 'onBtn_gz_auswerten', self.edi_daten_gewinnz.textCursor().blockNumber()
 
     def onBtn_ls_auswerten(self):
