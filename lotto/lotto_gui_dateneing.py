@@ -27,6 +27,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """Fenster oeffnen und Werte zuweisen"""
         QtGui.QDialog.__init__(self) 
         self.setupUi(self)
+        #array of Button from 1 to 49
         self.Btn_Numerary_1to49 = []
         for button in xrange(49):
             self.Btn_Numerary_1to49.append(QtGui.QPushButton(self.gridLayoutWidget))
@@ -36,7 +37,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             self.Btn_Numerary_1to49[button].setAutoFillBackground(True)
             self.Btn_Numerary_1to49[button].setText(QtGui.QApplication.translate("MainWindow", str(button + 1), 
              None, QtGui.QApplication.UnicodeUTF8))
-                     
+    
+        #set 6 SpinBoxen and 1 
         self.spinBox_Zahlen = []
         self.Btn_delete_Number = []
         for zahlen in xrange(6):
@@ -53,6 +55,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
                 self.horizontalLayout.addWidget(self.spinBox_Zahlen[zahlen])
                 self.horizontalLayout_2.addWidget(self.Btn_delete_Number[zahlen])
             else:
+                #set extra Spinbox
                 self.spinBox_Zahlen[zahlen].setGeometry(QtCore.QRect(130, 360, 51, 23))
                 self.Btn_delete_Number[zahlen].setGeometry(QtCore.QRect(190, 360, 41, 20)) 
             self.spinBox_Zahlen[zahlen].setMaximum(49)
@@ -182,12 +185,13 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             self.data_handler.insert_ziehung(day, self.spinBox_Zahlen[0].value(), self.spinBox_Zahlen[1].value(), self.spinBox_Zahlen[2].value(), \
              self.spinBox_Zahlen[3].value(), self.spinBox_Zahlen[4].value(), self.spinBox_Zahlen[5].value(), self.spinBox_Zahlen[6].value(), \
              self.spinBox_superz.value(), self.spinBox_spiel77.value(), self.spinBox_super6.value())
-            self.edi_daten_gewinnz.appendPlainText(text)
-
+            self.lab_daten_gewinnz.setText(text)
+            self.onBtn_gz_laden()
         else:
             self.data_handler.insert_schein(day, self.spinBox_Zahlen[0].value(), self.spinBox_Zahlen[1].value(), self.spinBox_Zahlen[2].value(), \
              self.spinBox_Zahlen[3].value(), self.spinBox_Zahlen[4].value(), self.spinBox_Zahlen[5].value(), self.com_laufzeit.currentIndex())
-            self.edi_daten_lottoschein.appendPlainText(text)
+            self.lab_daten_lottoschein.setText(text)
+            self.onBtn_ls_laden()
 
     def onBtn_gz_auswerten(self):
         """Gewinnzahlen auswerten
