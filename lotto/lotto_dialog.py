@@ -2,24 +2,29 @@
 
 # Form implementation generated from reading ui file 'lotto_dialog.ui'
 #
-# Created: Sun Jan  9 13:39:49 2011
-#      by: PyQt4 UI code generator 4.7.3
+# Created: Sun Jun 10 23:27:21 2012
+#      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
 
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    _fromUtf8 = lambda s: s
+
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
+        Dialog.setObjectName(_fromUtf8("Dialog"))
         Dialog.resize(413, 333)
         self.label = QtGui.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(140, 0, 91, 18))
-        self.label.setObjectName("label")
+        self.label.setObjectName(_fromUtf8("label"))
         self.buttonBox = QtGui.QDialogButtonBox(Dialog)
         self.buttonBox.setGeometry(QtCore.QRect(180, 290, 200, 27))
         self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName("buttonBox")
+        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
