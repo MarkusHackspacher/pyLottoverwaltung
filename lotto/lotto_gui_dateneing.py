@@ -194,7 +194,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             ToDo: noch programmieren
         """
         dlg = ui_lotto_Dialog()
-        dlg.exec_()
+        print dlg.exec_()
         print 'onBtn_gz_auswerten', self.edi_daten_gewinnz.textCursor().blockNumber()
 
     def onBtn_ls_auswerten(self):
