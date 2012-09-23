@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'lotto_dateneing.ui'
 #
-# Created: Sun Jun 10 23:27:21 2012
-#      by: PyQt4 UI code generator 4.9.1
+# Created: Sun Sep 23 18:51:00 2012
+#      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(881, 646)
+        MainWindow.resize(894, 665)
         self.Lottozahlen = QtGui.QWidget(MainWindow)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -153,7 +153,7 @@ class Ui_MainWindow(object):
         self.Btn_ls_anzeigen.setObjectName(_fromUtf8("Btn_ls_anzeigen"))
         MainWindow.setCentralWidget(self.Lottozahlen)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 881, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 894, 29))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         self.menuDatei = QtGui.QMenu(self.menubar)
         self.menuDatei.setObjectName(_fromUtf8("menuDatei"))
