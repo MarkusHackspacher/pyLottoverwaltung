@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 """
 the main programm
+Lizenz: Creative Commons by-sa
+http://creativecommons.org/licenses/by-sa/3.0/deed.de
 """
 
 import sys
