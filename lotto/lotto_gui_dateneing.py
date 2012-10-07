@@ -220,12 +220,14 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """
         print 'onBtn_ls_auswerten', self.edi_daten_lottoschein.textCursor().blockNumber()
 
-
     def onBtn_gz_anzeigen(self):
         """Gewinnzahlen anzeigen
             ToDo: noch programmieren
         """
         print 'onBtn_gz_anzeigen', self.edi_daten_gewinnz.textCursor().blockNumber()
+        block=self.edi_daten_gewinnz.textCursor().blockNumber()
+        lottodaten = self.data_handler.get_ziehung()
+        print lottodaten[block]
         self.onBtn_gz_laden()
 
     def onBtn_ls_anzeigen(self):
@@ -233,6 +235,9 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             ToDo: noch programmieren
         """
         print 'onBtn_ls_anzeigen', self.edi_daten_lottoschein.textCursor().blockNumber()
+        block=self.edi_daten_lottoschein.textCursor().blockNumber()
+        lottodaten = self.data_handler.get_schein()
+        print lottodaten[block]
         self.onBtn_ls_laden()
         
     def onBtn_gz_loeschen(self):
@@ -246,7 +251,6 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
 
     def onBtn_ls_loeschen(self):
         """Lottoschein aus der Datenbank loeschen
-            ToDo: noch programmieren
         """
         block=self.edi_daten_lottoschein.textCursor().blockNumber()
         lottodaten = self.data_handler.get_schein()

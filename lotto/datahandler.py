@@ -46,7 +46,7 @@ class Datahandler(object):
         """Daten der Ziehung der Lottozahlen auslesen"""
         c = self.connection.cursor()
         if id:
-            c.execute("select * from ziehung where id=?", (id,))
+            c.execute("select * from ziehung where rowid=?", (id,))
         else:
             c.execute("select rowid,* from ziehung")
         self.connection.commit()
@@ -58,7 +58,7 @@ class Datahandler(object):
         """Daten des Lottoscheines auslesen"""
         c = self.connection.cursor()
         if id:
-            c.execute("select * from schein where id=?", (id,))
+            c.execute("select * from schein where rowid=?", (id,))
         else:
             c.execute("select rowid,* from schein")
         self.connection.commit()
