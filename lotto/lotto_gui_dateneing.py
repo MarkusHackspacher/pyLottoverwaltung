@@ -4,6 +4,8 @@
 the main programm
 Lizenz: Creative Commons by-sa
 http://creativecommons.org/licenses/by-sa/3.0/deed.de
+
+MH 2012 
 """
 
 import sys
@@ -18,7 +20,7 @@ from lotto_dialog import Ui_Dialog
 
 class ui_lotto_Dialog(QtGui.QDialog, Ui_Dialog): 
     def __init__(self):
-        """Fenster oeffnen und Werte zuweisen"""
+        """abfragefenster oeffnen"""
         QtGui.QDialog.__init__(self) 
         self.setupUi(self)
         self.buttonBox.accepted.connect(self.accept)
@@ -26,7 +28,13 @@ class ui_lotto_Dialog(QtGui.QDialog, Ui_Dialog):
 
 class MeinDialog(QtGui.QMainWindow, Dlg): 
     def __init__(self):
-        """Fenster oeffnen und Werte zuweisen"""
+        """
+        inital the main window
+        1 to 49 button,
+        7 spinbox,
+        calender,
+        datafield
+        """
         QtGui.QDialog.__init__(self) 
         self.setupUi(self)
         #array of Button from 1 to 49
@@ -40,7 +48,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             self.Btn_Numerary_1to49[button].setText(QtGui.QApplication.translate("MainWindow", str(button + 1), 
              None, QtGui.QApplication.UnicodeUTF8))
     
-        #set 6 SpinBoxen and 1 
+        #set 6 SpinBox and 1 
         self.spinBox_Zahlen = []
         self.Btn_delete_Number = []
         for zahlen in xrange(6):
@@ -71,8 +79,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.onBtn_gz_laden()
         self.onBtn_ls_laden()        
         
-        # Slots einrichten 
-        #Datenbank Funktionen
+        # slots for datanbase funktion
         self.connect(self.Btn_gz_anzeigen,QtCore.SIGNAL("clicked()"), self.onBtn_gz_anzeigen)
         self.connect(self.Btn_ls_anzeigen,QtCore.SIGNAL("clicked()"), self.onBtn_ls_anzeigen)
         self.connect(self.Btn_gz_loeschen,QtCore.SIGNAL("clicked()"), self.onBtn_gz_loeschen)
@@ -80,11 +87,11 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.connect(self.Btn_gz_auswerten,QtCore.SIGNAL("clicked()"), self.onBtn_gz_auswerten)
         self.connect(self.Btn_ls_auswerten,QtCore.SIGNAL("clicked()"), self.onBtn_ls_auswerten)
 
-        #Felder mit Zufallszahen ausfüllen und der jeweiligen Datenbank hinzufügen
+        # fields fill with random numbers and give them to database
         self.connect(self.Btn_Zufall,QtCore.SIGNAL("clicked()"), self.onBtn_Zufall)
         self.connect(self.Btn_hinzu,QtCore.SIGNAL("clicked()"), self.onBtn_hinzu) 
 
-        #Zahlenfelder
+        # fields of draw numbers
         for number in xrange(7):
             self.spinBox_clear = functools.partial(self.spinBox_1to7_clear, number)
             self.connect(self.Btn_delete_Number[0], QtCore.SIGNAL("clicked()"), self.spinBox_clear)
@@ -95,7 +102,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.connect(self.com_laufzeit,QtCore.SIGNAL("currentIndexChanged(int)"), self.onlaufzeit)
         self.connect(self.calendarWidget,QtCore.SIGNAL("selectionChanged()"), self.oncalendarWidget)
 
-        # 1 bis 49 Felder
+        # fields of 1 to 49 numbers
         for button in xrange(49):
             self.onEingabefeld = functools.partial(self.onEingabefeld_1to49, button + 1)
             self.connect(self.Btn_Numerary_1to49[button], QtCore.SIGNAL("clicked()"), self.onEingabefeld)
@@ -178,7 +185,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         print self.calendarWidget.selectedDate()
      
     def onBtn_hinzu(self):
-        """Datensatz hinzufügen"""
+        """drawing numbers move in database """
         datum = self.calendarWidget.selectedDate()
         day = datum.toPyDate()
         text = u'Daten hinzugefügt '+str(datum.day())+ '.' + str(datum.month())+ '.' + str(datum.year())
