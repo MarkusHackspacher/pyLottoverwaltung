@@ -221,27 +221,33 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         print 'onBtn_ls_auswerten', self.edi_daten_lottoschein.textCursor().blockNumber()
 
     def onBtn_gz_anzeigen(self):
-        """Gewinnzahlen anzeigen
-            ToDo: noch programmieren
         """
-        print 'onBtn_gz_anzeigen', self.edi_daten_gewinnz.textCursor().blockNumber()
+        show drawing numbers
+        Gewinnzahlen anzeigen
+        ToDo: noch programmieren, gedacht die Zahlen im großen Feld anzuzeigen.
+        """
         block=self.edi_daten_gewinnz.textCursor().blockNumber()
+        print 'onBtn_gz_anzeigen', block
         lottodaten = self.data_handler.get_ziehung()
         print lottodaten[block]
         self.onBtn_gz_laden()
 
     def onBtn_ls_anzeigen(self):
-        """Lottoschein anzeigen
-            ToDo: noch programmieren
         """
-        print 'onBtn_ls_anzeigen', self.edi_daten_lottoschein.textCursor().blockNumber()
+        show tip numbers
+        Lottoschein anzeigen,
+        ToDo: noch programmieren, gedacht die Zahlen im großen Feld anzuzeigen.
+        """
         block=self.edi_daten_lottoschein.textCursor().blockNumber()
+        print 'onBtn_ls_anzeigen', block
         lottodaten = self.data_handler.get_schein()
         print lottodaten[block]
         self.onBtn_ls_laden()
         
     def onBtn_gz_loeschen(self):
-        """Gewinnzahlen einer Ziehung aus der Datenbank loeschen
+        """ 
+        delete drawing numbers from the database
+        Gewinnzahlen einer Ziehung aus der Datenbank loeschen
         """
         block=self.edi_daten_gewinnz.textCursor().blockNumber()
         lottodaten = self.data_handler.get_ziehung()
@@ -250,7 +256,9 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.onBtn_gz_laden()
 
     def onBtn_ls_loeschen(self):
-        """Lottoschein aus der Datenbank loeschen
+        """
+        delete tip numbers from the database
+        Lottoschein aus der Datenbank loeschen
         """
         block=self.edi_daten_lottoschein.textCursor().blockNumber()
         lottodaten = self.data_handler.get_schein()
