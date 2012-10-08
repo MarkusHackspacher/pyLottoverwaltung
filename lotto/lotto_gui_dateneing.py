@@ -19,12 +19,15 @@ from lotto_dialog import Ui_Dialog
 
 
 class ui_lotto_Dialog(QtGui.QDialog, Ui_Dialog): 
-    def __init__(self):
+    def __init__(self, infotext):
         """abfragefenster oeffnen"""
         QtGui.QDialog.__init__(self) 
         self.setupUi(self)
+        self.setWindowTitle(infotext)
+        self.label.setText('Bewertung')
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.close)
+
 
 class MeinDialog(QtGui.QMainWindow, Dlg): 
     def __init__(self):
@@ -70,7 +73,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
                 self.Btn_delete_Number[zahlen].setGeometry(QtCore.QRect(190, 360, 41, 20)) 
             self.spinBox_Zahlen[zahlen].setMaximum(49)
             self.spinBox_Zahlen[zahlen].clear()
-            self.Btn_delete_Number[zahlen].setText(QtGui.QApplication.translate("MainWindow", "X", None, QtGui.QApplication.UnicodeUTF8))
+            self.Btn_delete_Number[zahlen].setText(QtGui.QApplication.translate( \
+             "MainWindow", "X", None, QtGui.QApplication.UnicodeUTF8))
  
  
         self.onmodus()
@@ -152,18 +156,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         a.exec_()
         
     def closeEvent(self, event):
-        """ Das Fenster wird geschlossen """
+        """ the program exit """
         self.data_handler.close()
-        return
-        reply = QtGui.QMessageBox.question(self, 'Message',
-            "Wirklich Beenden?", QtGui.QMessageBox.Yes | 
-            QtGui.QMessageBox.No, QtGui.QMessageBox.No)
-
-        if reply == QtGui.QMessageBox.Yes:
-            event.accept()
-        else:
-            event.ignore()
-
 
     def spinBox_1to7_clear(self, number):
         """Die SpinBoxen 1 bis 6 und Zusatzzahl löschen"""
@@ -210,7 +204,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """Gewinnzahlen auswerten
             ToDo: noch programmieren
         """
-        dlg = ui_lotto_Dialog()
+        dlg = ui_lotto_Dialog('Gewinnzahlen')
         print dlg.exec_()
         print 'onBtn_gz_auswerten', self.edi_daten_gewinnz.textCursor().blockNumber()
 
@@ -218,6 +212,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """Lottoschein auswerten
             ToDo: noch programmieren
         """
+        dlg = ui_lotto_Dialog('Lottoschein')
+        dlg.exec_()
         print 'onBtn_ls_auswerten', self.edi_daten_lottoschein.textCursor().blockNumber()
 
     def onBtn_gz_anzeigen(self):
