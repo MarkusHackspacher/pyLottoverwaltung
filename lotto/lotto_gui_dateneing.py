@@ -20,7 +20,8 @@ from lotto_dialog import Ui_Dialog
 
 class ui_lotto_Dialog(QtGui.QDialog, Ui_Dialog): 
     def __init__(self, infotext):
-        """abfragefenster oeffnen"""
+        """open analyze dialog
+        Datenauswerte Dialog oeffnen"""
         QtGui.QDialog.__init__(self) 
         self.setupUi(self)
         self.setWindowTitle(infotext)
