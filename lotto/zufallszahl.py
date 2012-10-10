@@ -6,9 +6,11 @@ Erzeugen einer Zufallszahl, mit Modultest beim direkten Aufruf
 
 import random
  
-# Zufallszahl ermitteln und als Wuerfelergebnis nehmen. 
+
 def zufallszahlen(anzahl,maxwert):
     """
+    Zufallszahl ermitteln und als Wuerfelergebnis nehmen
+    return random valve
     @param anzahl: Gibt die Anzahl der Ausgabewerte an. 
     @param maxwert: Gibt den höchsten Zahlenwert an
     @type anzahl: int

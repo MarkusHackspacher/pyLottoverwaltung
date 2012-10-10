@@ -80,5 +80,18 @@ class Datahandler(object):
         self.connection.commit()
         c.close()
 
+    def find_rowid(self, typ, blocknumber):
+        """ Return the RowID from the BlockNumber of dataset
+        @param typ: 0 == Gewinnzahlen, 1 == Lottoschein
+        @param blocknumber: BlockNumber of dataset
+        @type typ: int
+        @type blocknumber: int
+        @return: Return the RowID
+        """
+        if typ == 1:
+            return self.get_schein()[blocknumber][0]
+        else:
+            return self.get_ziehung()[blocknumber][0]
+
     def close(self):
         self.connection.close()

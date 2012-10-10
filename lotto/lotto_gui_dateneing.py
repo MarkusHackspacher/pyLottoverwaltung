@@ -19,13 +19,23 @@ from lotto_dialog import Ui_Dialog
 
 
 class ui_lotto_Dialog(QtGui.QDialog, Ui_Dialog): 
-    def __init__(self, infotext):
+    def __init__(self, typ, rowid):
         """open analyze dialog
-        Datenauswerte Dialog oeffnen"""
+        Datenauswerte Dialog oeffnen
+        @param typ: 0 == Gewinnzahlen, 1 == Lottoschein
+        @param rowid: is the rowid number of the database
+        @type typ: int
+        @type rowid: int
+        @return: give close(0) or accept(1) back
+        """
         QtGui.QDialog.__init__(self) 
         self.setupUi(self)
+        infotext = 'Gewinnzahlen'
+        if typ == 1:
+            infotext = 'Lottoschein'        
         self.setWindowTitle(infotext)
-        self.label.setText('Bewertung')
+        #self.label.setText('Bewertung')
+        self.plainTextEdit.appendPlainText('Zeilen RowID: ' + str(rowid))
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.close)
 
@@ -205,17 +215,17 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """Gewinnzahlen auswerten
             ToDo: noch programmieren
         """
-        dlg = ui_lotto_Dialog('Gewinnzahlen')
+        dlg = ui_lotto_Dialog(0, self.data_handler.find_rowid(0, 
+         self.edi_daten_gewinnz.textCursor().blockNumber()))
         print dlg.exec_()
-        print 'onBtn_gz_auswerten', self.edi_daten_gewinnz.textCursor().blockNumber()
 
     def onBtn_ls_auswerten(self):
         """Lottoschein auswerten
             ToDo: noch programmieren
-        """
-        dlg = ui_lotto_Dialog('Lottoschein')
-        dlg.exec_()
-        print 'onBtn_ls_auswerten', self.edi_daten_lottoschein.textCursor().blockNumber()
+        """      
+        dlg = ui_lotto_Dialog(1, self.data_handler.find_rowid(1, 
+         self.edi_daten_lottoschein.textCursor().blockNumber()))
+        print dlg.exec_()
 
     def onBtn_gz_anzeigen(self):
         """
@@ -245,22 +255,18 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """ 
         delete drawing numbers from the database
         Gewinnzahlen einer Ziehung aus der Datenbank loeschen
-        """
-        block=self.edi_daten_gewinnz.textCursor().blockNumber()
-        lottodaten = self.data_handler.get_ziehung()
-           
-        self.data_handler.delete_ziehung(lottodaten[block][0])
+        """           
+        self.data_handler.delete_ziehung(self.data_handler.find_rowid(0, 
+         self.edi_daten_gewinnz.textCursor().blockNumber()))
         self.onBtn_gz_laden()
 
     def onBtn_ls_loeschen(self):
         """
         delete tip numbers from the database
         Lottoschein aus der Datenbank loeschen
-        """
-        block=self.edi_daten_lottoschein.textCursor().blockNumber()
-        lottodaten = self.data_handler.get_schein()
-           
-        self.data_handler.delete_schein(lottodaten[block][0])
+        """        
+        self.data_handler.delete_schein(self.data_handler.find_rowid(1, 
+         self.edi_daten_lottoschein.textCursor().blockNumber()))
         self.onBtn_ls_laden()
 
     def onBtn_ls_laden(self):
