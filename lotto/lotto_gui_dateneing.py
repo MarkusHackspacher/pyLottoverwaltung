@@ -101,6 +101,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.connect(self.Btn_ls_loeschen,QtCore.SIGNAL("clicked()"), self.onBtn_ls_loeschen)
         self.connect(self.Btn_gz_auswerten,QtCore.SIGNAL("clicked()"), self.onBtn_gz_auswerten)
         self.connect(self.Btn_ls_auswerten,QtCore.SIGNAL("clicked()"), self.onBtn_ls_auswerten)
+        self.connect(self.Btn_set_calender_today,QtCore.SIGNAL("clicked()"), self.onBtn_set_calender_today)
 
         # fields fill with random numbers and give them to database
         self.connect(self.Btn_Zufall,QtCore.SIGNAL("clicked()"), self.onBtn_Zufall)
@@ -234,10 +235,21 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         ToDo: noch programmieren, gedacht die Zahlen im großen Feld anzuzeigen.
         """
         block=self.edi_daten_gewinnz.textCursor().blockNumber()
-        print 'onBtn_gz_anzeigen', block
         lottodaten = self.data_handler.get_ziehung()
-        print lottodaten[block]
-        self.onBtn_gz_laden()
+        self.calendarWidget.setSelectedDate(QtCore.QDate.fromString(lottodaten[block][1],"yyyy-MM-dd"))       
+        self.spinBox_Zahlen[0].setValue(lottodaten[block][2])
+        self.spinBox_Zahlen[1].setValue(lottodaten[block][3])
+        self.spinBox_Zahlen[2].setValue(lottodaten[block][4])
+        self.spinBox_Zahlen[3].setValue(lottodaten[block][5])
+        self.spinBox_Zahlen[4].setValue(lottodaten[block][6])
+        self.spinBox_Zahlen[5].setValue(lottodaten[block][7])
+        self.spinBox_Zahlen[6].setValue(lottodaten[block][8])
+        self.spinBox_superz.setValue(lottodaten[block][9])
+        self.spinBox_spiel77.setValue(lottodaten[block][10])
+        self.spinBox_super6.setValue(lottodaten[block][11])
+        self.com_modus.setCurrentIndex(0)
+        #self.onmodus()
+        self.geaendert()
 
     def onBtn_ls_anzeigen(self):
         """
@@ -246,10 +258,18 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         ToDo: noch programmieren, gedacht die Zahlen im großen Feld anzuzeigen.
         """
         block=self.edi_daten_lottoschein.textCursor().blockNumber()
-        print 'onBtn_ls_anzeigen', block
         lottodaten = self.data_handler.get_schein()
-        print lottodaten[block]
-        self.onBtn_ls_laden()
+        self.calendarWidget.setSelectedDate(QtCore.QDate.fromString(lottodaten[block][1],"yyyy-MM-dd"))       
+        self.spinBox_Zahlen[0].setValue(lottodaten[block][2])
+        self.spinBox_Zahlen[1].setValue(lottodaten[block][3])
+        self.spinBox_Zahlen[2].setValue(lottodaten[block][4])
+        self.spinBox_Zahlen[3].setValue(lottodaten[block][5])
+        self.spinBox_Zahlen[4].setValue(lottodaten[block][6])
+        self.spinBox_Zahlen[5].setValue(lottodaten[block][7])
+        self.com_laufzeit.setCurrentIndex(lottodaten[block][8])
+        self.com_modus.setCurrentIndex(1)
+        #self.onmodus()
+        self.geaendert()
         
     def onBtn_gz_loeschen(self):
         """ 
@@ -301,6 +321,10 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.zahl=0
         self.geaendert_btn()
         
+    def onBtn_set_calender_today(self):
+        """set calender today"""
+        self.calendarWidget.setSelectedDate(QtCore.QDate.currentDate())       
+
     def onmodus(self):
         """ Wenn der Eingabe-Modus wechselt werden Schaltflächen an oder ab geschaltet
         """
@@ -333,12 +357,13 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
            self.lab_zusatz.setVisible(True)
            self.spinBox_Zahlen[6].setVisible(True)
            self.Btn_delete_Number[6].setVisible(True)
+           self.geaendert()
 
     def onlaufzeit(self):
         """Laufzeit des Lottoscheins
         ToDo: noch programmieren
         """
-        print 'onlaufzeit',self.com_laufzeit.currentIndex()        
+        #print 'onlaufzeit',self.com_laufzeit.currentIndex()        
 
     def geaendert(self):
         """Überprüfen der SpinBoxen damit nicht zwei den gleichen Wert haben
