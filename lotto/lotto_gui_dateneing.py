@@ -30,12 +30,17 @@ class ui_lotto_Dialog(QtGui.QDialog, Ui_Dialog):
         """
         QtGui.QDialog.__init__(self) 
         self.setupUi(self)
+        self.data_handler = Datahandler('datenbank.sqlite')
         infotext = 'Gewinnzahlen'
+        lottodaten = self.data_handler.get_ziehung(rowid)
         if typ == 1:
             infotext = 'Lottoschein'        
+            lottodaten = self.data_handler.get_schein(rowid)
         self.setWindowTitle(infotext)
         #self.label.setText('Bewertung')
-        self.plainTextEdit.appendPlainText('Zeilen RowID: ' + str(rowid))
+        #print lottodaten[0][0]
+        self.plainTextEdit.appendPlainText('Datensatz RowID: {0} Datum: {1}'.format(rowid, lottodaten[0][0]))
+
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.close)
 
@@ -248,7 +253,6 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.spinBox_spiel77.setValue(lottodaten[block][10])
         self.spinBox_super6.setValue(lottodaten[block][11])
         self.com_modus.setCurrentIndex(0)
-        #self.onmodus()
         self.geaendert()
 
     def onBtn_ls_anzeigen(self):
