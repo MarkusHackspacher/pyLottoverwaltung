@@ -376,9 +376,13 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         #Setzen der Botton je nach Wert der Spinbox
         for button in xrange(49):
             if button + 1 in a:
-                self.Btn_Numerary_1to49[button].setFlat(False)
+                self.Btn_Numerary_1to49[button].setFlat(False)               
+                self.Btn_Numerary_1to49[button].setStyleSheet("color: red;")
+                if button + 1 == self.spinBox_Zahlen[6].value():
+                    self.Btn_Numerary_1to49[button].setStyleSheet("color: blue;")                
             else:
                 self.Btn_Numerary_1to49[button].setFlat(True)
+                self.Btn_Numerary_1to49[button].setStyleSheet("color: black;")
                 
     def geaendert_btn(self):
         """in den SpinBoxen die Nummern der Zahlen 1 bis 49 anzeigen

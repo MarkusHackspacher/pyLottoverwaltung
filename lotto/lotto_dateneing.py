@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'lotto_dateneing.ui'
 #
-# Created: Thu Oct 18 23:45:56 2012
+# Created: Sun Oct 28 20:03:49 2012
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -73,6 +73,8 @@ class Ui_MainWindow(object):
         self.Btn_gz_loeschen.setObjectName(_fromUtf8("Btn_gz_loeschen"))
         self.Btn_gz_auswerten = QtGui.QPushButton(self.Lottozahlen)
         self.Btn_gz_auswerten.setGeometry(QtCore.QRect(470, 240, 91, 25))
+        self.Btn_gz_auswerten.setAutoFillBackground(False)
+        self.Btn_gz_auswerten.setStyleSheet(_fromUtf8(""))
         self.Btn_gz_auswerten.setObjectName(_fromUtf8("Btn_gz_auswerten"))
         self.horizontalLayoutWidget_2 = QtGui.QWidget(self.Lottozahlen)
         self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(10, 320, 441, 31))

@@ -156,6 +156,12 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
       <height>25</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <property name="text">
      <string>Auswerten</string>
     </property>
