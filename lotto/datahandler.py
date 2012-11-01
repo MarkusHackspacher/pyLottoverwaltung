@@ -20,9 +20,21 @@ class Datahandler(object):
                 zahl_4 INTEGER, zahl_5 INTEGER, zahl_6 INTEGER, zahl_zusatz INTEGER, \
                 zahl_super INTEGER, zahl_spiel77 INTEGER, zahl_spielsuper6 INTEGER)")
         c.execute("create table if not exists schein (d date, zahl_1 INTEGER, zahl_2 INTEGER, zahl_3 INTEGER, \
-                zahl_4 INTEGER, zahl_5 INTEGER, zahl_6 INTEGER, laufzeit INTEGER)")        
+                zahl_4 INTEGER, zahl_5 INTEGER, zahl_6 INTEGER, laufzeit INTEGER, laufzeit_tag INTEGER, scheinnr INTEGER)")        
         self.connection.commit()
         c.close()
+
+    def add_columns(self):
+        """Add columns"""		
+        lottodaten = self.get_schein()
+        if len(lottodaten[0]) == 9:
+            print ('Neue Spalten: laufzeit_tag und scheinnr')
+            c = self.connection.cursor()
+            c.execute("alter table schein add laufzeit_tag INTEGER")        
+            c.execute("alter table schein add scheinnr INTEGER")        
+            self.connection.commit()
+            c.close()
+		
 
     def insert_ziehung(self, day, zahl_1, zahl_2,zahl_3,zahl_4,zahl_5,zahl_6, zahl_zusatz,zahl_super, zahl_spiel77, zahl_spielsuper6):
         """Daten der Ziehung der Lottozahlen in der Datenbank speichern"""
@@ -33,12 +45,18 @@ class Datahandler(object):
         self.connection.commit()
         c.close()
 
-    def insert_schein(self, day, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, laufzeit):
+    def insert_schein(self, day, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, laufzeit, laufzeit_tag, scheinnr):
         """Daten des Lottoscheines in der Datenbank speichern"""
         c = self.connection.cursor()
-        c.execute("insert into schein(d, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
-             laufzeit) values (?, ?, ?, ?, ?, ?, ?, ?)", \
-             (day, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, laufzeit))
+        try:
+            c.execute("insert into schein(d, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
+             laufzeit, laufzeit_tag, scheinnr) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
+             (day, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, laufzeit, laufzeit_tag, scheinnr))
+        except:
+            self.add_columns()
+            c.execute("insert into schein(d, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
+             laufzeit, laufzeit_tag, scheinnr) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
+             (day, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, laufzeit, laufzeit_tag, scheinnr))
         self.connection.commit()
         c.close()
 

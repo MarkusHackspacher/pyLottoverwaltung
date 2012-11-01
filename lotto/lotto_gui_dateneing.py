@@ -12,6 +12,7 @@ import sys
 import sqlite3
 from PyQt4 import QtGui, QtCore
 import functools
+from os.path import join
 
 from lotto_dateneing import Ui_MainWindow as Dlg
 from datahandler import Datahandler
@@ -29,6 +30,7 @@ class ui_lotto_Dialog(QtGui.QDialog, Ui_Dialog):
         @return: give close(0) or accept(1) back
         """
         QtGui.QDialog.__init__(self) 
+        self.setWindowIcon(QtGui.QIcon(join("misc", "icon.ico")))
         self.setupUi(self)
         self.data_handler = Datahandler('datenbank.sqlite')
         infotext = 'Gewinnzahlen'
@@ -55,6 +57,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         datafield
         """
         QtGui.QDialog.__init__(self) 
+        self.setWindowIcon(QtGui.QIcon(join("misc", "icon.ico")))
         self.setupUi(self)
         #array of Button from 1 to 49
         self.Btn_Numerary_1to49 = []
@@ -213,7 +216,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             self.data_handler.insert_schein(day, self.spinBox_Zahlen[0].value(), \
              self.spinBox_Zahlen[1].value(), self.spinBox_Zahlen[2].value(), \
              self.spinBox_Zahlen[3].value(), self.spinBox_Zahlen[4].value(), \
-             self.spinBox_Zahlen[5].value(), self.com_laufzeit.currentIndex())
+             self.spinBox_Zahlen[5].value(), self.com_laufzeit.currentIndex(), \
+             self.com_laufzeit_tag.currentIndex(), self.spinBox_spiel77.value())
             self.lab_daten_lottoschein.setText(text)
             self.onBtn_ls_laden()
 
@@ -263,6 +267,9 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """
         block=self.edi_daten_lottoschein.textCursor().blockNumber()
         lottodaten = self.data_handler.get_schein()
+        if len(lottodaten[block]) < 10:
+            self.data_handler.add_columns()
+            lottodaten = self.data_handler.get_schein()
         self.calendarWidget.setSelectedDate(QtCore.QDate.fromString(lottodaten[block][1],"yyyy-MM-dd"))       
         self.spinBox_Zahlen[0].setValue(lottodaten[block][2])
         self.spinBox_Zahlen[1].setValue(lottodaten[block][3])
@@ -271,6 +278,16 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.spinBox_Zahlen[4].setValue(lottodaten[block][6])
         self.spinBox_Zahlen[5].setValue(lottodaten[block][7])
         self.com_laufzeit.setCurrentIndex(lottodaten[block][8])
+        if lottodaten[block][9] == None:
+            index = 0
+        else:
+            index = lottodaten[block][9]
+        self.com_laufzeit_tag.setCurrentIndex(index)
+        if lottodaten[block][10] == None:
+            index = 0
+        else:
+            index = lottodaten[block][10]
+        self.spinBox_spiel77.setValue(index)
         self.com_modus.setCurrentIndex(1)
         #self.onmodus()
         self.geaendert()
@@ -335,11 +352,13 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         if self.com_modus.currentIndex()==1:
            self.Btn_Zufall.setVisible(True)
            self.com_laufzeit.setVisible(True)
+           self.com_laufzeit_tag.setVisible(True)
            self.lab_laufzeit.setVisible(True)         
            self.spinBox_superz.setVisible(False)
            self.lab_superz.setVisible(False)
-           self.spinBox_spiel77.setVisible(False)
+           self.spinBox_spiel77.setVisible(True)
            self.lab_spiel77.setVisible(False)
+           self.lab_scheinnr.setVisible(True)
            self.spinBox_super6.setVisible(False)
            self.lab_super6.setVisible(False)
            self.lab_zusatz.setVisible(False)
@@ -351,11 +370,13 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         else:
            self.Btn_Zufall.setVisible(False)
            self.com_laufzeit.setVisible(False)
+           self.com_laufzeit_tag.setVisible(False)
            self.lab_laufzeit.setVisible(False)
            self.spinBox_superz.setVisible(True)
            self.lab_superz.setVisible(True)
            self.spinBox_spiel77.setVisible(True)
            self.lab_spiel77.setVisible(True)
+           self.lab_scheinnr.setVisible(False)
            self.spinBox_super6.setVisible(True)
            self.lab_super6.setVisible(True)
            self.lab_zusatz.setVisible(True)

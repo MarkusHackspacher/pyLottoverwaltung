@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'lotto_dialog.ui'
 #
-# Created: Sun Oct 28 20:03:49 2012
+# Created: Thu Nov  1 11:53:01 2012
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -31,7 +31,7 @@ class Ui_Dialog(object):
         self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
         self.plainTextEdit = QtGui.QPlainTextEdit(Dialog)
-        self.plainTextEdit.setGeometry(QtCore.QRect(60, 40, 261, 41))
+        self.plainTextEdit.setGeometry(QtCore.QRect(60, 40, 391, 41))
         self.plainTextEdit.setObjectName(_fromUtf8("plainTextEdit"))
         self.horizontalLayoutWidget = QtGui.QWidget(Dialog)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(60, 110, 311, 41))

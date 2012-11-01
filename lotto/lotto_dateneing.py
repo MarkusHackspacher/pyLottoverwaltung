@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'lotto_dateneing.ui'
 #
-# Created: Sun Oct 28 20:03:49 2012
+# Created: Thu Nov  1 11:53:01 2012
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -116,16 +116,11 @@ class Ui_MainWindow(object):
         self.com_modus.addItem(_fromUtf8(""))
         self.com_modus.addItem(_fromUtf8(""))
         self.Btn_Zufall = QtGui.QPushButton(self.Lottozahlen)
-        self.Btn_Zufall.setGeometry(QtCore.QRect(30, 370, 151, 25))
+        self.Btn_Zufall.setGeometry(QtCore.QRect(40, 350, 151, 21))
         self.Btn_Zufall.setObjectName(_fromUtf8("Btn_Zufall"))
         self.com_laufzeit = QtGui.QComboBox(self.Lottozahlen)
-        self.com_laufzeit.setGeometry(QtCore.QRect(270, 380, 121, 25))
+        self.com_laufzeit.setGeometry(QtCore.QRect(240, 384, 121, 23))
         self.com_laufzeit.setObjectName(_fromUtf8("com_laufzeit"))
-        self.com_laufzeit.addItem(_fromUtf8(""))
-        self.com_laufzeit.addItem(_fromUtf8(""))
-        self.com_laufzeit.addItem(_fromUtf8(""))
-        self.com_laufzeit.addItem(_fromUtf8(""))
-        self.com_laufzeit.addItem(_fromUtf8(""))
         self.com_laufzeit.addItem(_fromUtf8(""))
         self.com_laufzeit.addItem(_fromUtf8(""))
         self.com_laufzeit.addItem(_fromUtf8(""))
@@ -168,6 +163,16 @@ class Ui_MainWindow(object):
         self.Btn_set_calender_today = QtGui.QPushButton(self.Lottozahlen)
         self.Btn_set_calender_today.setGeometry(QtCore.QRect(380, 440, 71, 31))
         self.Btn_set_calender_today.setObjectName(_fromUtf8("Btn_set_calender_today"))
+        self.lab_scheinnr = QtGui.QLabel(self.Lottozahlen)
+        self.lab_scheinnr.setGeometry(QtCore.QRect(10, 384, 101, 21))
+        self.lab_scheinnr.setAlignment(QtCore.Qt.AlignCenter)
+        self.lab_scheinnr.setObjectName(_fromUtf8("lab_scheinnr"))
+        self.com_laufzeit_tag = QtGui.QComboBox(self.Lottozahlen)
+        self.com_laufzeit_tag.setGeometry(QtCore.QRect(370, 384, 91, 23))
+        self.com_laufzeit_tag.setObjectName(_fromUtf8("com_laufzeit_tag"))
+        self.com_laufzeit_tag.addItem(_fromUtf8(""))
+        self.com_laufzeit_tag.addItem(_fromUtf8(""))
+        self.com_laufzeit_tag.addItem(_fromUtf8(""))
         MainWindow.setCentralWidget(self.Lottozahlen)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 894, 29))
@@ -225,11 +230,6 @@ class Ui_MainWindow(object):
         self.com_laufzeit.setItemText(3, QtGui.QApplication.translate("MainWindow", "3 Ziehungen", None, QtGui.QApplication.UnicodeUTF8))
         self.com_laufzeit.setItemText(4, QtGui.QApplication.translate("MainWindow", "4 Ziehungen", None, QtGui.QApplication.UnicodeUTF8))
         self.com_laufzeit.setItemText(5, QtGui.QApplication.translate("MainWindow", "5 Ziehungen", None, QtGui.QApplication.UnicodeUTF8))
-        self.com_laufzeit.setItemText(6, QtGui.QApplication.translate("MainWindow", "6 Ziehungen", None, QtGui.QApplication.UnicodeUTF8))
-        self.com_laufzeit.setItemText(7, QtGui.QApplication.translate("MainWindow", "7 Ziehungen", None, QtGui.QApplication.UnicodeUTF8))
-        self.com_laufzeit.setItemText(8, QtGui.QApplication.translate("MainWindow", "8 Ziehungen", None, QtGui.QApplication.UnicodeUTF8))
-        self.com_laufzeit.setItemText(9, QtGui.QApplication.translate("MainWindow", "9 Ziehungen", None, QtGui.QApplication.UnicodeUTF8))
-        self.com_laufzeit.setItemText(10, QtGui.QApplication.translate("MainWindow", "10 Ziehungen", None, QtGui.QApplication.UnicodeUTF8))
         self.lab_laufzeit.setText(QtGui.QApplication.translate("MainWindow", "Laufzeit:", None, QtGui.QApplication.UnicodeUTF8))
         self.Btn_ls_loeschen.setText(QtGui.QApplication.translate("MainWindow", "löschen", None, QtGui.QApplication.UnicodeUTF8))
         self.Btn_ls_auswerten.setText(QtGui.QApplication.translate("MainWindow", "Auswerten", None, QtGui.QApplication.UnicodeUTF8))
@@ -241,6 +241,10 @@ class Ui_MainWindow(object):
         self.Btn_gz_anzeigen.setText(QtGui.QApplication.translate("MainWindow", "anzeigen", None, QtGui.QApplication.UnicodeUTF8))
         self.Btn_ls_anzeigen.setText(QtGui.QApplication.translate("MainWindow", "anzeigen", None, QtGui.QApplication.UnicodeUTF8))
         self.Btn_set_calender_today.setText(QtGui.QApplication.translate("MainWindow", "heute", None, QtGui.QApplication.UnicodeUTF8))
+        self.lab_scheinnr.setText(QtGui.QApplication.translate("MainWindow", "Scheinnummer", None, QtGui.QApplication.UnicodeUTF8))
+        self.com_laufzeit_tag.setItemText(0, QtGui.QApplication.translate("MainWindow", "Mi+Sa", None, QtGui.QApplication.UnicodeUTF8))
+        self.com_laufzeit_tag.setItemText(1, QtGui.QApplication.translate("MainWindow", "Mittwoch", None, QtGui.QApplication.UnicodeUTF8))
+        self.com_laufzeit_tag.setItemText(2, QtGui.QApplication.translate("MainWindow", "Samstag", None, QtGui.QApplication.UnicodeUTF8))
         self.menuDatei.setTitle(QtGui.QApplication.translate("MainWindow", "Datei", None, QtGui.QApplication.UnicodeUTF8))
         self.menuHilfe.setTitle(QtGui.QApplication.translate("MainWindow", "Hilfe", None, QtGui.QApplication.UnicodeUTF8))
         self.actionBeenden.setText(QtGui.QApplication.translate("MainWindow", "Beenden", None, QtGui.QApplication.UnicodeUTF8))
