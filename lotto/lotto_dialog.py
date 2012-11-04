@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'lotto_dialog.ui'
 #
-# Created: Thu Nov  1 11:53:01 2012
+# Created: Sun Nov  4 10:41:36 2012
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!

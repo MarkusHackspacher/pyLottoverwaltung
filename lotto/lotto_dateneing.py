@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'lotto_dateneing.ui'
 #
-# Created: Thu Nov  1 11:53:01 2012
+# Created: Sun Nov  4 10:41:35 2012
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -181,6 +181,8 @@ class Ui_MainWindow(object):
         self.menuDatei.setObjectName(_fromUtf8("menuDatei"))
         self.menuHilfe = QtGui.QMenu(self.menubar)
         self.menuHilfe.setObjectName(_fromUtf8("menuHilfe"))
+        self.menuInternet = QtGui.QMenu(self.menubar)
+        self.menuInternet.setObjectName(_fromUtf8("menuInternet"))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
@@ -191,10 +193,14 @@ class Ui_MainWindow(object):
         self.actionInfo.setObjectName(_fromUtf8("actionInfo"))
         self.actionHilfe = QtGui.QAction(MainWindow)
         self.actionHilfe.setObjectName(_fromUtf8("actionHilfe"))
+        self.actionDaten_von_lotto_de = QtGui.QAction(MainWindow)
+        self.actionDaten_von_lotto_de.setObjectName(_fromUtf8("actionDaten_von_lotto_de"))
         self.menuDatei.addAction(self.actionBeenden)
         self.menuHilfe.addAction(self.actionHilfe)
         self.menuHilfe.addAction(self.actionInfo)
+        self.menuInternet.addAction(self.actionDaten_von_lotto_de)
         self.menubar.addAction(self.menuDatei.menuAction())
+        self.menubar.addAction(self.menuInternet.menuAction())
         self.menubar.addAction(self.menuHilfe.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -247,7 +253,9 @@ class Ui_MainWindow(object):
         self.com_laufzeit_tag.setItemText(2, QtGui.QApplication.translate("MainWindow", "Samstag", None, QtGui.QApplication.UnicodeUTF8))
         self.menuDatei.setTitle(QtGui.QApplication.translate("MainWindow", "Datei", None, QtGui.QApplication.UnicodeUTF8))
         self.menuHilfe.setTitle(QtGui.QApplication.translate("MainWindow", "Hilfe", None, QtGui.QApplication.UnicodeUTF8))
+        self.menuInternet.setTitle(QtGui.QApplication.translate("MainWindow", "Internet", None, QtGui.QApplication.UnicodeUTF8))
         self.actionBeenden.setText(QtGui.QApplication.translate("MainWindow", "Beenden", None, QtGui.QApplication.UnicodeUTF8))
         self.actionInfo.setText(QtGui.QApplication.translate("MainWindow", "Info", None, QtGui.QApplication.UnicodeUTF8))
         self.actionHilfe.setText(QtGui.QApplication.translate("MainWindow", "Hilfe", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionDaten_von_lotto_de.setText(QtGui.QApplication.translate("MainWindow", "Daten von lotto.de", None, QtGui.QApplication.UnicodeUTF8))
 

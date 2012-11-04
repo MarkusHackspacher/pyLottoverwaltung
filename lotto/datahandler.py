@@ -5,7 +5,6 @@ the data handler
 for insert, get and delete data in the database
 """
 import sqlite3
-import datetime
 
 class Datahandler(object):
     def __init__(self, path):

@@ -569,7 +569,14 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
     <addaction name="actionHilfe"/>
     <addaction name="actionInfo"/>
    </widget>
+   <widget class="QMenu" name="menuInternet">
+    <property name="title">
+     <string>Internet</string>
+    </property>
+    <addaction name="actionDaten_von_lotto_de"/>
+   </widget>
    <addaction name="menuDatei"/>
+   <addaction name="menuInternet"/>
    <addaction name="menuHilfe"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -586,6 +593,11 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
   <action name="actionHilfe">
    <property name="text">
     <string>Hilfe</string>
+   </property>
+  </action>
+  <action name="actionDaten_von_lotto_de">
+   <property name="text">
+    <string>Daten von lotto.de</string>
    </property>
   </action>
  </widget>

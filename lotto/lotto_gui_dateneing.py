@@ -17,6 +17,7 @@ from os.path import join
 from lotto_dateneing import Ui_MainWindow as Dlg
 from datahandler import Datahandler
 from lotto_dialog import Ui_Dialog
+import webzugriff
 
 
 class ui_lotto_Dialog(QtGui.QDialog, Ui_Dialog): 
@@ -136,6 +137,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.connect(self.actionBeenden, QtCore.SIGNAL('triggered()'), QtCore.SLOT('close()'))
         self.connect(self.actionInfo, QtCore.SIGNAL('triggered()'), self.onInfo)
         self.connect(self.actionHilfe, QtCore.SIGNAL('triggered()'), self.onHilfe)
+        self.connect(self.actionDaten_von_lotto_de, QtCore.SIGNAL('triggered()'), self.onData_lottode)
         self.connect(self.edi_daten_gewinnz, QtCore.SIGNAL('cursorPositionChanged()'), self.ondaten_gewinnz)
         self.connect(self.edi_daten_lottoschein, QtCore.SIGNAL('cursorPositionChanged()'), self.ondaten_lottoschein)
  
@@ -178,6 +180,23 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
     def closeEvent(self, event):
         """ the program exit """
         self.data_handler.close()
+    
+    def onData_lottode(self):
+        datum, value = webzugriff.data_from_webpage()
+        self.calendarWidget.setSelectedDate(QtCore.QDate.fromString(datum,"dd.MM.yyyy"))       
+        self.spinBox_Zahlen[0].setValue(value[0])
+        self.spinBox_Zahlen[1].setValue(value[1])
+        self.spinBox_Zahlen[2].setValue(value[2])
+        self.spinBox_Zahlen[3].setValue(value[3])
+        self.spinBox_Zahlen[4].setValue(value[4])
+        self.spinBox_Zahlen[5].setValue(value[5])
+        self.spinBox_Zahlen[6].setValue(value[6])
+        self.spinBox_superz.setValue(value[7])
+        self.spinBox_spiel77.setValue(value[8])
+        self.spinBox_super6.setValue(value[9])
+        self.com_modus.setCurrentIndex(0)
+        self.geaendert()
+
 
     def spinBox_1to7_clear(self, number):
         """Die SpinBoxen 1 bis 6 und Zusatzzahl löschen"""
