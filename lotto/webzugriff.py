@@ -9,7 +9,10 @@ def data_from_webpage():
     @return: datum, list of numbers (draw 1-6, Zusatzzahl, Superzahl, Spiel77, Super6)
     """
     QUOTE_URL = 'http://www.lotto.de/de/spielen/landingpage.xhtml'
-    document = html.parse(QUOTE_URL)
+    try: 
+        document = html.parse(QUOTE_URL)
+    except:
+		return    
     str = '//div[@class="form-row"]//option'
     datum = document.xpath(str)[0].get('value')
     value = []
@@ -24,18 +27,21 @@ def data_from_webpage():
 def data_from_achiv():
     """
     Data from www.lottozahlenonline.de
-    @return: datum, list of numbers (draw 1-6, Zusatzzahl, Superzahl, Spiel77, Super6)
+    @return: datum, list of numbers (draw 1-6), Zusatzzahl
     """
     QUOTE_URL = 'http://www.lottozahlenonline.de/statistik/lotto-am-samstag/lottozahlen-archiv.php'
+    #QUOTE_URL = 'http://www.lottozahlenonline.de/statistik/lotto-am-mittwoch/lottozahlen-archiv.php?j=2009'
     document = html.parse(QUOTE_URL)
-    datum = document.xpath('//div[@class="zahlensuche_datum"]/text()')[0].strip()
-    value = []
-    for x in xrange( 6,12):
-        str = '//div[@class="zahlensuche_zahl"]/text()'
-        value.append(int(document.xpath(str)[x].strip())) 
-    value.append(int(document.xpath('//div[@class="zahlensuche_zz"]/text()')[0].strip()))
-    print  datum, value
-    return datum, value
+    datum = document.xpath('//div[@class="zahlensuche_datum"]/text()')
+    lottozahlen = document.xpath('//div[@class="zahlensuche_zahl"]/text()')
+    zusatzzahlen = document.xpath('//div[@class="zahlensuche_zz"]/text()')
+    block=[]
+    for x in range(len(lottozahlen)/6):
+		block.append(lottozahlen[x:x+6])
+    
+    for x in range(len(datum)):
+        print datum[x], block[x],zusatzzahlen[x].strip()
+    return datum, block, zusatzzahlen
 
 def test_data_from_webpage():
  	datum, value = data_from_webpage()
@@ -45,3 +51,4 @@ def test_data_from_webpage():
  
 if __name__ == '__main__':    #main()
     data_from_achiv()
+    #test_data_from_webpage()

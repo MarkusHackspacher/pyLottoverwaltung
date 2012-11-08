@@ -182,7 +182,15 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.data_handler.close()
     
     def onData_lottode(self):
-        datum, value = webzugriff.data_from_webpage()
+        try: 
+            datum, value = webzugriff.data_from_webpage()
+        except:
+            a = QtGui.QMessageBox()
+            a.setWindowTitle('Info')
+            a.setText('Daten konnten nicht geladen werden')
+            a.exec_()
+            return
+            
         self.calendarWidget.setSelectedDate(QtCore.QDate.fromString(datum,"dd.MM.yyyy"))       
         self.spinBox_Zahlen[0].setValue(value[0])
         self.spinBox_Zahlen[1].setValue(value[1])
