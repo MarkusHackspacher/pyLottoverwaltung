@@ -10,13 +10,13 @@ MH 2012
 
 import sys
 import sqlite3
-from PyQt4 import QtGui, QtCore
 import functools
 from os.path import join
+from PyQt4 import QtGui, QtCore
 
-from lotto_dateneing import Ui_MainWindow as Dlg
+from gui.lotto_dateneing import Ui_MainWindow as Dlg
 from datahandler import Datahandler
-from lotto_dialog import Ui_Dialog
+from gui.lotto_dialog import Ui_Dialog
 import webzugriff
 
 

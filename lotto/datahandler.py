@@ -59,11 +59,13 @@ class Datahandler(object):
         self.connection.commit()
         c.close()
 
-    def get_ziehung(self, id=None):    
+    def get_ziehung(self, id=None, date=None):    
         """Daten der Ziehung der Lottozahlen auslesen"""
         c = self.connection.cursor()
         if id:
             c.execute("select * from ziehung where rowid=?", (id,))
+        if date:
+            c.execute("select * from ziehung where d=?", (date,))
         else:
             c.execute("select rowid,* from ziehung")
         self.connection.commit()
