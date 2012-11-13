@@ -67,7 +67,7 @@ class Datahandler(object):
         if date:
             c.execute("select * from ziehung where d=?", (date,))
         else:
-            c.execute("select rowid,* from ziehung")
+            c.execute("select rowid,* from ziehung ORDER BY d")
         self.connection.commit()
         data = c.fetchall()
         c.close()

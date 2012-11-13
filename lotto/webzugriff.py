@@ -25,16 +25,24 @@ def data_from_webpage():
     value.append(int(document.xpath('//li[@class="field_super6"]/text()')[0].strip()))    
     return datum, value
  
+ 
+def all_data_from_achiv():
+    """
+    All Data from www.lottozahlenonline.de
+    """
+    for z in range(1955, 2012):
+        url = 'http://www.lottozahlenonline.de/statistik/beide-spieltage/lottozahlen-archiv.php?j={}'.format(z)
+        data_from_achiv(url)
 
-def data_from_achiv():
+def data_from_achiv(quote_url=None):
     """
     Data from www.lottozahlenonline.de
-    @return: datum, list of numbers (draw 1-6), Zusatzzahl
     """
     data_handler = Datahandler('datenbank.sqlite')
-    QUOTE_URL = 'http://www.lottozahlenonline.de/statistik/lotto-am-samstag/lottozahlen-archiv.php?j=2008'
-    #QUOTE_URL = 'http://www.lottozahlenonline.de/statistik/lotto-am-mittwoch/lottozahlen-archiv.php?j=2012'
-    document = html.parse(QUOTE_URL)
+    if not quote_url:
+        quote_url = 'http://www.lottozahlenonline.de/statistik/lotto-am-samstag/lottozahlen-archiv.php?j=2008'
+    #QUOTE_URL = 'http://www.lottozahlenonline.de/statistik/beide-spieltage/lottozahlen-archiv.php?j=2012'
+    document = html.parse(quote_url)
     datum = document.xpath('//div[@class="zahlensuche_datum"]/text()')
     lottozahlen = document.xpath('//div[@class="zahlensuche_zahl"]/text()')
     zusatzzahlen = document.xpath('//div[@class="zahlensuche_zz"]/text()')
@@ -57,7 +65,6 @@ def data_from_achiv():
             data_handler.insert_ziehung(day,int(block[x][0]),int(block[x][1]),int(block[x][2]),
                  int(block[x][3]),int(block[x][4]),int(block[x][5]),int(zusatzzahlen[x]),0,0,0)
 
-    return datum, block, zusatzzahlen
 
 def test_data_from_webpage():
  	datum, value = data_from_webpage()

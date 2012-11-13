@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'lotto_dateneing.ui'
 #
-# Created: Sun Nov  4 10:41:35 2012
+# Created: Tue Nov 13 22:18:36 2012
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -195,10 +195,13 @@ class Ui_MainWindow(object):
         self.actionHilfe.setObjectName(_fromUtf8("actionHilfe"))
         self.actionDaten_von_lotto_de = QtGui.QAction(MainWindow)
         self.actionDaten_von_lotto_de.setObjectName(_fromUtf8("actionDaten_von_lotto_de"))
+        self.actionDaten_von_lottozahlenonline_de_1955_2012 = QtGui.QAction(MainWindow)
+        self.actionDaten_von_lottozahlenonline_de_1955_2012.setObjectName(_fromUtf8("actionDaten_von_lottozahlenonline_de_1955_2012"))
         self.menuDatei.addAction(self.actionBeenden)
         self.menuHilfe.addAction(self.actionHilfe)
         self.menuHilfe.addAction(self.actionInfo)
         self.menuInternet.addAction(self.actionDaten_von_lotto_de)
+        self.menuInternet.addAction(self.actionDaten_von_lottozahlenonline_de_1955_2012)
         self.menubar.addAction(self.menuDatei.menuAction())
         self.menubar.addAction(self.menuInternet.menuAction())
         self.menubar.addAction(self.menuHilfe.menuAction())
@@ -257,5 +260,6 @@ class Ui_MainWindow(object):
         self.actionBeenden.setText(QtGui.QApplication.translate("MainWindow", "Beenden", None, QtGui.QApplication.UnicodeUTF8))
         self.actionInfo.setText(QtGui.QApplication.translate("MainWindow", "Info", None, QtGui.QApplication.UnicodeUTF8))
         self.actionHilfe.setText(QtGui.QApplication.translate("MainWindow", "Hilfe", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionDaten_von_lotto_de.setText(QtGui.QApplication.translate("MainWindow", "Daten von lotto.de", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionDaten_von_lotto_de.setText(QtGui.QApplication.translate("MainWindow", "Daten von lotto.de (aktuelle Ziehung)", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionDaten_von_lottozahlenonline_de_1955_2012.setText(QtGui.QApplication.translate("MainWindow", "Daten von  lottozahlenonline.de (2000-2012)", None, QtGui.QApplication.UnicodeUTF8))
 

@@ -574,6 +574,7 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
      <string>Internet</string>
     </property>
     <addaction name="actionDaten_von_lotto_de"/>
+    <addaction name="actionDaten_von_lottozahlenonline_de_1955_2012"/>
    </widget>
    <addaction name="menuDatei"/>
    <addaction name="menuInternet"/>
@@ -597,7 +598,12 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
   </action>
   <action name="actionDaten_von_lotto_de">
    <property name="text">
-    <string>Daten von lotto.de</string>
+    <string>Daten von lotto.de (aktuelle Ziehung)</string>
+   </property>
+  </action>
+  <action name="actionDaten_von_lottozahlenonline_de_1955_2012">
+   <property name="text">
+    <string>Daten von  lottozahlenonline.de (2000-2012)</string>
    </property>
   </action>
  </widget>

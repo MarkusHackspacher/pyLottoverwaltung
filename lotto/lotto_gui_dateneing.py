@@ -137,7 +137,10 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.connect(self.actionBeenden, QtCore.SIGNAL('triggered()'), QtCore.SLOT('close()'))
         self.connect(self.actionInfo, QtCore.SIGNAL('triggered()'), self.onInfo)
         self.connect(self.actionHilfe, QtCore.SIGNAL('triggered()'), self.onHilfe)
-        self.connect(self.actionDaten_von_lotto_de, QtCore.SIGNAL('triggered()'), self.onData_lottode)
+        self.connect(self.actionDaten_von_lotto_de,
+         QtCore.SIGNAL('triggered()'), self.onData_lottode)
+        self.connect(self.actionDaten_von_lottozahlenonline_de_1955_2012,
+         QtCore.SIGNAL('triggered()'), self.onData_lottozahlenonlinede)
         self.connect(self.edi_daten_gewinnz, QtCore.SIGNAL('cursorPositionChanged()'), self.ondaten_gewinnz)
         self.connect(self.edi_daten_lottoschein, QtCore.SIGNAL('cursorPositionChanged()'), self.ondaten_lottoschein)
  
@@ -204,7 +207,17 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.spinBox_super6.setValue(value[9])
         self.com_modus.setCurrentIndex(0)
         self.geaendert()
-
+        
+    def onData_lottozahlenonlinede(self):
+        a = QtGui.QProgressDialog("Daten Einlesen", "Abbruch", 2000, 2013, self, QtCore.Qt.Dialog|QtCore.Qt.WindowTitleHint)
+        a.setWindowModality(QtCore.Qt.WindowModal)
+        a.setValue(2000)
+        for z in range(2000, 2013):
+            url = 'http://www.lottozahlenonline.de/statistik/beide-spieltage/lottozahlen-archiv.php?j={}'.format(z)
+            webzugriff.data_from_achiv(url)
+            a.setValue(z)
+        self.onBtn_gz_laden()
+        a.close()
 
     def spinBox_1to7_clear(self, number):
         """Die SpinBoxen 1 bis 6 und Zusatzzahl löschen"""
@@ -344,7 +357,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.edi_daten_lottoschein.setPlainText("")
         lottodaten = self.data_handler.get_schein()
         for schein in lottodaten:
-            self.edi_daten_lottoschein.appendPlainText('Datum: {0} Zahlen: {1} {2} {3} {4} {5} {6}' \
+            self.edi_daten_lottoschein.appendPlainText('Datum: {0} Zahlen: {1}, {2}, {3}, {4}, {5} {6}' \
              .format(schein[1], schein[2], schein[3], schein[4], schein[5], schein[6], schein[7]))
 
     def onBtn_gz_laden(self):
@@ -354,8 +367,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.edi_daten_gewinnz.setPlainText("")
         lottodaten = self.data_handler.get_ziehung()
         for i in lottodaten:
-           self.edi_daten_gewinnz.appendPlainText('Datum: {0} Zahlen: {1} {2} {3} {4} {5} {6}' \
-            .format(i[1], i[2], i[3], i[4], i[5], i[6], i[7]))
+           self.edi_daten_gewinnz.appendPlainText('Datum: {0} | {1}, {2}, {3}, {4}, {5}, {6} ZZ: {7}' \
+            .format(i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8]))
             
     def onBtn_Zufall(self):
         """ Die Zufallszahen generieren
