@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>894</width>
+    <height>665</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Lottozahlen</string>
+  </property>
+  <widget class="QWidget" name="Lottozahlen">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>480</width>
+     <height>320</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="windowTitle">
+    <string>Lottozahlen</string>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QFrame#Rahmen { border-image: url(:/lottokugel.png);}
+QLabel {	background-color: rgb(195, 195, 195)}</string>
+   </property>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>444</width>
+      <height>251</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout"/>
+   </widget>
+   <widget class="QPlainTextEdit" name="edi_daten_gewinnz">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>30</y>
+      <width>401</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="whatsThis">
+     <string extracomment="Ausgabefeld">Ausgabefeld</string>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="undoRedoEnabled">
+     <bool>false</bool>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>290</y>
+      <width>441</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout"/>
+   </widget>
+   <widget class="QCalendarWidget" name="calendarWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>408</y>
+      <width>361</width>
+      <height>200</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+      <kerning>true</kerning>
+     </font>
+    </property>
+    <property name="firstDayOfWeek">
+     <enum>Qt::Monday</enum>
+    </property>
+    <property name="gridVisible">
+     <bool>false</bool>
+    </property>
+    <property name="selectionMode">
+     <enum>QCalendarWidget::SingleSelection</enum>
+    </property>
+    <property name="verticalHeaderFormat">
+     <enum>QCalendarWidget::NoVerticalHeader</enum>
+    </property>
+    <property name="navigationBarVisible">
+     <bool>true</bool>
+    </property>
+    <property name="dateEditEnabled">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Btn_hinzu">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>260</y>
+      <width>231</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>zur Datenbank hinzufügen</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Btn_gz_loeschen">
+    <property name="geometry">
+     <rect>
+      <x>780</x>
+      <y>240</y>
+      <width>91</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>löschen</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Btn_gz_auswerten">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>240</y>
+      <width>91</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>Auswerten</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>320</y>
+      <width>441</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+   </widget>
+   <widget class="QLabel" name="lab_zusatz">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>360</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Zusatzzahl</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="spinBox_superz">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>360</y>
+      <width>51</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>9</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lab_superz">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>360</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Superzahl</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="spinBox_spiel77">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>384</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>9999999</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lab_spiel77">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>384</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Spiel 77</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="spinBox_super6">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>384</y>
+      <width>91</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>999999</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lab_super6">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>384</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Super 6:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="com_modus">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>260</y>
+      <width>151</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Gewinnzahlen</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Lottoschein</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="Btn_Zufall">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>350</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Zufallszahlen</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="com_laufzeit">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>384</y>
+      <width>121</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>unbegrenzt</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>1 Ziehung</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>2 Ziehungen</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>3 Ziehungen</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>4 Ziehungen</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>5 Ziehungen</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="lab_laufzeit">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>360</y>
+      <width>69</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Laufzeit:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Btn_ls_loeschen">
+    <property name="geometry">
+     <rect>
+      <x>780</x>
+      <y>560</y>
+      <width>91</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>löschen</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Btn_ls_auswerten">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>560</y>
+      <width>91</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Auswerten</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="edi_daten_lottoschein">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>340</y>
+      <width>401</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <property name="whatsThis">
+     <string extracomment="Ausgabefeld">Ausgabefeld</string>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="undoRedoEnabled">
+     <bool>false</bool>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>310</y>
+      <width>121</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Lottoschein:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>0</y>
+      <width>111</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Gewinnzahlen:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lab_daten_gewinnz">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>180</y>
+      <width>401</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Gewählter Datensatz</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lab_daten_lottoschein">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>500</y>
+      <width>401</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Gewählter Datensatz</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Btn_gz_anzeigen">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>240</y>
+      <width>98</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>anzeigen</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Btn_ls_anzeigen">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>560</y>
+      <width>98</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>anzeigen</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Btn_set_calender_today">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>440</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>heute</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lab_scheinnr">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>384</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Scheinnummer</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="com_laufzeit_tag">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>384</y>
+      <width>91</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Mi+Sa</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Mittwoch</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Samstag</string>
+     </property>
+    </item>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>894</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuDatei">
+    <property name="title">
+     <string>Datei</string>
+    </property>
+    <addaction name="actionBeenden"/>
+   </widget>
+   <widget class="QMenu" name="menuHilfe">
+    <property name="title">
+     <string>Hilfe</string>
+    </property>
+    <addaction name="actionHilfe"/>
+    <addaction name="actionInfo"/>
+   </widget>
+   <widget class="QMenu" name="menuInternet">
+    <property name="title">
+     <string>Internet</string>
+    </property>
+    <addaction name="actionDaten_von_lotto_de"/>
+   </widget>
+   <addaction name="menuDatei"/>
+   <addaction name="menuInternet"/>
+   <addaction name="menuHilfe"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionBeenden">
+   <property name="text">
+    <string>Beenden</string>
+   </property>
+  </action>
+  <action name="actionInfo">
+   <property name="text">
+    <string>Info</string>
+   </property>
+  </action>
+  <action name="actionHilfe">
+   <property name="text">
+    <string>Hilfe</string>
+   </property>
+  </action>
+  <action name="actionDaten_von_lotto_de">
+   <property name="text">
+    <string>Daten von lotto.de</string>
+   </property>
+  </action>
+ </widget>
+ <tabstops>
+  <tabstop>edi_daten_gewinnz</tabstop>
+  <tabstop>calendarWidget</tabstop>
+  <tabstop>Btn_hinzu</tabstop>
+  <tabstop>Btn_gz_auswerten</tabstop>
+  <tabstop>Btn_gz_loeschen</tabstop>
+  <tabstop>com_modus</tabstop>
+  <tabstop>Btn_Zufall</tabstop>
+  <tabstop>com_laufzeit</tabstop>
+  <tabstop>spinBox_superz</tabstop>
+  <tabstop>spinBox_spiel77</tabstop>
+  <tabstop>spinBox_super6</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
