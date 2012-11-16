@@ -1,6 +1,28 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+"""
+pyLottoverwaltung
+
+Copyright (C) <2012> Markus Hackspacher
+
+This file is part of pyLottoverwaltung.
+
+pyLottoverwaltung is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+pyLottoverwaltung is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
+"""
+
+
 from lxml import html
 from PyQt4 import QtGui, QtCore
 from datahandler import Datahandler
@@ -25,15 +47,6 @@ def data_from_webpage():
     value.append(int(document.xpath('//li[@class="field_super6"]/text()')[0].strip()))    
     return datum, value
  
- 
-def all_data_from_achiv():
-    """
-    All Data from www.lottozahlenonline.de
-    """
-    for z in range(1955, 2012):
-        url = 'http://www.lottozahlenonline.de/statistik/beide-spieltage/lottozahlen-archiv.php?j={}'.format(z)
-        data_from_achiv(url)
-
 def data_from_achiv(quote_url=None):
     """
     Data from www.lottozahlenonline.de
