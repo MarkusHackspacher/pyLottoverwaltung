@@ -185,8 +185,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """ Programm Info
         """
         text ='Eingabe der Gewinnzahlen von einer Ziehung\noder des Lottoscheins\n\n'
-        text = text + 'Lizenz: Creative Commons by-sa\n'
-        text = text + 'http://creativecommons.org/licenses/by-sa/3.0/deed.de'
+        text = text + 'Lizenz: GNU GPLv3\n'
+        text = text + 'http://www.gnu.org/licenses/'
         a = QtGui.QMessageBox()
         a.setWindowTitle('Info')
         a.setText(text)
