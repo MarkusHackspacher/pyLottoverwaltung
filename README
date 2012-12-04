@@ -17,6 +17,7 @@ install:
 
 The program requires Python 7.2 to. www.python.org/download/
 and Qt4 for Python 2.7 www.riverbankcomputing.com / software / pyqt / download
+also the lxml package http://lxml.de/installation.html
 
 Start with:
 python lotto.pyw
@@ -24,16 +25,14 @@ python lotto.pyw
 The layout (lotto_dateneing.ui) can be manipulated using the Qt4 designer,
 can then be converted back with this command in Python:
 
-cd lotto
+cd lotto\gui
   lotto_ui_zu_py.bat
-
-The program has the Creative Commons by-sa license
-http://creativecommons.org/licenses/by-sa/3.0/deed.de
 
 Installieren:
 
 Das Programm benötigt Python 2.7 dazu. www.python.org/download/ 
 und Qt4 für Python 2.7 www.riverbankcomputing.com/software/pyqt/download
+sowie das lxml Paket http://lxml.de/installation.html
 
 Start mit: 
 python lotto.pyw
@@ -41,7 +40,7 @@ python lotto.pyw
 Das Layout (lotto_dateneing.ui) kann mit den Qt4-Designer bearbeitet werden,
 kann dann mit diesem Befehl wieder in Python umgewandelt werden:
 
-cd lotto
+cd lotto\gui
  lotto_ui_zu_py.bat
 
 
