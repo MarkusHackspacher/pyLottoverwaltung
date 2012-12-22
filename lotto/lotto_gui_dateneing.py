@@ -147,22 +147,26 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         
         self.statusBar().showMessage('Bereit')
 
-        self.connect(self.actionBeenden, QtCore.SIGNAL('triggered()'), QtCore.SLOT('close()'))
-        self.connect(self.actionInfo, QtCore.SIGNAL('triggered()'), self.onInfo)
-        self.connect(self.actionHilfe, QtCore.SIGNAL('triggered()'), self.onHilfe)
+        self.connect(self.actionBeenden, 
+         QtCore.SIGNAL('triggered()'), QtCore.SLOT('close()'))
+        self.connect(self.actionInfo, 
+         QtCore.SIGNAL('triggered()'), self.onInfo)
         self.connect(self.actionDaten_von_lotto_de,
          QtCore.SIGNAL('triggered()'), self.onData_lottode)
         self.connect(self.actionDaten_von_lottozahlenonline_de_1955_2012,
          QtCore.SIGNAL('triggered()'), self.onData_lottozahlenonlinede)
-        self.connect(self.edi_daten_gewinnz, QtCore.SIGNAL('cursorPositionChanged()'), self.ondaten_gewinnz)
-        self.connect(self.edi_daten_lottoschein, QtCore.SIGNAL('cursorPositionChanged()'), self.ondaten_lottoschein)
+        self.connect(self.edi_daten_gewinnz, 
+         QtCore.SIGNAL('cursorPositionChanged()'), self.ondaten_gewinnz)
+        self.connect(self.edi_daten_lottoschein, 
+         QtCore.SIGNAL('cursorPositionChanged()'), self.ondaten_lottoschein)
  
     def ondaten_gewinnz(self):
        """Anzeigen der Gewinnzahlen an den Auswahlfeld"""
        block=self.edi_daten_gewinnz.textCursor().blockNumber()
        lottodaten = self.data_handler.get_ziehung()
        text =('Datum: {0} Zahlen: {1} {2} {3} {4} {5} {6}' \
-        .format(lottodaten[block][1], lottodaten[block][2], lottodaten[block][3], lottodaten[block][4], 
+        .format(lottodaten[block][1], lottodaten[block][2], \
+         lottodaten[block][3], lottodaten[block][4], 
          lottodaten[block][5], lottodaten[block][6], lottodaten[block][7]))
        self.lab_daten_gewinnz.setText(text)
         
@@ -171,16 +175,11 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
        block=self.edi_daten_lottoschein.textCursor().blockNumber()               
        lottodaten = self.data_handler.get_schein()
        text =('Datum: {0} Zahlen: {1} {2} {3} {4} {5} {6}' \
-        .format(lottodaten[block][1], lottodaten[block][2], lottodaten[block][3], lottodaten[block][4],
+        .format(lottodaten[block][1], lottodaten[block][2], \
+         lottodaten[block][3], lottodaten[block][4],
          lottodaten[block][5], lottodaten[block][6], lottodaten[block][7]))
        self.lab_daten_lottoschein.setText(text)       
  
-    def onHilfe(self):
-        """ Öffnen der Hilfe Datei im Browser
-        """
-        import webbrowser
-        webbrowser.open_new('hilfe.html')
-
     def onInfo(self):
         """ Programm Info
         """

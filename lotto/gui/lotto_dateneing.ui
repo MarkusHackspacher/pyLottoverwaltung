@@ -566,7 +566,6 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
     <property name="title">
      <string>Hilfe</string>
     </property>
-    <addaction name="actionHilfe"/>
     <addaction name="actionInfo"/>
    </widget>
    <widget class="QMenu" name="menuInternet">
