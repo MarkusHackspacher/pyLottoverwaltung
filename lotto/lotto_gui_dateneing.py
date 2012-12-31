@@ -120,9 +120,13 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.connect(self.Btn_gz_anzeigen,QtCore.SIGNAL("clicked()"), self.onBtn_gz_anzeigen)
         self.connect(self.Btn_ls_anzeigen,QtCore.SIGNAL("clicked()"), self.onBtn_ls_anzeigen)
         self.connect(self.Btn_gz_loeschen,QtCore.SIGNAL("clicked()"), self.onBtn_gz_loeschen)
+        self.Btn_gz_loeschen.setEnabled(False)
         self.connect(self.Btn_ls_loeschen,QtCore.SIGNAL("clicked()"), self.onBtn_ls_loeschen)
+        self.Btn_ls_loeschen.setEnabled(False)
         self.connect(self.Btn_gz_auswerten,QtCore.SIGNAL("clicked()"), self.onBtn_gz_auswerten)
         self.connect(self.Btn_ls_auswerten,QtCore.SIGNAL("clicked()"), self.onBtn_ls_auswerten)
+        self.connect(self.CBox_gz_kompl_ausgeben,QtCore.SIGNAL("clicked()"), self.onCBox_gz_kompl_ausgeben)
+       
         self.connect(self.Btn_set_calender_today,QtCore.SIGNAL("clicked()"), self.onBtn_set_calender_today)
 
         # fields fill with random numbers and give them to database
@@ -161,24 +165,29 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
          QtCore.SIGNAL('cursorPositionChanged()'), self.ondaten_lottoschein)
  
     def ondaten_gewinnz(self):
-       """Anzeigen der Gewinnzahlen an den Auswahlfeld"""
+       """
+       Anzeigen der Gewinnzahlen an den Auswahlfeld
+       Auslesen der Zeilennumer
+       Den Text der Zeile in der Beschriftung ausgeben
+       """
        block=self.edi_daten_gewinnz.textCursor().blockNumber()
-       lottodaten = self.data_handler.get_ziehung()
-       text =('Datum: {0} Zahlen: {1} {2} {3} {4} {5} {6}' \
-        .format(lottodaten[block][1], lottodaten[block][2], \
-         lottodaten[block][3], lottodaten[block][4], 
-         lottodaten[block][5], lottodaten[block][6], lottodaten[block][7]))
+       text = self.edi_daten_gewinnz.document().findBlockByLineNumber(block).text()
        self.lab_daten_gewinnz.setText(text)
+       if self.CBox_gz_kompl_ausgeben.isChecked():
+           self.Btn_gz_loeschen.setEnabled(True)
+       else:
+           self.Btn_gz_loeschen.setEnabled(False)
         
     def ondaten_lottoschein(self):
-       """Anzeigen der Daten des Lottoscheins an den Auswahlfeld"""
+       """
+       Anzeigen der Daten des Lottoscheins an den Auswahlfeld
+       Auslesen der Zeilennumer
+       Den Text der Zeile in der Beschriftung ausgeben
+       """
        block=self.edi_daten_lottoschein.textCursor().blockNumber()               
-       lottodaten = self.data_handler.get_schein()
-       text =('Datum: {0} Zahlen: {1} {2} {3} {4} {5} {6}' \
-        .format(lottodaten[block][1], lottodaten[block][2], \
-         lottodaten[block][3], lottodaten[block][4],
-         lottodaten[block][5], lottodaten[block][6], lottodaten[block][7]))
+       text = self.edi_daten_lottoschein.document().findBlockByLineNumber(block).text()
        self.lab_daten_lottoschein.setText(text)       
+       self.Btn_ls_loeschen.setEnabled(True)
  
     def onInfo(self):
         """ Programm Info
@@ -247,22 +256,21 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
 
     def oncalendarWidget(self):
         """Tag der Ziehung oder der Beginn des Lottoscheins"""
-        print 'oncalendarWidget'
-        print self.calendarWidget.selectedDate()
+        #print 'oncalendarWidget'
+        #print self.calendarWidget.selectedDate()
+        return
      
     def onBtn_hinzu(self):
         """drawing numbers move in database """
         datum = self.calendarWidget.selectedDate()
-        day = datum.toPyDate()
-        text = u'Daten hinzugefügt '+str(datum.day())+ '.' + str(datum.month())+ '.' + str(datum.year())
-        
+        day = datum.toPyDate()       
         if self.com_modus.currentIndex()==0:
             self.data_handler.insert_ziehung(day, self.spinBox_Zahlen[0].value(), \
              self.spinBox_Zahlen[1].value(), self.spinBox_Zahlen[2].value(), \
              self.spinBox_Zahlen[3].value(), self.spinBox_Zahlen[4].value(), \
              self.spinBox_Zahlen[5].value(), self.spinBox_Zahlen[6].value(), \
              self.spinBox_superz.value(), self.spinBox_spiel77.value(), self.spinBox_super6.value())
-            self.lab_daten_gewinnz.setText(text)
+            self.Btn_gz_loeschen.setEnabled(False)
             self.onBtn_gz_laden()
         else:
             self.data_handler.insert_schein(day, self.spinBox_Zahlen[0].value(), \
@@ -270,8 +278,9 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
              self.spinBox_Zahlen[3].value(), self.spinBox_Zahlen[4].value(), \
              self.spinBox_Zahlen[5].value(), self.com_laufzeit.currentIndex(), \
              self.com_laufzeit_tag.currentIndex(), self.spinBox_spiel77.value())
-            self.lab_daten_lottoschein.setText(text)
+            self.Btn_ls_loeschen.setEnabled(False)
             self.onBtn_ls_laden()
+            
 
     def onBtn_gz_auswerten(self):
         """Gewinnzahlen auswerten
@@ -292,8 +301,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
     def onBtn_gz_anzeigen(self):
         """
         show drawing numbers
-        Gewinnzahlen anzeigen
-        ToDo: noch programmieren, gedacht die Zahlen im großen Feld anzuzeigen.
+        Gewinnzahlen im großen Feld anzeigen
         """
         block=self.edi_daten_gewinnz.textCursor().blockNumber()
         lottodaten = self.data_handler.get_ziehung()
@@ -314,8 +322,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
     def onBtn_ls_anzeigen(self):
         """
         show tip numbers
-        Lottoschein anzeigen,
-        ToDo: noch programmieren, gedacht die Zahlen im großen Feld anzuzeigen.
+        Lottoschein im großen Feld anzeigen,
         """
         block=self.edi_daten_lottoschein.textCursor().blockNumber()
         lottodaten = self.data_handler.get_schein()
@@ -366,22 +373,34 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """Read the Lottoschein from the Database
         loading into the QPlainTextEdit
         """
-        self.edi_daten_lottoschein.setPlainText("")
+        PlainText = QtGui.QPlainTextEdit()
         lottodaten = self.data_handler.get_schein()
         for schein in lottodaten:
-            self.edi_daten_lottoschein.appendPlainText('Datum: {0} Zahlen: {1}, {2}, {3}, {4}, {5} {6}' \
+            PlainText.appendPlainText('Datum: {0} Zahlen: {1}, {2}, {3}, {4}, {5} {6}' \
              .format(schein[1], schein[2], schein[3], schein[4], schein[5], schein[6], schein[7]))
+        self.edi_daten_lottoschein.setPlainText(PlainText.document().toPlainText())
+        self.edi_daten_lottoschein.moveCursor(self.edi_daten_lottoschein.textCursor().End)
 
     def onBtn_gz_laden(self):
         """Read the Gewinnzahlen from the Database
         loading into the QPlainTextEdit
         """
-        self.edi_daten_gewinnz.setPlainText("")
+        PlainText = QtGui.QPlainTextEdit()
         lottodaten = self.data_handler.get_ziehung()
+        if not self.CBox_gz_kompl_ausgeben.isChecked():
+            lottodaten = lottodaten[-10:]
         for i in lottodaten:
-           self.edi_daten_gewinnz.appendPlainText('Datum: {0} | {1}, {2}, {3}, {4}, {5}, {6} ZZ: {7}' \
+           PlainText.appendPlainText('Datum: {0} | {1}, {2}, {3}, {4}, {5}, {6} ZZ: {7}' \
             .format(i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8]))
+        self.edi_daten_gewinnz.setPlainText(PlainText.document().toPlainText())
+        self.edi_daten_gewinnz.moveCursor(self.edi_daten_gewinnz.textCursor().End)
             
+    def onCBox_gz_kompl_ausgeben(self):
+        """
+        Read the complete database
+        """
+        self.onBtn_gz_laden()
+   
     def onBtn_Zufall(self):
         """ Die Zufallszahen generieren
         """

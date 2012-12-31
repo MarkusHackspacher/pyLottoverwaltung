@@ -134,38 +134,6 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
      <string>zur Datenbank hinzufügen</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="Btn_gz_loeschen">
-    <property name="geometry">
-     <rect>
-      <x>780</x>
-      <y>240</y>
-      <width>91</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>löschen</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Btn_gz_auswerten">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>240</y>
-      <width>91</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string>Auswerten</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="horizontalLayoutWidget_2">
     <property name="geometry">
      <rect>
@@ -366,32 +334,6 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
      <string>Laufzeit:</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="Btn_ls_loeschen">
-    <property name="geometry">
-     <rect>
-      <x>780</x>
-      <y>560</y>
-      <width>91</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>löschen</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Btn_ls_auswerten">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>560</y>
-      <width>91</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Auswerten</string>
-    </property>
-   </widget>
    <widget class="QPlainTextEdit" name="edi_daten_lottoschein">
     <property name="geometry">
      <rect>
@@ -466,32 +408,6 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
      <string>Gewählter Datensatz</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="Btn_gz_anzeigen">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>240</y>
-      <width>98</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>anzeigen</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Btn_ls_anzeigen">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>560</y>
-      <width>98</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>anzeigen</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="Btn_set_calender_today">
     <property name="geometry">
      <rect>
@@ -545,6 +461,88 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
       <string>Samstag</string>
      </property>
     </item>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>240</y>
+      <width>401</width>
+      <height>33</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QPushButton" name="Btn_gz_auswerten">
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>Auswerten</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Btn_gz_anzeigen">
+       <property name="text">
+        <string>anzeigen</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Btn_gz_loeschen">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>löschen</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="CBox_gz_kompl_ausgeben">
+       <property name="text">
+        <string>alle Einträge</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>560</y>
+      <width>401</width>
+      <height>33</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QPushButton" name="Btn_ls_auswerten">
+       <property name="text">
+        <string>Auswerten</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Btn_ls_anzeigen">
+       <property name="text">
+        <string>anzeigen</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Btn_ls_loeschen">
+       <property name="text">
+        <string>löschen</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -610,8 +608,6 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
   <tabstop>edi_daten_gewinnz</tabstop>
   <tabstop>calendarWidget</tabstop>
   <tabstop>Btn_hinzu</tabstop>
-  <tabstop>Btn_gz_auswerten</tabstop>
-  <tabstop>Btn_gz_loeschen</tabstop>
   <tabstop>com_modus</tabstop>
   <tabstop>Btn_Zufall</tabstop>
   <tabstop>com_laufzeit</tabstop>
