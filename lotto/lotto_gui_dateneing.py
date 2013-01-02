@@ -206,6 +206,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.data_handler.close()
     
     def onData_lottode(self):
+        """Load the actual draw from lotto.de"""        
         try: 
             datum, value = webzugriff.data_from_webpage()
         except:
@@ -230,6 +231,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.geaendert()
         
     def onData_lottozahlenonlinede(self):
+        """Load the draw from 2000 to 2013 from lottozahlenonline.de"""        
         a = QtGui.QProgressDialog("Daten Einlesen", "Abbruch", 2000, 2013, self, QtCore.Qt.Dialog|QtCore.Qt.WindowTitleHint)
         a.setWindowModality(QtCore.Qt.WindowModal)
         a.setValue(2000)

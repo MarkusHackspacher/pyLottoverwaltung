@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>894</width>
-    <height>665</height>
+    <width>909</width>
+    <height>679</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -51,28 +51,6 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout"/>
-   </widget>
-   <widget class="QPlainTextEdit" name="edi_daten_gewinnz">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>30</y>
-      <width>401</width>
-      <height>151</height>
-     </rect>
-    </property>
-    <property name="whatsThis">
-     <string extracomment="Ausgabefeld">Ausgabefeld</string>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="undoRedoEnabled">
-     <bool>false</bool>
-    </property>
-    <property name="readOnly">
-     <bool>true</bool>
-    </property>
    </widget>
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
@@ -334,80 +312,6 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
      <string>Laufzeit:</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="edi_daten_lottoschein">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>340</y>
-      <width>401</width>
-      <height>161</height>
-     </rect>
-    </property>
-    <property name="whatsThis">
-     <string extracomment="Ausgabefeld">Ausgabefeld</string>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="undoRedoEnabled">
-     <bool>false</bool>
-    </property>
-    <property name="readOnly">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>610</x>
-      <y>310</y>
-      <width>121</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Lottoschein:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>600</x>
-      <y>0</y>
-      <width>111</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Gewinnzahlen:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lab_daten_gewinnz">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>180</y>
-      <width>401</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Gewählter Datensatz</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lab_daten_lottoschein">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>500</y>
-      <width>401</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Gewählter Datensatz</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="Btn_set_calender_today">
     <property name="geometry">
      <rect>
@@ -462,85 +366,169 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
      </property>
     </item>
    </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget_3">
+   <widget class="QWidget" name="horizontalLayoutWidget_5">
     <property name="geometry">
      <rect>
       <x>470</x>
-      <y>240</y>
-      <width>401</width>
-      <height>33</height>
+      <y>-1</y>
+      <width>421</width>
+      <height>611</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
-      <widget class="QPushButton" name="Btn_gz_auswerten">
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="text">
-        <string>Auswerten</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="Btn_gz_anzeigen">
-       <property name="text">
-        <string>anzeigen</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="Btn_gz_loeschen">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="text">
-        <string>löschen</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="CBox_gz_kompl_ausgeben">
-       <property name="text">
-        <string>alle Einträge</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget_4">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>560</y>
-      <width>401</width>
-      <height>33</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
-      <widget class="QPushButton" name="Btn_ls_auswerten">
-       <property name="text">
-        <string>Auswerten</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="Btn_ls_anzeigen">
-       <property name="text">
-        <string>anzeigen</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="Btn_ls_loeschen">
-       <property name="text">
-        <string>löschen</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Gewinnzahlen:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPlainTextEdit" name="edi_daten_gewinnz">
+         <property name="font">
+          <font>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
+         <property name="whatsThis">
+          <string extracomment="Ausgabefeld">Ausgabefeld</string>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="undoRedoEnabled">
+          <bool>false</bool>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lab_daten_gewinnz">
+         <property name="text">
+          <string>Gewählter Datensatz</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QPushButton" name="Btn_gz_auswerten">
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string>Auswerten</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Btn_gz_anzeigen">
+           <property name="text">
+            <string>anzeigen</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Btn_gz_loeschen">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>löschen</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="CBox_gz_kompl_ausgeben">
+           <property name="text">
+            <string>alle Einträge</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Lottoschein:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPlainTextEdit" name="edi_daten_lottoschein">
+         <property name="font">
+          <font>
+           <family>Cantarell</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
+         <property name="whatsThis">
+          <string extracomment="Ausgabefeld">Ausgabefeld</string>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="undoRedoEnabled">
+          <bool>false</bool>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lab_daten_lottoschein">
+         <property name="text">
+          <string>Gewählter Datensatz</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QPushButton" name="Btn_ls_auswerten">
+           <property name="text">
+            <string>Auswerten</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Btn_ls_anzeigen">
+           <property name="text">
+            <string>anzeigen</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Btn_ls_loeschen">
+           <property name="text">
+            <string>löschen</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>
@@ -550,7 +538,7 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>894</width>
+     <width>909</width>
      <height>29</height>
     </rect>
    </property>
