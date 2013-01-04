@@ -44,7 +44,7 @@ class ui_lotto_Dialog(QtGui.QDialog, Ui_Dialog):
         @return: give close(0) or accept(1) back
         """
         QtGui.QDialog.__init__(self) 
-        self.setWindowIcon(QtGui.QIcon(join("misc", "icon.ico")))
+        self.setWindowIcon(QtGui.QIcon(join("misc", "pyLottoverwaltung.svg")))
         self.setupUi(self)
         self.data_handler = Datahandler('datenbank.sqlite')
         infotext = 'Gewinnzahlen'
@@ -71,7 +71,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         datafield
         """
         QtGui.QDialog.__init__(self) 
-        self.setWindowIcon(QtGui.QIcon(join("misc", "icon.ico")))
+        self.setWindowIcon(QtGui.QIcon(join("misc", "pyLottoverwaltung.svg")))
         self.setupUi(self)
         #array of Button from 1 to 49
         self.Btn_Numerary_1to49 = []
