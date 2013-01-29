@@ -22,8 +22,10 @@ You should have received a copy of the GNU General Public License
 along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-
-from lxml import html
+try:
+    from lxml import html
+except ImportError, e:
+    print "FAIL!!!"
 from PyQt4 import QtGui, QtCore
 from datahandler import Datahandler
 
