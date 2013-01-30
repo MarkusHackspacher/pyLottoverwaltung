@@ -25,7 +25,7 @@ along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 try:
     from lxml import html
 except ImportError, e:
-    print "FAIL!!!"
+    print "FAIL!!! import lxml"
 from PyQt4 import QtGui, QtCore
 from datahandler import Datahandler
 
@@ -34,9 +34,9 @@ def data_from_webpage():
     Data from lotto.de
     @return: datum, list of numbers (draw 1-6, Zusatzzahl, Superzahl, Spiel77, Super6)
     """
-    QUOTE_URL = 'http://www.lotto.de/de/spielen/landingpage.xhtml'
+    quote_url = 'http://www.lotto.de/de/spielen/landingpage.xhtml'
     try: 
-        document = html.parse(QUOTE_URL)
+        document = html.parse(quote_url)
     except:
 		return    
     str = '//div[@class="form-row"]//option'
@@ -57,7 +57,10 @@ def data_from_achiv(quote_url=None):
     if not quote_url:
         quote_url = 'http://www.lottozahlenonline.de/statistik/lotto-am-samstag/lottozahlen-archiv.php?j=2008'
     #QUOTE_URL = 'http://www.lottozahlenonline.de/statistik/beide-spieltage/lottozahlen-archiv.php?j=2012'
-    document = html.parse(quote_url)
+    try: 
+        document = html.parse(quote_url)
+    except:
+		return    
     datum = document.xpath('//div[@class="zahlensuche_datum"]/text()')
     lottozahlen = document.xpath('//div[@class="zahlensuche_zahl"]/text()')
     zusatzzahlen = document.xpath('//div[@class="zahlensuche_zz"]/text()')
