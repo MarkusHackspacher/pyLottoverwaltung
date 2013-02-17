@@ -79,6 +79,27 @@ class Datahandler(object):
         self.connection.commit()
         c.close()
 
+    def update_ziehung(self, row_id, day, zahl_1, zahl_2,zahl_3,zahl_4,zahl_5,zahl_6, zahl_zusatz,zahl_super, zahl_spiel77, zahl_spielsuper6):
+        """Daten der Ziehung der Lottozahlen in der Datenbank speichern"""
+        c = self.connection.cursor()
+        c.execute("update ziehung set d=?, zahl_1=?, zahl_2=?, zahl_3=?, zahl_4=?, zahl_5=?, zahl_6=?, \
+             zahl_zusatz=? ,zahl_super=? , zahl_spiel77=?, zahl_spielsuper6=? \
+             where rowid=? ", \
+             (day, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
+              zahl_zusatz, zahl_super, zahl_spiel77, zahl_spielsuper6, row_id))
+        self.connection.commit()
+        c.close()
+
+    def update_schein(self, row_id, day, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, laufzeit, laufzeit_tag, scheinnr):
+        """Daten des Lottoscheines in der Datenbank speichern"""
+        c = self.connection.cursor()
+        c.execute("update schein set d=?, zahl_1=?, zahl_2=?, zahl_3=?, zahl_4=?, zahl_5=?, zahl_6=?, \
+             laufzeit=?, laufzeit_tag=?, scheinnr=? where rowid=? ", \
+             (day, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
+              laufzeit, laufzeit_tag, scheinnr, row_id))
+        self.connection.commit()
+        c.close()
+
     def get_ziehung(self, id=None, date=None):    
         """Daten der Ziehung der Lottozahlen auslesen"""
         c = self.connection.cursor()

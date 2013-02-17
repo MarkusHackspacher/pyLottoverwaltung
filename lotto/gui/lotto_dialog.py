@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'lotto_dialog.ui'
 #
-# Created: Sun Feb 17 09:14:28 2013
+# Created: Sun Feb 17 22:33:04 2013
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -68,7 +68,7 @@ class Ui_Dialog(object):
         self.lab_super6.setAlignment(QtCore.Qt.AlignCenter)
         self.lab_super6.setObjectName(_fromUtf8("lab_super6"))
         self.btn_save = QtGui.QPushButton(Dialog)
-        self.btn_save.setGeometry(QtCore.QRect(190, 290, 95, 31))
+        self.btn_save.setGeometry(QtCore.QRect(310, 290, 81, 27))
         self.btn_save.setObjectName(_fromUtf8("btn_save"))
         self.com_laufzeit = QtGui.QComboBox(Dialog)
         self.com_laufzeit.setGeometry(QtCore.QRect(380, 130, 121, 23))

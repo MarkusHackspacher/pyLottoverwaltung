@@ -114,11 +114,26 @@ class ui_lotto_Dialog(QtGui.QDialog, Ui_Dialog):
             self.com_laufzeit_tag.setVisible(False)
             self.lab_laufzeit.setVisible(False)         
             self.lab_scheinnr.setVisible(False)
-
-
+            
+        self.onbtn_save = functools.partial(self.onbtn_save_index, typ, rowid, lottodaten[0][0])
+        self.connect(self.btn_save, QtCore.SIGNAL('clicked()'), self.onbtn_save)
         self.buttonBox.accepted.connect(self.accept)
-        self.buttonBox.rejected.connect(self.close)
-
+         
+    def onbtn_save_index(self, typ , rowid, date_of):
+        """drawing numbers move in database """
+        if typ == 0:
+            self.data_handler.update_ziehung(rowid ,date_of, self.spinBox_Zahlen[0].value(), \
+             self.spinBox_Zahlen[1].value(), self.spinBox_Zahlen[2].value(), \
+             self.spinBox_Zahlen[3].value(), self.spinBox_Zahlen[4].value(), \
+             self.spinBox_Zahlen[5].value(), self.spinBox_Zahlen[6].value(), \
+             self.spinBox_superz.value(), self.spinBox_spiel77.value(), self.spinBox_super6.value())
+        else:
+            self.data_handler.update_schein(rowid ,date_of, self.spinBox_Zahlen[0].value(), \
+             self.spinBox_Zahlen[1].value(), self.spinBox_Zahlen[2].value(), \
+             self.spinBox_Zahlen[3].value(), self.spinBox_Zahlen[4].value(), \
+             self.spinBox_Zahlen[5].value(), self.com_laufzeit.currentIndex(), \
+             self.com_laufzeit_tag.currentIndex(), self.spinBox_spiel77.value())
+        self.accept()
 
 class MeinDialog(QtGui.QMainWindow, Dlg): 
     def __init__(self):
@@ -508,39 +523,39 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """ Wenn der Eingabe-Modus wechselt werden Schaltflächen an oder ab geschaltet
         """
         if self.com_modus.currentIndex()==1:
-           self.Btn_Zufall.setVisible(True)
-           self.com_laufzeit.setVisible(True)
-           self.com_laufzeit_tag.setVisible(True)
-           self.lab_laufzeit.setVisible(True)         
-           self.spinBox_superz.setVisible(False)
-           self.lab_superz.setVisible(False)
-           self.spinBox_spiel77.setVisible(True)
-           self.lab_spiel77.setVisible(False)
-           self.lab_scheinnr.setVisible(True)
-           self.spinBox_super6.setVisible(False)
-           self.lab_super6.setVisible(False)
-           self.lab_zusatz.setVisible(False)
-           self.spinBox_Zahlen[6].setVisible(False)
-           self.Btn_delete_Number[6].setVisible(False)
-           self.spinBox_1to7_clear(6)
-           self.geaendert()
+            self.Btn_Zufall.setVisible(True)
+            self.com_laufzeit.setVisible(True)
+            self.com_laufzeit_tag.setVisible(True)
+            self.lab_laufzeit.setVisible(True)         
+            self.spinBox_superz.setVisible(False)
+            self.lab_superz.setVisible(False)
+            self.spinBox_spiel77.setVisible(True)
+            self.lab_spiel77.setVisible(False)
+            self.lab_scheinnr.setVisible(True)
+            self.spinBox_super6.setVisible(False)
+            self.lab_super6.setVisible(False)
+            self.lab_zusatz.setVisible(False)
+            self.spinBox_Zahlen[6].setVisible(False)
+            self.Btn_delete_Number[6].setVisible(False)
+            self.spinBox_1to7_clear(6)
+            self.geaendert()
 
         else:
-           self.Btn_Zufall.setVisible(False)
-           self.com_laufzeit.setVisible(False)
-           self.com_laufzeit_tag.setVisible(False)
-           self.lab_laufzeit.setVisible(False)
-           self.spinBox_superz.setVisible(True)
-           self.lab_superz.setVisible(True)
-           self.spinBox_spiel77.setVisible(True)
-           self.lab_spiel77.setVisible(True)
-           self.lab_scheinnr.setVisible(False)
-           self.spinBox_super6.setVisible(True)
-           self.lab_super6.setVisible(True)
-           self.lab_zusatz.setVisible(True)
-           self.spinBox_Zahlen[6].setVisible(True)
-           self.Btn_delete_Number[6].setVisible(True)
-           self.geaendert()
+            self.Btn_Zufall.setVisible(False)
+            self.com_laufzeit.setVisible(False)
+            self.com_laufzeit_tag.setVisible(False)
+            self.lab_laufzeit.setVisible(False)
+            self.spinBox_superz.setVisible(True)
+            self.lab_superz.setVisible(True)
+            self.spinBox_spiel77.setVisible(True)
+            self.lab_spiel77.setVisible(True)
+            self.lab_scheinnr.setVisible(False)
+            self.spinBox_super6.setVisible(True)
+            self.lab_super6.setVisible(True)
+            self.lab_zusatz.setVisible(True)
+            self.spinBox_Zahlen[6].setVisible(True)
+            self.Btn_delete_Number[6].setVisible(True)
+            self.geaendert()
 
     def onlaufzeit(self):
         """Laufzeit des Lottoscheins
