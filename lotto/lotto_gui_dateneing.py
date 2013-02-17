@@ -3,7 +3,7 @@
 """
 pyLottoverwaltung
 
-Copyright (C) <2012> Markus Hackspacher
+Copyright (C) <2012-2013> Markus Hackspacher
 
 This file is part of pyLottoverwaltung.
 
@@ -48,14 +48,73 @@ class ui_lotto_Dialog(QtGui.QDialog, Ui_Dialog):
         self.setupUi(self)
         self.data_handler = Datahandler('datenbank.sqlite')
         infotext = 'Gewinnzahlen'
-        lottodaten = self.data_handler.get_ziehung(rowid)
         if typ == 1:
             infotext = 'Lottoschein'        
             lottodaten = self.data_handler.get_schein(rowid)
+        else:
+            lottodaten = self.data_handler.get_ziehung(rowid)
+            
         self.setWindowTitle(infotext)
-        #self.label.setText('Bewertung')
-        #print lottodaten[0][0]
-        self.plainTextEdit.appendPlainText('Datensatz RowID: {0} Datum: {1}'.format(rowid, lottodaten[0][0]))
+        self.plainTextEdit.appendPlainText('Datensatz RowID: {0} Datum: {1}'.
+        format(rowid, lottodaten[0][0]))
+
+        #set 6 SpinBox and 1 
+        self.spinBox_Zahlen = []
+        for zahlen in xrange(6):
+            self.spinBox_Zahlen.append(QtGui.QSpinBox(self.horizontalLayoutWidget))
+        self.spinBox_Zahlen.append(QtGui.QSpinBox(self))
+        for zahlen in xrange(7):
+            if zahlen != 6:
+                self.spinBox_Zahlen[zahlen].setMinimumSize(QtCore.QSize(32, 20))
+                self.spinBox_Zahlen[zahlen].setMaximumSize(QtCore.QSize(52, 32))
+                self.horizontalLayout.addWidget(self.spinBox_Zahlen[zahlen])
+            else:
+                #set extra Spinbox
+                self.spinBox_Zahlen[zahlen].setGeometry(QtCore.QRect(140, 170, 51, 23))
+            self.spinBox_Zahlen[zahlen].setMaximum(49)
+            self.spinBox_Zahlen[zahlen].clear()
+
+        self.spinBox_Zahlen[0].setValue(lottodaten[0][1])
+        self.spinBox_Zahlen[1].setValue(lottodaten[0][2])
+        self.spinBox_Zahlen[2].setValue(lottodaten[0][3])
+        self.spinBox_Zahlen[3].setValue(lottodaten[0][4])
+        self.spinBox_Zahlen[4].setValue(lottodaten[0][5])
+        self.spinBox_Zahlen[5].setValue(lottodaten[0][6])
+
+        if typ == 1:
+            self.com_laufzeit.setCurrentIndex(lottodaten[0][7])
+            if lottodaten[0][8] == None:
+                index = 0
+            else:
+                index = lottodaten[0][8]           
+            self.com_laufzeit_tag.setCurrentIndex(index)
+            if lottodaten[0][9] == None:
+                index = 0
+            else:
+                index = lottodaten[0][9]
+            self.spinBox_spiel77.setValue(index)
+
+            self.spinBox_Zahlen[6].setVisible(False)
+            self.spinBox_superz.setVisible(False)
+            self.lab_superz.setVisible(False)
+            self.spinBox_spiel77.setVisible(True)
+            self.lab_spiel77.setVisible(False)
+            self.lab_scheinnr.setVisible(True)
+            self.spinBox_super6.setVisible(False)
+            self.lab_super6.setVisible(False)
+            self.lab_zusatz.setVisible(False)
+           
+        else:
+            self.spinBox_Zahlen[6].setValue(lottodaten[0][7])
+            self.spinBox_superz.setValue(lottodaten[0][8])
+            self.spinBox_spiel77.setValue(lottodaten[0][9])
+            self.spinBox_super6.setValue(lottodaten[0][10])
+            self.spinBox_Zahlen[6].setVisible(True)
+            self.com_laufzeit.setVisible(False)
+            self.com_laufzeit_tag.setVisible(False)
+            self.lab_laufzeit.setVisible(False)         
+            self.lab_scheinnr.setVisible(False)
+
 
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.close)
@@ -124,7 +183,9 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.connect(self.Btn_ls_loeschen,QtCore.SIGNAL("clicked()"), self.onBtn_ls_loeschen)
         self.Btn_ls_loeschen.setEnabled(False)
         self.connect(self.Btn_gz_auswerten,QtCore.SIGNAL("clicked()"), self.onBtn_gz_auswerten)
+        self.Btn_gz_auswerten.setEnabled(False)
         self.connect(self.Btn_ls_auswerten,QtCore.SIGNAL("clicked()"), self.onBtn_ls_auswerten)
+        self.Btn_ls_auswerten.setEnabled(False)
         self.connect(self.CBox_gz_kompl_ausgeben,QtCore.SIGNAL("clicked()"), self.onCBox_gz_kompl_ausgeben)
        
         self.connect(self.Btn_set_calender_today,QtCore.SIGNAL("clicked()"), self.onBtn_set_calender_today)
@@ -171,12 +232,10 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
        Den Text der Zeile in der Beschriftung ausgeben
        """
        block=self.edi_daten_gewinnz.textCursor().blockNumber()
-       text = self.edi_daten_gewinnz.document().findBlockByLineNumber(block).text()
+       text = self.edi_daten_gewinnz.document().findBlockByNumber(block).text()
        self.lab_daten_gewinnz.setText(text)
-       if self.CBox_gz_kompl_ausgeben.isChecked():
-           self.Btn_gz_loeschen.setEnabled(True)
-       else:
-           self.Btn_gz_loeschen.setEnabled(False)
+       self.Btn_gz_loeschen.setEnabled(True)
+       self.Btn_gz_auswerten.setEnabled(True)
         
     def ondaten_lottoschein(self):
        """
@@ -185,9 +244,11 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
        Den Text der Zeile in der Beschriftung ausgeben
        """
        block=self.edi_daten_lottoschein.textCursor().blockNumber()               
-       text = self.edi_daten_lottoschein.document().findBlockByLineNumber(block).text()
+       text = self.edi_daten_lottoschein.document().findBlockByNumber(block).text()
        self.lab_daten_lottoschein.setText(text)       
        self.Btn_ls_loeschen.setEnabled(True)
+       self.Btn_ls_auswerten.setEnabled(True)
+
  
     def onInfo(self):
         """ Programm Info
@@ -235,7 +296,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         a = QtGui.QProgressDialog("Daten Einlesen", "Abbruch", 2000, 2013, self, QtCore.Qt.Dialog|QtCore.Qt.WindowTitleHint)
         a.setWindowModality(QtCore.Qt.WindowModal)
         a.setValue(2000)
-        for z in range(2000, 2013):
+        for z in range(2000, 2014):
             url = 'http://www.lottozahlenonline.de/statistik/beide-spieltage/lottozahlen-archiv.php?j={}'.format(z)
             webzugriff.data_from_achiv(url)
             a.setValue(z)
@@ -288,8 +349,15 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """Gewinnzahlen auswerten
             ToDo: noch programmieren
         """
-        dlg = ui_lotto_Dialog(0, self.data_handler.find_rowid(0, 
-         self.edi_daten_gewinnz.textCursor().blockNumber()))
+        anzahl_datensaetze = len(self.data_handler.get_ziehung())
+        if not self.CBox_gz_kompl_ausgeben.isChecked():
+            anzahl_datensaetze =- 10
+        else:
+            anzahl_datensaetze = 0
+        rowid = self.data_handler.find_rowid(0, 
+         self.edi_daten_gewinnz.textCursor().blockNumber() + anzahl_datensaetze)
+        print anzahl_datensaetze, rowid
+        dlg = ui_lotto_Dialog(0, rowid)
         print dlg.exec_()
 
     def onBtn_ls_auswerten(self):
@@ -307,6 +375,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """
         block=self.edi_daten_gewinnz.textCursor().blockNumber()
         lottodaten = self.data_handler.get_ziehung()
+        if not self.CBox_gz_kompl_ausgeben.isChecked():
+            lottodaten = lottodaten[-10:]
         self.calendarWidget.setSelectedDate(QtCore.QDate.fromString(lottodaten[block][1],"yyyy-MM-dd"))       
         self.spinBox_Zahlen[0].setValue(lottodaten[block][2])
         self.spinBox_Zahlen[1].setValue(lottodaten[block][3])
@@ -358,8 +428,13 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         delete drawing numbers from the database
         Gewinnzahlen einer Ziehung aus der Datenbank loeschen
         """           
+        anzahl_datensaetze = len(self.data_handler.get_ziehung())
+        if not self.CBox_gz_kompl_ausgeben.isChecked():
+            anzahl_datensaetze =- 10
+        else:
+            anzahl_datensaetze = 0
         self.data_handler.delete_ziehung(self.data_handler.find_rowid(0, 
-         self.edi_daten_gewinnz.textCursor().blockNumber()))
+         self.edi_daten_gewinnz.textCursor().blockNumber() + anzahl_datensaetze))
         self.onBtn_gz_laden()
 
     def onBtn_ls_loeschen(self):
@@ -399,7 +474,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             
     def onCBox_gz_kompl_ausgeben(self):
         """
-        Read the complete database
+        CheckBox: Show the complete database in TextEdit
         """
         self.onBtn_gz_laden()
    

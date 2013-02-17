@@ -185,6 +185,100 @@
     <string>Sichern</string>
    </property>
   </widget>
+  <widget class="QComboBox" name="com_laufzeit">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>130</y>
+     <width>121</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>unbegrenzt</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1 Ziehung</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>2 Ziehungen</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>3 Ziehungen</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>4 Ziehungen</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>5 Ziehungen</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="lab_laufzeit">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>106</y>
+     <width>69</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Laufzeit:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="com_laufzeit_tag">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>160</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Mi+Sa</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Mittwoch</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Samstag</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="lab_scheinnr">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>170</y>
+     <width>101</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Scheinnummer</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

@@ -6,7 +6,7 @@ for insert, get and delete data in the database
 
 pyLottoverwaltung
 
-Copyright (C) <2012> Markus Hackspacher
+Copyright (C) <2012-2013> Markus Hackspacher
 
 This file is part of pyLottoverwaltung.
 
@@ -84,7 +84,7 @@ class Datahandler(object):
         c = self.connection.cursor()
         if id:
             c.execute("select * from ziehung where rowid=?", (id,))
-        if date:
+        elif date:
             c.execute("select * from ziehung where d=?", (date,))
         else:
             c.execute("select rowid,* from ziehung ORDER BY d")

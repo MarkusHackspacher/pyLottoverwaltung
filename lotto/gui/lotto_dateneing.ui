@@ -588,7 +588,7 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
   </action>
   <action name="actionDaten_von_lottozahlenonline_de_1955_2012">
    <property name="text">
-    <string>Daten von  lottozahlenonline.de (2000-2012)</string>
+    <string>Daten von  lottozahlenonline.de (2000-2013)</string>
    </property>
   </action>
  </widget>

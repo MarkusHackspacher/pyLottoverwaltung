@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'lotto_dialog.ui'
 #
-# Created: Wed Jan  2 21:30:19 2013
+# Created: Sun Feb 17 01:15:48 2013
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -70,6 +70,28 @@ class Ui_Dialog(object):
         self.btn_save = QtGui.QPushButton(Dialog)
         self.btn_save.setGeometry(QtCore.QRect(190, 290, 95, 31))
         self.btn_save.setObjectName(_fromUtf8("btn_save"))
+        self.com_laufzeit = QtGui.QComboBox(Dialog)
+        self.com_laufzeit.setGeometry(QtCore.QRect(380, 130, 121, 23))
+        self.com_laufzeit.setObjectName(_fromUtf8("com_laufzeit"))
+        self.com_laufzeit.addItem(_fromUtf8(""))
+        self.com_laufzeit.addItem(_fromUtf8(""))
+        self.com_laufzeit.addItem(_fromUtf8(""))
+        self.com_laufzeit.addItem(_fromUtf8(""))
+        self.com_laufzeit.addItem(_fromUtf8(""))
+        self.com_laufzeit.addItem(_fromUtf8(""))
+        self.lab_laufzeit = QtGui.QLabel(Dialog)
+        self.lab_laufzeit.setGeometry(QtCore.QRect(420, 106, 69, 18))
+        self.lab_laufzeit.setObjectName(_fromUtf8("lab_laufzeit"))
+        self.com_laufzeit_tag = QtGui.QComboBox(Dialog)
+        self.com_laufzeit_tag.setGeometry(QtCore.QRect(410, 160, 91, 23))
+        self.com_laufzeit_tag.setObjectName(_fromUtf8("com_laufzeit_tag"))
+        self.com_laufzeit_tag.addItem(_fromUtf8(""))
+        self.com_laufzeit_tag.addItem(_fromUtf8(""))
+        self.com_laufzeit_tag.addItem(_fromUtf8(""))
+        self.lab_scheinnr = QtGui.QLabel(Dialog)
+        self.lab_scheinnr.setGeometry(QtCore.QRect(140, 170, 101, 21))
+        self.lab_scheinnr.setAlignment(QtCore.Qt.AlignCenter)
+        self.lab_scheinnr.setObjectName(_fromUtf8("lab_scheinnr"))
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -82,4 +104,15 @@ class Ui_Dialog(object):
         self.lab_superz.setText(QtGui.QApplication.translate("Dialog", "Superzahl", None, QtGui.QApplication.UnicodeUTF8))
         self.lab_super6.setText(QtGui.QApplication.translate("Dialog", "Super 6:", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_save.setText(QtGui.QApplication.translate("Dialog", "Sichern", None, QtGui.QApplication.UnicodeUTF8))
+        self.com_laufzeit.setItemText(0, QtGui.QApplication.translate("Dialog", "unbegrenzt", None, QtGui.QApplication.UnicodeUTF8))
+        self.com_laufzeit.setItemText(1, QtGui.QApplication.translate("Dialog", "1 Ziehung", None, QtGui.QApplication.UnicodeUTF8))
+        self.com_laufzeit.setItemText(2, QtGui.QApplication.translate("Dialog", "2 Ziehungen", None, QtGui.QApplication.UnicodeUTF8))
+        self.com_laufzeit.setItemText(3, QtGui.QApplication.translate("Dialog", "3 Ziehungen", None, QtGui.QApplication.UnicodeUTF8))
+        self.com_laufzeit.setItemText(4, QtGui.QApplication.translate("Dialog", "4 Ziehungen", None, QtGui.QApplication.UnicodeUTF8))
+        self.com_laufzeit.setItemText(5, QtGui.QApplication.translate("Dialog", "5 Ziehungen", None, QtGui.QApplication.UnicodeUTF8))
+        self.lab_laufzeit.setText(QtGui.QApplication.translate("Dialog", "Laufzeit:", None, QtGui.QApplication.UnicodeUTF8))
+        self.com_laufzeit_tag.setItemText(0, QtGui.QApplication.translate("Dialog", "Mi+Sa", None, QtGui.QApplication.UnicodeUTF8))
+        self.com_laufzeit_tag.setItemText(1, QtGui.QApplication.translate("Dialog", "Mittwoch", None, QtGui.QApplication.UnicodeUTF8))
+        self.com_laufzeit_tag.setItemText(2, QtGui.QApplication.translate("Dialog", "Samstag", None, QtGui.QApplication.UnicodeUTF8))
+        self.lab_scheinnr.setText(QtGui.QApplication.translate("Dialog", "Scheinnummer", None, QtGui.QApplication.UnicodeUTF8))
 
