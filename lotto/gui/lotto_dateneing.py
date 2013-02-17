@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'lotto_dateneing.ui'
 #
-# Created: Sun Feb 17 01:15:48 2013
+# Created: Sun Feb 17 09:14:28 2013
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -223,12 +223,18 @@ class Ui_MainWindow(object):
         self.actionHilfe.setObjectName(_fromUtf8("actionHilfe"))
         self.actionDaten_von_lotto_de = QtGui.QAction(MainWindow)
         self.actionDaten_von_lotto_de.setObjectName(_fromUtf8("actionDaten_von_lotto_de"))
-        self.actionDaten_von_lottozahlenonline_de_1955_2012 = QtGui.QAction(MainWindow)
-        self.actionDaten_von_lottozahlenonline_de_1955_2012.setObjectName(_fromUtf8("actionDaten_von_lottozahlenonline_de_1955_2012"))
+        self.actionDaten_von_lottozahlenonline_de_2010_2013 = QtGui.QAction(MainWindow)
+        self.actionDaten_von_lottozahlenonline_de_2010_2013.setObjectName(_fromUtf8("actionDaten_von_lottozahlenonline_de_2010_2013"))
+        self.actionDaten_von_lottozahlenonline_de_2000_2004 = QtGui.QAction(MainWindow)
+        self.actionDaten_von_lottozahlenonline_de_2000_2004.setObjectName(_fromUtf8("actionDaten_von_lottozahlenonline_de_2000_2004"))
+        self.actionDaten_von_lottozahlenonline_de_2005_2009 = QtGui.QAction(MainWindow)
+        self.actionDaten_von_lottozahlenonline_de_2005_2009.setObjectName(_fromUtf8("actionDaten_von_lottozahlenonline_de_2005_2009"))
         self.menuDatei.addAction(self.actionBeenden)
         self.menuHilfe.addAction(self.actionInfo)
         self.menuInternet.addAction(self.actionDaten_von_lotto_de)
-        self.menuInternet.addAction(self.actionDaten_von_lottozahlenonline_de_1955_2012)
+        self.menuInternet.addAction(self.actionDaten_von_lottozahlenonline_de_2010_2013)
+        self.menuInternet.addAction(self.actionDaten_von_lottozahlenonline_de_2000_2004)
+        self.menuInternet.addAction(self.actionDaten_von_lottozahlenonline_de_2005_2009)
         self.menubar.addAction(self.menuDatei.menuAction())
         self.menubar.addAction(self.menuInternet.menuAction())
         self.menubar.addAction(self.menuHilfe.menuAction())
@@ -287,5 +293,7 @@ class Ui_MainWindow(object):
         self.actionInfo.setText(QtGui.QApplication.translate("MainWindow", "Info", None, QtGui.QApplication.UnicodeUTF8))
         self.actionHilfe.setText(QtGui.QApplication.translate("MainWindow", "Hilfe", None, QtGui.QApplication.UnicodeUTF8))
         self.actionDaten_von_lotto_de.setText(QtGui.QApplication.translate("MainWindow", "Daten von lotto.de (aktuelle Ziehung)", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionDaten_von_lottozahlenonline_de_1955_2012.setText(QtGui.QApplication.translate("MainWindow", "Daten von  lottozahlenonline.de (2000-2012)", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionDaten_von_lottozahlenonline_de_2010_2013.setText(QtGui.QApplication.translate("MainWindow", "Daten von  lottozahlenonline.de (2010-2013)", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionDaten_von_lottozahlenonline_de_2000_2004.setText(QtGui.QApplication.translate("MainWindow", "Daten von  lottozahlenonline.de (2000-2004)", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionDaten_von_lottozahlenonline_de_2005_2009.setText(QtGui.QApplication.translate("MainWindow", "Daten von  lottozahlenonline.de (2005-2009)", None, QtGui.QApplication.UnicodeUTF8))
 

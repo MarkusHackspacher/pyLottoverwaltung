@@ -218,8 +218,18 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
          QtCore.SIGNAL('triggered()'), self.onInfo)
         self.connect(self.actionDaten_von_lotto_de,
          QtCore.SIGNAL('triggered()'), self.onData_lottode)
-        self.connect(self.actionDaten_von_lottozahlenonline_de_1955_2012,
-         QtCore.SIGNAL('triggered()'), self.onData_lottozahlenonlinede)
+        self.onData_lottozahlenonlinede_2000 = functools.partial \
+         (self.onData_lottozahlenonlinede, 2000, 2004)
+        self.connect(self.actionDaten_von_lottozahlenonline_de_2000_2004,
+         QtCore.SIGNAL('triggered()'), self.onData_lottozahlenonlinede_2000)
+        self.onData_lottozahlenonlinede_2005 = functools.partial \
+         (self.onData_lottozahlenonlinede, 2005, 2009)
+        self.connect(self.actionDaten_von_lottozahlenonline_de_2005_2009,
+         QtCore.SIGNAL('triggered()'), self.onData_lottozahlenonlinede_2005)
+        self.onData_lottozahlenonlinede_2010 = functools.partial \
+         (self.onData_lottozahlenonlinede, 2010, 2013)
+        self.connect(self.actionDaten_von_lottozahlenonline_de_2010_2013,
+         QtCore.SIGNAL('triggered()'), self.onData_lottozahlenonlinede_2010)
         self.connect(self.edi_daten_gewinnz, 
          QtCore.SIGNAL('cursorPositionChanged()'), self.ondaten_gewinnz)
         self.connect(self.edi_daten_lottoschein, 
@@ -291,12 +301,12 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.com_modus.setCurrentIndex(0)
         self.geaendert()
         
-    def onData_lottozahlenonlinede(self):
-        """Load the draw from 2000 to 2013 from lottozahlenonline.de"""        
-        a = QtGui.QProgressDialog("Daten Einlesen", "Abbruch", 2000, 2013, self, QtCore.Qt.Dialog|QtCore.Qt.WindowTitleHint)
+    def onData_lottozahlenonlinede(self, first_year, last_year):
+        """Load the draw from lottozahlenonline.de"""        
+        a = QtGui.QProgressDialog("Daten Einlesen", "Abbruch", first_year, last_year, self, QtCore.Qt.Dialog|QtCore.Qt.WindowTitleHint)
         a.setWindowModality(QtCore.Qt.WindowModal)
-        a.setValue(2000)
-        for z in range(2000, 2014):
+        a.setValue(first_year)
+        for z in range(first_year, last_year+1):
             url = 'http://www.lottozahlenonline.de/statistik/beide-spieltage/lottozahlen-archiv.php?j={}'.format(z)
             webzugriff.data_from_achiv(url)
             a.setValue(z)
