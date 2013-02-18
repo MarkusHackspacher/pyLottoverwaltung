@@ -153,7 +153,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             self.Btn_Numerary_1to49.append(QtGui.QPushButton(self.gridLayoutWidget))
         for button in xrange(49):
             self.Btn_Numerary_1to49[button].setMaximumSize(QtCore.QSize(58, 58))
-            self.gridLayout.addWidget(self.Btn_Numerary_1to49[button], int(button / 7),  int(button % 7), 1, 1)
+            self.gridLayout.addWidget(self.Btn_Numerary_1to49[button], \
+             int(button / 7),  int(button % 7), 1, 1)
             self.Btn_Numerary_1to49[button].setAutoFillBackground(True)
             self.Btn_Numerary_1to49[button].setText(QtGui.QApplication.translate("MainWindow", str(button + 1), 
              None, QtGui.QApplication.UnicodeUTF8))
@@ -218,7 +219,6 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
 
         self.connect(self.com_modus,QtCore.SIGNAL("currentIndexChanged(int)"), self.onmodus)
         self.connect(self.com_laufzeit,QtCore.SIGNAL("currentIndexChanged(int)"), self.onlaufzeit)
-        self.connect(self.calendarWidget,QtCore.SIGNAL("selectionChanged()"), self.oncalendarWidget)
 
         # fields of 1 to 49 numbers
         for button in xrange(49):
@@ -318,7 +318,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         
     def onData_lottozahlenonlinede(self, first_year, last_year):
         """Load the draw from lottozahlenonline.de"""        
-        a = QtGui.QProgressDialog("Daten Einlesen", "Abbruch", first_year, last_year, self, QtCore.Qt.Dialog|QtCore.Qt.WindowTitleHint)
+        a = QtGui.QProgressDialog("Daten Einlesen", "Abbruch", \
+         first_year, last_year, self, QtCore.Qt.Dialog|QtCore.Qt.WindowTitleHint)
         a.setWindowModality(QtCore.Qt.WindowModal)
         a.setValue(first_year)
         for z in range(first_year, last_year+1):
@@ -341,12 +342,6 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
     def focusSpinBox_1to7(self, number):
         """Ein Auswahlfelder der 7 Gewinnzahlen oder Lottoscheins hat sich geaendert"""
         self.geaendert()
-
-    def oncalendarWidget(self):
-        """Tag der Ziehung oder der Beginn des Lottoscheins"""
-        #print 'oncalendarWidget'
-        #print self.calendarWidget.selectedDate()
-        return
      
     def onBtn_hinzu(self):
         """drawing numbers move in database """
