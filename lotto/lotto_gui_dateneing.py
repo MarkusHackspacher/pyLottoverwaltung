@@ -366,8 +366,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             
 
     def onBtn_gz_auswerten(self):
-        """Gewinnzahlen auswerten
-            ToDo: noch programmieren
+        """Gewinnzahlen anzeigen und änderen
         """
         anzahl_datensaetze = len(self.data_handler.get_ziehung())
         if not self.CBox_gz_kompl_ausgeben.isChecked():
@@ -378,15 +377,14 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
          self.edi_daten_gewinnz.textCursor().blockNumber() + anzahl_datensaetze)
         print anzahl_datensaetze, rowid
         dlg = ui_lotto_Dialog(0, rowid)
-        print dlg.exec_()
+        dlg.exec_()
 
     def onBtn_ls_auswerten(self):
-        """Lottoschein auswerten
-            ToDo: noch programmieren
+        """Lottoschein anzeigen und änderen
         """      
         dlg = ui_lotto_Dialog(1, self.data_handler.find_rowid(1, 
          self.edi_daten_lottoschein.textCursor().blockNumber()))
-        print dlg.exec_()
+        dlg.exec_()
 
     def onBtn_gz_anzeigen(self):
         """

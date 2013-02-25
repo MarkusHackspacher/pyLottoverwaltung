@@ -25,7 +25,7 @@ along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 try:
     from lxml import html
 except ImportError, e:
-    print "FAIL!!! import lxml"
+    print "FAIL!!! import lxml", e
 from PyQt4 import QtGui, QtCore
 from datahandler import Datahandler
 
@@ -37,8 +37,9 @@ def data_from_webpage():
     quote_url = 'http://www.lotto.de/de/spielen/landingpage.xhtml'
     try: 
         document = html.parse(quote_url)
-    except:
-		return    
+    except Exception, e:
+        print "Error:", e
+        return
     str = '//div[@class="form-row"]//option'
     datum = document.xpath(str)[0].get('value')
     value = []
@@ -56,11 +57,11 @@ def data_from_achiv(quote_url=None):
     data_handler = Datahandler('datenbank.sqlite')
     if not quote_url:
         quote_url = 'http://www.lottozahlenonline.de/statistik/lotto-am-samstag/lottozahlen-archiv.php?j=2008'
-    #QUOTE_URL = 'http://www.lottozahlenonline.de/statistik/beide-spieltage/lottozahlen-archiv.php?j=2012'
     try: 
         document = html.parse(quote_url)
-    except:
-		return    
+    except Exception, e:
+        print "Error:", e
+        return    
     datum = document.xpath('//div[@class="zahlensuche_datum"]/text()')
     lottozahlen = document.xpath('//div[@class="zahlensuche_zahl"]/text()')
     zusatzzahlen = document.xpath('//div[@class="zahlensuche_zz"]/text()')
@@ -82,7 +83,7 @@ def data_from_achiv(quote_url=None):
         else:
             data_handler.insert_ziehung(day,int(block[x][0]),int(block[x][1]),int(block[x][2]),
                  int(block[x][3]),int(block[x][4]),int(block[x][5]),int(zusatzzahlen[x]),0,0,0)
-
+    return
 
 def test_data_from_webpage():
  	datum, value = data_from_webpage()
@@ -90,6 +91,7 @@ def test_data_from_webpage():
 	    print '{} ...Zahl........ {}'.format(datum, x)
 
  
-if __name__ == '__main__':    #main()
+if __name__ == '__main__':
+    """main"""
     data_from_achiv()
     #test_data_from_webpage()
