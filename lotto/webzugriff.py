@@ -25,7 +25,7 @@ along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 try:
     from lxml import html
 except ImportError, e:
-    print "FAIL!!! import lxml", e
+    print "FAIL!!! import lxml:", e
 from PyQt4 import QtGui, QtCore
 from datahandler import Datahandler
 
@@ -50,11 +50,10 @@ def data_from_webpage():
     value.append(int(document.xpath('//li[@class="field_super6"]/text()')[0].strip()))    
     return datum, value
  
-def data_from_achiv(quote_url=None):
+def data_from_achiv(data_handler, quote_url=None):
     """
     Data from www.lottozahlenonline.de
     """
-    data_handler = Datahandler('datenbank.sqlite')
     if not quote_url:
         quote_url = 'http://www.lottozahlenonline.de/statistik/lotto-am-samstag/lottozahlen-archiv.php?j=2008'
     try: 

@@ -317,17 +317,17 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.geaendert()
         
     def onData_lottozahlenonlinede(self, first_year, last_year):
-        """Load the draw from lottozahlenonline.de"""        
+        """Load the draw from lottozahlenonline.de"""
         a = QtGui.QProgressDialog("Daten Einlesen", "Abbruch", \
          first_year, last_year, self, QtCore.Qt.Dialog|QtCore.Qt.WindowTitleHint)
         a.setWindowModality(QtCore.Qt.WindowModal)
         a.setValue(first_year)
         for z in range(first_year, last_year+1):
             url = 'http://www.lottozahlenonline.de/statistik/beide-spieltage/lottozahlen-archiv.php?j={}'.format(z)
-            webzugriff.data_from_achiv(url)
-            a.setValue(z)
-        self.onBtn_gz_laden()
+            webzugriff.data_from_achiv(self.data_handler, url)
+            a.setValue(z)      
         a.close()
+        self.onBtn_gz_laden()
 
     def spinBox_1to7_clear(self, number):
         """Die SpinBoxen 1 bis 6 und Zusatzzahl löschen"""
@@ -369,7 +369,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """Gewinnzahlen anzeigen und änderen
         """
         anzahl_datensaetze = len(self.data_handler.get_ziehung())
-        if not self.CBox_gz_kompl_ausgeben.isChecked():
+        if not self.CBox_gz_kompl_ausgeben.isChecked() \
+         and anzahl_datensaetze > 10:
             anzahl_datensaetze =- 10
         else:
             anzahl_datensaetze = 0
