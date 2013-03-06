@@ -323,7 +323,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         a.setWindowModality(QtCore.Qt.WindowModal)
         a.setValue(first_year)
         for z in range(first_year, last_year+1):
-            url = 'http://www.lottozahlenonline.de/statistik/beide-spieltage/lottozahlen-archiv.php?j={}'.format(z)
+            url = 'http://www.lottozahlenonline.de/statistik/beide-spieltage/lottozahlen-archiv.php?j={0}'.format(z)
             webzugriff.data_from_achiv(self.data_handler, url)
             a.setValue(z)      
         a.close()
@@ -453,8 +453,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             anzahl_datensaetze =- 10
         else:
             anzahl_datensaetze = 0
-        self.data_handler.delete_ziehung(self.data_handler.find_rowid(0, 
-         self.edi_daten_gewinnz.textCursor().blockNumber() + anzahl_datensaetze))
+        self.data_handler.delete_ziehung(self.data_handler.get_ziehung() 
+         [self.edi_daten_gewinnz.textCursor().blockNumber() + anzahl_datensaetze][0])
         self.onBtn_gz_laden()
 
     def onBtn_ls_loeschen(self):
@@ -462,8 +462,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         delete tip numbers from the database
         Lottoschein aus der Datenbank loeschen
         """        
-        self.data_handler.delete_schein(self.data_handler.find_rowid(1, 
-         self.edi_daten_lottoschein.textCursor().blockNumber()))
+        self.data_handler.delete_schein(self.data_handler.get_schein()
+         [self.edi_daten_lottoschein.textCursor().blockNumber()][0])
         self.onBtn_ls_laden()
 
     def onBtn_ls_laden(self):

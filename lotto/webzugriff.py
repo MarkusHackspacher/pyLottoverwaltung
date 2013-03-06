@@ -44,7 +44,7 @@ def data_from_webpage():
     datum = document.xpath(str)[0].get('value')
     value = []
     for x in xrange(1, 9):
-        str = '//div[@class="teaser-left-content"]//li[{}]/text()'.format(x)
+        str = '//div[@class="teaser-left-content"]//li[{0}]/text()'.format(x)
         value.append(int(document.xpath(str)[0].strip())) 
     value.append(int(document.xpath('//li[@class="field_spiel77"]/text()')[0].strip()))
     value.append(int(document.xpath('//li[@class="field_super6"]/text()')[0].strip()))    
