@@ -374,18 +374,19 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             anzahl_datensaetze =- 10
         else:
             anzahl_datensaetze = 0
-        rowid = self.data_handler.find_rowid(0, 
-         self.edi_daten_gewinnz.textCursor().blockNumber() + anzahl_datensaetze)
-        print anzahl_datensaetze, rowid
+        rowid = self.data_handler.get_ziehung()[ 
+         self.edi_daten_gewinnz.textCursor().blockNumber() + anzahl_datensaetze][0]
         dlg = ui_lotto_Dialog(0, rowid)
         dlg.exec_()
+        self.onBtn_gz_laden()
 
     def onBtn_ls_auswerten(self):
         """Lottoschein anzeigen und änderen
         """      
-        dlg = ui_lotto_Dialog(1, self.data_handler.find_rowid(1, 
-         self.edi_daten_lottoschein.textCursor().blockNumber()))
+        dlg = ui_lotto_Dialog(1, self.data_handler.get_schein()[
+         self.edi_daten_lottoschein.textCursor().blockNumber()][0])
         dlg.exec_()
+        self.onBtn_ls_laden()        
 
     def onBtn_gz_anzeigen(self):
         """
