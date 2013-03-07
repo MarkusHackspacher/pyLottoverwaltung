@@ -218,7 +218,6 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             self.connect(self.spinBox_Zahlen[0],QtCore.SIGNAL("valueChanged(int)"), self.focusSpinBox)
 
         self.connect(self.com_modus,QtCore.SIGNAL("currentIndexChanged(int)"), self.onmodus)
-        self.connect(self.com_laufzeit,QtCore.SIGNAL("currentIndexChanged(int)"), self.onlaufzeit)
 
         # fields of 1 to 49 numbers
         for button in xrange(49):
@@ -551,12 +550,6 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             self.spinBox_Zahlen[6].setVisible(True)
             self.Btn_delete_Number[6].setVisible(True)
             self.geaendert()
-
-    def onlaufzeit(self):
-        """Laufzeit des Lottoscheins
-        ToDo: noch programmieren
-        """
-        #print 'onlaufzeit',self.com_laufzeit.currentIndex()        
 
     def geaendert(self):
         """Überprüfen der SpinBoxen damit nicht zwei den gleichen Wert haben
