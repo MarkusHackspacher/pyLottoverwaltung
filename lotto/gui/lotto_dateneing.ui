@@ -416,7 +416,7 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
-          <widget class="QPushButton" name="Btn_gz_auswerten">
+          <widget class="QPushButton" name="btn_gz_aendern">
            <property name="autoFillBackground">
             <bool>false</bool>
            </property>
@@ -424,7 +424,7 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
             <string notr="true"/>
            </property>
            <property name="text">
-            <string>Auswerten</string>
+            <string>ändern</string>
            </property>
           </widget>
          </item>
@@ -506,9 +506,16 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
-          <widget class="QPushButton" name="Btn_ls_auswerten">
+          <widget class="QPushButton" name="btn_ls_auswerten">
            <property name="text">
-            <string>Auswerten</string>
+            <string>auswerten</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_ls_aendern">
+           <property name="text">
+            <string>ändern</string>
            </property>
           </widget>
          </item>

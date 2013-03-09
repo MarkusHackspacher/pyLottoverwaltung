@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'lotto_dateneing.ui'
 #
-# Created: Sun Feb 17 22:33:04 2013
+# Created: Sat Mar  9 18:11:11 2013
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -154,11 +154,11 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.lab_daten_gewinnz)
         self.horizontalLayout_3 = QtGui.QHBoxLayout()
         self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
-        self.Btn_gz_auswerten = QtGui.QPushButton(self.horizontalLayoutWidget_5)
-        self.Btn_gz_auswerten.setAutoFillBackground(False)
-        self.Btn_gz_auswerten.setStyleSheet(_fromUtf8(""))
-        self.Btn_gz_auswerten.setObjectName(_fromUtf8("Btn_gz_auswerten"))
-        self.horizontalLayout_3.addWidget(self.Btn_gz_auswerten)
+        self.btn_gz_aendern = QtGui.QPushButton(self.horizontalLayoutWidget_5)
+        self.btn_gz_aendern.setAutoFillBackground(False)
+        self.btn_gz_aendern.setStyleSheet(_fromUtf8(""))
+        self.btn_gz_aendern.setObjectName(_fromUtf8("btn_gz_aendern"))
+        self.horizontalLayout_3.addWidget(self.btn_gz_aendern)
         self.Btn_gz_anzeigen = QtGui.QPushButton(self.horizontalLayoutWidget_5)
         self.Btn_gz_anzeigen.setObjectName(_fromUtf8("Btn_gz_anzeigen"))
         self.horizontalLayout_3.addWidget(self.Btn_gz_anzeigen)
@@ -190,9 +190,12 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.lab_daten_lottoschein)
         self.horizontalLayout_4 = QtGui.QHBoxLayout()
         self.horizontalLayout_4.setObjectName(_fromUtf8("horizontalLayout_4"))
-        self.Btn_ls_auswerten = QtGui.QPushButton(self.horizontalLayoutWidget_5)
-        self.Btn_ls_auswerten.setObjectName(_fromUtf8("Btn_ls_auswerten"))
-        self.horizontalLayout_4.addWidget(self.Btn_ls_auswerten)
+        self.btn_ls_auswerten = QtGui.QPushButton(self.horizontalLayoutWidget_5)
+        self.btn_ls_auswerten.setObjectName(_fromUtf8("btn_ls_auswerten"))
+        self.horizontalLayout_4.addWidget(self.btn_ls_auswerten)
+        self.btn_ls_aendern = QtGui.QPushButton(self.horizontalLayoutWidget_5)
+        self.btn_ls_aendern.setObjectName(_fromUtf8("btn_ls_aendern"))
+        self.horizontalLayout_4.addWidget(self.btn_ls_aendern)
         self.Btn_ls_anzeigen = QtGui.QPushButton(self.horizontalLayoutWidget_5)
         self.Btn_ls_anzeigen.setObjectName(_fromUtf8("Btn_ls_anzeigen"))
         self.horizontalLayout_4.addWidget(self.Btn_ls_anzeigen)
@@ -276,14 +279,15 @@ class Ui_MainWindow(object):
         self.label_2.setText(QtGui.QApplication.translate("MainWindow", "Gewinnzahlen:", None, QtGui.QApplication.UnicodeUTF8))
         self.edi_daten_gewinnz.setWhatsThis(QtGui.QApplication.translate("MainWindow", "Ausgabefeld", None, QtGui.QApplication.UnicodeUTF8))
         self.lab_daten_gewinnz.setText(QtGui.QApplication.translate("MainWindow", "Gewählter Datensatz", None, QtGui.QApplication.UnicodeUTF8))
-        self.Btn_gz_auswerten.setText(QtGui.QApplication.translate("MainWindow", "Auswerten", None, QtGui.QApplication.UnicodeUTF8))
+        self.btn_gz_aendern.setText(QtGui.QApplication.translate("MainWindow", "ändern", None, QtGui.QApplication.UnicodeUTF8))
         self.Btn_gz_anzeigen.setText(QtGui.QApplication.translate("MainWindow", "anzeigen", None, QtGui.QApplication.UnicodeUTF8))
         self.Btn_gz_loeschen.setText(QtGui.QApplication.translate("MainWindow", "löschen", None, QtGui.QApplication.UnicodeUTF8))
         self.CBox_gz_kompl_ausgeben.setText(QtGui.QApplication.translate("MainWindow", "alle Einträge", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("MainWindow", "Lottoschein:", None, QtGui.QApplication.UnicodeUTF8))
         self.edi_daten_lottoschein.setWhatsThis(QtGui.QApplication.translate("MainWindow", "Ausgabefeld", None, QtGui.QApplication.UnicodeUTF8))
         self.lab_daten_lottoschein.setText(QtGui.QApplication.translate("MainWindow", "Gewählter Datensatz", None, QtGui.QApplication.UnicodeUTF8))
-        self.Btn_ls_auswerten.setText(QtGui.QApplication.translate("MainWindow", "Auswerten", None, QtGui.QApplication.UnicodeUTF8))
+        self.btn_ls_auswerten.setText(QtGui.QApplication.translate("MainWindow", "auswerten", None, QtGui.QApplication.UnicodeUTF8))
+        self.btn_ls_aendern.setText(QtGui.QApplication.translate("MainWindow", "ändern", None, QtGui.QApplication.UnicodeUTF8))
         self.Btn_ls_anzeigen.setText(QtGui.QApplication.translate("MainWindow", "anzeigen", None, QtGui.QApplication.UnicodeUTF8))
         self.Btn_ls_loeschen.setText(QtGui.QApplication.translate("MainWindow", "löschen", None, QtGui.QApplication.UnicodeUTF8))
         self.menuDatei.setTitle(QtGui.QApplication.translate("MainWindow", "Datei", None, QtGui.QApplication.UnicodeUTF8))

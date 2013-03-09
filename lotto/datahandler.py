@@ -100,11 +100,11 @@ class Datahandler(object):
         self.connection.commit()
         c.close()
 
-    def get_ziehung(self, id=None, date=None):    
+    def get_ziehung(self, rowid=None, date=None):    
         """Daten der Ziehung der Lottozahlen auslesen"""
         c = self.connection.cursor()
-        if id:
-            c.execute("select * from ziehung where rowid=?", (id,))
+        if rowid:
+            c.execute("select * from ziehung where rowid=?", (rowid,))
         elif date:
             c.execute("select * from ziehung where d=?", (date,))
         else:
@@ -113,12 +113,35 @@ class Datahandler(object):
         data = c.fetchall()
         c.close()
         return data
-        
-    def get_schein(self, id=None):    
-        """Daten des Lottoscheines auslesen"""
+
+    def get_numbers_from_ziehung(self, rowid_lottoschein):    
+        """Get numbers from ziehung
+        Finde von Nummer in den Ziehungsdaten
+        @type rowid_lottoschein: int
+        @return: ToDo
+        """
         c = self.connection.cursor()
-        if id:
-            c.execute("select * from schein where rowid=?", (id,))
+        if rowid_lottoschein:
+            c.execute("select * from schein where rowid=?", (rowid_lottoschein,))
+        self.connection.commit()
+        data = c.fetchall()
+        print data
+        c.execute("select * from ziehung where zahl_1=? or zahl_1=?", 
+         (data[0][1], data[0][2]))
+        self.connection.commit()
+        data = c.fetchall()
+        print data
+        return data
+        
+    def get_schein(self, rowid=None):    
+        """Get data from Lottoscheines
+        Daten des Lottoscheines auslesen
+        @type rowid: int
+        @return: data
+        """
+        c = self.connection.cursor()
+        if rowid:
+            c.execute("select * from schein where rowid=?", (rowid,))
         else:
             c.execute("select rowid,* from schein")
         self.connection.commit()
@@ -126,19 +149,24 @@ class Datahandler(object):
         c.close()
         return data
         
-    def delete_ziehung(self, id):
-        """Daten der Ziehung der Lottozahlen löschen"""
+    def delete_ziehung(self, rowid):
+        """Daten der Ziehung der Lottozahlen löschen
+        @type rowid: int
+        """
         c = self.connection.cursor()
-        c.execute("delete from ziehung where rowid=?", (id,))
+        c.execute("delete from ziehung where rowid=?", (rowid,))
         self.connection.commit()
         c.close()
 
-    def delete_schein(self, id):
-        """Daten eines  Lottoscheines löschen"""
+    def delete_schein(self, rowid):
+        """Daten eines  Lottoscheines löschen
+        @type rowid: int
+        """
         c = self.connection.cursor()
-        c.execute("delete from schein where rowid=?", (id,))
+        c.execute("delete from schein where rowid=?", (rowid,))
         self.connection.commit()
         c.close()
 
     def close(self):
+        """close connection of database"""
         self.connection.close()

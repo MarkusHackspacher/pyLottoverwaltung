@@ -31,7 +31,7 @@ from gui.lotto_dateneing import Ui_MainWindow as Dlg
 from datahandler import Datahandler
 from gui.lotto_dialog import Ui_Dialog
 import webzugriff
-
+import auswertung
 
 class ui_lotto_Dialog(QtGui.QDialog, Ui_Dialog): 
     def __init__(self, typ, rowid):
@@ -198,10 +198,12 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.Btn_gz_loeschen.setEnabled(False)
         self.connect(self.Btn_ls_loeschen,QtCore.SIGNAL("clicked()"), self.onBtn_ls_loeschen)
         self.Btn_ls_loeschen.setEnabled(False)
-        self.connect(self.Btn_gz_auswerten,QtCore.SIGNAL("clicked()"), self.onBtn_gz_auswerten)
-        self.Btn_gz_auswerten.setEnabled(False)
-        self.connect(self.Btn_ls_auswerten,QtCore.SIGNAL("clicked()"), self.onBtn_ls_auswerten)
-        self.Btn_ls_auswerten.setEnabled(False)
+        self.connect(self.btn_gz_aendern,QtCore.SIGNAL("clicked()"), self.onBtn_gz_aendern)
+        self.btn_gz_aendern.setEnabled(False)
+        self.connect(self.btn_ls_aendern,QtCore.SIGNAL("clicked()"), self.onBtn_ls_aendern)
+        self.btn_ls_aendern.setEnabled(False)
+        self.connect(self.btn_ls_auswerten,QtCore.SIGNAL("clicked()"), self.onBtn_ls_auswerten)
+        self.btn_ls_auswerten.setEnabled(False)
         self.connect(self.CBox_gz_kompl_ausgeben,QtCore.SIGNAL("clicked()"), self.onCBox_gz_kompl_ausgeben)
        
         self.connect(self.Btn_set_calender_today,QtCore.SIGNAL("clicked()"), self.onBtn_set_calender_today)
@@ -259,7 +261,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
        text = self.edi_daten_gewinnz.document().findBlockByNumber(block).text()
        self.lab_daten_gewinnz.setText(text)
        self.Btn_gz_loeschen.setEnabled(True)
-       self.Btn_gz_auswerten.setEnabled(True)
+       self.btn_gz_aendern.setEnabled(True)
         
     def ondaten_lottoschein(self):
        """
@@ -271,7 +273,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
        text = self.edi_daten_lottoschein.document().findBlockByNumber(block).text()
        self.lab_daten_lottoschein.setText(text)       
        self.Btn_ls_loeschen.setEnabled(True)
-       self.Btn_ls_auswerten.setEnabled(True)
+       self.btn_ls_auswerten.setEnabled(True)
+       self.btn_ls_aendern.setEnabled(True)
 
  
     def onInfo(self):
@@ -364,7 +367,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             self.onBtn_ls_laden()
             
 
-    def onBtn_gz_auswerten(self):
+    def onBtn_gz_aendern(self):
         """Gewinnzahlen anzeigen und änderen
         """
         anzahl_datensaetze = len(self.data_handler.get_ziehung())
@@ -379,13 +382,19 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         dlg.exec_()
         self.onBtn_gz_laden()
 
-    def onBtn_ls_auswerten(self):
+    def onBtn_ls_aendern(self):
         """Lottoschein anzeigen und änderen
         """      
         dlg = ui_lotto_Dialog(1, self.data_handler.get_schein()[
          self.edi_daten_lottoschein.textCursor().blockNumber()][0])
         dlg.exec_()
-        self.onBtn_ls_laden()        
+        self.onBtn_ls_laden()
+                
+    def onBtn_ls_auswerten(self):
+        """den Lottoschein auswerten"""
+        dlg = auswertung.ui_lotto_auswertung(self.data_handler.get_schein()[
+         self.edi_daten_lottoschein.textCursor().blockNumber()][0], self.data_handler)
+        dlg.exec_()
 
     def onBtn_gz_anzeigen(self):
         """
@@ -472,7 +481,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         PlainText = QtGui.QPlainTextEdit()
         lottodaten = self.data_handler.get_schein()
         for schein in lottodaten:
-            PlainText.appendPlainText('Datum: {0} Zahlen: {1}, {2}, {3}, {4}, {5} {6}' \
+            PlainText.appendPlainText('Datum: {0} Zahlen: {1}, {2}, {3}, {4}, {5}, {6}' \
              .format(schein[1], schein[2], schein[3], schein[4], schein[5], schein[6], schein[7]))
         self.edi_daten_lottoschein.setPlainText(PlainText.document().toPlainText())
         self.edi_daten_lottoschein.moveCursor(self.edi_daten_lottoschein.textCursor().End)

@@ -27,7 +27,6 @@ try:
 except ImportError, e:
     print "FAIL!!! import lxml:", e
 from PyQt4 import QtGui, QtCore
-from datahandler import Datahandler
 
 def data_from_webpage():
     """
