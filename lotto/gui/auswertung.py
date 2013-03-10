@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'auswertung.ui'
 #
-# Created: Sat Mar  9 18:11:11 2013
+# Created: Sun Mar 10 02:59:05 2013
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,14 +17,14 @@ except AttributeError:
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName(_fromUtf8("Dialog"))
-        Dialog.resize(457, 300)
+        Dialog.resize(561, 300)
         self.buttonBox = QtGui.QDialogButtonBox(Dialog)
-        self.buttonBox.setGeometry(QtCore.QRect(90, 250, 341, 32))
+        self.buttonBox.setGeometry(QtCore.QRect(200, 250, 341, 32))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
         self.edi_daten = QtGui.QPlainTextEdit(Dialog)
-        self.edi_daten.setGeometry(QtCore.QRect(20, 20, 417, 191))
+        self.edi_daten.setGeometry(QtCore.QRect(10, 10, 541, 221))
         font = QtGui.QFont()
         font.setPointSize(9)
         self.edi_daten.setFont(font)

@@ -125,12 +125,25 @@ class Datahandler(object):
             c.execute("select * from schein where rowid=?", (rowid_lottoschein,))
         self.connection.commit()
         data = c.fetchall()
-        print data
-        c.execute("select * from ziehung where zahl_1=? or zahl_1=?", 
-         (data[0][1], data[0][2]))
+        c.execute("select rowid,* from ziehung \
+         where zahl_1 in (?,?,?,?,?,?) \
+         or zahl_2 in (?,?,?,?,?,?) \
+         or zahl_3 in (?,?,?,?,?,?) \
+         or zahl_4 in (?,?,?,?,?,?) \
+         or zahl_5 in (?,?,?,?,?,?) \
+         or zahl_6 in (?,?,?,?,?,?) \
+         or zahl_zusatz in (?,?,?,?,?,?) ORDER BY d", 
+         (
+         data[0][1], data[0][2], data[0][3], data[0][4], data[0][5], data[0][6],
+         data[0][1], data[0][2], data[0][3], data[0][4], data[0][5], data[0][6],
+         data[0][1], data[0][2], data[0][3], data[0][4], data[0][5], data[0][6],
+         data[0][1], data[0][2], data[0][3], data[0][4], data[0][5], data[0][6],
+         data[0][1], data[0][2], data[0][3], data[0][4], data[0][5], data[0][6],
+         data[0][1], data[0][2], data[0][3], data[0][4], data[0][5], data[0][6],
+         data[0][1], data[0][2], data[0][3], data[0][4], data[0][5], data[0][6]
+         ))
         self.connection.commit()
         data = c.fetchall()
-        print data
         return data
         
     def get_schein(self, rowid=None):    
