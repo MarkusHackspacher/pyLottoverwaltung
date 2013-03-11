@@ -52,11 +52,11 @@ class ui_lotto_auswertung(QtGui.QDialog, Ui_Dialog):
         set_schein = Set([schein[1],schein[2],schein[3],schein[4],schein[5],schein[6]])
         
         for i in lottodaten:
-            set_ziehung = Set([i[2], i[3], i[4], i[5], i[6], i[7], i[8]])
+            set_ziehung = Set([i[1], i[2], i[3], i[4], i[5], i[6], i[7]])
             anzahl_gleiche_zahl =  len(set_schein & set_ziehung)
             self.edi_daten.appendPlainText(u'Datum: {0} | {1}, {2}, '
             u'{3}, {4}, {5}, {6} ZZ: {7} Übereinstimmungen: {8}' 
-             .format(i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8], anzahl_gleiche_zahl))
+             .format(i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], anzahl_gleiche_zahl))
         self.edi_daten.moveCursor(self.edi_daten.textCursor().End)
  
       
