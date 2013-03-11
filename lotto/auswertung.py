@@ -44,8 +44,8 @@ class ui_lotto_auswertung(QtGui.QDialog, Ui_Dialog):
         self.edi_daten.appendPlainText('Datensatz RowID: {0}'.
         format(rowid))
         schein = data_handler.get_schein(rowid)[0]
-        self.edi_daten.appendPlainText('Datum: {0} Zahlen: \
-{1}, {2}, {3}, {4}, {5}, {6}' \
+        self.edi_daten.appendPlainText('Datum: {0} Zahlen: '
+        '{1}, {2}, {3}, {4}, {5}, {6}' 
          .format(schein[0], schein[1], schein[2], schein[3], schein[4], schein[5], schein[6]))
         self.edi_daten.moveCursor(self.edi_daten.textCursor().End)
         lottodaten = data_handler.get_numbers_from_ziehung(rowid)      
@@ -54,8 +54,8 @@ class ui_lotto_auswertung(QtGui.QDialog, Ui_Dialog):
         for i in lottodaten:
             set_ziehung = Set([i[2], i[3], i[4], i[5], i[6], i[7], i[8]])
             anzahl_gleiche_zahl =  len(set_schein & set_ziehung)
-            self.edi_daten.appendPlainText(u'Datum: {0} | {1}, {2},\
-{3}, {4}, {5}, {6} ZZ: {7} Übereinstimmungen: {8}' \
+            self.edi_daten.appendPlainText(u'Datum: {0} | {1}, {2}, '
+            u'{3}, {4}, {5}, {6} ZZ: {7} Übereinstimmungen: {8}' 
              .format(i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8], anzahl_gleiche_zahl))
         self.edi_daten.moveCursor(self.edi_daten.textCursor().End)
  
