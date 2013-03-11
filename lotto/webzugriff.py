@@ -68,16 +68,14 @@ def data_from_achiv(data_handler, quote_url=None):
 		block.append(lottozahlen[(x*6):(x*6)+6])
     
     for x in range(len(datum)):
-        print datum[x], block[x],zusatzzahlen[x].strip()
+        #print datum[x], block[x],zusatzzahlen[x].strip()
         day = QtCore.QDate.fromString(datum[x],"dd.MM.yyyy").toPyDate()
         ziehung_from_date = data_handler.get_ziehung(None, day)
         if ziehung_from_date != []:
             if ziehung_from_date[0][1] != int(block[x][0]):
-                print ('Eintrag fehlt in der DB')
+                """Eintrag fehlt in der DB"""
                 data_handler.insert_ziehung(day,int(block[x][0]),int(block[x][1]),int(block[x][2]),
                  int(block[x][3]),int(block[x][4]),int(block[x][5]),int(zusatzzahlen[x]),0,0,0)
-            else:
-                print ('Eintrag vorhanden in der DB')
         else:
             data_handler.insert_ziehung(day,int(block[x][0]),int(block[x][1]),int(block[x][2]),
                  int(block[x][3]),int(block[x][4]),int(block[x][5]),int(zusatzzahlen[x]),0,0,0)

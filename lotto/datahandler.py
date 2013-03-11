@@ -28,6 +28,7 @@ import sqlite3
 
 class Datahandler(object):
     def __init__(self, path):
+        """class init"""
         self.connection = sqlite3.connect(path)
         self.connection.row_factory = sqlite3.Row
         self.create_tables()
@@ -55,53 +56,83 @@ class Datahandler(object):
             c.close()
 		
 
-    def insert_ziehung(self, day, zahl_1, zahl_2,zahl_3,zahl_4,zahl_5,zahl_6, zahl_zusatz,zahl_super, zahl_spiel77, zahl_spielsuper6):
-        """Daten der Ziehung der Lottozahlen in der Datenbank speichern"""
+    def insert_ziehung(self, date, zahl_1, zahl_2,zahl_3,zahl_4,zahl_5,zahl_6, \
+     zahl_zusatz,zahl_super, zahl_spiel77, zahl_spielsuper6):
+        """Save the number of the draw in database
+        Lottozahlen in der Datenbank speichern
+        @type date: date
+        zahl_1, zahl_2 ,zahl_3 ,zahl_4 ,zahl_5, zahl_6: int
+        zahl_zusatz, zahl_super, zahl_spiel77, zahl_spielsuper6: int
+        """
         c = self.connection.cursor()
         c.execute("insert into ziehung(d, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
              zahl_zusatz,zahl_super , zahl_spiel77, zahl_spielsuper6) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
-             (day, zahl_1, zahl_2,zahl_3,zahl_4,zahl_5,zahl_6, zahl_zusatz,zahl_super, zahl_spiel77, zahl_spielsuper6))
+             (date, zahl_1, zahl_2,zahl_3,zahl_4,zahl_5,zahl_6, zahl_zusatz,zahl_super, zahl_spiel77, zahl_spielsuper6))
         self.connection.commit()
         c.close()
 
-    def insert_schein(self, day, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, laufzeit, laufzeit_tag, scheinnr):
-        """Daten des Lottoscheines in der Datenbank speichern"""
+    def insert_schein(self, date, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
+     laufzeit, laufzeit_tag, scheinnr):
+        """Save the number of the tip in database
+        Daten des Lottoscheines in der Datenbank speichern
+        @type date: date
+        zahl_1, zahl_2 ,zahl_3 ,zahl_4 ,zahl_5, zahl_6: int
+        laufzeit, laufzeit_tag, scheinnr: int
+        """
         c = self.connection.cursor()
         try:
             c.execute("insert into schein(d, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
              laufzeit, laufzeit_tag, scheinnr) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
-             (day, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, laufzeit, laufzeit_tag, scheinnr))
+             (date, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, laufzeit, laufzeit_tag, scheinnr))
         except:
             self.add_columns()
             c.execute("insert into schein(d, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
              laufzeit, laufzeit_tag, scheinnr) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
-             (day, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, laufzeit, laufzeit_tag, scheinnr))
+             (date, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, laufzeit, laufzeit_tag, scheinnr))
         self.connection.commit()
         c.close()
 
-    def update_ziehung(self, row_id, day, zahl_1, zahl_2,zahl_3,zahl_4,zahl_5,zahl_6, zahl_zusatz,zahl_super, zahl_spiel77, zahl_spielsuper6):
-        """Daten der Ziehung der Lottozahlen in der Datenbank speichern"""
+    def update_ziehung(self, row_id, date, zahl_1, zahl_2,zahl_3, zahl_4, zahl_5, zahl_6, \
+     zahl_zusatz, zahl_super, zahl_spiel77, zahl_spielsuper6):
+        """Update the number of the draw 
+        Lottozahlen in der Datenbank aktualisieren
+        @type row_id: int
+        @type date: date
+        zahl_1, zahl_2 ,zahl_3 ,zahl_4 ,zahl_5, zahl_6: int
+        zahl_zusatz, zahl_super, zahl_spiel77, zahl_spielsuper6: int
+        """
         c = self.connection.cursor()
         c.execute("update ziehung set d=?, zahl_1=?, zahl_2=?, zahl_3=?, zahl_4=?, zahl_5=?, zahl_6=?, \
              zahl_zusatz=? ,zahl_super=? , zahl_spiel77=?, zahl_spielsuper6=? \
              where rowid=? ", \
-             (day, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
+             (date, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
               zahl_zusatz, zahl_super, zahl_spiel77, zahl_spielsuper6, row_id))
         self.connection.commit()
         c.close()
 
-    def update_schein(self, row_id, day, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, laufzeit, laufzeit_tag, scheinnr):
-        """Daten des Lottoscheines in der Datenbank speichern"""
+    def update_schein(self, row_id, date, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6,\
+     laufzeit, laufzeit_tag, scheinnr):
+        """Update the number of the tip 
+        Daten des Lottoscheines in der Datenbank aktualisieren
+        @type row_id: int
+        @type date: date
+        zahl_1, zahl_2 ,zahl_3 ,zahl_4 ,zahl_5, zahl_6: int
+        laufzeit, laufzeit_tag, scheinnr: int
+        """
         c = self.connection.cursor()
         c.execute("update schein set d=?, zahl_1=?, zahl_2=?, zahl_3=?, zahl_4=?, zahl_5=?, zahl_6=?, \
              laufzeit=?, laufzeit_tag=?, scheinnr=? where rowid=? ", \
-             (day, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
+             (date, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
               laufzeit, laufzeit_tag, scheinnr, row_id))
         self.connection.commit()
         c.close()
 
     def get_ziehung(self, rowid=None, date=None):    
-        """Daten der Ziehung der Lottozahlen auslesen"""
+        """Daten der Ziehung der Lottozahlen auslesen
+        @type rowid: int
+        @type date: date
+        @return: data
+        """
         c = self.connection.cursor()
         if rowid:
             c.execute("select * from ziehung where rowid=?", (rowid,))
@@ -118,7 +149,7 @@ class Datahandler(object):
         """Get numbers from ziehung
         Finde von Nummer in den Ziehungsdaten
         @type rowid_lottoschein: int
-        @return: ToDo
+        @return: data all the draw with a number from the tip
         """
         c = self.connection.cursor()
         if rowid_lottoschein:
