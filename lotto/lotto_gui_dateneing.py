@@ -34,7 +34,7 @@ import webzugriff
 import auswertung
 
 class ui_lotto_Dialog(QtGui.QDialog, Ui_Dialog): 
-    def __init__(self, typ, rowid):
+    def __init__(self, typ, data_handler, rowid):
         """open analyze dialog
         Datenauswerte Dialog oeffnen
         @param typ: 0 == Gewinnzahlen, 1 == Lottoschein
@@ -46,13 +46,12 @@ class ui_lotto_Dialog(QtGui.QDialog, Ui_Dialog):
         QtGui.QDialog.__init__(self) 
         self.setWindowIcon(QtGui.QIcon(join("misc", "pyLottoverwaltung.svg")))
         self.setupUi(self)
-        self.data_handler = Datahandler('datenbank.sqlite')
         infotext = 'Gewinnzahlen'
         if typ == 1:
             infotext = 'Lottoschein'        
-            lottodaten = self.data_handler.get_schein(rowid)
+            lottodaten = data_handler.get_schein(rowid)
         else:
-            lottodaten = self.data_handler.get_ziehung(rowid)
+            lottodaten = data_handler.get_ziehung(rowid)
             
         self.setWindowTitle(infotext)
         self.plainTextEdit.appendPlainText('Datensatz RowID: {0} Datum: {1}'.
@@ -122,13 +121,13 @@ class ui_lotto_Dialog(QtGui.QDialog, Ui_Dialog):
     def onbtn_save_index(self, typ , rowid, date_of):
         """drawing numbers move in database """
         if typ == 0:
-            self.data_handler.update_ziehung(rowid ,date_of, self.spinBox_Zahlen[0].value(), \
+            data_handler.update_ziehung(rowid ,date_of, self.spinBox_Zahlen[0].value(), \
              self.spinBox_Zahlen[1].value(), self.spinBox_Zahlen[2].value(), \
              self.spinBox_Zahlen[3].value(), self.spinBox_Zahlen[4].value(), \
              self.spinBox_Zahlen[5].value(), self.spinBox_Zahlen[6].value(), \
              self.spinBox_superz.value(), self.spinBox_spiel77.value(), self.spinBox_super6.value())
         else:
-            self.data_handler.update_schein(rowid ,date_of, self.spinBox_Zahlen[0].value(), \
+            data_handler.update_schein(rowid ,date_of, self.spinBox_Zahlen[0].value(), \
              self.spinBox_Zahlen[1].value(), self.spinBox_Zahlen[2].value(), \
              self.spinBox_Zahlen[3].value(), self.spinBox_Zahlen[4].value(), \
              self.spinBox_Zahlen[5].value(), self.com_laufzeit.currentIndex(), \
@@ -187,7 +186,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
  
         self.onmodus()
         self.geaendert()
-        self.data_handler = Datahandler('datenbank.sqlite')
+        self.data_handler = Datahandler('datenbank1.sqlite')
         self.onBtn_gz_laden()
         self.onBtn_ls_laden()        
         
@@ -378,14 +377,14 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             anzahl_datensaetze = 0
         rowid = self.data_handler.get_ziehung()[ 
          self.edi_daten_gewinnz.textCursor().blockNumber() + anzahl_datensaetze][0]
-        dlg = ui_lotto_Dialog(0, rowid)
+        dlg = ui_lotto_Dialog(0, self.data_handler, rowid)
         dlg.exec_()
         self.onBtn_gz_laden()
 
     def onBtn_ls_aendern(self):
         """Lottoschein anzeigen und änderen
         """      
-        dlg = ui_lotto_Dialog(1, self.data_handler.get_schein()[
+        dlg = ui_lotto_Dialog(1, self.data_handler, self.data_handler.get_schein()[
          self.edi_daten_lottoschein.textCursor().blockNumber()][0])
         dlg.exec_()
         self.onBtn_ls_laden()

@@ -36,25 +36,17 @@ class Datahandler(object):
     def create_tables(self):
         """Tabellen erstellen mit id"""
         c = self.connection.cursor()
-        c.execute("create table if not exists ziehung (d date, zahl_1 INTEGER, zahl_2 INTEGER, zahl_3 INTEGER, \
-                zahl_4 INTEGER, zahl_5 INTEGER, zahl_6 INTEGER, zahl_zusatz INTEGER, \
-                zahl_super INTEGER, zahl_spiel77 INTEGER, zahl_spielsuper6 INTEGER)")
-        c.execute("create table if not exists schein (d date, zahl_1 INTEGER, zahl_2 INTEGER, zahl_3 INTEGER, \
-                zahl_4 INTEGER, zahl_5 INTEGER, zahl_6 INTEGER, laufzeit INTEGER, laufzeit_tag INTEGER, scheinnr INTEGER)")        
+        c.execute("""create table if not exists ziehung (ziehungid INTEGER PRIMARY KEY ASC, d DATE, 
+                  zahl_zusatz INTEGER, 
+                  zahl_super INTEGER, zahl_spiel77 INTEGER, zahl_spielsuper6 INTEGER)""")
+        c.execute("""create table if not exists ziehung_nummern (nummernziehung INTEGER, nummer SHORT INTEGER, 
+                  FOREIGN KEY(nummernziehung) REFERENCES ziehung(ziehungid))""")
+        c.execute("""create table if not exists schein (scheinid INTEGER PRIMARY KEY, d DATE, 
+                  laufzeit INTEGER, laufzeit_tag INTEGER, scheinnr INTEGER)""")        
+        c.execute("""create table if not exists schein_nummern (nummernschein INTEGER, nummer SHORT INTEGER, 
+                  FOREIGN KEY(nummernschein) REFERENCES ziehung(scheinid))""")
         self.connection.commit()
-        c.close()
-
-    def add_columns(self):
-        """Add columns"""		
-        lottodaten = self.get_schein()
-        if len(lottodaten[0]) == 9:
-            print ('Neue Spalten: laufzeit_tag und scheinnr')
-            c = self.connection.cursor()
-            c.execute("alter table schein add laufzeit_tag INTEGER")        
-            c.execute("alter table schein add scheinnr INTEGER")        
-            self.connection.commit()
-            c.close()
-		
+        c.close()	
 
     def insert_ziehung(self, date, zahl_1, zahl_2,zahl_3,zahl_4,zahl_5,zahl_6, \
      zahl_zusatz,zahl_super, zahl_spiel77, zahl_spielsuper6):
