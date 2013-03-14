@@ -34,7 +34,7 @@ class Datahandler(object):
         self.create_tables()
 
     def create_tables(self):
-        """Tabellen erstellen"""
+        """Tabellen erstellen mit id"""
         c = self.connection.cursor()
         c.execute("create table if not exists ziehung (d date, zahl_1 INTEGER, zahl_2 INTEGER, zahl_3 INTEGER, \
                 zahl_4 INTEGER, zahl_5 INTEGER, zahl_6 INTEGER, zahl_zusatz INTEGER, \
