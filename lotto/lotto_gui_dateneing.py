@@ -349,10 +349,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         datum = self.calendarWidget.selectedDate()
         day = datum.toPyDate()       
         if self.com_modus.currentIndex()==0:
-            self.data_handler.insert_ziehung(day, self.spinBox_Zahlen[0].value(),
-             self.spinBox_Zahlen[1].value(), self.spinBox_Zahlen[2].value(),
-             self.spinBox_Zahlen[3].value(), self.spinBox_Zahlen[4].value(),
-             self.spinBox_Zahlen[5].value(), self.spinBox_Zahlen[6].value(),
+            self.data_handler.insert_ziehung(day, self.draw_numbers(),
              self.spinBox_superz.value(), self.spinBox_spiel77.value(), self.spinBox_super6.value())
             self.Btn_gz_loeschen.setEnabled(False)
             self.onBtn_gz_laden()

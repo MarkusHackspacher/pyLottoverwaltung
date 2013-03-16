@@ -24,43 +24,61 @@ You should have received a copy of the GNU General Public License
 along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import sqlite3
+import sqlite3, os
 
 class Datahandler(object):
     def __init__(self, path):
         """class init"""
         self.connection = sqlite3.connect(path)
-        self.connection.row_factory = sqlite3.Row
+        #self.connection.row_factory = sqlite3.Row
         self.create_tables()
 
     def create_tables(self):
         """Tabellen erstellen mit id"""
         c = self.connection.cursor()
-        c.execute("""create table if not exists ziehung (ziehungid INTEGER PRIMARY KEY ASC, d DATE, 
-                  zahl_zusatz INTEGER, 
+        c.execute("""create table if not exists lottery_drawing (
+                  id INTEGER PRIMARY KEY ASC, 
+                  d DATE, 
                   zahl_super INTEGER, zahl_spiel77 INTEGER, zahl_spielsuper6 INTEGER)""")
-        c.execute("""create table if not exists ziehung_nummern (nummernziehung INTEGER, nummer SHORT INTEGER, 
-                  FOREIGN KEY(nummernziehung) REFERENCES ziehung(ziehungid))""")
-        c.execute("""create table if not exists schein (scheinid INTEGER PRIMARY KEY, d DATE, 
+        c.execute("""create table if not exists lottery_drawing_numbers (
+                  id INTEGER PRIMARY KEY, 
+                  number INTEGER, 
+                  position INTEGER,
+                  FOREIGN KEY(id) REFERENCES lottery_drawing(id))""")
+                  
+        c.execute("""create table if not exists lottery_tickets (
+                  id INTEGER PRIMARY KEY ASC, 
+                  d DATE, 
                   laufzeit INTEGER, laufzeit_tag INTEGER, scheinnr INTEGER)""")        
-        c.execute("""create table if not exists schein_nummern (nummernschein INTEGER, nummer SHORT INTEGER, 
-                  FOREIGN KEY(nummernschein) REFERENCES ziehung(scheinid))""")
+        c.execute("""create table if not exists lottery_tickets_numbers (
+                  id INTEGER PRIMARY KEY, 
+                  nummer INTEGER, 
+                  position INTEGER,
+                  FOREIGN KEY(id) REFERENCES lottery_tickets(id))""")
         self.connection.commit()
         c.close()	
 
-    def insert_ziehung(self, date, zahl_1, zahl_2,zahl_3,zahl_4,zahl_5,zahl_6, \
-     zahl_zusatz,zahl_super, zahl_spiel77, zahl_spielsuper6):
+    def insert_ziehung(self, date, zahlen, zahl_super, zahl_spiel77, zahl_spielsuper6):
         """Save the number of the draw in database
         Lottozahlen in der Datenbank speichern
         @type date: date
-        zahl_1, zahl_2 ,zahl_3 ,zahl_4 ,zahl_5, zahl_6: int
-        zahl_zusatz, zahl_super, zahl_spiel77, zahl_spielsuper6: int
+        @type zahlen: list
+        @type zahl_zusatz, zahl_super, zahl_spiel77, zahl_spielsuper6: int
         """
         c = self.connection.cursor()
-        c.execute("insert into ziehung(d, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
-             zahl_zusatz,zahl_super , zahl_spiel77, zahl_spielsuper6) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
-             (date, zahl_1, zahl_2,zahl_3,zahl_4,zahl_5,zahl_6, zahl_zusatz,zahl_super, zahl_spiel77, zahl_spielsuper6))
+        c.execute("insert into lottery_drawing(d, zahl_super , zahl_spiel77, zahl_spielsuper6) "
+                  "values (?, ?, ?, ?)", 
+                 (date,zahl_super, zahl_spiel77, zahl_spielsuper6))
         self.connection.commit()
+        c.execute("SELECT last_insert_rowid()")
+        self.connection.commit()
+        last_insert_rowid = c.fetchone()
+        print last_insert_rowid[0]
+        position = 0
+        for z in zahlen:
+            position = position + 1         
+            c.execute("insert into lottery_drawing_numbers (number , position) values (?, ?)", 
+             (z, position))
         c.close()
 
     def insert_schein(self, date, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
@@ -73,12 +91,12 @@ class Datahandler(object):
         """
         c = self.connection.cursor()
         try:
-            c.execute("insert into schein(d, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
+            c.execute("insert into lottery_tickets(d, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
              laufzeit, laufzeit_tag, scheinnr) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
              (date, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, laufzeit, laufzeit_tag, scheinnr))
         except:
             self.add_columns()
-            c.execute("insert into schein(d, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
+            c.execute("insert into lottery_tickets(d, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
              laufzeit, laufzeit_tag, scheinnr) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", \
              (date, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, laufzeit, laufzeit_tag, scheinnr))
         self.connection.commit()
@@ -94,7 +112,7 @@ class Datahandler(object):
         zahl_zusatz, zahl_super, zahl_spiel77, zahl_spielsuper6: int
         """
         c = self.connection.cursor()
-        c.execute("update ziehung set d=?, zahl_1=?, zahl_2=?, zahl_3=?, zahl_4=?, zahl_5=?, zahl_6=?, \
+        c.execute("update lottery_drawing set d=?, zahl_1=?, zahl_2=?, zahl_3=?, zahl_4=?, zahl_5=?, zahl_6=?, \
              zahl_zusatz=? ,zahl_super=? , zahl_spiel77=?, zahl_spielsuper6=? \
              where rowid=? ", \
              (date, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
@@ -112,7 +130,7 @@ class Datahandler(object):
         laufzeit, laufzeit_tag, scheinnr: int
         """
         c = self.connection.cursor()
-        c.execute("update schein set d=?, zahl_1=?, zahl_2=?, zahl_3=?, zahl_4=?, zahl_5=?, zahl_6=?, \
+        c.execute("update lottery_tickets set d=?, zahl_1=?, zahl_2=?, zahl_3=?, zahl_4=?, zahl_5=?, zahl_6=?, \
              laufzeit=?, laufzeit_tag=?, scheinnr=? where rowid=? ", \
              (date, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
               laufzeit, laufzeit_tag, scheinnr, row_id))
@@ -127,11 +145,11 @@ class Datahandler(object):
         """
         c = self.connection.cursor()
         if rowid:
-            c.execute("select * from ziehung where rowid=?", (rowid,))
+            c.execute("select * from lottery_drawing where id=?", (rowid,))
         elif date:
-            c.execute("select * from ziehung where d=?", (date,))
+            c.execute("select * from lottery_drawing where d=?", (date,))
         else:
-            c.execute("select rowid,* from ziehung ORDER BY d")
+            c.execute("select * from lottery_drawing ORDER BY d")
         self.connection.commit()
         data = c.fetchall()
         c.close()
@@ -145,10 +163,10 @@ class Datahandler(object):
         """
         c = self.connection.cursor()
         if rowid_lottoschein:
-            c.execute("select * from schein where rowid=?", (rowid_lottoschein,))
+            c.execute("select * from lottery_drawing where rowid=?", (rowid_lottoschein,))
         self.connection.commit()
         data = c.fetchone()  
-        selectdata = "select * from ziehung where "
+        selectdata = "select * from lottery_drawing where "
         for z in range(1, 7):
             selectdata = selectdata + ("zahl_{0} in ({1},{2},{3},{4},{5},{6}) or ".
              format(z, data[1], data[2], data[3], data[4], data[5], data[6]))
@@ -167,9 +185,9 @@ class Datahandler(object):
         """
         c = self.connection.cursor()
         if rowid:
-            c.execute("select * from schein where rowid=?", (rowid,))
+            c.execute("select * from lottery_tickets where rowid=?", (rowid,))
         else:
-            c.execute("select rowid,* from schein")
+            c.execute("select rowid,* from lottery_tickets")
         self.connection.commit()
         data = c.fetchall()
         c.close()
@@ -189,9 +207,17 @@ class Datahandler(object):
         @type rowid: int
         """
         c = self.connection.cursor()
-        c.execute("delete from schein where rowid=?", (rowid,))
+        c.execute("delete from lottery_tickets where rowid=?", (rowid,))
         self.connection.commit()
         c.close()
+
+    def dump(self):
+        c = self.connection.cursor()
+        with open('dump.sql', 'w') as f:
+            for line in c.iterdump():
+                f.write('%s\n' % line)
+        f.close()
+
 
     def close(self):
         """close connection of database"""
