@@ -33,21 +33,34 @@ class Datahandler(object):
         
         >>> data_handler = Datahandler(':memory:')
         >>> data_handler.insert_ziehung('2013-03-13',[11,12,13,14,15,16,17],666,777,888)
-        1
         >>> data_handler.get_ziehung()
         [(1, u'2013-03-13', 666, 777, 888, u'11,12,13,14,15,16,17')]
         >>> data_handler.insert_ziehung('2013-03-12',[21,22,23,24,25,26,27],222,333,444)
-        2
         >>> data_handler.get_ziehung(2)
         [(2, u'2013-03-12', 222, 333, 444, u'21,22,23,24,25,26,27')]
         >>> data_handler.get_ziehung()
         [(2, u'2013-03-12', 222, 333, 444, u'21,22,23,24,25,26,27'), (1, u'2013-03-13', 666, 777, 888, u'11,12,13,14,15,16,17')]
+
+        >>> data_handler.insert_schein('2013-03-13',[11,12,13,14,15,16,17],2,0,888)
+        >>> data_handler.get_schein()
+        [(1, u'2013-03-13', 666, 777, 888, u'11,12,13,14,15,16,17')]
+        >>> data_handler.insert_schein('2013-03-12',[21,22,23,24,25,26],1,1,444)
+        >>> data_handler.get_schein(2)
+        [(2, u'2013-03-12', 1,1, 444, u'21,22,23,24,25,26,27')]
+        >>> data_handler.get_schein()
+        [(2, u'2013-03-12', 1,1, 444, u'21,22,23,24,25,26,27'), (1, u'2013-03-13', 2,0, 888, u'11,12,13,14,15,16,17')]
+
+
         >>> data_handler.dump()
         >>> data_handler.delete_ziehung(1)
         >>> data_handler.delete_ziehung(2)
         >>> data_handler.get_ziehung()
         []
-        """
+        >>> data_handler.delete_schein(1)
+        >>> data_handler.delete_schein(2)
+        >>> data_handler.get_schein()
+        []
+       """
         self.connection = sqlite3.connect(path)
         self.create_tables()
 
@@ -80,7 +93,9 @@ class Datahandler(object):
         Lottozahlen in der Datenbank speichern
         @type date: date
         @type zahlen: list
-        @type zahl_super, zahl_spiel77, zahl_spielsuper6: int
+        @type zahl_super : int
+        @type zahl_spiel77: int
+        @type zahl_spielsuper6: int
         """
         c = self.connection.cursor()
         c.execute("insert into lottery_drawing(d, zahl_super , zahl_spiel77, zahl_spielsuper6) "
@@ -97,8 +112,7 @@ class Datahandler(object):
         self.connection.commit()
         c.close()
 
-    def insert_schein(self, date, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
-     laufzeit, laufzeit_tag, scheinnr):
+    def insert_schein(self, date, zahlen, laufzeit, laufzeit_tag, scheinnr):
         """Save the number of the tip in database
         Daten des Lottoscheines in der Datenbank speichern
         @type date: date
@@ -106,9 +120,17 @@ class Datahandler(object):
         laufzeit, laufzeit_tag, scheinnr: int
         """
         c = self.connection.cursor()
-        c.execute("insert into lottery_tickets(d, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, "
-             "laufzeit, laufzeit_tag, scheinnr) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
-             (date, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, laufzeit, laufzeit_tag, scheinnr))
+        c.execute("insert into lottery_tickets(d, "
+                  "laufzeit, laufzeit_tag, scheinnr) values (?, ?, ?, ?)", 
+                 (date, laufzeit, laufzeit_tag, scheinnr))
+        self.connection.commit()
+        c.execute("SELECT last_insert_rowid()")
+        last_insert_rowid = c.fetchone()
+        position = 0
+        for z in zahlen:
+            position = position + 1         
+            c.execute("insert into lottery_tickets_numbers (id_ticket, number , position) values (?, ?, ?)", 
+             (last_insert_rowid[0], z, position))
         self.connection.commit()
         c.close()
 
