@@ -491,8 +491,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         if not self.CBox_gz_kompl_ausgeben.isChecked():
             lottodaten = lottodaten[-10:]
         for i in lottodaten:
-           PlainText.appendPlainText('Datum: {0} | {1}, {2}, {3}, {4}, {5}, {6} ZZ: {7}'
-            .format(i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8]))
+           PlainText.appendPlainText('Datum: {0} | {1}'
+            .format(i[1], i[5]))
         self.edi_daten_gewinnz.setPlainText(PlainText.document().toPlainText())
         self.edi_daten_gewinnz.moveCursor(self.edi_daten_gewinnz.textCursor().End)
             
