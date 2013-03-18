@@ -43,13 +43,13 @@ class Datahandler(object):
 
         >>> data_handler.insert_schein('2013-03-13',[11,12,13,14,15,16,17],2,0,888)
         >>> data_handler.get_schein()
-        [(1, u'2013-03-13', 666, 777, 888, u'11,12,13,14,15,16,17')]
+        [(1, u'2013-03-13', 2, 0, 888, u'11,12,13,14,15,16,17')]
         >>> data_handler.insert_schein('2013-03-12',[21,22,23,24,25,26],1,1,444)
         >>> data_handler.get_schein(2)
-        [(2, u'2013-03-12', 1,1, 444, u'21,22,23,24,25,26,27')]
+        [(2, u'2013-03-12', 1, 1, 444, u'21,22,23,24,25,26')]
         >>> data_handler.get_schein()
-        [(2, u'2013-03-12', 1,1, 444, u'21,22,23,24,25,26,27'), (1, u'2013-03-13', 2,0, 888, u'11,12,13,14,15,16,17')]
-
+        [(2, u'2013-03-12', 1, 1, 444, u'21,22,23,24,25,26'), (1, u'2013-03-13', 2, 0, 888, u'11,12,13,14,15,16,17')]
+        >>> get_numbers_from_ziehung(2)
 
         >>> data_handler.dump()
         >>> data_handler.delete_ziehung(1)
@@ -227,9 +227,18 @@ class Datahandler(object):
         """
         c = self.connection.cursor()
         if rowid:
-            c.execute("select * from lottery_tickets where rowid=?", (rowid,))
+            c.execute("""SELECT a.*, GROUP_CONCAT(b.number) 
+                      FROM lottery_tickets a
+                      INNER JOIN lottery_tickets_numbers b ON a.id = b.id_ticket
+                      WHERE a.id=?
+                      GROUP BY a.id 
+                      """, (rowid,))
         else:
-            c.execute("select rowid,* from lottery_tickets")
+            c.execute("""SELECT a.*, GROUP_CONCAT(b.number)
+                      FROM lottery_tickets a
+                      INNER JOIN lottery_tickets_numbers b ON a.id = b.id_ticket
+                      GROUP BY b.id_ticket
+                      ORDER BY a.d """)           
         data = c.fetchall()
         c.close()
         return data
@@ -240,9 +249,9 @@ class Datahandler(object):
         """
         c = self.connection.cursor()
         c.execute("DELETE from lottery_drawing "
-                  "where id=?", (rowid, ))
+                  "WHERE id=?", (rowid, ))
         c.execute("DELETE from lottery_drawing_numbers "
-                  "where id_drawing=?", (rowid, ))
+                  "WHERE id_drawing=?", (rowid, ))
         self.connection.commit()
         c.close()
 
@@ -251,12 +260,15 @@ class Datahandler(object):
         @type rowid: int
         """
         c = self.connection.cursor()
-        c.execute("DELETE from lottery_tickets, lottery_tickets_numbers where id=?", (rowid, ))
-        c.execute("DELETE from lottery_tickets_numbers where id_ticket=?", (rowid, ))
+        c.execute("DELETE from lottery_tickets "
+                  "WHERE id=?", (rowid, ))
+        c.execute("DELETE from lottery_tickets_numbers "
+                  "WHERE id_ticket=?", (rowid, ))
         self.connection.commit()
         c.close()
 
     def dump(self):
+        """write dump file"""
         with open('dump.sql', 'w') as f:
             for line in self.connection.iterdump():
                 f.write('%s\n' % line)
