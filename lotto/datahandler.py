@@ -49,7 +49,7 @@ class Datahandler(object):
         [(2, u'2013-03-12', 1, 1, 444, u'21,22,23,24,25,26')]
         >>> data_handler.get_schein()
         [(2, u'2013-03-12', 1, 1, 444, u'21,22,23,24,25,26'), (1, u'2013-03-13', 2, 0, 888, u'11,12,13,14,15,16,17')]
-        >>> get_numbers_from_ziehung(2)
+        >>> data_handler.get_id_numbers_of_ziehung(2)
 
         >>> data_handler.dump()
         >>> data_handler.delete_ziehung(1)
@@ -199,19 +199,20 @@ class Datahandler(object):
         c.close()
         return data
 
-    def get_numbers_from_ziehung(self, rowid_lottoschein):    
-        """Get numbers from ziehung
+    def get_id_numbers_of_ziehung(self, id_lottoschein):    
+        """Get id numbers of ziehung
         Finde von Nummer in den Ziehungsdaten
-        @type rowid_lottoschein: int
+        @type id_lottoschein: int
         @return: data all the draw with a number from the tip
         """
         c = self.connection.cursor()
-        if rowid_lottoschein:
-            c.execute("select * from lottery_drawing where rowid=?", (rowid_lottoschein,))
-        data = c.fetchone()  
-        selectdata = "select * from lottery_drawing where "
-        for z in range(1, 7):
-            selectdata = selectdata + ("zahl_{0} in ({1},{2},{3},{4},{5},{6}) or ".
+        c.execute("select * from lottery_tickets_numbers where id_ticket=?", (id_lottoschein,))
+        data = c.fetchall()  
+        print data
+        
+        selectdata = "select * from lottery_drawing_numbers where "
+        for z in data:
+            selectdata = selectdata + ("number in ({1},{2},{3},{4},{5},{6}) or ".
              format(z, data[1], data[2], data[3], data[4], data[5], data[6]))
         c.execute("{6} "
           "zahl_zusatz in ({0},{1},{2},{3},{4},{5}) ORDER BY d". 
