@@ -25,6 +25,7 @@ along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 import sqlite3, os
+import doctest
 
 class Datahandler(object):
     def __init__(self, path):
@@ -32,25 +33,31 @@ class Datahandler(object):
         @type path: string
         
         >>> data_handler = Datahandler(':memory:')
-        >>> data_handler.insert_ziehung('2013-03-13',[11,12,13,14,15,16,17],666,777,888)
+        >>> data_handler.insert_ziehung('2013-03-13', [11, 12, 13, 14, 15, 16, 17],666, 777, 888)
         >>> data_handler.get_ziehung()
         [(1, u'2013-03-13', 666, 777, 888, u'11,12,13,14,15,16,17')]
-        >>> data_handler.insert_ziehung('2013-03-12',[21,22,23,24,25,26,27],222,333,444)
+        >>> data_handler.insert_ziehung('2013-03-12', [21 ,22, 23, 24, 25, 26, 27], 222, 333, 444)
         >>> data_handler.get_ziehung(2)
         [(2, u'2013-03-12', 222, 333, 444, u'21,22,23,24,25,26,27')]
         >>> data_handler.get_ziehung()
         [(2, u'2013-03-12', 222, 333, 444, u'21,22,23,24,25,26,27'), (1, u'2013-03-13', 666, 777, 888, u'11,12,13,14,15,16,17')]
 
-        >>> data_handler.insert_schein('2013-03-13',[11,12,13,14,15,16,17],2,0,888)
+        >>> data_handler.insert_schein('2013-03-13', [11, 12, 13, 14, 15, 16, 17], 2 ,0 ,888)
         >>> data_handler.get_schein()
         [(1, u'2013-03-13', 2, 0, 888, u'11,12,13,14,15,16,17')]
-        >>> data_handler.insert_schein('2013-03-12',[21,22,23,24,25,26],1,1,444)
+        >>> data_handler.insert_schein('2013-03-12', [21, 22, 23, 24, 25, 28], 1, 1, 444)
         >>> data_handler.get_schein(2)
-        [(2, u'2013-03-12', 1, 1, 444, u'21,22,23,24,25,26')]
+        [(2, u'2013-03-12', 1, 1, 444, u'21,22,23,24,25,28')]
         >>> data_handler.get_schein()
-        [(2, u'2013-03-12', 1, 1, 444, u'21,22,23,24,25,26'), (1, u'2013-03-13', 2, 0, 888, u'11,12,13,14,15,16,17')]
+        [(2, u'2013-03-12', 1, 1, 444, u'21,22,23,24,25,28'), (1, u'2013-03-13', 2, 0, 888, u'11,12,13,14,15,16,17')]
         >>> data_handler.get_id_numbers_of_ziehung(2)
-
+        [2]
+        >>> data_handler.get_id_numbers_of_ziehung(2, 3)
+        'error'
+        >>> data_handler.get_id_numbers_of_ziehung()
+        'error'
+        >>> data_handler.get_id_numbers_of_ziehung(number_list=[12, 27])
+        [1, 2]
         >>> data_handler.dump()
         >>> data_handler.delete_ziehung(1)
         >>> data_handler.delete_ziehung(2)
@@ -134,41 +141,6 @@ class Datahandler(object):
         self.connection.commit()
         c.close()
 
-    def update_ziehung(self, row_id, date, zahl_1, zahl_2,zahl_3, zahl_4, zahl_5, zahl_6, \
-     zahl_zusatz, zahl_super, zahl_spiel77, zahl_spielsuper6):
-        """Update the number of the draw 
-        Lottozahlen in der Datenbank aktualisieren
-        @type row_id: int
-        @type date: date
-        zahl_1, zahl_2 ,zahl_3 ,zahl_4 ,zahl_5, zahl_6: int
-        zahl_zusatz, zahl_super, zahl_spiel77, zahl_spielsuper6: int
-        """
-        c = self.connection.cursor()
-        c.execute("update lottery_drawing set d=?, zahl_1=?, zahl_2=?, zahl_3=?, zahl_4=?, zahl_5=?, zahl_6=?, \
-             zahl_zusatz=? ,zahl_super=? , zahl_spiel77=?, zahl_spielsuper6=? \
-             where rowid=? ", \
-             (date, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, \
-              zahl_zusatz, zahl_super, zahl_spiel77, zahl_spielsuper6, row_id))
-        self.connection.commit()
-        c.close()
-
-    def update_schein(self, row_id, date, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6,\
-     laufzeit, laufzeit_tag, scheinnr):
-        """Update the number of the tip 
-        Daten des Lottoscheines in der Datenbank aktualisieren
-        @type row_id: int
-        @type date: date
-        zahl_1, zahl_2 ,zahl_3 ,zahl_4 ,zahl_5, zahl_6: int
-        laufzeit, laufzeit_tag, scheinnr: int
-        """
-        c = self.connection.cursor()
-        c.execute("update lottery_tickets set d=?, zahl_1=?, zahl_2=?, zahl_3=?, zahl_4=?, zahl_5=?, zahl_6=?, "
-             "laufzeit=?, laufzeit_tag=?, scheinnr=? where rowid=? ", 
-             (date, zahl_1, zahl_2, zahl_3, zahl_4, zahl_5, zahl_6, 
-              laufzeit, laufzeit_tag, scheinnr, row_id))
-        self.connection.commit()
-        c.close()
-
     def get_ziehung(self, rowid=None, date=None):    
         """Daten der Ziehung der Lottozahlen auslesen
         @type rowid: int
@@ -199,26 +171,33 @@ class Datahandler(object):
         c.close()
         return data
 
-    def get_id_numbers_of_ziehung(self, id_lottoschein):    
-        """Get id numbers of ziehung
-        Finde von Nummer in den Ziehungsdaten
+    def get_id_numbers_of_ziehung(self, id_lottoschein=None, number_list=None):    
+        """Get id numbers of ziehung, with the id of lotteryticket
+        Finde die ID Nummer der Ziehungsdaten, durch den Lottoschein
         @type id_lottoschein: int
-        @return: data all the draw with a number from the tip
+        @type number_list: list of int
+        @return: data all the draw with the number of lotteryticket
         """
+        if not ((id_lottoschein==None) ^ (number_list==None)):
+            return "error"
         c = self.connection.cursor()
-        c.execute("select * from lottery_tickets_numbers where id_ticket=?", (id_lottoschein,))
-        data = c.fetchall()  
-        print data
-        
-        selectdata = "select * from lottery_drawing_numbers where "
-        for z in data:
-            selectdata = selectdata + ("number in ({1},{2},{3},{4},{5},{6}) or ".
-             format(z, data[1], data[2], data[3], data[4], data[5], data[6]))
-        c.execute("{6} "
-          "zahl_zusatz in ({0},{1},{2},{3},{4},{5}) ORDER BY d". 
-         format(data[1], data[2], data[3], data[4], data[5], data[6], selectdata))
+        if id_lottoschein:
+            c.execute("SELECT * FROM lottery_tickets_numbers where id_ticket=?", (id_lottoschein,))
+            data = c.fetchall()                      
+            selectdata = ""
+            for z in data:
+                selectdata = selectdata + (" {0},".format(z[1]))
+        if number_list:
+            selectdata = "".join(map(" {0},".format, number_list))
+        selectdata = ("SELECT * FROM lottery_drawing_numbers where number in ( {0} ) ORDER BY id_drawing".
+         format(selectdata.rstrip(',')))
+        c.execute (selectdata)
         data = c.fetchall()
-        return data
+        id_numbers = []
+        for z in data:
+            if z[0] not in id_numbers:
+                id_numbers.append(z[0])
+        return id_numbers
         
     def get_schein(self, rowid=None):    
         """Get data from Lottoscheines
@@ -275,11 +254,9 @@ class Datahandler(object):
                 f.write('%s\n' % line)
         f.close()
 
-
-    def close(self):
+    def __del__(self):
         """close connection of database"""
         self.connection.close()
         
 if __name__ == "__main__":
-    import doctest
     doctest.testmod()
