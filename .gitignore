@@ -5,6 +5,7 @@
 *.pytc
 .eric4project/
 lotto/.directory
-lotto/datenbank.sqlite
 datenbank.splite
+datenbank1.splite
 pyLottoverwaltung.e4p
+lotto/dump.sql

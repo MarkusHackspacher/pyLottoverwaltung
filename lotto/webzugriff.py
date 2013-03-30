@@ -66,19 +66,16 @@ def data_from_achiv(data_handler, quote_url=None):
     block=[]
     for x in range(len(lottozahlen)/6):
 		block.append(lottozahlen[(x*6):(x*6)+6])
-    
+
+    ziehung_from_date = data_handler.get_ziehung()    
+    ziehung_date = [ziehung_date_satz[1] for ziehung_date_satz in ziehung_from_date]
     for x in range(len(datum)):
-        #print datum[x], block[x],zusatzzahlen[x].strip()
-        day = QtCore.QDate.fromString(datum[x],"dd.MM.yyyy").toPyDate()
-        ziehung_from_date = data_handler.get_ziehung(None, day)
-        if ziehung_from_date != []:
-            if ziehung_from_date[0][1] != int(block[x][0]):
-                """Eintrag fehlt in der DB"""
-                data_handler.insert_ziehung(day,int(block[x][0]),int(block[x][1]),int(block[x][2]),
-                 int(block[x][3]),int(block[x][4]),int(block[x][5]),int(zusatzzahlen[x]),0,0,0)
-        else:
-            data_handler.insert_ziehung(day,int(block[x][0]),int(block[x][1]),int(block[x][2]),
-                 int(block[x][3]),int(block[x][4]),int(block[x][5]),int(zusatzzahlen[x]),0,0,0)
+        datensatz = block[x]
+        datensatz.append(zusatzzahlen[x].strip())
+        #print datensatz
+        day = u'{0}'.format(QtCore.QDate.fromString(datum[x],"dd.MM.yyyy").toPyDate())
+        if not day in ziehung_date:
+            data_handler.insert_ziehung(day,datensatz,0,0,0)
     return
 
 def test_data_from_webpage():
