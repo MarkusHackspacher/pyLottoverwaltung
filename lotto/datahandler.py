@@ -123,8 +123,10 @@ class Datahandler(object):
         """Save the number of the tip in database
         Daten des Lottoscheines in der Datenbank speichern
         @type date: date
-        zahl_1, zahl_2 ,zahl_3 ,zahl_4 ,zahl_5, zahl_6: int
-        laufzeit, laufzeit_tag, scheinnr: int
+        @type zahlen: list of int
+        @type laufzeit: int
+        @type laufzeit_tag: int
+        @type scheinnr: int
         """
         c = self.connection.cursor()
         c.execute("insert into lottery_tickets(d, "
@@ -152,15 +154,13 @@ class Datahandler(object):
             c.execute("""SELECT a.*, GROUP_CONCAT(b.number) 
                       FROM lottery_drawing a
                       INNER JOIN lottery_drawing_numbers b ON a.id = b.id_drawing
-                      WHERE a.id=?
-                      GROUP BY a.id 
+                      WHERE a.id=? GROUP BY a.id 
                       """, (rowid,))
         elif date:
             c.execute("""SELECT a.*, GROUP_CONCAT(b.number)
                       FROM lottery_drawing a
                       INNER JOIN lottery_drawing_numbers b ON a.id = b.id_drawing
-                      GROUP BY a.id 
-                      WHERE a.d=?""", (date,))
+                      WHERE a.d=? GROUP BY a.id""", (date,))
         else:
             c.execute("""SELECT a.*, GROUP_CONCAT(b.number)
                       FROM lottery_drawing a
@@ -257,6 +257,7 @@ class Datahandler(object):
     def __del__(self):
         """close connection of database"""
         self.connection.close()
+        print ('database connection close')
         
 if __name__ == "__main__":
     doctest.testmod()
