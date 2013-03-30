@@ -5,7 +5,7 @@ Erzeugen einer Zufallszahl, mit Modultest beim direkten Aufruf
 
 pyLottoverwaltung
 
-Copyright (C) <2012> Markus Hackspacher
+Copyright (C) <2012-2013> Markus Hackspacher
 
 This file is part of pyLottoverwaltung.
 

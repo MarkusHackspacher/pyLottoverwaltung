@@ -22,12 +22,10 @@ along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 """
         
 from sets import Set
-
 from os.path import join
 from PyQt4 import QtGui, QtCore
 
 from gui.auswertung import Ui_Dialog
-#import datahandler
 
 class ui_lotto_auswertung(QtGui.QDialog, Ui_Dialog): 
     def __init__(self, rowid, data_handler):
@@ -41,22 +39,35 @@ class ui_lotto_auswertung(QtGui.QDialog, Ui_Dialog):
         self.setWindowIcon(QtGui.QIcon(join("misc", "pyLottoverwaltung.svg")))
         self.setupUi(self)
         self.setWindowTitle("Auswertung")
-        self.edi_daten.appendPlainText('Datensatz RowID: {0}'.
+        self.edi_daten.appendPlainText('Datensatz: {0}'.
         format(rowid))
         schein = data_handler.get_schein(rowid)[0]
-        self.edi_daten.appendPlainText('Datum: {0} Zahlen: '
-        '{1}, {2}, {3}, {4}, {5}, {6}' 
-         .format(schein[0], schein[1], schein[2], schein[3], schein[4], schein[5], schein[6]))
+        self.edi_daten.appendPlainText('Datum: {0} Zahlen: {1}' 
+         .format(schein[1], schein[5]))
         self.edi_daten.moveCursor(self.edi_daten.textCursor().End)
-        lottodaten = data_handler.get_numbers_from_ziehung(rowid)      
-        set_schein = Set([schein[1],schein[2],schein[3],schein[4],schein[5],schein[6]])
-        
-        for i in lottodaten:
-            set_ziehung = Set([i[1], i[2], i[3], i[4], i[5], i[6], i[7]])
-            anzahl_gleiche_zahl =  len(set_schein & set_ziehung)
-            self.edi_daten.appendPlainText(u'Datum: {0} | {1}, {2}, '
-            u'{3}, {4}, {5}, {6} ZZ: {7} Übereinstimmungen: {8}' 
-             .format(i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], anzahl_gleiche_zahl))
-        self.edi_daten.moveCursor(self.edi_daten.textCursor().End)
+        lottodaten = data_handler.get_id_numbers_of_ziehung(rowid) 
+        anzahl_lottodaten = len(lottodaten)
+        if anzahl_lottodaten == 0:
+            self.edi_daten.appendPlainText(u'Keine übereinstimmende Ziehungen gefunden')  
+        else:
+            self.edi_daten.appendPlainText(u'Folgende Ziehungen gefunden:')  
+            zahlen = schein[5].split(',')
+            z = []
+            for i in zahlen:
+                z.append(int(i))
+            set_schein = Set(z)
+            for lottodaten_z in lottodaten:
+                ziehungsdaten = data_handler.get_ziehung(lottodaten_z)[0]
+                zahlen = ziehungsdaten[5].split(',')
+                z = []
+                for i in zahlen:
+                    z.append(int(i))
+                set_ziehung = Set(z)
+                
+                anzahl_gleiche_zahl =  len(set_schein & set_ziehung)
+                self.edi_daten.appendPlainText(u'Datum: {0} | {1}, {2}, '
+                u'{3}, {4}, {5}, {6} ZZ: {7} Übereinstimmungen: {8}' 
+                 .format(ziehungsdaten[1], z[0], z[1], z[2], z[3], z[4], z[5], z[6], anzahl_gleiche_zahl))
+            self.edi_daten.moveCursor(self.edi_daten.textCursor().End)
  
       
