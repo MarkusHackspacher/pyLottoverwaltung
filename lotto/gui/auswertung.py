@@ -2,27 +2,22 @@
 
 # Form implementation generated from reading ui file 'auswertung.ui'
 #
-# Created: Fri Mar 29 21:53:56 2013
-#      by: PyQt4 UI code generator 4.9.3
+# Created: Sun Apr  7 13:46:41 2013
+#      by: PyQt4 UI code generator 4.7.3
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
 
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    _fromUtf8 = lambda s: s
-
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
-        Dialog.setObjectName(_fromUtf8("Dialog"))
+        Dialog.setObjectName("Dialog")
         Dialog.resize(561, 300)
         self.buttonBox = QtGui.QDialogButtonBox(Dialog)
         self.buttonBox.setGeometry(QtCore.QRect(200, 250, 341, 32))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
+        self.buttonBox.setObjectName("buttonBox")
         self.edi_daten = QtGui.QPlainTextEdit(Dialog)
         self.edi_daten.setGeometry(QtCore.QRect(10, 10, 541, 221))
         font = QtGui.QFont()
@@ -31,10 +26,10 @@ class Ui_Dialog(object):
         self.edi_daten.setAutoFillBackground(False)
         self.edi_daten.setUndoRedoEnabled(False)
         self.edi_daten.setReadOnly(True)
-        self.edi_daten.setObjectName(_fromUtf8("edi_daten"))
+        self.edi_daten.setObjectName("edi_daten")
 
         self.retranslateUi(Dialog)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), Dialog.accept)
+        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL("accepted()"), Dialog.accept)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):

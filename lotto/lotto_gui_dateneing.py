@@ -31,6 +31,7 @@ from gui.lotto_dateneing import Ui_MainWindow as Dlg
 from datahandler import Datahandler
 import webzugriff
 import auswertung
+import kalender_datum
 
 class MeinDialog(QtGui.QMainWindow, Dlg): 
     def __init__(self):
@@ -99,11 +100,12 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.btn_ls_auswerten.setEnabled(False)
         self.connect(self.CBox_gz_kompl_ausgeben,QtCore.SIGNAL("clicked()"), self.onCBox_gz_kompl_ausgeben)
        
-        self.connect(self.Btn_set_calender_today,QtCore.SIGNAL("clicked()"), self.onBtn_set_calender_today)
+        self.connect(self.btn_set_calender_today,QtCore.SIGNAL("clicked()"), self.onbtn_set_calender_today)
+        self.connect(self.btn_kalender,QtCore.SIGNAL("clicked()"), self.onbtn_kalender)
 
         # fields fill with random numbers and give them to database
-        self.connect(self.Btn_Zufall,QtCore.SIGNAL("clicked()"), self.onBtn_Zufall)
-        self.connect(self.Btn_hinzu,QtCore.SIGNAL("clicked()"), self.onBtn_hinzu) 
+        self.connect(self.btn_zufall,QtCore.SIGNAL("clicked()"), self.onbtn_zufall)
+        self.connect(self.btn_hinzu,QtCore.SIGNAL("clicked()"), self.onbtn_hinzu) 
 
         # fields of draw numbers
         for number in xrange(7):
@@ -144,6 +146,11 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.connect(self.edi_daten_lottoschein, 
          QtCore.SIGNAL('cursorPositionChanged()'), self.ondaten_lottoschein)
  
+    def onbtn_kalender(self):
+        """Kalender Winget öffen"""
+        dlg = kalender_datum.ui_kalender('2013-04-07')
+        print dlg.exec_()
+        
     def ondaten_gewinnz(self):
        """
        Anzeigen der Gewinnzahlen an den Auswahlfeld
@@ -238,7 +245,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """Ein Auswahlfelder der 7 Gewinnzahlen oder Lottoscheins hat sich geaendert"""
         self.geaendert()
      
-    def onBtn_hinzu(self):
+    def onbtn_hinzu(self):
         """drawing numbers move in database """
         datum = self.calendarWidget.selectedDate()
         day = datum.toPyDate()       
@@ -271,7 +278,6 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             return
         if not self.CBox_gz_kompl_ausgeben.isChecked():
             lottodaten = lottodaten[-10:]
-        self.calendarWidget.setSelectedDate(QtCore.QDate.fromString(lottodaten[block][1],"yyyy-MM-dd"))       
         zahlen = lottodaten[block][5].split(',')
         self.spinBox_Zahlen[0].setValue(int(zahlen[0]))
         self.spinBox_Zahlen[1].setValue(int(zahlen[1]))
@@ -372,7 +378,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """
         self.onBtn_gz_laden()
    
-    def onBtn_Zufall(self):
+    def onbtn_zufall(self):
         """ Die Zufallszahen generieren
         """
         from zufallszahl import zufallszahlen
@@ -384,15 +390,18 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.zahl=0
         self.geaendert_btn()
         
-    def onBtn_set_calender_today(self):
+    def onbtn_set_calender_today(self):
         """set calender today"""
-        self.calendarWidget.setSelectedDate(QtCore.QDate.currentDate())       
+        #self.calendarWidget.setSelectedDate(QtCore.QDate.currentDate())       
+        self.spinbox_tag.setValve(5)
+        self.spinBox_monat.setValve(5)
+        self.spinbox_jahr.setValve(2013)
 
     def onmodus(self):
         """ Wenn der Eingabe-Modus wechselt werden Schaltflächen an oder ab geschaltet
         """
         if self.com_modus.currentIndex()==1:
-            self.Btn_Zufall.setVisible(True)
+            self.btn_zufall.setVisible(True)
             self.com_laufzeit.setVisible(True)
             self.com_laufzeit_tag.setVisible(True)
             self.lab_laufzeit.setVisible(True)         
@@ -410,7 +419,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             self.geaendert()
 
         else:
-            self.Btn_Zufall.setVisible(False)
+            self.btn_zufall.setVisible(False)
             self.com_laufzeit.setVisible(False)
             self.com_laufzeit_tag.setVisible(False)
             self.lab_laufzeit.setVisible(False)
