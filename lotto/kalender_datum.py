@@ -31,8 +31,9 @@ class ui_kalender(QtGui.QDialog, Ui_Dialog):
     def __init__(self, year, month, day):
         """open kalender dialog
         Kalender Dialog oeffnen
-        @type datum: datum
-        @return: datum 
+        @type year: int
+        @type month: int
+        @type day: int
         """
         QtGui.QDialog.__init__(self) 
         self.setWindowIcon(QtGui.QIcon(join("misc", "pyLottoverwaltung.svg")))
@@ -41,4 +42,7 @@ class ui_kalender(QtGui.QDialog, Ui_Dialog):
         self.calendarWidget.setSelectedDate(QtCore.QDate(year, month, day))  
 
     def kalender(self):
+        """Return the date of the calender
+        @return: datum 
+        """
         return self.calendarWidget.selectedDate()
