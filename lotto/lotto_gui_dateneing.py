@@ -145,11 +145,18 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
          QtCore.SIGNAL('cursorPositionChanged()'), self.ondaten_gewinnz)
         self.connect(self.edi_daten_lottoschein, 
          QtCore.SIGNAL('cursorPositionChanged()'), self.ondaten_lottoschein)
+        self.onbtn_set_calender_today()
  
     def onbtn_kalender(self):
-        """Kalender Winget öffen"""
-        dlg = kalender_datum.ui_kalender('2013-04-07')
-        print dlg.exec_()
+        """Kalender Dialog öffen"""
+        dlg = kalender_datum.ui_kalender(
+         self.spinBox_jahr.value(),
+         self.spinBox_monat.value(),
+         self.spinbox_tag.value())
+        if dlg.exec_() ==1:
+            self.spinbox_tag.setValue(dlg.kalender().day())
+            self.spinBox_monat.setValue(dlg.kalender().month())
+            self.spinBox_jahr.setValue(dlg.kalender().year())
         
     def ondaten_gewinnz(self):
        """
@@ -202,8 +209,9 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             a.setText('Daten konnten nicht geladen werden')
             a.exec_()
             return
-            
-        self.calendarWidget.setSelectedDate(QtCore.QDate.fromString(datum,"dd.MM.yyyy"))       
+        self.spinbox_tag.setValue(int(datum[:2]))
+        self.spinBox_monat.setValue(int(datum[3:5]))
+        self.spinBox_jahr.setValue(int(datum[6:]))            
         self.spinBox_Zahlen[0].setValue(value[0])
         self.spinBox_Zahlen[1].setValue(value[1])
         self.spinBox_Zahlen[2].setValue(value[2])
@@ -247,8 +255,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
      
     def onbtn_hinzu(self):
         """drawing numbers move in database """
-        datum = self.calendarWidget.selectedDate()
-        day = datum.toPyDate()       
+        day =  '{0:4}-{1:02}-{2:02}'.format(self.spinBox_jahr.value(),
+         self.spinBox_monat.value(), self.spinbox_tag.value())
         if self.com_modus.currentIndex()==0:
             self.data_handler.insert_ziehung(day, self.draw_numbers(),
              self.spinBox_superz.value(), self.spinBox_spiel77.value(), self.spinBox_super6.value())
@@ -278,6 +286,9 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             return
         if not self.CBox_gz_kompl_ausgeben.isChecked():
             lottodaten = lottodaten[-10:]
+        self.spinbox_tag.setValue(int(lottodaten[block][1][8:]))
+        self.spinBox_monat.setValue(int(lottodaten[block][1][5:7]))
+        self.spinBox_jahr.setValue(int(lottodaten[block][1][:4]))
         zahlen = lottodaten[block][5].split(',')
         self.spinBox_Zahlen[0].setValue(int(zahlen[0]))
         self.spinBox_Zahlen[1].setValue(int(zahlen[1]))
@@ -300,8 +311,10 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         block=self.edi_daten_lottoschein.textCursor().blockNumber()
         lottodaten = self.data_handler.get_schein()
         if lottodaten == []:
-            return
-        self.calendarWidget.setSelectedDate(QtCore.QDate.fromString(lottodaten[block][1],"yyyy-MM-dd"))
+            return        
+        self.spinbox_tag.setValue(int(lottodaten[block][1][8:]))
+        self.spinBox_monat.setValue(int(lottodaten[block][1][5:7]))
+        self.spinBox_jahr.setValue(int(lottodaten[block][1][:4]))
         zahlen = lottodaten[block][5].split(',')
         self.spinBox_Zahlen[0].setValue(int(zahlen[0]))
         self.spinBox_Zahlen[1].setValue(int(zahlen[1]))
@@ -392,10 +405,9 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         
     def onbtn_set_calender_today(self):
         """set calender today"""
-        #self.calendarWidget.setSelectedDate(QtCore.QDate.currentDate())       
-        self.spinbox_tag.setValve(5)
-        self.spinBox_monat.setValve(5)
-        self.spinbox_jahr.setValve(2013)
+        self.spinbox_tag.setValue(QtCore.QDate.currentDate().day())
+        self.spinBox_monat.setValue(QtCore.QDate.currentDate().month())
+        self.spinBox_jahr.setValue(QtCore.QDate.currentDate().year())
 
     def onmodus(self):
         """ Wenn der Eingabe-Modus wechselt werden Schaltflächen an oder ab geschaltet

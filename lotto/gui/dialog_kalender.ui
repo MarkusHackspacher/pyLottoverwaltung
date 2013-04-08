@@ -28,6 +28,9 @@
    <property name="standardButtons">
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
+   <property name="centerButtons">
+    <bool>false</bool>
+   </property>
   </widget>
   <widget class="QCalendarWidget" name="calendarWidget">
    <property name="geometry">
@@ -81,6 +84,22 @@
     <hint type="destinationlabel">
      <x>157</x>
      <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>Dialog</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>240</x>
+     <y>226</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>209</x>
+     <y>123</y>
     </hint>
    </hints>
   </connection>

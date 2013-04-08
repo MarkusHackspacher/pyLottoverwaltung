@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>913</width>
-    <height>551</height>
+    <height>564</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -279,8 +279,8 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
    <widget class="QPushButton" name="btn_set_calender_today">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>420</y>
+      <x>10</x>
+      <y>460</y>
       <width>141</width>
       <height>41</height>
      </rect>
@@ -489,8 +489,8 @@ einstellen</string>
      <rect>
       <x>10</x>
       <y>420</y>
-      <width>307</width>
-      <height>31</height>
+      <width>326</width>
+      <height>33</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -594,14 +594,15 @@ einstellen</string>
    <widget class="QPushButton" name="btn_kalender">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>170</x>
       <y>460</y>
-      <width>102</width>
-      <height>24</height>
+      <width>141</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>Kalender</string>
+     <string>Kalender
+öffnen</string>
     </property>
    </widget>
   </widget>
@@ -611,7 +612,7 @@ einstellen</string>
      <x>0</x>
      <y>0</y>
      <width>913</width>
-     <height>21</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuDatei">
