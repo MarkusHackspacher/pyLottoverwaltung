@@ -384,25 +384,25 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             .format(i[1], i[5]))
         self.edi_daten_gewinnz.setPlainText(PlainText.document().toPlainText())
         self.edi_daten_gewinnz.moveCursor(self.edi_daten_gewinnz.textCursor().End)
-            
+
     def onCBox_gz_kompl_ausgeben(self):
         """
         CheckBox: Show the complete database in TextEdit
         """
         self.onBtn_gz_laden()
-   
+
     def onbtn_zufall(self):
         """ Die Zufallszahen generieren
         """
         from zufallszahl import zufallszahlen
-        i_anzahl=6
-        i_hochste=49
-        zufallszahl=zufallszahlen(i_anzahl,i_hochste)
+        i_anzahl = 6
+        i_hochste = 49
+        zufallszahl = zufallszahlen(i_anzahl, i_hochste)
         for zahlen in xrange(6):
             self.spinBox_Zahlen[zahlen].setValue(zufallszahl[zahlen])
-        self.zahl=0
+        self.zahl = 0
         self.geaendert_btn()
-        
+
     def onbtn_set_calender_today(self):
         """set calender today"""
         self.spinbox_tag.setValue(QtCore.QDate.currentDate().day())
@@ -412,11 +412,11 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
     def onmodus(self):
         """ Wenn der Eingabe-Modus wechselt werden Schaltflächen an oder ab geschaltet
         """
-        if self.com_modus.currentIndex()==1:
+        if self.com_modus.currentIndex() == 1:
             self.btn_zufall.setVisible(True)
             self.com_laufzeit.setVisible(True)
             self.com_laufzeit_tag.setVisible(True)
-            self.lab_laufzeit.setVisible(True)         
+            self.lab_laufzeit.setVisible(True)
             self.spinBox_superz.setVisible(False)
             self.lab_superz.setVisible(False)
             self.spinBox_spiel77.setVisible(True)
@@ -450,36 +450,36 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
     def geaendert(self):
         """Überprüfen der SpinBoxen damit nicht zwei den gleichen Wert haben
         """
-        a = self.draw_numbers()        
+        a = self.draw_numbers()
         #Setzen der Botton je nach Wert der Spinbox
         for button in xrange(49):
             if button + 1 in a:
-                self.Btn_Numerary_1to49[button].setFlat(False)               
+                self.Btn_Numerary_1to49[button].setFlat(False)
                 self.Btn_Numerary_1to49[button].setStyleSheet("color: red;")
                 if button + 1 == self.spinBox_Zahlen[6].value():
-                    self.Btn_Numerary_1to49[button].setStyleSheet("color: blue;")                
+                    self.Btn_Numerary_1to49[button].setStyleSheet("color: blue;")
             else:
                 self.Btn_Numerary_1to49[button].setFlat(True)
                 self.Btn_Numerary_1to49[button].setStyleSheet("color: black;")
-                
+
     def geaendert_btn(self):
         """in den SpinBoxen die Nummern der Zahlen 1 bis 49 anzeigen
         wenn die Zahl abgewaehlt wird, wird auch der Wert der entsprechende Spinbox geloescht
         """
-        a = self.draw_numbers()        
+        a = self.draw_numbers()
 
         for number in xrange(6):
-            if self.spinBox_Zahlen[number].value()==0 and not (self.zahl in a):
+            if self.spinBox_Zahlen[number].value() == 0 and not (self.zahl in a):
                 self.spinBox_Zahlen[number].setValue(self.zahl)
                 break
             elif self.zahl == self.spinBox_Zahlen[number].value():
                 self.spinBox_1to7_clear(number)
                 self.zahl = 0
-                
-        a = self.draw_numbers()          
-        if self.spinBox_Zahlen[6].value()==0 and self.com_modus.currentIndex()==0 and not (self.zahl in a):
+
+        a = self.draw_numbers()
+        if self.spinBox_Zahlen[6].value() == 0 and self.com_modus.currentIndex() == 0 and not (self.zahl in a):
             self.spinBox_Zahlen[6].setValue(self.zahl)
-        elif self.zahl == self.spinBox_Zahlen[6].value() or self.com_modus.currentIndex()==1:
+        elif self.zahl == self.spinBox_Zahlen[6].value() or self.com_modus.currentIndex() == 1:
             self.spinBox_1to7_clear(6)
         self.geaendert()
 
@@ -487,8 +487,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         """
         this numbers are in the draw
         """
-        a=[]
-        a.append(self.spinBox_Zahlen[0].value())        
+        a = []
+        a.append(self.spinBox_Zahlen[0].value())
         a.append(self.spinBox_Zahlen[1].value())
         a.append(self.spinBox_Zahlen[2].value())
         a.append(self.spinBox_Zahlen[3].value())
@@ -497,10 +497,11 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         a.append(self.spinBox_Zahlen[6].value())
         return a
 
+
 def gui():
-    app = QtGui.QApplication(sys.argv) 
-    dialog = MeinDialog() 
-    dialog.show() 
+    app = QtGui.QApplication(sys.argv)
+    dialog = MeinDialog()
+    dialog.show()
     sys.exit(app.exec_())
 
 if __name__ == "__main__":
