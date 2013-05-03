@@ -157,7 +157,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             self.spinbox_tag.setValue(dlg.kalender().day())
             self.spinBox_monat.setValue(dlg.kalender().month())
             self.spinBox_jahr.setValue(dlg.kalender().year())
-        
+
     def ondaten_gewinnz(self):
        """
        Anzeigen der Gewinnzahlen an den Auswahlfeld
@@ -169,7 +169,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
        self.lab_daten_gewinnz.setText(text)
        self.Btn_gz_loeschen.setEnabled(True)
        print "ondaten_gewinnz"
-        
+
     def ondaten_lottoschein(self):
        """
        Anzeigen der Daten des Lottoscheins an den Auswahlfeld
@@ -182,7 +182,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
        self.Btn_ls_loeschen.setEnabled(True)
        self.btn_ls_auswerten.setEnabled(True)
        print "ondaten_lottoschein"
- 
+
     def onInfo(self):
         """ Programm Info
         """
@@ -194,14 +194,14 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         a.setText(text)
         a.setInformativeText('Von Markus Hackspacher')
         a.exec_()
-        
+
     def closeEvent(self, event):
         """ the program exit """
         return
-    
+
     def onData_lottode(self):
-        """Load the actual draw from lotto.de"""        
-        try: 
+        """Load the actual draw from lotto.de"""
+        try:
             datum, value = webzugriff.data_from_webpage()
         except:
             a = QtGui.QMessageBox()
@@ -211,7 +211,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             return
         self.spinbox_tag.setValue(int(datum[:2]))
         self.spinBox_monat.setValue(int(datum[3:5]))
-        self.spinBox_jahr.setValue(int(datum[6:]))            
+        self.spinBox_jahr.setValue(int(datum[6:]))
         self.spinBox_Zahlen[0].setValue(value[0])
         self.spinBox_Zahlen[1].setValue(value[1])
         self.spinBox_Zahlen[2].setValue(value[2])
@@ -224,18 +224,19 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.spinBox_super6.setValue(value[9])
         self.com_modus.setCurrentIndex(0)
         self.geaendert()
-        
+
     def onData_lottozahlenonlinede(self, first_year, last_year):
         """Load the draw from lottozahlenonline.de"""
         a = QtGui.QProgressDialog("Daten Einlesen", "Abbruch",
-         first_year, last_year, self, QtCore.Qt.Dialog|QtCore.Qt.WindowTitleHint)
+         first_year, last_year, self,
+         QtCore.Qt.Dialog | QtCore.Qt.WindowTitleHint)
         a.setWindowModality(QtCore.Qt.WindowModal)
         a.setValue(first_year)
-        for z in range(first_year, last_year+1):
+        for z in range(first_year, last_year + 1):
             print z
             url = 'http://www.lottozahlenonline.de/statistik/beide-spieltage/lottozahlen-archiv.php?j={0}'.format(z)
             webzugriff.data_from_achiv(self.data_handler, url)
-            a.setValue(z)                  
+            a.setValue(z)
         a.close()
         self.onBtn_gz_laden()
 
@@ -244,35 +245,39 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.spinBox_Zahlen[number].setValue(0)
         self.spinBox_Zahlen[number].clear()
 
-    def onEingabefeld_1to49(self,zahl):
+    def onEingabefeld_1to49(self, zahl):
         """Ein Zahlenfelder 1 bis 49 wurde angeklickt"""
         self.zahl = zahl
         self.geaendert_btn()
-            
+
     def focusSpinBox_1to7(self, number):
-        """Ein Auswahlfelder der 7 Gewinnzahlen oder Lottoscheins hat sich geaendert"""
+        """Ein Auswahlfelder der 7 Gewinnzahlen oder
+        Lottoscheins hat sich geaendert"""
         self.geaendert()
-     
+
     def onbtn_hinzu(self):
         """drawing numbers move in database """
-        day =  '{0:4}-{1:02}-{2:02}'.format(self.spinBox_jahr.value(),
+        day = '{0:4}-{1:02}-{2:02}'.format(self.spinBox_jahr.value(),
          self.spinBox_monat.value(), self.spinbox_tag.value())
-        if self.com_modus.currentIndex()==0:
+        if self.com_modus.currentIndex() == 0:
             self.data_handler.insert_ziehung(day, self.draw_numbers(),
-             self.spinBox_superz.value(), self.spinBox_spiel77.value(), self.spinBox_super6.value())
+             self.spinBox_superz.value(), self.spinBox_spiel77.value(),
+             self.spinBox_super6.value())
             self.Btn_gz_loeschen.setEnabled(False)
             self.onBtn_gz_laden()
         else:
             self.data_handler.insert_schein(day, self.draw_numbers()[:-1],
              self.com_laufzeit.currentIndex(),
-             self.com_laufzeit_tag.currentIndex(), self.spinBox_spiel77.value())
+             self.com_laufzeit_tag.currentIndex(),
+             self.spinBox_spiel77.value())
             self.Btn_ls_loeschen.setEnabled(False)
             self.onBtn_ls_laden()
-                           
+
     def onBtn_ls_auswerten(self):
         """den Lottoschein auswerten"""
         dlg = auswertung.ui_lotto_auswertung(self.data_handler.get_schein()[
-         self.edi_daten_lottoschein.textCursor().blockNumber()][0], self.data_handler)
+         self.edi_daten_lottoschein.textCursor().blockNumber()][0],
+         self.data_handler)
         dlg.exec_()
 
     def onBtn_gz_anzeigen(self):
@@ -280,7 +285,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         show drawing numbers
         Gewinnzahlen im großen Feld anzeigen
         """
-        block=self.edi_daten_gewinnz.textCursor().blockNumber()
+        block = self.edi_daten_gewinnz.textCursor().blockNumber()
         lottodaten = self.data_handler.get_ziehung()
         if lottodaten == []:
             return
@@ -308,10 +313,10 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         show tip numbers
         Lottoschein im großen Feld anzeigen,
         """
-        block=self.edi_daten_lottoschein.textCursor().blockNumber()
+        block = self.edi_daten_lottoschein.textCursor().blockNumber()
         lottodaten = self.data_handler.get_schein()
         if lottodaten == []:
-            return        
+            return
         self.spinbox_tag.setValue(int(lottodaten[block][1][8:]))
         self.spinBox_monat.setValue(int(lottodaten[block][1][5:7]))
         self.spinBox_jahr.setValue(int(lottodaten[block][1][:4]))
@@ -328,30 +333,31 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.spinBox_spiel77.setValue(lottodaten[block][4])
         self.com_modus.setCurrentIndex(1)
         self.geaendert()
-        
+
     def onBtn_gz_loeschen(self):
-        """ 
+        """
         delete drawing numbers from the database
         Gewinnzahlen einer Ziehung aus der Datenbank loeschen
-        """           
+        """
         lottodaten = self.data_handler.get_ziehung()
         if lottodaten == []:
             return
         anzahl_datensaetze = len(lottodaten)
         if not self.CBox_gz_kompl_ausgeben.isChecked() \
          and anzahl_datensaetze > 10:
-             anzahl_datensaetze =- 10
+            anzahl_datensaetze =- 10
         else:
             anzahl_datensaetze = 0
-        self.data_handler.delete_ziehung(lottodaten 
-         [self.edi_daten_gewinnz.textCursor().blockNumber() + anzahl_datensaetze][0])
+        self.data_handler.delete_ziehung(lottodaten
+         [self.edi_daten_gewinnz.textCursor().blockNumber()
+         + anzahl_datensaetze][0])
         self.onBtn_gz_laden()
 
     def onBtn_ls_loeschen(self):
         """
         delete tip numbers from the database
         Lottoschein aus der Datenbank loeschen
-        """        
+        """
         lottodaten = self.data_handler.get_schein()
         if lottodaten == []:
             return
@@ -368,8 +374,10 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         for schein in lottodaten:
             PlainText.appendPlainText('Datum: {0} Zahlen: {1}'
              .format(schein[1], schein[5]))
-        self.edi_daten_lottoschein.setPlainText(PlainText.document().toPlainText())
-        self.edi_daten_lottoschein.moveCursor(self.edi_daten_lottoschein.textCursor().End)
+        self.edi_daten_lottoschein.setPlainText(
+         PlainText.document().toPlainText())
+        self.edi_daten_lottoschein.moveCursor(
+         self.edi_daten_lottoschein.textCursor().End)
 
     def onBtn_gz_laden(self):
         """Read the Gewinnzahlen from the Database
@@ -380,10 +388,11 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         if not self.CBox_gz_kompl_ausgeben.isChecked():
             lottodaten = lottodaten[-10:]
         for i in lottodaten:
-           PlainText.appendPlainText('Datum: {0} Zahlen: {1}'
-            .format(i[1], i[5]))
+            PlainText.appendPlainText('Datum: {0} Zahlen: {1}'
+             .format(i[1], i[5]))
         self.edi_daten_gewinnz.setPlainText(PlainText.document().toPlainText())
-        self.edi_daten_gewinnz.moveCursor(self.edi_daten_gewinnz.textCursor().End)
+        self.edi_daten_gewinnz.moveCursor(
+         self.edi_daten_gewinnz.textCursor().End)
 
     def onCBox_gz_kompl_ausgeben(self):
         """
@@ -410,7 +419,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.spinBox_jahr.setValue(QtCore.QDate.currentDate().year())
 
     def onmodus(self):
-        """ Wenn der Eingabe-Modus wechselt werden Schaltflächen an oder ab geschaltet
+        """ Wenn der Eingabe-Modus wechselt werden
+        Schaltflächen an oder ab geschaltet
         """
         if self.com_modus.currentIndex() == 1:
             self.btn_zufall.setVisible(True)
@@ -457,19 +467,22 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
                 self.Btn_Numerary_1to49[button].setFlat(False)
                 self.Btn_Numerary_1to49[button].setStyleSheet("color: red;")
                 if button + 1 == self.spinBox_Zahlen[6].value():
-                    self.Btn_Numerary_1to49[button].setStyleSheet("color: blue;")
+                    self.Btn_Numerary_1to49[button].setStyleSheet(
+                     "color: blue;")
             else:
                 self.Btn_Numerary_1to49[button].setFlat(True)
                 self.Btn_Numerary_1to49[button].setStyleSheet("color: black;")
 
     def geaendert_btn(self):
         """in den SpinBoxen die Nummern der Zahlen 1 bis 49 anzeigen
-        wenn die Zahl abgewaehlt wird, wird auch der Wert der entsprechende Spinbox geloescht
+        wenn die Zahl abgewaehlt wird, wird auch der
+        Wert der entsprechende Spinbox geloescht
         """
         a = self.draw_numbers()
 
         for number in xrange(6):
-            if self.spinBox_Zahlen[number].value() == 0 and not (self.zahl in a):
+            if self.spinBox_Zahlen[number].value() == 0 \
+             and not (self.zahl in a):
                 self.spinBox_Zahlen[number].setValue(self.zahl)
                 break
             elif self.zahl == self.spinBox_Zahlen[number].value():
@@ -477,9 +490,12 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
                 self.zahl = 0
 
         a = self.draw_numbers()
-        if self.spinBox_Zahlen[6].value() == 0 and self.com_modus.currentIndex() == 0 and not (self.zahl in a):
+        if self.spinBox_Zahlen[6].value() == 0 \
+         and self.com_modus.currentIndex() == 0 \
+         and not (self.zahl in a):
             self.spinBox_Zahlen[6].setValue(self.zahl)
-        elif self.zahl == self.spinBox_Zahlen[6].value() or self.com_modus.currentIndex() == 1:
+        elif self.zahl == self.spinBox_Zahlen[6].value() \
+         or self.com_modus.currentIndex() == 1:
             self.spinBox_1to7_clear(6)
         self.geaendert()
 
