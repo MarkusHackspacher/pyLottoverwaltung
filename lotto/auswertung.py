@@ -55,6 +55,7 @@ class ui_lotto_auswertung(QtGui.QDialog, Ui_Dialog):
             self.edi_daten.appendPlainText(u'Folgende Ziehungen gefunden:')
             zahlen = schein[5].split(',')
             z = []
+            uebereinstimmungen = [0,0]
             for i in zahlen:
                 z.append(int(i))
             set_schein = Set(z)
@@ -65,11 +66,19 @@ class ui_lotto_auswertung(QtGui.QDialog, Ui_Dialog):
                 for i in zahlen:
                     z.append(int(i))
                 set_ziehung = Set(z)
-
                 anzahl_gleiche_zahl = len(set_schein & set_ziehung)
-                self.edi_daten.appendPlainText(u'Datum: {0} | {1}, {2}, '
-                u'{3}, {4}, {5}, {6} ZZ: {7} Übereinstimmungen: {8}'
-                 .format(ziehungsdaten[1],
-                 z[0], z[1], z[2], z[3], z[4], z[5], z[6],
-                 anzahl_gleiche_zahl))
+                if anzahl_gleiche_zahl == 1:
+                    uebereinstimmungen[0] += 1
+                if anzahl_gleiche_zahl == 2:
+                    uebereinstimmungen[1] += 1
+                if anzahl_gleiche_zahl > 2:
+                    self.edi_daten.appendPlainText(u'Datum: {0} | {1}, {2},'
+                     u'{3}, {4}, {5}, {6} ZZ: {7} Übereinstimmungen: {8}'
+                    .format(ziehungsdaten[1],
+                    z[0], z[1], z[2], z[3], z[4], z[5], z[6],
+                    anzahl_gleiche_zahl))
+            self.edi_daten.appendPlainText(u'{0} Übereinstimmungen mit einer Zahl'
+            .format(uebereinstimmungen[0]))
+            self.edi_daten.appendPlainText(u'{0} Übereinstimmungen mit zwei Zahlen'
+            .format(uebereinstimmungen[1]))
             self.edi_daten.moveCursor(self.edi_daten.textCursor().End)
