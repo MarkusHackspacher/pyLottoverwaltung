@@ -79,7 +79,7 @@ class Datahandler(object):
         c.execute("""create table if not exists lottery_drawing (
                   id INTEGER PRIMARY KEY ASC,
                   d DATE,
-                  zahl_super INTEGER, zahl_spiel77 INTEGER, 
+                  zahl_super INTEGER, zahl_spiel77 INTEGER,
                   zahl_spielsuper6 INTEGER)""")
         c.execute("""create table if not exists lottery_drawing_numbers (
                   id_drawing INTEGER,
