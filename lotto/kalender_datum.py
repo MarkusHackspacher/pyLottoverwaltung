@@ -20,14 +20,15 @@ GNU Lesser General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 """
-        
+
 from sets import Set
 from os.path import join
 from PyQt4 import QtGui, QtCore
 
 from gui.dialog_kalender import Ui_Dialog
 
-class ui_kalender(QtGui.QDialog, Ui_Dialog): 
+
+class ui_kalender(QtGui.QDialog, Ui_Dialog):
     def __init__(self, year, month, day):
         """open kalender dialog
         Kalender Dialog oeffnen
@@ -35,14 +36,14 @@ class ui_kalender(QtGui.QDialog, Ui_Dialog):
         @type month: int
         @type day: int
         """
-        QtGui.QDialog.__init__(self) 
+        QtGui.QDialog.__init__(self)
         self.setWindowIcon(QtGui.QIcon(join("misc", "pyLottoverwaltung.svg")))
         self.setupUi(self)
         self.setWindowTitle("Kalender")
-        self.calendarWidget.setSelectedDate(QtCore.QDate(year, month, day))  
+        self.calendarWidget.setSelectedDate(QtCore.QDate(year, month, day))
 
     def kalender(self):
         """Return the date of the calender
-        @return: datum 
+        @return: datum
         """
         return self.calendarWidget.selectedDate()

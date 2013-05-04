@@ -33,7 +33,8 @@ import webzugriff
 import auswertung
 import kalender_datum
 
-class MeinDialog(QtGui.QMainWindow, Dlg): 
+
+class MeinDialog(QtGui.QMainWindow, Dlg):
     def __init__(self):
         """
         inital the main window
@@ -42,151 +43,183 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         calender,
         datafield
         """
-        QtGui.QDialog.__init__(self) 
+        QtGui.QDialog.__init__(self)
         self.setWindowIcon(QtGui.QIcon(join("misc", "pyLottoverwaltung.svg")))
         self.setupUi(self)
         #array of Button from 1 to 49
         self.Btn_Numerary_1to49 = []
         for button in xrange(49):
-            self.Btn_Numerary_1to49.append(QtGui.QPushButton(self.gridLayoutWidget))
+            self.Btn_Numerary_1to49.append(QtGui.QPushButton(
+             self.gridLayoutWidget))
         for button in xrange(49):
-            self.Btn_Numerary_1to49[button].setMaximumSize(QtCore.QSize(58, 58))
-            self.gridLayout.addWidget(self.Btn_Numerary_1to49[button], \
+            self.Btn_Numerary_1to49[button].setMaximumSize(
+             QtCore.QSize(58, 58))
+            self.gridLayout.addWidget(self.Btn_Numerary_1to49[button],
              int(button / 7),  int(button % 7), 1, 1)
             self.Btn_Numerary_1to49[button].setAutoFillBackground(True)
-            self.Btn_Numerary_1to49[button].setText(QtGui.QApplication.translate("MainWindow", str(button + 1), 
+            self.Btn_Numerary_1to49[button].setText(
+             QtGui.QApplication.translate("MainWindow", str(button + 1),
              None, QtGui.QApplication.UnicodeUTF8))
-    
-        #set 6 SpinBox and 1 
+
+        #set 6 SpinBox and 1
         self.spinBox_Zahlen = []
         self.Btn_delete_Number = []
         for zahlen in xrange(6):
-            self.spinBox_Zahlen.append(QtGui.QSpinBox(self.horizontalLayoutWidget))
-            self.Btn_delete_Number.append(QtGui.QPushButton(self.horizontalLayoutWidget_2))
+            self.spinBox_Zahlen.append(QtGui.QSpinBox(
+             self.horizontalLayoutWidget))
+            self.Btn_delete_Number.append(QtGui.QPushButton(
+             self.horizontalLayoutWidget_2))
         self.spinBox_Zahlen.append(QtGui.QSpinBox(self.Lottozahlen))
         self.Btn_delete_Number.append(QtGui.QPushButton(self.Lottozahlen))
         for zahlen in xrange(7):
             if zahlen != 6:
-                self.spinBox_Zahlen[zahlen].setMinimumSize(QtCore.QSize(32, 20))
-                self.spinBox_Zahlen[zahlen].setMaximumSize(QtCore.QSize(52, 32))
-                self.Btn_delete_Number[zahlen].setMinimumSize(QtCore.QSize(32, 20))
-                self.Btn_delete_Number[zahlen].setMaximumSize(QtCore.QSize(52, 20))
-                self.horizontalLayout.addWidget(self.spinBox_Zahlen[zahlen])
-                self.horizontalLayout_2.addWidget(self.Btn_delete_Number[zahlen])
+                self.spinBox_Zahlen[zahlen].setMinimumSize(
+                 QtCore.QSize(32, 20))
+                self.spinBox_Zahlen[zahlen].setMaximumSize(
+                 QtCore.QSize(52, 32))
+                self.Btn_delete_Number[zahlen].setMinimumSize(
+                 QtCore.QSize(32, 20))
+                self.Btn_delete_Number[zahlen].setMaximumSize(
+                 QtCore.QSize(52, 20))
+                self.horizontalLayout.addWidget(
+                 self.spinBox_Zahlen[zahlen])
+                self.horizontalLayout_2.addWidget(
+                 self.Btn_delete_Number[zahlen])
             else:
                 #set extra Spinbox
-                self.spinBox_Zahlen[zahlen].setGeometry(QtCore.QRect(130, 360, 51, 23))
-                self.Btn_delete_Number[zahlen].setGeometry(QtCore.QRect(190, 360, 41, 20)) 
+                self.spinBox_Zahlen[zahlen].setGeometry(QtCore.QRect(
+                 130, 360, 51, 23))
+                self.Btn_delete_Number[zahlen].setGeometry(QtCore.QRect(
+                 190, 360, 41, 20))
             self.spinBox_Zahlen[zahlen].setMaximum(49)
             self.spinBox_Zahlen[zahlen].clear()
-            self.Btn_delete_Number[zahlen].setText(QtGui.QApplication.translate( \
+            self.Btn_delete_Number[zahlen].setText(
+             QtGui.QApplication.translate(
              "MainWindow", "X", None, QtGui.QApplication.UnicodeUTF8))
- 
- 
+
         self.onmodus()
         self.geaendert()
         self.data_handler = Datahandler('datenbank1.sqlite')
         self.onBtn_gz_laden()
-        self.onBtn_ls_laden()        
-        
+        self.onBtn_ls_laden()
+
         # slots for datanbase funktion
-        self.connect(self.Btn_gz_anzeigen,QtCore.SIGNAL("clicked()"), self.onBtn_gz_anzeigen)
-        self.connect(self.Btn_ls_anzeigen,QtCore.SIGNAL("clicked()"), self.onBtn_ls_anzeigen)
-        self.connect(self.Btn_gz_loeschen,QtCore.SIGNAL("clicked()"), self.onBtn_gz_loeschen)
+        self.connect(self.Btn_gz_anzeigen, QtCore.SIGNAL(
+         "clicked()"), self.onBtn_gz_anzeigen)
+        self.connect(self.Btn_ls_anzeigen, QtCore.SIGNAL(
+         "clicked()"), self.onBtn_ls_anzeigen)
+        self.connect(self.Btn_gz_loeschen, QtCore.SIGNAL(
+         "clicked()"), self.onBtn_gz_loeschen)
         self.Btn_gz_loeschen.setEnabled(False)
-        self.connect(self.Btn_ls_loeschen,QtCore.SIGNAL("clicked()"), self.onBtn_ls_loeschen)
+        self.connect(self.Btn_ls_loeschen, QtCore.SIGNAL(
+         "clicked()"), self.onBtn_ls_loeschen)
         self.Btn_ls_loeschen.setEnabled(False)
-        self.connect(self.btn_ls_auswerten,QtCore.SIGNAL("clicked()"), self.onBtn_ls_auswerten)
+        self.connect(self.btn_ls_auswerten, QtCore.SIGNAL(
+         "clicked()"), self.onBtn_ls_auswerten)
         self.btn_ls_auswerten.setEnabled(False)
-        self.connect(self.CBox_gz_kompl_ausgeben,QtCore.SIGNAL("clicked()"), self.onCBox_gz_kompl_ausgeben)
-       
-        self.connect(self.btn_set_calender_today,QtCore.SIGNAL("clicked()"), self.onbtn_set_calender_today)
-        self.connect(self.btn_kalender,QtCore.SIGNAL("clicked()"), self.onbtn_kalender)
+        self.connect(self.CBox_gz_kompl_ausgeben, QtCore.SIGNAL(
+         "clicked()"), self.onCBox_gz_kompl_ausgeben)
+        self.connect(self.btn_set_calender_today, QtCore.SIGNAL(
+         "clicked()"), self.onbtn_set_calender_today)
+        self.connect(self.btn_kalender, QtCore.SIGNAL(
+         "clicked()"), self.onbtn_kalender)
 
         # fields fill with random numbers and give them to database
-        self.connect(self.btn_zufall,QtCore.SIGNAL("clicked()"), self.onbtn_zufall)
-        self.connect(self.btn_hinzu,QtCore.SIGNAL("clicked()"), self.onbtn_hinzu) 
-
-        # fields of draw numbers
+        self.connect(self.btn_zufall, QtCore.SIGNAL(
+         "clicked()"), self.onbtn_zufall)
+        self.connect(self.btn_hinzu, QtCore.SIGNAL(
+         "clicked()"), self.onbtn_hinzu)
+       # fields of draw numbers
         for number in xrange(7):
-            self.spinBox_clear = functools.partial(self.spinBox_1to7_clear, number)
-            self.connect(self.Btn_delete_Number[0], QtCore.SIGNAL("clicked()"), self.spinBox_clear)
-            self.focusSpinBox = functools.partial(self.focusSpinBox_1to7, number)
-            self.connect(self.spinBox_Zahlen[0],QtCore.SIGNAL("valueChanged(int)"), self.focusSpinBox)
+            self.spinBox_clear = functools.partial(
+             self.spinBox_1to7_clear, number)
+            self.connect(self.Btn_delete_Number[0], QtCore.SIGNAL(
+             "clicked()"), self.spinBox_clear)
+            self.focusSpinBox = functools.partial(
+             self.focusSpinBox_1to7, number)
+            self.connect(self.spinBox_Zahlen[0], QtCore.SIGNAL(
+             "valueChanged(int)"), self.focusSpinBox)
 
-        self.connect(self.com_modus,QtCore.SIGNAL("currentIndexChanged(int)"), self.onmodus)
+        self.connect(self.com_modus, QtCore.SIGNAL(
+         "currentIndexChanged(int)"), self.onmodus)
 
         # fields of 1 to 49 numbers
         for button in xrange(49):
-            self.onEingabefeld = functools.partial(self.onEingabefeld_1to49, button + 1)
-            self.connect(self.Btn_Numerary_1to49[button], QtCore.SIGNAL("clicked()"), self.onEingabefeld)
-        
+            self.onEingabefeld = functools.partial(
+             self.onEingabefeld_1to49, button + 1)
+            self.connect(self.Btn_Numerary_1to49[button], QtCore.SIGNAL(
+             "clicked()"), self.onEingabefeld)
+
         self.statusBar().showMessage('Bereit')
 
-        self.connect(self.actionBeenden, 
+        self.connect(self.actionBeenden,
          QtCore.SIGNAL('triggered()'), QtCore.SLOT('close()'))
-        self.connect(self.actionInfo, 
+        self.connect(self.actionInfo,
          QtCore.SIGNAL('triggered()'), self.onInfo)
         self.connect(self.actionDaten_von_lotto_de,
          QtCore.SIGNAL('triggered()'), self.onData_lottode)
-        self.onData_lottozahlenonlinede_2000 = functools.partial \
-         (self.onData_lottozahlenonlinede, 2000, 2004)
+        self.onData_lottozahlenonlinede_2000 = functools.partial(
+         self.onData_lottozahlenonlinede, 2000, 2004)
         self.connect(self.actionDaten_von_lottozahlenonline_de_2000_2004,
          QtCore.SIGNAL('triggered()'), self.onData_lottozahlenonlinede_2000)
-        self.onData_lottozahlenonlinede_2005 = functools.partial \
-         (self.onData_lottozahlenonlinede, 2005, 2009)
+        self.onData_lottozahlenonlinede_2005 = functools.partial(
+         self.onData_lottozahlenonlinede, 2005, 2009)
         self.connect(self.actionDaten_von_lottozahlenonline_de_2005_2009,
          QtCore.SIGNAL('triggered()'), self.onData_lottozahlenonlinede_2005)
-        self.onData_lottozahlenonlinede_2010 = functools.partial \
-         (self.onData_lottozahlenonlinede, 2010, 2013)
+        self.onData_lottozahlenonlinede_2010 = functools.partial(
+         self.onData_lottozahlenonlinede, 2010, 2013)
         self.connect(self.actionDaten_von_lottozahlenonline_de_2010_2013,
          QtCore.SIGNAL('triggered()'), self.onData_lottozahlenonlinede_2010)
-        self.connect(self.edi_daten_gewinnz, 
+        self.connect(self.edi_daten_gewinnz,
          QtCore.SIGNAL('cursorPositionChanged()'), self.ondaten_gewinnz)
-        self.connect(self.edi_daten_lottoschein, 
+        self.connect(self.edi_daten_lottoschein,
          QtCore.SIGNAL('cursorPositionChanged()'), self.ondaten_lottoschein)
         self.onbtn_set_calender_today()
- 
+
     def onbtn_kalender(self):
         """Kalender Dialog öffen"""
         dlg = kalender_datum.ui_kalender(
          self.spinBox_jahr.value(),
          self.spinBox_monat.value(),
          self.spinbox_tag.value())
-        if dlg.exec_() ==1:
+        if dlg.exec_() == 1:
             self.spinbox_tag.setValue(dlg.kalender().day())
             self.spinBox_monat.setValue(dlg.kalender().month())
             self.spinBox_jahr.setValue(dlg.kalender().year())
 
     def ondaten_gewinnz(self):
-       """
-       Anzeigen der Gewinnzahlen an den Auswahlfeld
-       Auslesen der Zeilennumer
-       Den Text der Zeile in der Beschriftung ausgeben
-       """
-       block=self.edi_daten_gewinnz.textCursor().blockNumber()
-       text = self.edi_daten_gewinnz.document().findBlockByNumber(block).text()
-       self.lab_daten_gewinnz.setText(text)
-       self.Btn_gz_loeschen.setEnabled(True)
-       print "ondaten_gewinnz"
+        """
+        Anzeigen der Gewinnzahlen an den Auswahlfeld
+        Auslesen der Zeilennumer
+        Den Text der Zeile in der Beschriftung ausgeben
+        """
+        block = self.edi_daten_gewinnz.textCursor().blockNumber()
+        text = self.edi_daten_gewinnz.document(). \
+         findBlockByNumber(block).text()
+        self.lab_daten_gewinnz.setText(text)
+        self.Btn_gz_loeschen.setEnabled(True)
+        print "ondaten_gewinnz"
 
     def ondaten_lottoschein(self):
-       """
-       Anzeigen der Daten des Lottoscheins an den Auswahlfeld
-       Auslesen der Zeilennumer
-       Den Text der Zeile in der Beschriftung ausgeben
-       """
-       block=self.edi_daten_lottoschein.textCursor().blockNumber()               
-       text = self.edi_daten_lottoschein.document().findBlockByNumber(block).text()
-       self.lab_daten_lottoschein.setText(text)       
-       self.Btn_ls_loeschen.setEnabled(True)
-       self.btn_ls_auswerten.setEnabled(True)
-       print "ondaten_lottoschein"
+        """
+        Anzeigen der Daten des Lottoscheins an den Auswahlfeld
+        Auslesen der Zeilennumer
+        Den Text der Zeile in der Beschriftung ausgeben
+        """
+        block = self.edi_daten_lottoschein.textCursor().blockNumber()
+        text = self.edi_daten_lottoschein.document(). \
+         findBlockByNumber(block).text()
+        self.lab_daten_lottoschein.setText(text)
+        self.Btn_ls_loeschen.setEnabled(True)
+        self.btn_ls_auswerten.setEnabled(True)
+        print "ondaten_lottoschein"
 
     def onInfo(self):
         """ Programm Info
         """
-        text ='Eingabe der Gewinnzahlen von einer Ziehung\noder des Lottoscheins\n\n'
+        text = """Eingabe der Gewinnzahlen von einer Ziehung
+        oder des Lottoscheins
+        \n"""
         text = text + 'Lizenz: GNU GPLv3\n'
         text = text + 'http://www.gnu.org/licenses/'
         a = QtGui.QMessageBox()

@@ -20,14 +20,15 @@ GNU Lesser General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 """
-        
+
 from sets import Set
 from os.path import join
 from PyQt4 import QtGui, QtCore
 
 from gui.auswertung import Ui_Dialog
 
-class ui_lotto_auswertung(QtGui.QDialog, Ui_Dialog): 
+
+class ui_lotto_auswertung(QtGui.QDialog, Ui_Dialog):
     def __init__(self, rowid, data_handler):
         """open analyze dialog
         Datenauswerte Dialog oeffnen
@@ -35,22 +36,23 @@ class ui_lotto_auswertung(QtGui.QDialog, Ui_Dialog):
         @type data_handler: datahandler
         @return: give close(0) back
         """
-        QtGui.QDialog.__init__(self) 
+        QtGui.QDialog.__init__(self)
         self.setWindowIcon(QtGui.QIcon(join("misc", "pyLottoverwaltung.svg")))
         self.setupUi(self)
         self.setWindowTitle("Auswertung")
         self.edi_daten.appendPlainText('Datensatz: {0}'.
         format(rowid))
         schein = data_handler.get_schein(rowid)[0]
-        self.edi_daten.appendPlainText('Datum: {0} Zahlen: {1}' 
+        self.edi_daten.appendPlainText('Datum: {0} Zahlen: {1}'
          .format(schein[1], schein[5]))
         self.edi_daten.moveCursor(self.edi_daten.textCursor().End)
-        lottodaten = data_handler.get_id_numbers_of_ziehung(rowid) 
+        lottodaten = data_handler.get_id_numbers_of_ziehung(rowid)
         anzahl_lottodaten = len(lottodaten)
         if anzahl_lottodaten == 0:
-            self.edi_daten.appendPlainText(u'Keine übereinstimmende Ziehungen gefunden')  
+            self.edi_daten.appendPlainText(
+             u'Keine übereinstimmende Ziehungen gefunden')
         else:
-            self.edi_daten.appendPlainText(u'Folgende Ziehungen gefunden:')  
+            self.edi_daten.appendPlainText(u'Folgende Ziehungen gefunden:')
             zahlen = schein[5].split(',')
             z = []
             for i in zahlen:
@@ -63,11 +65,11 @@ class ui_lotto_auswertung(QtGui.QDialog, Ui_Dialog):
                 for i in zahlen:
                     z.append(int(i))
                 set_ziehung = Set(z)
-                
-                anzahl_gleiche_zahl =  len(set_schein & set_ziehung)
+
+                anzahl_gleiche_zahl = len(set_schein & set_ziehung)
                 self.edi_daten.appendPlainText(u'Datum: {0} | {1}, {2}, '
-                u'{3}, {4}, {5}, {6} ZZ: {7} Übereinstimmungen: {8}' 
-                 .format(ziehungsdaten[1], z[0], z[1], z[2], z[3], z[4], z[5], z[6], anzahl_gleiche_zahl))
+                u'{3}, {4}, {5}, {6} ZZ: {7} Übereinstimmungen: {8}'
+                 .format(ziehungsdaten[1],
+                 z[0], z[1], z[2], z[3], z[4], z[5], z[6],
+                 anzahl_gleiche_zahl))
             self.edi_daten.moveCursor(self.edi_daten.textCursor().End)
- 
-      
