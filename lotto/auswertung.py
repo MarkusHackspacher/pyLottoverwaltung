@@ -55,7 +55,7 @@ class ui_lotto_auswertung(QtGui.QDialog, Ui_Dialog):
             self.edi_daten.appendPlainText(u'Folgende Ziehungen gefunden:')
             zahlen = schein[5].split(',')
             z = []
-            uebereinstimmungen = [0,0]
+            uebereinstimmungen = [0,0,0,0,0,0,0,0,0,0,0,0]
             for i in zahlen:
                 z.append(int(i))
             set_schein = Set(z)
@@ -65,20 +65,31 @@ class ui_lotto_auswertung(QtGui.QDialog, Ui_Dialog):
                 z = []
                 for i in zahlen:
                     z.append(int(i))
-                set_ziehung = Set(z)
+                set_ziehung = Set(z[0:6])
+                set_zusatzzahl = Set([z[6]])
+
                 anzahl_gleiche_zahl = len(set_schein & set_ziehung)
-                if anzahl_gleiche_zahl == 1:
-                    uebereinstimmungen[0] += 1
-                if anzahl_gleiche_zahl == 2:
-                    uebereinstimmungen[1] += 1
-                if anzahl_gleiche_zahl > 2:
+                zusatzzahl_vorhanden = len(set_schein & set_zusatzzahl)
+                uebereinstimmungen[anzahl_gleiche_zahl * 2 + zusatzzahl_vorhanden] += 1
+                if anzahl_gleiche_zahl > 3:
                     self.edi_daten.appendPlainText(u'Datum: {0} | {1}, {2},'
                      u'{3}, {4}, {5}, {6} ZZ: {7} Übereinstimmungen: {8}'
                     .format(ziehungsdaten[1],
                     z[0], z[1], z[2], z[3], z[4], z[5], z[6],
                     anzahl_gleiche_zahl))
-            self.edi_daten.appendPlainText(u'{0} Übereinstimmungen mit einer Zahl'
-            .format(uebereinstimmungen[0]))
-            self.edi_daten.appendPlainText(u'{0} Übereinstimmungen mit zwei Zahlen'
+            self.edi_daten.appendPlainText(
+             u'nur Übereinstimmend mit der Zusatzzahl: {0}'
             .format(uebereinstimmungen[1]))
+            self.edi_daten.appendPlainText(
+             u'{0} Übereinstimmungen mit einer Zahlen, plus Zusatzzahl: {1}'
+             .format(uebereinstimmungen[2], uebereinstimmungen[3]))
+            self.edi_daten.appendPlainText(
+             u'{0} Übereinstimmungen mit zwei Zahlen, plus Zusatzzahl: {1}'
+             .format(uebereinstimmungen[4], uebereinstimmungen[5]))
+            self.edi_daten.appendPlainText(
+             u'{0} Übereinstimmungen mit drei Zahlen, plus Zusatzzahl: {1}'
+             .format(uebereinstimmungen[6], uebereinstimmungen[7]))
+            self.edi_daten.appendPlainText(
+             u'{0} Übereinstimmungen mit vier Zahlen, plus Zusatzzahl: {1}'
+             .format(uebereinstimmungen[8], uebereinstimmungen[9]))
             self.edi_daten.moveCursor(self.edi_daten.textCursor().End)
