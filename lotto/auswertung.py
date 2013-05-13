@@ -55,7 +55,7 @@ class ui_lotto_auswertung(QtGui.QDialog, Ui_Dialog):
             self.edi_daten.appendPlainText(u'Folgende Ziehungen gefunden:')
             zahlen = schein[5].split(',')
             z = []
-            uebereinstimmungen = [0,0,0,0,0,0,0,0,0,0,0,0]
+            uebereinstimmungen = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             for i in zahlen:
                 z.append(int(i))
             set_schein = Set(z)
