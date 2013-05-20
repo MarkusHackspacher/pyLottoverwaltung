@@ -44,7 +44,7 @@ def data_from_webpage():
     str = '//div[@class="form-row"]//option'
     datum = document.xpath(str)[0].get('value')
     value = []
-    for x in xrange(1, 9):
+    for x in xrange(1, 8):
         str = '//div[@class="teaser-left-content"]//li[{0}]/text()'.format(x)
         value.append(int(document.xpath(str)[0].strip()))
     value.append(int(document.xpath(
@@ -68,6 +68,7 @@ def data_from_achiv(data_handler, quote_url=None):
     datum = document.xpath('//div[@class="zahlensuche_datum"]/text()')
     lottozahlen = document.xpath('//div[@class="zahlensuche_zahl"]/text()')
     zusatzzahlen = document.xpath('//div[@class="zahlensuche_zz"]/text()')
+    
     block = []
     for x in range(len(lottozahlen) / 6):
         block.append(lottozahlen[(x * 6):(x * 6) + 6])
@@ -77,12 +78,12 @@ def data_from_achiv(data_handler, quote_url=None):
      ziehung_date_satz in ziehung_from_date]
     for x in range(len(datum)):
         datensatz = block[x]
-        datensatz.append(zusatzzahlen[x].strip())
         #print datensatz
         day = u'{0}'.format(QtCore.QDate.fromString(datum[x],
          "dd.MM.yyyy").toPyDate())
         if not day in ziehung_date:
-            data_handler.insert_ziehung(day, datensatz, 0, 0, 0)
+            data_handler.insert_ziehung(day, datensatz,
+             zusatzzahlen[x].strip(), 0, 0)
     return
 
 
@@ -93,5 +94,5 @@ def test_data_from_webpage():
 
 if __name__ == '__main__':
     """main"""
-    data_from_achiv()
+    print data_from_webpage()
     #test_data_from_webpage()

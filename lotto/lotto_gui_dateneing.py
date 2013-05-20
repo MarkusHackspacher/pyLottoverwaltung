@@ -251,10 +251,11 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.spinBox_Zahlen[3].setValue(value[3])
         self.spinBox_Zahlen[4].setValue(value[4])
         self.spinBox_Zahlen[5].setValue(value[5])
-        self.spinBox_Zahlen[6].setValue(value[6])
-        self.spinBox_superz.setValue(value[7])
-        self.spinBox_spiel77.setValue(value[8])
-        self.spinBox_super6.setValue(value[9])
+        #self.spinBox_Zahlen[6].setValue(value[6])
+        #04.05.2013 rules change, no Zusatzzahl
+        self.spinBox_superz.setValue(value[6])
+        self.spinBox_spiel77.setValue(value[7])
+        self.spinBox_super6.setValue(value[8])
         self.com_modus.setCurrentIndex(0)
         self.geaendert()
 
@@ -334,7 +335,8 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.spinBox_Zahlen[3].setValue(int(zahlen[3]))
         self.spinBox_Zahlen[4].setValue(int(zahlen[4]))
         self.spinBox_Zahlen[5].setValue(int(zahlen[5]))
-        self.spinBox_Zahlen[6].setValue(int(zahlen[6]))
+        if len(zahlen) > 6:
+            self.spinBox_Zahlen[6].setValue(int(zahlen[6]))
         self.spinBox_superz.setValue(lottodaten[block][2])
         self.spinBox_spiel77.setValue(lottodaten[block][3])
         self.spinBox_super6.setValue(lottodaten[block][4])
