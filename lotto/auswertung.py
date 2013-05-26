@@ -77,7 +77,7 @@ class ui_lotto_auswertung(QtGui.QDialog, Ui_Dialog):
                 uebereinstimmungen[anzahl_gleiche_zahl * 2 + zusatzzahl_vorhanden] += 1
                 if anzahl_gleiche_zahl > 3:
                     if len(z) >= 7:
-                        text_zz = 'ZZ: {7}'.format(z[6])
+                        text_zz = 'ZZ: {0}'.format(z[6])
                     else:
                         text_zz = ''
                     self.edi_daten.appendPlainText(u'Datum: {0} | {1}, {2},'
