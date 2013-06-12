@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'auswertung.ui'
 #
-# Created: Mon Apr  8 23:42:17 2013
+# Created: Wed Jun 12 23:05:20 2013
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!

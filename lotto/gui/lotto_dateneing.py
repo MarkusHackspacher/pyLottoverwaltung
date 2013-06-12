@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'lotto_dateneing.ui'
 #
-# Created: Mon Apr  8 23:42:17 2013
+# Created: Wed Jun 12 23:05:20 2013
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -105,7 +105,7 @@ class Ui_MainWindow(object):
         self.btn_set_calender_today.setGeometry(QtCore.QRect(10, 460, 141, 41))
         self.btn_set_calender_today.setObjectName(_fromUtf8("btn_set_calender_today"))
         self.lab_scheinnr = QtGui.QLabel(self.Lottozahlen)
-        self.lab_scheinnr.setGeometry(QtCore.QRect(10, 384, 101, 21))
+        self.lab_scheinnr.setGeometry(QtCore.QRect(10, 384, 111, 21))
         self.lab_scheinnr.setAlignment(QtCore.Qt.AlignCenter)
         self.lab_scheinnr.setObjectName(_fromUtf8("lab_scheinnr"))
         self.com_laufzeit_tag = QtGui.QComboBox(self.Lottozahlen)
@@ -231,7 +231,7 @@ class Ui_MainWindow(object):
         self.btn_kalender.setObjectName(_fromUtf8("btn_kalender"))
         MainWindow.setCentralWidget(self.Lottozahlen)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 913, 29))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 913, 20))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         self.menuDatei = QtGui.QMenu(self.menubar)
         self.menuDatei.setObjectName(_fromUtf8("menuDatei"))
