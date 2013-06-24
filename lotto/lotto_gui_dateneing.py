@@ -51,7 +51,6 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         for button in xrange(49):
             self.Btn_Numerary_1to49.append(QtGui.QPushButton(
              self.gridLayoutWidget))
-        for button in xrange(49):
             self.Btn_Numerary_1to49[button].setMaximumSize(
              QtCore.QSize(58, 58))
             self.gridLayout.addWidget(self.Btn_Numerary_1to49[button],
@@ -64,15 +63,12 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         #set 6 SpinBox and 1
         self.spinBox_Zahlen = []
         self.Btn_delete_Number = []
-        for zahlen in xrange(6):
-            self.spinBox_Zahlen.append(QtGui.QSpinBox(
-             self.horizontalLayoutWidget))
-            self.Btn_delete_Number.append(QtGui.QPushButton(
-             self.horizontalLayoutWidget_2))
-        self.spinBox_Zahlen.append(QtGui.QSpinBox(self.Lottozahlen))
-        self.Btn_delete_Number.append(QtGui.QPushButton(self.Lottozahlen))
         for zahlen in xrange(7):
             if zahlen != 6:
+                self.spinBox_Zahlen.append(QtGui.QSpinBox(
+                 self.horizontalLayoutWidget))
+                self.Btn_delete_Number.append(QtGui.QPushButton(
+                 self.horizontalLayoutWidget_2))
                 self.spinBox_Zahlen[zahlen].setMinimumSize(
                  QtCore.QSize(32, 20))
                 self.spinBox_Zahlen[zahlen].setMaximumSize(
@@ -87,8 +83,10 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
                  self.Btn_delete_Number[zahlen])
             else:
                 #set extra Spinbox
+                self.spinBox_Zahlen.append(QtGui.QSpinBox(self.Lottozahlen))
                 self.spinBox_Zahlen[zahlen].setGeometry(QtCore.QRect(
                  130, 360, 51, 23))
+                self.Btn_delete_Number.append(QtGui.QPushButton(self.Lottozahlen))
                 self.Btn_delete_Number[zahlen].setGeometry(QtCore.QRect(
                  190, 360, 41, 20))
             self.spinBox_Zahlen[zahlen].setMaximum(49)
@@ -133,11 +131,11 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         for number in xrange(7):
             self.spinBox_clear = functools.partial(
              self.spinBox_1to7_clear, number)
-            self.connect(self.Btn_delete_Number[0], QtCore.SIGNAL(
+            self.connect(self.Btn_delete_Number[number], QtCore.SIGNAL(
              "clicked()"), self.spinBox_clear)
             self.focusSpinBox = functools.partial(
              self.focusSpinBox_1to7, number)
-            self.connect(self.spinBox_Zahlen[0], QtCore.SIGNAL(
+            self.connect(self.spinBox_Zahlen[number], QtCore.SIGNAL(
              "valueChanged(int)"), self.focusSpinBox)
 
         self.connect(self.com_modus, QtCore.SIGNAL(
