@@ -54,11 +54,9 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
             self.Btn_Numerary_1to49[button].setMaximumSize(
              QtCore.QSize(58, 58))
             self.gridLayout.addWidget(self.Btn_Numerary_1to49[button],
-             int(button / 7),  int(button % 7), 1, 1)
+             int(button / 7), int(button % 7), 1, 1)
             self.Btn_Numerary_1to49[button].setAutoFillBackground(True)
-            self.Btn_Numerary_1to49[button].setText(
-             QtGui.QApplication.translate("MainWindow", str(button + 1),
-             None, QtGui.QApplication.UnicodeUTF8))
+            self.Btn_Numerary_1to49[button].setText(str(button + 1))
 
         #set 6 SpinBox and 1
         self.spinBox_Zahlen = []
@@ -91,9 +89,7 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
                  190, 360, 41, 20))
             self.spinBox_Zahlen[zahlen].setMaximum(49)
             self.spinBox_Zahlen[zahlen].clear()
-            self.Btn_delete_Number[zahlen].setText(
-             QtGui.QApplication.translate(
-             "MainWindow", "X", None, QtGui.QApplication.UnicodeUTF8))
+            self.Btn_delete_Number[zahlen].setText("X")
 
         self.onmodus()
         self.geaendert()
@@ -102,77 +98,65 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.onBtn_ls_laden()
 
         # slots for datanbase funktion
-        self.connect(self.Btn_gz_anzeigen, QtCore.SIGNAL(
-         "clicked()"), self.onBtn_gz_anzeigen)
-        self.connect(self.Btn_ls_anzeigen, QtCore.SIGNAL(
-         "clicked()"), self.onBtn_ls_anzeigen)
-        self.connect(self.Btn_gz_loeschen, QtCore.SIGNAL(
-         "clicked()"), self.onBtn_gz_loeschen)
+        self.Btn_gz_anzeigen.clicked.connect(self.onBtn_gz_anzeigen)
+        self.Btn_ls_anzeigen.clicked.connect(self.onBtn_ls_anzeigen)
+        self.Btn_gz_loeschen.clicked.connect(self.onBtn_gz_loeschen)
         self.Btn_gz_loeschen.setEnabled(False)
-        self.connect(self.Btn_ls_loeschen, QtCore.SIGNAL(
-         "clicked()"), self.onBtn_ls_loeschen)
+        self.Btn_ls_loeschen.clicked.connect(self.onBtn_ls_loeschen)
         self.Btn_ls_loeschen.setEnabled(False)
-        self.connect(self.btn_ls_auswerten, QtCore.SIGNAL(
-         "clicked()"), self.onBtn_ls_auswerten)
+        self.btn_ls_auswerten.clicked.connect(self.onBtn_ls_auswerten)
         self.btn_ls_auswerten.setEnabled(False)
-        self.connect(self.CBox_gz_kompl_ausgeben, QtCore.SIGNAL(
-         "clicked()"), self.onCBox_gz_kompl_ausgeben)
-        self.connect(self.btn_set_calender_today, QtCore.SIGNAL(
-         "clicked()"), self.onbtn_set_calender_today)
-        self.connect(self.btn_kalender, QtCore.SIGNAL(
-         "clicked()"), self.onbtn_kalender)
+        self.CBox_gz_kompl_ausgeben.clicked.connect(
+         self.onCBox_gz_kompl_ausgeben)
+        self.btn_set_calender_today.clicked.connect(
+         self.onbtn_set_calender_today)
+        self.btn_kalender.clicked.connect(self.onbtn_kalender)
 
         # fields fill with random numbers and give them to database
-        self.connect(self.btn_zufall, QtCore.SIGNAL(
-         "clicked()"), self.onbtn_zufall)
-        self.connect(self.btn_hinzu, QtCore.SIGNAL(
-         "clicked()"), self.onbtn_hinzu)
+        self.btn_zufall.clicked.connect(self.onbtn_zufall)
+        self.btn_hinzu.clicked.connect(self.onbtn_hinzu)
        # fields of draw numbers
         for number in xrange(7):
             self.spinBox_clear = functools.partial(
              self.spinBox_1to7_clear, number)
-            self.connect(self.Btn_delete_Number[number], QtCore.SIGNAL(
-             "clicked()"), self.spinBox_clear)
+            self.Btn_delete_Number[number].clicked.connect(self.spinBox_clear)
             self.focusSpinBox = functools.partial(
              self.focusSpinBox_1to7, number)
-            self.connect(self.spinBox_Zahlen[number], QtCore.SIGNAL(
-             "valueChanged(int)"), self.focusSpinBox)
+            self.spinBox_Zahlen[number].valueChanged.connect(self.focusSpinBox)
 
-        self.connect(self.com_modus, QtCore.SIGNAL(
-         "currentIndexChanged(int)"), self.onmodus)
+        self.com_modus.currentIndexChanged.connect(self.onmodus)
 
         # fields of 1 to 49 numbers
         for button in xrange(49):
             self.onEingabefeld = functools.partial(
              self.onEingabefeld_1to49, button + 1)
-            self.connect(self.Btn_Numerary_1to49[button], QtCore.SIGNAL(
-             "clicked()"), self.onEingabefeld)
+            self.Btn_Numerary_1to49[button].clicked.connect(self.onEingabefeld)
 
         self.statusBar().showMessage('Bereit')
 
         self.connect(self.actionBeenden,
          QtCore.SIGNAL('triggered()'), QtCore.SLOT('close()'))
-        self.connect(self.actionInfo,
-         QtCore.SIGNAL('triggered()'), self.onInfo)
-        self.connect(self.actionDaten_von_lotto_de,
-         QtCore.SIGNAL('triggered()'), self.onData_lottode)
+        self.actionInfo.triggered.connect(self.onInfo)
+        self.actionDaten_von_lotto_de.triggered.connect(self.onData_lottode)
         self.onData_lottozahlenonlinede_2000 = functools.partial(
          self.onData_lottozahlenonlinede, 2000, 2004)
-        self.connect(self.actionDaten_von_lottozahlenonline_de_2000_2004,
-         QtCore.SIGNAL('triggered()'), self.onData_lottozahlenonlinede_2000)
+        self.actionDaten_von_lottozahlenonline_de_2000_2004.triggered.connect(
+         self.onData_lottozahlenonlinede_2000)
         self.onData_lottozahlenonlinede_2005 = functools.partial(
          self.onData_lottozahlenonlinede, 2005, 2009)
-        self.connect(self.actionDaten_von_lottozahlenonline_de_2005_2009,
-         QtCore.SIGNAL('triggered()'), self.onData_lottozahlenonlinede_2005)
+        self.actionDaten_von_lottozahlenonline_de_2005_2009.triggered.connect(
+         self.onData_lottozahlenonlinede_2005)
         self.onData_lottozahlenonlinede_2010 = functools.partial(
          self.onData_lottozahlenonlinede, 2010, 2013)
-        self.connect(self.actionDaten_von_lottozahlenonline_de_2010_2013,
-         QtCore.SIGNAL('triggered()'), self.onData_lottozahlenonlinede_2010)
-        self.connect(self.edi_daten_gewinnz,
-         QtCore.SIGNAL('cursorPositionChanged()'), self.ondaten_gewinnz)
-        self.connect(self.edi_daten_lottoschein,
-         QtCore.SIGNAL('cursorPositionChanged()'), self.ondaten_lottoschein)
+        self.actionDaten_von_lottozahlenonline_de_2010_2013.triggered.connect(
+         self.onData_lottozahlenonlinede_2010)
+        self.edi_daten_gewinnz.cursorPositionChanged.connect(
+         self.ondaten_gewinnz)
+        self.edi_daten_lottoschein.cursorPositionChanged.connect(
+         self.ondaten_lottoschein)
         self.onbtn_set_calender_today()
+
+        self.show()
 
     def onbtn_kalender(self):
         """Kalender Dialog öffen"""
@@ -196,7 +180,6 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
          findBlockByNumber(block).text()
         self.lab_daten_gewinnz.setText(text)
         self.Btn_gz_loeschen.setEnabled(True)
-        print "ondaten_gewinnz"
 
     def ondaten_lottoschein(self):
         """
@@ -210,7 +193,6 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
         self.lab_daten_lottoschein.setText(text)
         self.Btn_ls_loeschen.setEnabled(True)
         self.btn_ls_auswerten.setEnabled(True)
-        print "ondaten_lottoschein"
 
     def onInfo(self):
         """ Programm Info
@@ -550,7 +532,6 @@ class MeinDialog(QtGui.QMainWindow, Dlg):
 def gui():
     app = QtGui.QApplication(sys.argv)
     dialog = MeinDialog()
-    dialog.show()
     sys.exit(app.exec_())
 
 if __name__ == "__main__":
