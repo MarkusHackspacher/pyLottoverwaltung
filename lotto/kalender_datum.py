@@ -21,7 +21,6 @@ You should have received a copy of the GNU General Public License
 along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-from sets import Set
 from os.path import join
 from PyQt4 import QtGui, QtCore
 
