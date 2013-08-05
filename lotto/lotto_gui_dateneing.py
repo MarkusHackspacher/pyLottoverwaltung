@@ -253,10 +253,16 @@ class MeinDialog(QtGui.QMainWindow):
         a.close()
         self.onBtn_gz_laden()
 
-    def spinBox_1to7_clear(self, number):
+    def spinBox_1to7_clear(self, number = None, numbers = None):
         """Die SpinBoxen 1 bis 6 und Zusatzzahl löschen"""
-        self.ui.spinBox_Zahlen[number].setValue(0)
-        self.ui.spinBox_Zahlen[number].clear()
+        if number != None:
+            self.ui.spinBox_Zahlen[number].setValue(0)
+            self.ui.spinBox_Zahlen[number].clear()
+        elif numbers != None:
+            for spinBox_number in self.ui.spinBox_Zahlen:
+                if spinBox_number.value() == numbers:
+                    spinBox_number.setValue(0)
+                    spinBox_number.clear()
 
     def onEingabefeld_1to49(self, zahl):
         """Ein Zahlenfelder 1 bis 49 wurde angeklickt"""
@@ -266,6 +272,15 @@ class MeinDialog(QtGui.QMainWindow):
     def focusSpinBox_1to7(self, number):
         """Ein Auswahlfelder der 7 Gewinnzahlen oder
         Lottoscheins hat sich geaendert"""
+        """
+        for spinBox_Zahlen in self.ui.spinBox_Zahlen:
+            if (self.ui.spinBox_Zahlen[number].value() ==
+             spinBox_Zahlen.value() and not
+             self.ui.spinBox_Zahlen[number] == spinBox_Zahlen
+             and not self.ui.spinBox_Zahlen[number].value() == 0):
+                 self.ui.spinBox_Zahlen[number].setValue(
+                  spinBox_Zahlen.value() + 1)
+        """
         self.geaendert()
 
     def onbtn_hinzu(self):
@@ -472,20 +487,18 @@ class MeinDialog(QtGui.QMainWindow):
             self.geaendert()
 
     def geaendert(self):
-        """Überprüfen der SpinBoxen damit nicht zwei den gleichen Wert haben
+        """Botton colour in dependence of the valve of the Spinbox
         """
         a = self.draw_numbers()
-        #Setzen der Botton je nach Wert der Spinbox
-        for button in xrange(49):
-            if button + 1 in a:
-                self.ui.Btn_Numerary_1to49[button].setFlat(False)
-                self.ui.Btn_Numerary_1to49[button].setStyleSheet("color: red;")
-                if button + 1 == self.ui.spinBox_Zahlen[6].value():
-                    self.ui.Btn_Numerary_1to49[button].setStyleSheet(
-                     "color: blue;")
+        for button in self.ui.Btn_Numerary_1to49:
+            if int(button.text()) in a:
+                button.setFlat(False)
+                button.setStyleSheet("color: red;")
+                if int(button.text()) == self.ui.spinBox_Zahlen[6].value():
+                    button.setStyleSheet("color: blue;")
             else:
-                self.ui.Btn_Numerary_1to49[button].setFlat(True)
-                self.ui.Btn_Numerary_1to49[button].setStyleSheet("color: black;")
+                button.setFlat(True)
+                button.setStyleSheet("color: black;")
 
     def geaendert_btn(self):
         """in den SpinBoxen die Nummern der Zahlen 1 bis 49 anzeigen
@@ -494,16 +507,16 @@ class MeinDialog(QtGui.QMainWindow):
         """
         a = self.draw_numbers()
 
-        for number in xrange(6):
-            if self.ui.spinBox_Zahlen[number].value() == 0 \
-             and not (self.zahl in a):
-                self.ui.spinBox_Zahlen[number].setValue(self.zahl)
+        for number in self.ui.spinBox_Zahlen:
+            if number.value() == 0 and not (self.zahl in a):
+                number.setValue(self.zahl)
                 break
-            elif self.zahl == self.ui.spinBox_Zahlen[number].value():
-                self.spinBox_1to7_clear(number)
+            elif self.zahl == number.value():
+                self.spinBox_1to7_clear(numbers = number.value())
                 self.zahl = 0
 
         a = self.draw_numbers()
+
         if self.ui.spinBox_Zahlen[6].value() == 0 \
          and self.ui.com_modus.currentIndex() == 0 \
          and not (self.zahl in a):
@@ -515,17 +528,9 @@ class MeinDialog(QtGui.QMainWindow):
 
     def draw_numbers(self):
         """
-        this numbers are in the draw
+        numbers are in the draw
         """
-        a = []
-        a.append(self.ui.spinBox_Zahlen[0].value())
-        a.append(self.ui.spinBox_Zahlen[1].value())
-        a.append(self.ui.spinBox_Zahlen[2].value())
-        a.append(self.ui.spinBox_Zahlen[3].value())
-        a.append(self.ui.spinBox_Zahlen[4].value())
-        a.append(self.ui.spinBox_Zahlen[5].value())
-        a.append(self.ui.spinBox_Zahlen[6].value())
-        return a
+        return [num_draw.value() for num_draw in self.ui.spinBox_Zahlen]
 
     def onClose(self):
         self.ui.close()
