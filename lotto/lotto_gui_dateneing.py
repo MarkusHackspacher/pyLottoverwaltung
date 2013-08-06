@@ -159,6 +159,10 @@ class MeinDialog(QtGui.QMainWindow):
 
         self.ui.show()
 
+    def init(self):
+        """inital variable"""
+        self.zahl = 0
+
     def onbtn_kalender(self):
         """Kalender Dialog öffen"""
         dlg = kalender_datum.ui_kalender(
