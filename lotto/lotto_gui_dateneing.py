@@ -24,6 +24,7 @@ along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 import sys
 import sqlite3
 import functools
+import webbrowser
 from os.path import join
 from PyQt4 import QtGui, QtCore, uic
 
@@ -136,6 +137,7 @@ class MeinDialog(QtGui.QMainWindow):
 
         self.ui.actionBeenden.triggered.connect(self.onClose)
         self.ui.actionInfo.triggered.connect(self.onInfo)
+        self.ui.actionGo_to_the_website.triggered.connect(self.onwebsite)
         self.ui.actionDaten_von_lotto_de.triggered.connect(self.onData_lottode)
         self.onData_lottozahlenonlinede_2000 = functools.partial(
          self.onData_lottozahlenonlinede, 2000, 2004)
@@ -531,6 +533,11 @@ class MeinDialog(QtGui.QMainWindow):
         numbers are in the draw
         """
         return [num_draw.value() for num_draw in self.ui.spinBox_Zahlen]
+
+    def onwebsite(self):
+        """ open website """
+        webbrowser.open_new_tab("http://markush.cwsurf.de/"
+         "joomla_17/index.php/python/pylottoverwaltung/")
 
     def onClose(self):
         self.ui.close()
