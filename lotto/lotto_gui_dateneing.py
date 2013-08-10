@@ -45,29 +45,30 @@ class MeinDialog(QtGui.QMainWindow):
         """
         QtGui.QDialog.__init__(self)
         self.ui = uic.loadUi(join("lotto/gui", "lotto_dateneing.ui"))
-        self.ui.setWindowIcon(QtGui.QIcon(join("misc", "pyLottoverwaltung.svg")))
+        self.ui.setWindowIcon(QtGui.QIcon(
+         join("misc", "pyLottoverwaltung.svg")))
 
         #array of Button from 1 to 49
-        self.ui.Btn_Numerary_1to49 = []
-        for button in xrange(49):
-            self.ui.Btn_Numerary_1to49.append(QtGui.QPushButton(
-             self.ui.gridLayoutWidget))
-            self.ui.Btn_Numerary_1to49[button].setMaximumSize(
-             QtCore.QSize(58, 58))
-            self.ui.gridLayout.addWidget(self.ui.Btn_Numerary_1to49[button],
-             int(button / 7), int(button % 7), 1, 1)
-            self.ui.Btn_Numerary_1to49[button].setAutoFillBackground(True)
-            self.ui.Btn_Numerary_1to49[button].setText(str(button + 1))
+        highest_number = 49
+        self.ui.Btn_Numerary_1to49 = [QtGui.QPushButton(
+         self.ui.gridLayoutWidget)
+         for n in xrange(highest_number)]
+        button_number = 0
+        for button in self.ui.Btn_Numerary_1to49:
+            button.setMaximumSize(QtCore.QSize(58, 58))
+            self.ui.gridLayout.addWidget(button,
+             int(button_number / 7), int(button_number % 7), 1, 1)
+            button.setAutoFillBackground(True)
+            button_number += 1
+            button.setText(str(button_number))
 
         #set 6 SpinBox and 1
-        self.ui.spinBox_Zahlen = []
-        self.ui.Btn_delete_Number = []
+        self.ui.spinBox_Zahlen = [QtGui.QSpinBox(
+         self.ui.horizontalLayoutWidget) for n in xrange(6)]
+        self.ui.Btn_delete_Number = [QtGui.QPushButton(
+         self.ui.horizontalLayoutWidget_2) for n in xrange(6)]
         for zahlen in xrange(7):
             if zahlen != 6:
-                self.ui.spinBox_Zahlen.append(QtGui.QSpinBox(
-                 self.ui.horizontalLayoutWidget))
-                self.ui.Btn_delete_Number.append(QtGui.QPushButton(
-                 self.ui.horizontalLayoutWidget_2))
                 self.ui.spinBox_Zahlen[zahlen].setMinimumSize(
                  QtCore.QSize(32, 20))
                 self.ui.spinBox_Zahlen[zahlen].setMaximumSize(
@@ -82,12 +83,14 @@ class MeinDialog(QtGui.QMainWindow):
                  self.ui.Btn_delete_Number[zahlen])
             else:
                 #set extra Spinbox
-                self.ui.spinBox_Zahlen.append(QtGui.QSpinBox(self.ui.Lottozahlen))
+                self.ui.spinBox_Zahlen.append(QtGui.QSpinBox(
+                 self.ui.Lottozahlen))
                 self.ui.spinBox_Zahlen[zahlen].setGeometry(QtCore.QRect(
                  130, 360, 51, 23))
-                self.ui.Btn_delete_Number.append(QtGui.QPushButton(self.ui.Lottozahlen))
-                self.ui.Btn_delete_Number[zahlen].setGeometry(QtCore.QRect(
-                 190, 360, 41, 20))
+                self.ui.Btn_delete_Number.append(QtGui.QPushButton(
+                 self.ui.Lottozahlen))
+                self.ui.Btn_delete_Number[zahlen].setGeometry(
+                 QtCore.QRect(190, 360, 41, 20))
             self.ui.spinBox_Zahlen[zahlen].setMaximum(49)
             self.ui.spinBox_Zahlen[zahlen].clear()
             self.ui.Btn_delete_Number[zahlen].setText("X")
@@ -120,10 +123,12 @@ class MeinDialog(QtGui.QMainWindow):
         for number in xrange(7):
             self.spinBox_clear = functools.partial(
              self.spinBox_1to7_clear, number)
-            self.ui.Btn_delete_Number[number].clicked.connect(self.spinBox_clear)
+            self.ui.Btn_delete_Number[number].clicked.connect(
+             self.spinBox_clear)
             self.focusSpinBox = functools.partial(
              self.focusSpinBox_1to7, number)
-            self.ui.spinBox_Zahlen[number].valueChanged.connect(self.focusSpinBox)
+            self.ui.spinBox_Zahlen[number].valueChanged.connect(
+             self.focusSpinBox)
 
         self.ui.com_modus.currentIndexChanged.connect(self.onmodus)
 
@@ -131,7 +136,8 @@ class MeinDialog(QtGui.QMainWindow):
         for button in xrange(49):
             self.onEingabefeld = functools.partial(
              self.onEingabefeld_1to49, button + 1)
-            self.ui.Btn_Numerary_1to49[button].clicked.connect(self.onEingabefeld)
+            self.ui.Btn_Numerary_1to49[button].clicked.connect(
+             self.onEingabefeld)
 
         self.statusBar().showMessage('Bereit')
 
@@ -141,16 +147,16 @@ class MeinDialog(QtGui.QMainWindow):
         self.ui.actionDaten_von_lotto_de.triggered.connect(self.onData_lottode)
         self.onData_lottozahlenonlinede_2000 = functools.partial(
          self.onData_lottozahlenonlinede, 2000, 2004)
-        self.ui.actionDaten_von_lottozahlenonline_de_2000_2004.triggered.connect(
-         self.onData_lottozahlenonlinede_2000)
+        self.ui.actionDaten_von_lottozahlenonline_de_2000_2004.triggered.  \
+         connect(self.onData_lottozahlenonlinede_2000)
         self.onData_lottozahlenonlinede_2005 = functools.partial(
          self.onData_lottozahlenonlinede, 2005, 2009)
-        self.ui.actionDaten_von_lottozahlenonline_de_2005_2009.triggered.connect(
-         self.onData_lottozahlenonlinede_2005)
+        self.ui.actionDaten_von_lottozahlenonline_de_2005_2009.triggered. \
+         connect(self.onData_lottozahlenonlinede_2005)
         self.onData_lottozahlenonlinede_2010 = functools.partial(
          self.onData_lottozahlenonlinede, 2010, 2013)
-        self.ui.actionDaten_von_lottozahlenonline_de_2010_2013.triggered.connect(
-         self.onData_lottozahlenonlinede_2010)
+        self.ui.actionDaten_von_lottozahlenonline_de_2010_2013.triggered. \
+         connect(self.onData_lottozahlenonlinede_2010)
         self.ui.edi_daten_gewinnz.cursorPositionChanged.connect(
          self.ondaten_gewinnz)
         self.ui.edi_daten_lottoschein.cursorPositionChanged.connect(
@@ -253,7 +259,8 @@ class MeinDialog(QtGui.QMainWindow):
         a.setValue(first_year)
         for z in range(first_year, last_year + 1):
             print z
-            url = 'http://www.lottozahlenonline.de/statistik/beide-spieltage/lottozahlen-archiv.php?j={0}'.format(z)
+            url = ("http://www.lottozahlenonline.de/statistik/beide-spieltage"
+             "/lottozahlen-archiv.php?j={0}".format(z))
             webzugriff.data_from_achiv(self.data_handler, url)
             a.setValue(z)
         a.close()
@@ -261,10 +268,10 @@ class MeinDialog(QtGui.QMainWindow):
 
     def spinBox_1to7_clear(self, number = None, numbers = None):
         """Die SpinBoxen 1 bis 6 und Zusatzzahl löschen"""
-        if number != None:
+        if number is not None:
             self.ui.spinBox_Zahlen[number].setValue(0)
             self.ui.spinBox_Zahlen[number].clear()
-        elif numbers != None:
+        elif numbers is not None:
             for spinBox_number in self.ui.spinBox_Zahlen:
                 if spinBox_number.value() == numbers:
                     spinBox_number.setValue(0)
@@ -425,7 +432,8 @@ class MeinDialog(QtGui.QMainWindow):
         for i in lottodaten:
             PlainText.appendPlainText('Datum: {0} Zahlen: {1}'
              .format(i[1], i[5]))
-        self.ui.edi_daten_gewinnz.setPlainText(PlainText.document().toPlainText())
+        self.ui.edi_daten_gewinnz.setPlainText(
+         PlainText.document().toPlainText())
         self.ui.edi_daten_gewinnz.moveCursor(
          self.ui.edi_daten_gewinnz.textCursor().End)
 
