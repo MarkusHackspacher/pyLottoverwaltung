@@ -208,15 +208,13 @@ class MeinDialog(QtGui.QMainWindow):
     def onInfo(self):
         """ Programm Info
         """
-        text = """Eingabe der Gewinnzahlen von einer Ziehung
-        oder des Lottoscheins
-        \n"""
-        text = text + 'Lizenz: GNU GPLv3\n'
-        text = text + 'http://www.gnu.org/licenses/'
+        text = self.tr('Eingabe der Gewinnzahlen von einer Ziehung'
+         'oder des Lottoscheins\n Lizenz: GNU GPLv3\n'
+         'http://www.gnu.org/licenses/')
         a = QtGui.QMessageBox()
-        a.setWindowTitle('Info')
+        a.setWindowTitle(self.tr('Info'))
         a.setText(text)
-        a.setInformativeText('Von Markus Hackspacher')
+        a.setInformativeText(self.tr('Von Markus Hackspacher'))
         a.exec_()
 
     def closeEvent(self, event):
@@ -229,8 +227,8 @@ class MeinDialog(QtGui.QMainWindow):
             datum, value = webzugriff.data_from_webpage()
         except:
             a = QtGui.QMessageBox()
-            a.setWindowTitle('Info')
-            a.setText('Daten konnten nicht geladen werden')
+            a.setWindowTitle(self.tr('Info'))
+            a.setText(self.tr('Daten konnten nicht geladen werden'))
             a.exec_()
             return
         self.ui.spinbox_tag.setValue(int(datum[:2]))
@@ -555,8 +553,21 @@ class MeinDialog(QtGui.QMainWindow):
         self.ui.close()
 
 
-def gui():
+def gui(arguments):
+    """open the GUI
+    @param arguments: language (en, de)
+    @type arguments: string
+    @return: none
+    """
+    if len(arguments) > 1:
+        locale = arguments[1]
+    else:
+        locale = unicode(QtCore.QLocale.system().name())
+        print "locale: " + unicode(locale)
     app = QtGui.QApplication(sys.argv)
+    translator = QtCore.QTranslator()
+    translator.load(join("lotto", "pylv_" + unicode(locale)))
+    app.installTranslator(translator)
     dialog = MeinDialog()
     sys.exit(app.exec_())
 

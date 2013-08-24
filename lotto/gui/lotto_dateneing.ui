@@ -617,13 +617,13 @@ einstellen</string>
    </property>
    <widget class="QMenu" name="menuDatei">
     <property name="title">
-     <string>Datei</string>
+     <string>File</string>
     </property>
     <addaction name="actionBeenden"/>
    </widget>
    <widget class="QMenu" name="menuHilfe">
     <property name="title">
-     <string>Hilfe</string>
+     <string>Help</string>
     </property>
     <addaction name="actionGo_to_the_website"/>
     <addaction name="actionInfo"/>
