@@ -23,12 +23,10 @@ along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 
 from sets import Set
 from os.path import join
-from PyQt4 import QtGui, QtCore
-
-from gui.auswertung import Ui_Dialog
+from PyQt4 import QtGui, QtCore, uic
 
 
-class ui_lotto_auswertung(QtGui.QDialog, Ui_Dialog):
+class ui_lotto_auswertung(QtGui.QDialog):
     def __init__(self, rowid, data_handler):
         """open analyze dialog
         Datenauswerte Dialog oeffnen
@@ -37,9 +35,8 @@ class ui_lotto_auswertung(QtGui.QDialog, Ui_Dialog):
         @return: give close(0) back
         """
         QtGui.QDialog.__init__(self)
+        uic.loadUi(join("lotto", "gui", "auswertung.ui"), self)
         self.setWindowIcon(QtGui.QIcon(join("misc", "pyLottoverwaltung.svg")))
-        self.setupUi(self)
-        self.setWindowTitle("Auswertung")
         self.edi_daten.appendPlainText('Datensatz: {0}'.
         format(rowid))
         schein = data_handler.get_schein(rowid)[0]

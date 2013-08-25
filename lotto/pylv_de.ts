@@ -2,11 +2,29 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="de_DE">
 <context>
+    <name>Dialog</name>
+    <message>
+        <location filename="gui/auswertung.ui" line="14"/>
+        <source>evaluation</source>
+        <translation>Auswertung</translation>
+    </message>
+    <message>
+        <location filename="gui/auswertung.ui" line="47"/>
+        <source>Ausgabefeld</source>
+        <translation>Ausgabefeld</translation>
+    </message>
+    <message>
+        <location filename="gui/dialog_kalender.ui" line="14"/>
+        <source>Calendar</source>
+        <translation>Kalender</translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="35"/>
         <source>Lottozahlen</source>
-        <translation type="unfinished"></translation>
+        <translation>Lottozahlen</translation>
     </message>
     <message utf8="true">
         <location filename="gui/lotto_dateneing.ui" line="76"/>
