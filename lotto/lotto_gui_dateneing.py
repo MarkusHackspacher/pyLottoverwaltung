@@ -44,7 +44,7 @@ class MeinDialog(QtGui.QMainWindow):
         datafield
         """
         QtGui.QDialog.__init__(self)
-        self.ui = uic.loadUi(join("lotto/gui", "lotto_dateneing.ui"))
+        self.ui = uic.loadUi(join("lotto", "gui", "lotto_dateneing.ui"))
         self.ui.setWindowIcon(QtGui.QIcon(
          join("misc", "pyLottoverwaltung.svg")))
 
@@ -333,15 +333,10 @@ class MeinDialog(QtGui.QMainWindow):
         self.ui.spinbox_tag.setValue(int(lottodaten[block][1][8:]))
         self.ui.spinBox_monat.setValue(int(lottodaten[block][1][5:7]))
         self.ui.spinBox_jahr.setValue(int(lottodaten[block][1][:4]))
-        zahlen = lottodaten[block][5].split(',')
-        self.ui.spinBox_Zahlen[0].setValue(int(zahlen[0]))
-        self.ui.spinBox_Zahlen[1].setValue(int(zahlen[1]))
-        self.ui.spinBox_Zahlen[2].setValue(int(zahlen[2]))
-        self.ui.spinBox_Zahlen[3].setValue(int(zahlen[3]))
-        self.ui.spinBox_Zahlen[4].setValue(int(zahlen[4]))
-        self.ui.spinBox_Zahlen[5].setValue(int(zahlen[5]))
-        if len(zahlen) > 6:
-            self.ui.spinBox_Zahlen[6].setValue(int(zahlen[6]))
+        i = 0
+        for num in lottodaten[block][5].split(','):
+            self.ui.spinBox_Zahlen[i].setValue(int(num))
+            i += 1
         self.ui.spinBox_superz.setValue(lottodaten[block][2])
         self.ui.spinBox_spiel77.setValue(lottodaten[block][3])
         self.ui.spinBox_super6.setValue(lottodaten[block][4])
@@ -360,14 +355,10 @@ class MeinDialog(QtGui.QMainWindow):
         self.ui.spinbox_tag.setValue(int(lottodaten[block][1][8:]))
         self.ui.spinBox_monat.setValue(int(lottodaten[block][1][5:7]))
         self.ui.spinBox_jahr.setValue(int(lottodaten[block][1][:4]))
-        zahlen = lottodaten[block][5].split(',')
-        self.ui.spinBox_Zahlen[0].setValue(int(zahlen[0]))
-        self.ui.spinBox_Zahlen[1].setValue(int(zahlen[1]))
-        self.ui.spinBox_Zahlen[2].setValue(int(zahlen[2]))
-        self.ui.spinBox_Zahlen[3].setValue(int(zahlen[3]))
-        self.ui.spinBox_Zahlen[4].setValue(int(zahlen[4]))
-        self.ui.spinBox_Zahlen[5].setValue(int(zahlen[5]))
-
+        i = 0
+        for num in lottodaten[block][5].split(','):
+            self.ui.spinBox_Zahlen[i].setValue(int(num))
+            i += 1
         self.ui.com_laufzeit.setCurrentIndex(lottodaten[block][2])
         self.ui.com_laufzeit_tag.setCurrentIndex(lottodaten[block][3])
         self.ui.spinBox_spiel77.setValue(lottodaten[block][4])
@@ -539,9 +530,7 @@ class MeinDialog(QtGui.QMainWindow):
         self.geaendert()
 
     def draw_numbers(self):
-        """
-        numbers are in the draw
-        """
+        """ numbers are in the draw """
         return [num_draw.value() for num_draw in self.ui.spinBox_Zahlen]
 
     def onwebsite(self):

@@ -29,164 +29,166 @@
     <message utf8="true">
         <location filename="gui/lotto_dateneing.ui" line="76"/>
         <source>zur Datenbank hinzufügen</source>
-        <translation type="unfinished"></translation>
+        <translation>zur Datenbank hinzufügen</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="100"/>
         <source>Zusatzzahl</source>
-        <translation type="unfinished"></translation>
+        <translation>Zusatzzahl</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="129"/>
         <source>Superzahl</source>
-        <translation type="unfinished"></translation>
+        <translation>Superzahl</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="158"/>
         <source>Spiel 77</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiel 77</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="187"/>
         <source>Super 6:</source>
-        <translation type="unfinished"></translation>
+        <translation>Super 6:</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="204"/>
         <source>Gewinnzahlen</source>
-        <translation type="unfinished"></translation>
+        <translation>Gewinnzahlen</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="209"/>
         <source>Lottoschein</source>
-        <translation type="unfinished"></translation>
+        <translation>Lottoschein</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="223"/>
         <source>Zufallszahlen</source>
-        <translation type="unfinished"></translation>
+        <translation>Zufallszahlen</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="237"/>
         <source>unbegrenzt</source>
-        <translation type="unfinished"></translation>
+        <translation>unbegrenzt</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="242"/>
         <source>1 Ziehung</source>
-        <translation type="unfinished"></translation>
+        <translation>1 Ziehung</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="247"/>
         <source>2 Ziehungen</source>
-        <translation type="unfinished"></translation>
+        <translation>2 Ziehungen</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="252"/>
         <source>3 Ziehungen</source>
-        <translation type="unfinished"></translation>
+        <translation>3 Ziehungen</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="257"/>
         <source>4 Ziehungen</source>
-        <translation type="unfinished"></translation>
+        <translation>4 Ziehungen</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="262"/>
         <source>5 Ziehungen</source>
-        <translation type="unfinished"></translation>
+        <translation>5 Ziehungen</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="276"/>
         <source>Laufzeit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Laufzeit:</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="289"/>
         <source>Datum von heute
 einstellen</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum von heute
+einstellen</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="303"/>
         <source>Scheinnummer</source>
-        <translation type="unfinished"></translation>
+        <translation>Scheinnummer</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="320"/>
         <source>Mi+Sa</source>
-        <translation type="unfinished"></translation>
+        <translation>Mi+Sa</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="325"/>
         <source>Mittwoch</source>
-        <translation type="unfinished"></translation>
+        <translation>Mittwoch</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="330"/>
         <source>Samstag</source>
-        <translation type="unfinished"></translation>
+        <translation>Samstag</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="349"/>
         <source>Gewinnzahlen:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gewinnzahlen:</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="438"/>
         <source>Ausgabefeld</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgabefeld</translation>
     </message>
     <message utf8="true">
         <location filename="gui/lotto_dateneing.ui" line="454"/>
         <source>Gewählter Datensatz</source>
-        <translation type="unfinished"></translation>
+        <translation>Gewählter Datensatz</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="470"/>
         <source>anzeigen</source>
-        <translation type="unfinished"></translation>
+        <translation>anzeigen</translation>
     </message>
     <message utf8="true">
         <location filename="gui/lotto_dateneing.ui" line="477"/>
         <source>löschen</source>
-        <translation type="unfinished"></translation>
+        <translation>löschen</translation>
     </message>
     <message utf8="true">
         <location filename="gui/lotto_dateneing.ui" line="403"/>
         <source>alle Einträge</source>
-        <translation type="unfinished"></translation>
+        <translation>alle Einträge</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="425"/>
         <source>Lottoschein:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lottoschein:</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="463"/>
         <source>auswerten</source>
-        <translation type="unfinished"></translation>
+        <translation>auswerten</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="500"/>
         <source>Tag</source>
-        <translation type="unfinished"></translation>
+        <translation>Tag</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="530"/>
         <source>Monat</source>
-        <translation type="unfinished"></translation>
+        <translation>Monat</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="566"/>
         <source>Jahr</source>
-        <translation type="unfinished"></translation>
+        <translation>Jahr</translation>
     </message>
     <message utf8="true">
         <location filename="gui/lotto_dateneing.ui" line="604"/>
         <source>Kalender
 öffnen</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalender
+öffnen</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="620"/>
@@ -201,12 +203,12 @@ einstellen</source>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="633"/>
         <source>Internet</source>
-        <translation type="unfinished"></translation>
+        <translation>Internet</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="647"/>
         <source>Beenden</source>
-        <translation type="unfinished"></translation>
+        <translation>Beenden</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="652"/>
@@ -216,27 +218,27 @@ einstellen</source>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="657"/>
         <source>Hilfe</source>
-        <translation type="unfinished"></translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="662"/>
         <source>Daten von lotto.de (aktuelle Ziehung)</source>
-        <translation type="unfinished"></translation>
+        <translation>Daten von lotto.de (aktuelle Ziehung)</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="667"/>
         <source>Daten von  lottozahlenonline.de (2010-2013)</source>
-        <translation type="unfinished"></translation>
+        <translation>Daten von  lottozahlenonline.de (2010-2013)</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="672"/>
         <source>Daten von  lottozahlenonline.de (2000-2004)</source>
-        <translation type="unfinished"></translation>
+        <translation>Daten von  lottozahlenonline.de (2000-2004)</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="677"/>
         <source>Daten von  lottozahlenonline.de (2005-2009)</source>
-        <translation type="unfinished"></translation>
+        <translation>Daten von  lottozahlenonline.de (2005-2009)</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="682"/>
