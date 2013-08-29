@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Lottozahlen</string>
+   <string>pyLottomanager</string>
   </property>
   <widget class="QWidget" name="Lottozahlen">
    <property name="sizePolicy">
@@ -73,7 +73,7 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
      </rect>
     </property>
     <property name="text">
-     <string>zur Datenbank hinzufügen</string>
+     <string>Add to database</string>
     </property>
    </widget>
    <widget class="QWidget" name="horizontalLayoutWidget_2">
@@ -92,12 +92,12 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
      <rect>
       <x>10</x>
       <y>360</y>
-      <width>101</width>
+      <width>111</width>
       <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>Zusatzzahl</string>
+     <string>add. number</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -121,12 +121,12 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
      <rect>
       <x>240</x>
       <y>360</y>
-      <width>91</width>
+      <width>101</width>
       <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>Superzahl</string>
+     <string>Super number</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -155,7 +155,7 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
      </rect>
     </property>
     <property name="text">
-     <string>Spiel 77</string>
+     <string>game 77</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -195,18 +195,18 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
      <rect>
       <x>10</x>
       <y>260</y>
-      <width>151</width>
+      <width>161</width>
       <height>25</height>
      </rect>
     </property>
     <item>
      <property name="text">
-      <string>Gewinnzahlen</string>
+      <string>Winning numbers</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>Lottoschein</string>
+      <string>lottery ticket</string>
      </property>
     </item>
    </widget>
@@ -220,7 +220,7 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
      </rect>
     </property>
     <property name="text">
-     <string>Zufallszahlen</string>
+     <string>random numbers</string>
     </property>
    </widget>
    <widget class="QComboBox" name="com_laufzeit">
@@ -234,32 +234,32 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
     </property>
     <item>
      <property name="text">
-      <string>unbegrenzt</string>
+      <string>unlimited</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>1 Ziehung</string>
+      <string>1 draw</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>2 Ziehungen</string>
+      <string>2 draws</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>3 Ziehungen</string>
+      <string>3 draws</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>4 Ziehungen</string>
+      <string>4 draws</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>5 Ziehungen</string>
+      <string>5 draws</string>
      </property>
     </item>
    </widget>
@@ -268,12 +268,12 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
      <rect>
       <x>280</x>
       <y>360</y>
-      <width>69</width>
+      <width>111</width>
       <height>18</height>
      </rect>
     </property>
     <property name="text">
-     <string>Laufzeit:</string>
+     <string>Running Time:</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btn_set_calender_today">
@@ -286,8 +286,8 @@ QLabel {	background-color: rgb(195, 195, 195)}</string>
      </rect>
     </property>
     <property name="text">
-     <string>Datum von heute
-einstellen</string>
+     <string>Setting the
+date of today</string>
     </property>
    </widget>
    <widget class="QLabel" name="lab_scheinnr">
@@ -300,7 +300,7 @@ einstellen</string>
      </rect>
     </property>
     <property name="text">
-     <string>Scheinnummer</string>
+     <string>serial number</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -309,25 +309,25 @@ einstellen</string>
    <widget class="QComboBox" name="com_laufzeit_tag">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>360</x>
       <y>384</y>
-      <width>91</width>
+      <width>101</width>
       <height>23</height>
      </rect>
     </property>
     <item>
      <property name="text">
-      <string>Mi+Sa</string>
+      <string>We + Sa</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>Mittwoch</string>
+      <string>Wednesday</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>Samstag</string>
+      <string>Saturday</string>
      </property>
     </item>
    </widget>
@@ -346,7 +346,10 @@ einstellen</string>
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Gewinnzahlen:</string>
+          <string>Winning numbers</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -374,7 +377,7 @@ einstellen</string>
        <item>
         <widget class="QLabel" name="lab_daten_gewinnz">
          <property name="text">
-          <string>Gewählter Datensatz</string>
+          <string>selected record</string>
          </property>
         </widget>
        </item>
@@ -383,7 +386,7 @@ einstellen</string>
          <item>
           <widget class="QPushButton" name="Btn_gz_anzeigen">
            <property name="text">
-            <string>anzeigen</string>
+            <string>show</string>
            </property>
           </widget>
          </item>
@@ -393,14 +396,14 @@ einstellen</string>
             <bool>true</bool>
            </property>
            <property name="text">
-            <string>löschen</string>
+            <string>delete</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QCheckBox" name="CBox_gz_kompl_ausgeben">
            <property name="text">
-            <string>alle Einträge</string>
+            <string>all entries</string>
            </property>
           </widget>
          </item>
@@ -422,7 +425,10 @@ einstellen</string>
        <item>
         <widget class="QLabel" name="label">
          <property name="text">
-          <string>Lottoschein:</string>
+          <string>lottery ticket</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -451,7 +457,7 @@ einstellen</string>
        <item>
         <widget class="QLabel" name="lab_daten_lottoschein">
          <property name="text">
-          <string>Gewählter Datensatz</string>
+          <string>selected record</string>
          </property>
         </widget>
        </item>
@@ -460,21 +466,21 @@ einstellen</string>
          <item>
           <widget class="QPushButton" name="btn_ls_auswerten">
            <property name="text">
-            <string>auswerten</string>
+            <string>evaluate</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="Btn_ls_anzeigen">
            <property name="text">
-            <string>anzeigen</string>
+            <string>show</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="Btn_ls_loeschen">
            <property name="text">
-            <string>löschen</string>
+            <string>delete</string>
            </property>
           </widget>
          </item>
@@ -497,7 +503,7 @@ einstellen</string>
      <item>
       <widget class="QLabel" name="label_tag">
        <property name="text">
-        <string>Tag</string>
+        <string>day</string>
        </property>
       </widget>
      </item>
@@ -527,7 +533,7 @@ einstellen</string>
      <item>
       <widget class="QLabel" name="label_monat">
        <property name="text">
-        <string>Monat</string>
+        <string>month</string>
        </property>
       </widget>
      </item>
@@ -563,7 +569,7 @@ einstellen</string>
      <item>
       <widget class="QLabel" name="label_jahr">
        <property name="text">
-        <string>Jahr</string>
+        <string>year</string>
        </property>
       </widget>
      </item>
@@ -601,8 +607,8 @@ einstellen</string>
      </rect>
     </property>
     <property name="text">
-     <string>Kalender
-öffnen</string>
+     <string>Open
+calendar</string>
     </property>
    </widget>
   </widget>
@@ -644,7 +650,7 @@ einstellen</string>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionBeenden">
    <property name="text">
-    <string>Beenden</string>
+    <string>Quit</string>
    </property>
   </action>
   <action name="actionInfo">
@@ -659,22 +665,22 @@ einstellen</string>
   </action>
   <action name="actionDaten_von_lotto_de">
    <property name="text">
-    <string>Daten von lotto.de (aktuelle Ziehung)</string>
+    <string>Data from lotto.de (actual Draw)</string>
    </property>
   </action>
   <action name="actionDaten_von_lottozahlenonline_de_2010_2013">
    <property name="text">
-    <string>Daten von  lottozahlenonline.de (2010-2013)</string>
+    <string>Data from lottozahlenonline.de (2010-2013)</string>
    </property>
   </action>
   <action name="actionDaten_von_lottozahlenonline_de_2000_2004">
    <property name="text">
-    <string>Daten von  lottozahlenonline.de (2000-2004)</string>
+    <string>Data from lottozahlenonline.de (2000-2004)</string>
    </property>
   </action>
   <action name="actionDaten_von_lottozahlenonline_de_2005_2009">
    <property name="text">
-    <string>Daten von  lottozahlenonline.de (2005-2009)</string>
+    <string>Data from lottozahlenonline.de (2005-2009)</string>
    </property>
   </action>
   <action name="actionGo_to_the_website">

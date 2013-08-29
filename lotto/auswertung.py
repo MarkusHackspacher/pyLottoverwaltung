@@ -47,9 +47,10 @@ class ui_lotto_auswertung(QtGui.QDialog):
         anzahl_lottodaten = len(lottodaten)
         if anzahl_lottodaten == 0:
             self.edi_daten.appendPlainText(
-             u'Keine übereinstimmende Ziehungen gefunden')
+             self.tr('No matching draws found'))
         else:
-            self.edi_daten.appendPlainText(u'Folgende Ziehungen gefunden:')
+            self.edi_daten.appendPlainText(
+             self.tr('The following drawings found:'))
             zahlen = schein[5].split(',')
             z = []
             uebereinstimmungen = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
