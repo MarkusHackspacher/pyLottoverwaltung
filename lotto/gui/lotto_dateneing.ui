@@ -664,6 +664,9 @@ calendar</string>
    </property>
   </action>
   <action name="actionDaten_von_lotto_de">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Data from lotto.de (actual Draw)</string>
    </property>

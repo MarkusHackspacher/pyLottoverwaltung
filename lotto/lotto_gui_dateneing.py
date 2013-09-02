@@ -162,6 +162,7 @@ class MeinDialog(QtGui.QMainWindow):
         self.ui.edi_daten_lottoschein.cursorPositionChanged.connect(
          self.ondaten_lottoschein)
         self.onbtn_set_calender_today()
+        self.ui.menuInternet.deleteLater()
 
         self.ui.show()
 
@@ -170,7 +171,7 @@ class MeinDialog(QtGui.QMainWindow):
         self.zahl = 0
 
     def onbtn_kalender(self):
-        """Kalender Dialog öffen"""
+        """open calender dialog"""
         dlg = kalender_datum.ui_kalender(
          self.ui.spinBox_jahr.value(),
          self.ui.spinBox_monat.value(),
@@ -264,7 +265,7 @@ class MeinDialog(QtGui.QMainWindow):
         a.close()
         self.onBtn_gz_laden()
 
-    def spinBox_1to7_clear(self, number = None, numbers = None):
+    def spinBox_1to7_clear(self, number=None, numbers=None):
         """Die SpinBoxen 1 bis 6 und Zusatzzahl löschen"""
         if number is not None:
             self.ui.spinBox_Zahlen[number].setValue(0)
@@ -376,7 +377,7 @@ class MeinDialog(QtGui.QMainWindow):
         anzahl_datensaetze = len(lottodaten)
         if not self.ui.CBox_gz_kompl_ausgeben.isChecked() \
          and anzahl_datensaetze > 10:
-            anzahl_datensaetze =- 10
+            anzahl_datensaetze -= 10
         else:
             anzahl_datensaetze = 0
         self.data_handler.delete_ziehung(lottodaten
@@ -515,7 +516,7 @@ class MeinDialog(QtGui.QMainWindow):
                 number.setValue(self.zahl)
                 break
             elif self.zahl == number.value():
-                self.spinBox_1to7_clear(numbers = number.value())
+                self.spinBox_1to7_clear(numbers=number.value())
                 self.zahl = 0
 
         a = self.draw_numbers()
