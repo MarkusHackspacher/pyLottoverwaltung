@@ -36,6 +36,7 @@ def zufallszahlen(anzahl, maxwert):
     @type anzahl: int
     @type maxwert: int
     @return: Gibt Zufallszahlen zurueck.
+
     >>> zufallszahlen(16, 15)
     Traceback (most recent call last):
     ValueError: sample larger than population
@@ -58,7 +59,7 @@ def zufallszahlen(anzahl, maxwert):
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
-    print "zufallszahlen(6, 49):", zufallszahlen(6, 49)
-    print sorted(zufallszahlen(3, 3))
+    print ("zufallszahlen(6, 49):", zufallszahlen(6, 49))
+    print (sorted(zufallszahlen(3, 3)))
     a = zufallszahlen(3, 30)
-    print a, a[:-1], a[-1]
+    print (a, a[:-1], a[-1])

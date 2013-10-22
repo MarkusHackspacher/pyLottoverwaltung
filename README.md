@@ -1,50 +1,50 @@
+=================
 pyLottoverwaltung
+=================
 
 a programm for the german lottery "pick 6 out of 49" system.
 A goal is manage the own numbers and the numbers of the drawing.
 
 
 current:
+--------
+
 input of the own numbers and draw numbers with date and save in a database (sqlite).
 load a numbers from the database
 
 ToDo:
+-----
+
 change and remove data sets.
 compare the own numbers with the draw numbers.
 make the code easier to read.
 
 install:
+--------
 
 The program requires Python 7.2 to. www.python.org/download/
 and Qt4 for Python 2.7 www.riverbankcomputing.com / software / pyqt / download
 also the lxml package http://lxml.de/installation.html
 
 Start with:
-python lotto.pyw
+```python pylotto.pyw```
 
-The layout (lotto_dateneing.ui) can be manipulated using the Qt4 designer,
-can then be converted back with this command in Python:
-
-cd lotto\gui
-  lotto_ui_zu_py.bat
+The layout (lotto_dateneing.ui) can be manipulated using the Qt4 designer.
 
 Make the documentation as .pdf file:
-epydoc lotto --pdf
+```epydoc pylotto.pyw lotto --pdf```
 
 Installieren:
+-------------
 
 Das Programm benötigt Python 2.7 dazu. www.python.org/download/ 
 und Qt4 für Python 2.7 www.riverbankcomputing.com/software/pyqt/download
 sowie das lxml Paket http://lxml.de/installation.html
 
 Start mit: 
-python lotto.pyw
+```python lotto.pyw```
 
-Das Layout (lotto_dateneing.ui) kann mit den Qt4-Designer bearbeitet werden,
-kann dann mit diesem Befehl wieder in Python umgewandelt werden:
-
-cd lotto\gui
- lotto_ui_zu_py.bat
+Das Layout (lotto_dateneing.ui) kann mit den Qt4-Designer bearbeitet werden.
 
 
 Copyright (C) <2012-2013> Markus Hackspacher
