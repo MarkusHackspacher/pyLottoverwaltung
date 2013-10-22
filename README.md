@@ -46,6 +46,8 @@ Start mit:
 
 Das Layout (lotto_dateneing.ui) kann mit den Qt4-Designer bearbeitet werden.
 
+Dokumentation als as .pdf Datei erstellen lassen:
+```epydoc pylotto.pyw lotto --pdf```
 
 Copyright (C) <2012-2013> Markus Hackspacher
 

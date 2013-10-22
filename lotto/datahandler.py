@@ -33,6 +33,7 @@ class Datahandler(object):
     def __init__(self, path):
         """class init
         @type path: string
+        @return: none
 
         >>> data_handler = Datahandler(':memory:')
         >>> data_handler.insert_ziehung('2013-03-13', [11, 12, 13, 14, 15, 16, 17],666, 777, 888)
@@ -74,7 +75,7 @@ class Datahandler(object):
         self.create_tables()
 
     def create_tables(self):
-        """Tabellen erstellen mit id"""
+        """create_tables with a id"""
         c = self.connection.cursor()
         c.execute("""create table if not exists lottery_drawing (
                   id INTEGER PRIMARY KEY ASC,
@@ -101,12 +102,12 @@ class Datahandler(object):
     def insert_ziehung(self, date, zahlen, zahl_super, zahl_spiel77,
      zahl_spielsuper6):
         """Save the number of the draw in database
-        Lottozahlen in der Datenbank speichern
         @type date: date
         @type zahlen: list
         @type zahl_super : int
         @type zahl_spiel77: int
         @type zahl_spielsuper6: int
+        @return: none
         """
         c = self.connection.cursor()
         c.execute("""insert into lottery_drawing(d, zahl_super , zahl_spiel77,
@@ -132,6 +133,7 @@ class Datahandler(object):
         @type laufzeit: int
         @type laufzeit_tag: int
         @type scheinnr: int
+        @return: none
         """
         c = self.connection.cursor()
         c.execute("insert into lottery_tickets(d, "
@@ -273,4 +275,5 @@ class Datahandler(object):
         print ('database connection close')
 
 if __name__ == "__main__":
+    """ doctest of datahandler"""
     doctest.testmod()
