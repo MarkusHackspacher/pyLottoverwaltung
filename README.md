@@ -22,7 +22,7 @@ make the code easier to read.
 install:
 --------
 
-The program requires Python 7.2 to. www.python.org/download/
+The program requires Python 2.7 to. www.python.org/download/
 and Qt4 for Python 2.7 www.riverbankcomputing.com / software / pyqt / download
 also the lxml package http://lxml.de/installation.html
 
