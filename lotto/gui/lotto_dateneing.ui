@@ -10,6 +10,18 @@
     <height>564</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>913</width>
+    <height>564</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>913</width>
+    <height>564</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>pyLottomanager</string>
   </property>
