@@ -3,7 +3,7 @@
 """
 pyLottoverwaltung
 
-Copyright (C) <2012-2013> Markus Hackspacher
+Copyright (C) <2012-2014> Markus Hackspacher
 
 This file is part of pyLottoverwaltung.
 
@@ -28,9 +28,8 @@ import webbrowser
 from os.path import join
 from PyQt4 import QtGui, QtCore, uic
 
-from datahandler import Datahandler
-import webzugriff
-import auswertung
+from .datahandler import Datahandler
+import lotto.auswertung as auswertung
 import kalender_datum
 
 
@@ -139,30 +138,16 @@ class MeinDialog(QtGui.QMainWindow):
             self.ui.Btn_Numerary_1to49[button].clicked.connect(
              self.onEingabefeld)
 
-        self.statusBar().showMessage('Bereit')
+        self.statusBar().showMessage(self.tr('ready'))
 
         self.ui.actionBeenden.triggered.connect(self.onClose)
         self.ui.actionInfo.triggered.connect(self.onInfo)
         self.ui.actionGo_to_the_website.triggered.connect(self.onwebsite)
-        self.ui.actionDaten_von_lotto_de.triggered.connect(self.onData_lottode)
-        self.onData_lottozahlenonlinede_2000 = functools.partial(
-         self.onData_lottozahlenonlinede, 2000, 2004)
-        self.ui.actionDaten_von_lottozahlenonline_de_2000_2004.triggered.  \
-         connect(self.onData_lottozahlenonlinede_2000)
-        self.onData_lottozahlenonlinede_2005 = functools.partial(
-         self.onData_lottozahlenonlinede, 2005, 2009)
-        self.ui.actionDaten_von_lottozahlenonline_de_2005_2009.triggered. \
-         connect(self.onData_lottozahlenonlinede_2005)
-        self.onData_lottozahlenonlinede_2010 = functools.partial(
-         self.onData_lottozahlenonlinede, 2010, 2013)
-        self.ui.actionDaten_von_lottozahlenonline_de_2010_2013.triggered. \
-         connect(self.onData_lottozahlenonlinede_2010)
         self.ui.edi_daten_gewinnz.cursorPositionChanged.connect(
          self.ondaten_gewinnz)
         self.ui.edi_daten_lottoschein.cursorPositionChanged.connect(
          self.ondaten_lottoschein)
         self.onbtn_set_calender_today()
-        self.ui.menuInternet.deleteLater()
 
         self.ui.show()
 
@@ -222,48 +207,6 @@ class MeinDialog(QtGui.QMainWindow):
         """ the program exit """
         return
 
-    def onData_lottode(self):
-        """Load the actual draw from lotto.de"""
-        try:
-            datum, value = webzugriff.data_from_webpage()
-        except:
-            a = QtGui.QMessageBox()
-            a.setWindowTitle(self.tr('Info'))
-            a.setText(self.tr('Daten konnten nicht geladen werden'))
-            a.exec_()
-            return
-        self.ui.spinbox_tag.setValue(int(datum[:2]))
-        self.ui.spinBox_monat.setValue(int(datum[3:5]))
-        self.ui.spinBox_jahr.setValue(int(datum[6:]))
-        self.ui.spinBox_Zahlen[0].setValue(value[0])
-        self.ui.spinBox_Zahlen[1].setValue(value[1])
-        self.ui.spinBox_Zahlen[2].setValue(value[2])
-        self.ui.spinBox_Zahlen[3].setValue(value[3])
-        self.ui.spinBox_Zahlen[4].setValue(value[4])
-        self.ui.spinBox_Zahlen[5].setValue(value[5])
-        #self.spinBox_Zahlen[6].setValue(value[6])
-        #04.05.2013 rules change, no Zusatzzahl
-        self.ui.spinBox_superz.setValue(value[6])
-        self.ui.spinBox_spiel77.setValue(value[7])
-        self.ui.spinBox_super6.setValue(value[8])
-        self.ui.com_modus.setCurrentIndex(0)
-        self.geaendert()
-
-    def onData_lottozahlenonlinede(self, first_year, last_year):
-        """Load the draw from lottozahlenonline.de"""
-        a = QtGui.QProgressDialog("Daten Einlesen", "Abbruch",
-         first_year, last_year, self,
-         QtCore.Qt.Dialog | QtCore.Qt.WindowTitleHint)
-        a.setWindowModality(QtCore.Qt.WindowModal)
-        a.setValue(first_year)
-        for z in range(first_year, last_year + 1):
-            print z
-            url = ("http://www.lottozahlenonline.de/statistik/beide-spieltage"
-             "/lottozahlen-archiv.php?j={0}".format(z))
-            webzugriff.data_from_achiv(self.data_handler, url)
-            a.setValue(z)
-        a.close()
-        self.onBtn_gz_laden()
 
     def spinBox_1to7_clear(self, number=None, numbers=None):
         """Die SpinBoxen 1 bis 6 und Zusatzzahl löschen"""
@@ -552,8 +495,11 @@ def gui(arguments):
     if len(arguments) > 1:
         locale = arguments[1]
     else:
-        locale = unicode(QtCore.QLocale.system().name())
-        print "locale: " + unicode(locale)
+        try:
+            locale = unicode(QtCore.QLocale.system().name())
+        except:
+            locale = QtCore.QLocale.system().name()
+        print ("locale: {}".format(locale))
     app = QtGui.QApplication(sys.argv)
     translator = QtCore.QTranslator()
     translator.load(join("lotto", "pylv_" + unicode(locale)))

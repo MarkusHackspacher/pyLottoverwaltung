@@ -34,6 +34,17 @@ The layout (lotto_dateneing.ui) can be manipulated using the Qt4 designer.
 Make the documentation as .pdf file:
 ```epydoc pylotto.pyw lotto --pdf```
 
+To translate the programm or make a translation in your language,
+insert in the complete.pro your language code.
+```
+cd lotto
+pylupdate4 complete.pro
+```
+translate your language file: pylv_xx.ts, and produce the .ts translation files with
+```
+lrelease complete.pro
+```
+
 Installieren:
 -------------
 

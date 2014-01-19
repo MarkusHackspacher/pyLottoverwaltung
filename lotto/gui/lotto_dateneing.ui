@@ -624,6 +624,7 @@ calendar</string>
     </property>
    </widget>
   </widget>
+  <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -646,20 +647,9 @@ calendar</string>
     <addaction name="actionGo_to_the_website"/>
     <addaction name="actionInfo"/>
    </widget>
-   <widget class="QMenu" name="menuInternet">
-    <property name="title">
-     <string>Internet</string>
-    </property>
-    <addaction name="actionDaten_von_lotto_de"/>
-    <addaction name="actionDaten_von_lottozahlenonline_de_2010_2013"/>
-    <addaction name="actionDaten_von_lottozahlenonline_de_2000_2004"/>
-    <addaction name="actionDaten_von_lottozahlenonline_de_2005_2009"/>
-   </widget>
    <addaction name="menuDatei"/>
-   <addaction name="menuInternet"/>
    <addaction name="menuHilfe"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionBeenden">
    <property name="text">
     <string>Quit</string>

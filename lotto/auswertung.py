@@ -3,7 +3,7 @@
 """
 pyLottoverwaltung
 
-Copyright (C) <2012-2013> Markus Hackspacher
+Copyright (C) <2012-2014> Markus Hackspacher
 
 This file is part of pyLottoverwaltung.
 
@@ -78,11 +78,17 @@ class ui_lotto_auswertung(QtGui.QDialog):
                         text_zz = 'ZZ: {0}'.format(z[6])
                     else:
                         text_zz = ''
-                    self.edi_daten.appendPlainText(u'Datum: {0} | {1}, {2},'
-                     u'{3}, {4}, {5}, {6} {7} Übereinstimmungen: {8}'
-                    .format(ziehungsdaten[1],
-                    z[0], z[1], z[2], z[3], z[4], z[5], text_zz,
-                    anzahl_gleiche_zahl))
+                    text = self.tr('Date: {0} | {1}, {2},'
+                     '{3}, {4}, {5}, {6} {7} matches: {8}')
+                    try:
+                        text = unicode(text).format(ziehungsdaten[1],
+                        z[0], z[1], z[2], z[3], z[4], z[5], text_zz,
+                        anzahl_gleiche_zahl)
+                    except:
+                        text = text.format(ziehungsdaten[1],
+                        z[0], z[1], z[2], z[3], z[4], z[5], text_zz,
+                        anzahl_gleiche_zahl)
+                    self.edi_daten.appendPlainText(text)
             self.edi_daten.appendPlainText(
              u'nur Übereinstimmend mit der Zusatzzahl: {0}'
             .format(uebereinstimmungen[1]))
