@@ -31,6 +31,10 @@ from PyQt4 import QtGui, QtCore, uic
 from .datahandler import Datahandler
 import lotto.auswertung as auswertung
 import lotto.kalender_datum as kalender_datum
+if sys.version_info >= (3, 0):
+    from lotto.randomnumbers import zufallszahlen
+else:
+    from lotto.zufallszahl import zufallszahlen
 
 
 class MeinDialog(QtGui.QMainWindow):
@@ -51,11 +55,11 @@ class MeinDialog(QtGui.QMainWindow):
         highest_number = 49
         try:
             range_highest_number = xrange(highest_number)
-            range_6 = xrange(6)
+            self.range_6 = xrange(6)
             range_7 = xrange(7)
         except:
             range_highest_number = range(highest_number)
-            range_6 = range(6)
+            self.range_6 = range(6)
             range_7 = range(7)
         self.ui.Btn_Numerary_1to49 = [QtGui.QPushButton(
          self.ui.gridLayoutWidget)
@@ -71,9 +75,9 @@ class MeinDialog(QtGui.QMainWindow):
 
         #set 6 SpinBox and 1
         self.ui.spinBox_Zahlen = [QtGui.QSpinBox(
-         self.ui.horizontalLayoutWidget) for n in range_6]
+         self.ui.horizontalLayoutWidget) for n in self.range_6]
         self.ui.Btn_delete_Number = [QtGui.QPushButton(
-         self.ui.horizontalLayoutWidget_2) for n in range_6]
+         self.ui.horizontalLayoutWidget_2) for n in self.range_6]
         for zahlen in range_7:
             if zahlen != 6:
                 self.ui.spinBox_Zahlen[zahlen].setMinimumSize(
@@ -387,11 +391,10 @@ class MeinDialog(QtGui.QMainWindow):
     def onbtn_zufall(self):
         """ Die Zufallszahen generieren
         """
-        from zufallszahl import zufallszahlen
         i_anzahl = 6
         i_hochste = 49
         zufallszahl = zufallszahlen(i_anzahl, i_hochste)
-        for zahlen in xrange(6):
+        for zahlen in self.range_6:
             self.ui.spinBox_Zahlen[zahlen].setValue(zufallszahl[zahlen])
         self.zahl = 0
         self.geaendert_btn()
