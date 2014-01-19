@@ -660,34 +660,6 @@ calendar</string>
     <string>Info</string>
    </property>
   </action>
-  <action name="actionHilfe">
-   <property name="text">
-    <string>Hilfe</string>
-   </property>
-  </action>
-  <action name="actionDaten_von_lotto_de">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Data from lotto.de (actual Draw)</string>
-   </property>
-  </action>
-  <action name="actionDaten_von_lottozahlenonline_de_2010_2013">
-   <property name="text">
-    <string>Data from lottozahlenonline.de (2010-2013)</string>
-   </property>
-  </action>
-  <action name="actionDaten_von_lottozahlenonline_de_2000_2004">
-   <property name="text">
-    <string>Data from lottozahlenonline.de (2000-2004)</string>
-   </property>
-  </action>
-  <action name="actionDaten_von_lottozahlenonline_de_2005_2009">
-   <property name="text">
-    <string>Data from lottozahlenonline.de (2005-2009)</string>
-   </property>
-  </action>
   <action name="actionGo_to_the_website">
    <property name="text">
     <string>Go to the website</string>

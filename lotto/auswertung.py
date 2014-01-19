@@ -21,7 +21,11 @@ You should have received a copy of the GNU General Public License
 along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-from sets import Set
+try:
+    from sets import Set
+except ImportError:
+    Set = set
+
 from os.path import join
 from PyQt4 import QtGui, QtCore, uic
 
@@ -37,11 +41,18 @@ class ui_lotto_auswertung(QtGui.QDialog):
         QtGui.QDialog.__init__(self)
         uic.loadUi(join("lotto", "gui", "auswertung.ui"), self)
         self.setWindowIcon(QtGui.QIcon(join("misc", "pyLottoverwaltung.svg")))
-        self.edi_daten.appendPlainText('Datensatz: {0}'.
-        format(rowid))
+        text = self.tr('record: {0}')
+        try:
+            self.edi_daten.appendPlainText(unicode(text).format(rowid))
+        except:
+            self.edi_daten.appendPlainText(text.format(rowid))
         schein = data_handler.get_schein(rowid)[0]
-        self.edi_daten.appendPlainText('Datum: {0} Zahlen: {1}'
-         .format(schein[1], schein[5]))
+        text = self.tr('Date: {0} Numbers: {1}')
+        try:
+            self.edi_daten.appendPlainText(unicode(text)
+             .format(schein[1], schein[5]))
+        except:
+            self.edi_daten.appendPlainText(text.format(schein[1], schein[5]))
         self.edi_daten.moveCursor(self.edi_daten.textCursor().End)
         lottodaten = data_handler.get_id_numbers_of_ziehung(rowid)
         anzahl_lottodaten = len(lottodaten)
@@ -89,19 +100,25 @@ class ui_lotto_auswertung(QtGui.QDialog):
                         z[0], z[1], z[2], z[3], z[4], z[5], text_zz,
                         anzahl_gleiche_zahl)
                     self.edi_daten.appendPlainText(text)
-            self.edi_daten.appendPlainText(
-             u'nur Übereinstimmend mit der Zusatzzahl: {0}'
-            .format(uebereinstimmungen[1]))
-            self.edi_daten.appendPlainText(
-             u'{0} Übereinstimmungen mit einer Zahlen, plus Zusatzzahl: {1}'
-             .format(uebereinstimmungen[2], uebereinstimmungen[3]))
-            self.edi_daten.appendPlainText(
-             u'{0} Übereinstimmungen mit zwei Zahlen, plus Zusatzzahl: {1}'
-             .format(uebereinstimmungen[4], uebereinstimmungen[5]))
-            self.edi_daten.appendPlainText(
-             u'{0} Übereinstimmungen mit drei Zahlen, plus Zusatzzahl: {1}'
-             .format(uebereinstimmungen[6], uebereinstimmungen[7]))
-            self.edi_daten.appendPlainText(
-             u'{0} Übereinstimmungen mit vier Zahlen, plus Zusatzzahl: {1}'
-             .format(uebereinstimmungen[8], uebereinstimmungen[9]))
+            text = self.tr('only match with the additional number: {0}')
+            try:
+                self.edi_daten.appendPlainText(unicode(text)
+                .format(uebereinstimmungen[1]))
+            except:
+                self.edi_daten.appendPlainText(text
+                .format(uebereinstimmungen[1]))
+            text_zahl = (self.tr('a number'), self.tr('two numbers'),
+             self.tr('three numbers'), self.tr('four numbers'))
+            text = self.tr('{} Matches with {}, plus additional number: {}')
+            c = 0
+            while c < 4:
+                try:
+                    self.edi_daten.appendPlainText(unicode(text)
+                    .format(uebereinstimmungen[c + 1 * 2],
+                    unicode(text_zahl[c]), uebereinstimmungen[c + 2 * 2]))
+                except:
+                    self.edi_daten.appendPlainText(text
+                    .format(uebereinstimmungen[c + 1 * 2],
+                    text_zahl[c], uebereinstimmungen[c + 2 * 2]))
+                c += 1
             self.edi_daten.moveCursor(self.edi_daten.textCursor().End)

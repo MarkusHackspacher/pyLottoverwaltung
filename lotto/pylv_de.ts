@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<!DOCTYPE TS><TS version="2.0" language="de_DE" sourcelanguage="">
 <context>
     <name>Dialog</name>
     <message>
@@ -47,22 +46,12 @@
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="gui/lotto_dateneing.ui" line="639"/>
-        <source>Internet</source>
-        <translation type="obsolete">Internet</translation>
-    </message>
-    <message>
         <location filename="gui/lotto_dateneing.ui" line="660"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="665"/>
-        <source>Hilfe</source>
-        <translation>Hilfe</translation>
-    </message>
-    <message>
-        <location filename="gui/lotto_dateneing.ui" line="693"/>
         <source>Go to the website</source>
         <translation>Webseite öffnen</translation>
     </message>
@@ -211,26 +200,6 @@ calendar</source>
         <translation>Beenden</translation>
     </message>
     <message>
-        <location filename="gui/lotto_dateneing.ui" line="673"/>
-        <source>Data from lotto.de (actual Draw)</source>
-        <translation>Daten von lotto.de (aktuelle Ziehung)</translation>
-    </message>
-    <message>
-        <location filename="gui/lotto_dateneing.ui" line="678"/>
-        <source>Data from lottozahlenonline.de (2010-2013)</source>
-        <translation>Daten von  lottozahlenonline.de (2010-2013)</translation>
-    </message>
-    <message>
-        <location filename="gui/lotto_dateneing.ui" line="683"/>
-        <source>Data from lottozahlenonline.de (2000-2004)</source>
-        <translation>Daten von  lottozahlenonline.de (2000-2004)</translation>
-    </message>
-    <message>
-        <location filename="gui/lotto_dateneing.ui" line="688"/>
-        <source>Data from lottozahlenonline.de (2005-2009)</source>
-        <translation>Daten von  lottozahlenonline.de (2005-2009)</translation>
-    </message>
-    <message>
         <location filename="gui/lotto_dateneing.ui" line="170"/>
         <source>game 77</source>
         <translation>Spiel 77</translation>
@@ -263,11 +232,6 @@ http://www.gnu.org/licenses/</translation>
         <translation>Von Markus Hackspacher</translation>
     </message>
     <message>
-        <location filename="lotto_gui_dateneing.py" line="231"/>
-        <source>Daten konnten nicht geladen werden</source>
-        <translation type="obsolete">Daten konnten nicht geladen werden</translation>
-    </message>
-    <message>
         <location filename="lotto_gui_dateneing.py" line="141"/>
         <source>ready</source>
         <translation>Bereit</translation>
@@ -276,19 +240,59 @@ http://www.gnu.org/licenses/</translation>
 <context>
     <name>ui_lotto_auswertung</name>
     <message>
-        <location filename="auswertung.py" line="49"/>
+        <location filename="auswertung.py" line="60"/>
         <source>No matching draws found</source>
         <translation>Keine übereinstimmende Ziehungen gefunden</translation>
     </message>
     <message>
-        <location filename="auswertung.py" line="52"/>
+        <location filename="auswertung.py" line="63"/>
         <source>The following drawings found:</source>
         <translation>Folgende Ziehungen gefunden:</translation>
     </message>
     <message>
-        <location filename="auswertung.py" line="81"/>
+        <location filename="auswertung.py" line="92"/>
         <source>Date: {0} | {1}, {2},{3}, {4}, {5}, {6} {7} matches: {8}</source>
         <translation>Darum: {0} | {1}, {2},{3}, {4}, {5}, {6} {7} Übereinstimmungen: {8}</translation>
+    </message>
+    <message>
+        <location filename="auswertung.py" line="50"/>
+        <source>Date: {0} Numbers: {1}</source>
+        <translation>Datum: {0} Zahlen: {1}</translation>
+    </message>
+    <message>
+        <location filename="auswertung.py" line="103"/>
+        <source>only match with the additional number: {0}</source>
+        <translation>nur Übereinstimmend mit der Zusatzzahl: {0}</translation>
+    </message>
+    <message>
+        <location filename="auswertung.py" line="106"/>
+        <source>a number</source>
+        <translation>einer Zahl</translation>
+    </message>
+    <message>
+        <location filename="auswertung.py" line="106"/>
+        <source>two numbers</source>
+        <translation>zwei Zahlen</translation>
+    </message>
+    <message>
+        <location filename="auswertung.py" line="106"/>
+        <source>three numbers</source>
+        <translation>drei Zahlen</translation>
+    </message>
+    <message>
+        <location filename="auswertung.py" line="106"/>
+        <source>four numbers</source>
+        <translation>vier Zahlen</translation>
+    </message>
+    <message>
+        <location filename="auswertung.py" line="108"/>
+        <source>{} Matches with {}, plus additional number: {}</source>
+        <translation>{} Übereinstimmungen mit {}, plus Zusatzzahl: {}</translation>
+    </message>
+    <message>
+        <location filename="auswertung.py" line="44"/>
+        <source>record: {0}</source>
+        <translation>Datensatz: {0}</translation>
     </message>
 </context>
 </TS>

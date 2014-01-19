@@ -30,7 +30,7 @@ from PyQt4 import QtGui, QtCore, uic
 
 from .datahandler import Datahandler
 import lotto.auswertung as auswertung
-import kalender_datum
+import lotto.kalender_datum as kalender_datum
 
 
 class MeinDialog(QtGui.QMainWindow):
@@ -49,9 +49,17 @@ class MeinDialog(QtGui.QMainWindow):
 
         #array of Button from 1 to 49
         highest_number = 49
+        try:
+            range_highest_number = xrange(highest_number)
+            range_6 = xrange(6)
+            range_7 = xrange(7)
+        except:
+            range_highest_number = range(highest_number)
+            range_6 = range(6)
+            range_7 = range(7)
         self.ui.Btn_Numerary_1to49 = [QtGui.QPushButton(
          self.ui.gridLayoutWidget)
-         for n in xrange(highest_number)]
+         for n in range_highest_number]
         button_number = 0
         for button in self.ui.Btn_Numerary_1to49:
             button.setMaximumSize(QtCore.QSize(58, 58))
@@ -63,10 +71,10 @@ class MeinDialog(QtGui.QMainWindow):
 
         #set 6 SpinBox and 1
         self.ui.spinBox_Zahlen = [QtGui.QSpinBox(
-         self.ui.horizontalLayoutWidget) for n in xrange(6)]
+         self.ui.horizontalLayoutWidget) for n in range_6]
         self.ui.Btn_delete_Number = [QtGui.QPushButton(
-         self.ui.horizontalLayoutWidget_2) for n in xrange(6)]
-        for zahlen in xrange(7):
+         self.ui.horizontalLayoutWidget_2) for n in range_6]
+        for zahlen in range_7:
             if zahlen != 6:
                 self.ui.spinBox_Zahlen[zahlen].setMinimumSize(
                  QtCore.QSize(32, 20))
@@ -119,7 +127,7 @@ class MeinDialog(QtGui.QMainWindow):
         self.ui.btn_zufall.clicked.connect(self.onbtn_zufall)
         self.ui.btn_hinzu.clicked.connect(self.onbtn_hinzu)
        # fields of draw numbers
-        for number in xrange(7):
+        for number in range_7:
             self.spinBox_clear = functools.partial(
              self.spinBox_1to7_clear, number)
             self.ui.Btn_delete_Number[number].clicked.connect(
@@ -131,8 +139,8 @@ class MeinDialog(QtGui.QMainWindow):
 
         self.ui.com_modus.currentIndexChanged.connect(self.onmodus)
 
-        # fields of 1 to 49 numbers
-        for button in xrange(49):
+        # fields of 1 to highest number
+        for button in range_highest_number:
             self.onEingabefeld = functools.partial(
              self.onEingabefeld_1to49, button + 1)
             self.ui.Btn_Numerary_1to49[button].clicked.connect(
@@ -502,7 +510,7 @@ def gui(arguments):
         print ("locale: {}".format(locale))
     app = QtGui.QApplication(sys.argv)
     translator = QtCore.QTranslator()
-    translator.load(join("lotto", "pylv_" + unicode(locale)))
+    translator.load(join("lotto", "pylv_" + locale))
     app.installTranslator(translator)
     dialog = MeinDialog()
     sys.exit(app.exec_())

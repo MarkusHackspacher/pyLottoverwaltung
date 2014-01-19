@@ -15,16 +15,14 @@ load a numbers from the database
 ToDo:
 -----
 
-change and remove data sets.
-compare the own numbers with the draw numbers.
+change and remove data sets. compare the own numbers with the draw numbers.
 make the code easier to read.
 
 install:
 --------
 
-The program requires Python 2.7 www.python.org/download/
-and Qt4 for Python 2.7 www.riverbankcomputing.com/software/pyqt/download
-also the lxml package http://lxml.de/installation.html
+The program requires Python 2.7 or 3 www.python.org/download/
+and Qt4 for Python www.riverbankcomputing.com/software/pyqt/download
 
 Start with:
 ```python pylotto.pyw```
@@ -48,9 +46,8 @@ lrelease complete.pro
 Installieren:
 -------------
 
-Das Programm benötigt Python 2.7 dazu. www.python.org/download/ 
-und Qt4 für Python 2.7 www.riverbankcomputing.com/software/pyqt/download
-sowie das lxml Paket http://lxml.de/installation.html
+Das Programm benötigt Python 2.7 oder 3 dazu. www.python.org/download/
+und Qt4 für Python www.riverbankcomputing.com/software/pyqt/download
 
 Start mit: 
 ```python lotto.pyw```
@@ -60,7 +57,7 @@ Das Layout (lotto_dateneing.ui) kann mit den Qt4-Designer bearbeitet werden.
 Dokumentation als as .pdf Datei erstellen lassen:
 ```epydoc pylotto.pyw lotto --pdf```
 
-Copyright (C) <2012-2013> Markus Hackspacher
+Copyright (C) <2012-2014> Markus Hackspacher
 
 This file is part of pyLottoverwaltung.
 
