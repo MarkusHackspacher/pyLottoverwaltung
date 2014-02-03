@@ -21,8 +21,8 @@ make the code easier to read.
 install:
 --------
 
-The program requires Python 2.7 or 3 www.python.org/download/
-and Qt4 for Python www.riverbankcomputing.com/software/pyqt/download
+The program requires [Python 2.7 or 3.x](http://www.python.org/download/) 
+and [Qt4 for Python](http://www.riverbankcomputing.com/software/pyqt/download).
 
 Start with:
 ```python pylotto.pyw```
@@ -46,8 +46,8 @@ lrelease complete.pro
 Installieren:
 -------------
 
-Das Programm benötigt Python 2.7 oder 3 dazu. www.python.org/download/
-und Qt4 für Python www.riverbankcomputing.com/software/pyqt/download
+Das Programm benötigt [Python  2.7 or 3.x](http://www.python.org/download/) 
+und [Qt4 für Python](http://www.riverbankcomputing.com/software/pyqt/download) dazu.
 
 Start mit: 
 ```python lotto.pyw```
