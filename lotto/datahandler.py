@@ -99,8 +99,8 @@ class Datahandler(object):
         self.connection.commit()
         c.close()
 
-    def insert_ziehung(self, date, zahlen, zahl_super, zahl_spiel77,
-     zahl_spielsuper6):
+    def insert_ziehung(
+            self, date, zahlen, zahl_super, zahl_spiel77, zahl_spielsuper6):
         """Save the number of the draw in database
         @type date: date
         @type zahlen: list
@@ -120,8 +120,8 @@ class Datahandler(object):
         for z in zahlen:
             position = position + 1
             c.execute("""insert into lottery_drawing_numbers
-             (id_drawing, number , position) values (?, ?, ?)""",
-             (last_insert_rowid[0], z, position))
+                      (id_drawing, number , position) values (?, ?, ?)""",
+                      (last_insert_rowid[0], z, position))
         self.connection.commit()
         c.close()
 
@@ -146,8 +146,8 @@ class Datahandler(object):
         for z in zahlen:
             position = position + 1
             c.execute("""insert into lottery_tickets_numbers
-             (id_ticket, number , position) values (?, ?, ?)""",
-             (last_insert_rowid[0], z, position))
+                      (id_ticket, number , position) values (?, ?, ?)""",
+                      (last_insert_rowid[0], z, position))
         self.connection.commit()
         c.close()
 
@@ -202,8 +202,8 @@ class Datahandler(object):
         if number_list:
             selectdata = "".join(map(" {0},".format, number_list))
         selectdata = ("""SELECT * FROM lottery_drawing_numbers
-         WHERE number in ( {0} ) ORDER BY id_drawing""".
-         format(selectdata.rstrip(',')))
+                      WHERE number in ( {0} ) ORDER BY id_drawing""".
+                      format(selectdata.rstrip(',')))
         c.execute(selectdata)
         data = c.fetchall()
         id_numbers = []

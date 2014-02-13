@@ -49,7 +49,7 @@ class MeinDialog(QtGui.QMainWindow):
         QtGui.QDialog.__init__(self)
         self.ui = uic.loadUi(join("lotto", "gui", "lotto_dateneing.ui"))
         self.ui.setWindowIcon(QtGui.QIcon(
-         join("misc", "pyLottoverwaltung.svg")))
+            join("misc", "pyLottoverwaltung.svg")))
 
         #array of Button from 1 to 49
         highest_number = 49
@@ -62,46 +62,46 @@ class MeinDialog(QtGui.QMainWindow):
             self.range_6 = range(6)
             range_7 = range(7)
         self.ui.Btn_Numerary_1to49 = [QtGui.QPushButton(
-         self.ui.gridLayoutWidget)
-         for n in range_highest_number]
+            self.ui.gridLayoutWidget)
+            for n in range_highest_number]
         button_number = 0
         for button in self.ui.Btn_Numerary_1to49:
             button.setMaximumSize(QtCore.QSize(58, 58))
-            self.ui.gridLayout.addWidget(button,
-             int(button_number / 7), int(button_number % 7), 1, 1)
+            self.ui.gridLayout.addWidget(
+                button, int(button_number / 7), int(button_number % 7), 1, 1)
             button.setAutoFillBackground(True)
             button_number += 1
             button.setText(str(button_number))
 
         #set 6 SpinBox and 1
         self.ui.spinBox_Zahlen = [QtGui.QSpinBox(
-         self.ui.horizontalLayoutWidget) for n in self.range_6]
+            self.ui.horizontalLayoutWidget) for n in self.range_6]
         self.ui.Btn_delete_Number = [QtGui.QPushButton(
-         self.ui.horizontalLayoutWidget_2) for n in self.range_6]
+            self.ui.horizontalLayoutWidget_2) for n in self.range_6]
         for zahlen in range_7:
             if zahlen != 6:
                 self.ui.spinBox_Zahlen[zahlen].setMinimumSize(
-                 QtCore.QSize(32, 20))
+                    QtCore.QSize(32, 20))
                 self.ui.spinBox_Zahlen[zahlen].setMaximumSize(
-                 QtCore.QSize(52, 32))
+                    QtCore.QSize(52, 32))
                 self.ui.Btn_delete_Number[zahlen].setMinimumSize(
-                 QtCore.QSize(32, 20))
+                    QtCore.QSize(32, 20))
                 self.ui.Btn_delete_Number[zahlen].setMaximumSize(
-                 QtCore.QSize(52, 20))
+                    QtCore.QSize(52, 20))
                 self.ui.horizontalLayout.addWidget(
-                 self.ui.spinBox_Zahlen[zahlen])
+                    self.ui.spinBox_Zahlen[zahlen])
                 self.ui.horizontalLayout_2.addWidget(
-                 self.ui.Btn_delete_Number[zahlen])
+                    self.ui.Btn_delete_Number[zahlen])
             else:
                 #set extra Spinbox
                 self.ui.spinBox_Zahlen.append(QtGui.QSpinBox(
-                 self.ui.Lottozahlen))
+                    self.ui.Lottozahlen))
                 self.ui.spinBox_Zahlen[zahlen].setGeometry(QtCore.QRect(
-                 130, 360, 51, 23))
+                    130, 360, 51, 23))
                 self.ui.Btn_delete_Number.append(QtGui.QPushButton(
-                 self.ui.Lottozahlen))
+                    self.ui.Lottozahlen))
                 self.ui.Btn_delete_Number[zahlen].setGeometry(
-                 QtCore.QRect(190, 360, 41, 20))
+                    QtCore.QRect(190, 360, 41, 20))
             self.ui.spinBox_Zahlen[zahlen].setMaximum(49)
             self.ui.spinBox_Zahlen[zahlen].clear()
             self.ui.Btn_delete_Number[zahlen].setText("X")
@@ -122,9 +122,9 @@ class MeinDialog(QtGui.QMainWindow):
         self.ui.btn_ls_auswerten.clicked.connect(self.onBtn_ls_auswerten)
         self.ui.btn_ls_auswerten.setEnabled(False)
         self.ui.CBox_gz_kompl_ausgeben.clicked.connect(
-         self.onCBox_gz_kompl_ausgeben)
+            self.onCBox_gz_kompl_ausgeben)
         self.ui.btn_set_calender_today.clicked.connect(
-         self.onbtn_set_calender_today)
+            self.onbtn_set_calender_today)
         self.ui.btn_kalender.clicked.connect(self.onbtn_kalender)
 
         # fields fill with random numbers and give them to database
@@ -133,22 +133,22 @@ class MeinDialog(QtGui.QMainWindow):
        # fields of draw numbers
         for number in range_7:
             self.spinBox_clear = functools.partial(
-             self.spinBox_1to7_clear, number)
+                self.spinBox_1to7_clear, number)
             self.ui.Btn_delete_Number[number].clicked.connect(
-             self.spinBox_clear)
+                self.spinBox_clear)
             self.focusSpinBox = functools.partial(
-             self.focusSpinBox_1to7, number)
+                self.focusSpinBox_1to7, number)
             self.ui.spinBox_Zahlen[number].valueChanged.connect(
-             self.focusSpinBox)
+                self.focusSpinBox)
 
         self.ui.com_modus.currentIndexChanged.connect(self.onmodus)
 
         # fields of 1 to highest number
         for button in range_highest_number:
             self.onEingabefeld = functools.partial(
-             self.onEingabefeld_1to49, button + 1)
+                self.onEingabefeld_1to49, button + 1)
             self.ui.Btn_Numerary_1to49[button].clicked.connect(
-             self.onEingabefeld)
+                self.onEingabefeld)
 
         self.statusBar().showMessage(self.tr('ready'))
 
@@ -156,9 +156,9 @@ class MeinDialog(QtGui.QMainWindow):
         self.ui.actionInfo.triggered.connect(self.onInfo)
         self.ui.actionGo_to_the_website.triggered.connect(self.onwebsite)
         self.ui.edi_daten_gewinnz.cursorPositionChanged.connect(
-         self.ondaten_gewinnz)
+            self.ondaten_gewinnz)
         self.ui.edi_daten_lottoschein.cursorPositionChanged.connect(
-         self.ondaten_lottoschein)
+            self.ondaten_lottoschein)
         self.onbtn_set_calender_today()
 
         self.ui.show()
@@ -170,9 +170,9 @@ class MeinDialog(QtGui.QMainWindow):
     def onbtn_kalender(self):
         """open calender dialog"""
         dlg = kalender_datum.ui_kalender(
-         self.ui.spinBox_jahr.value(),
-         self.ui.spinBox_monat.value(),
-         self.ui.spinbox_tag.value())
+            self.ui.spinBox_jahr.value(),
+            self.ui.spinBox_monat.value(),
+            self.ui.spinbox_tag.value())
         if dlg.exec_() == 1:
             self.ui.spinbox_tag.setValue(dlg.kalender().day())
             self.ui.spinBox_monat.setValue(dlg.kalender().month())
@@ -186,7 +186,7 @@ class MeinDialog(QtGui.QMainWindow):
         """
         block = self.ui.edi_daten_gewinnz.textCursor().blockNumber()
         text = self.ui.edi_daten_gewinnz.document(). \
-         findBlockByNumber(block).text()
+            findBlockByNumber(block).text()
         self.ui.lab_daten_gewinnz.setText(text)
         self.ui.Btn_gz_loeschen.setEnabled(True)
 
@@ -198,7 +198,7 @@ class MeinDialog(QtGui.QMainWindow):
         """
         block = self.ui.edi_daten_lottoschein.textCursor().blockNumber()
         text = self.ui.edi_daten_lottoschein.document(). \
-         findBlockByNumber(block).text()
+            findBlockByNumber(block).text()
         self.ui.lab_daten_lottoschein.setText(text)
         self.ui.Btn_ls_loeschen.setEnabled(True)
         self.ui.btn_ls_auswerten.setEnabled(True)
@@ -207,8 +207,8 @@ class MeinDialog(QtGui.QMainWindow):
         """ Programm Info
         """
         text = self.tr('Eingabe der Gewinnzahlen von einer Ziehung'
-         'oder des Lottoscheins\n Lizenz: GNU GPLv3\n'
-         'http://www.gnu.org/licenses/')
+                       'oder des Lottoscheins\n Lizenz: GNU GPLv3\n'
+                       'http://www.gnu.org/licenses/')
         a = QtGui.QMessageBox()
         a.setWindowTitle(self.tr('Info'))
         a.setText(text)
@@ -218,7 +218,6 @@ class MeinDialog(QtGui.QMainWindow):
     def closeEvent(self, event):
         """ the program exit """
         return
-
 
     def spinBox_1to7_clear(self, number=None, numbers=None):
         """Die SpinBoxen 1 bis 6 und Zusatzzahl löschen"""
@@ -252,27 +251,32 @@ class MeinDialog(QtGui.QMainWindow):
 
     def onbtn_hinzu(self):
         """drawing numbers move in database """
-        day = '{0:4}-{1:02}-{2:02}'.format(self.ui.spinBox_jahr.value(),
-         self.ui.spinBox_monat.value(), self.ui.spinbox_tag.value())
+        day = '{0:4}-{1:02}-{2:02}'.format(
+            self.ui.spinBox_jahr.value(),
+            self.ui.spinBox_monat.value(),
+            self.ui.spinbox_tag.value())
         if self.ui.com_modus.currentIndex() == 0:
-            self.data_handler.insert_ziehung(day, self.draw_numbers(),
-             self.ui.spinBox_superz.value(), self.ui.spinBox_spiel77.value(),
-             self.ui.spinBox_super6.value())
+            self.data_handler.insert_ziehung(
+                day, self.draw_numbers(),
+                self.ui.spinBox_superz.value(),
+                self.ui.spinBox_spiel77.value(),
+                self.ui.spinBox_super6.value())
             self.ui.Btn_gz_loeschen.setEnabled(False)
             self.onBtn_gz_laden()
         else:
-            self.data_handler.insert_schein(day, self.draw_numbers()[:-1],
-             self.ui.com_laufzeit.currentIndex(),
-             self.ui.com_laufzeit_tag.currentIndex(),
-             self.ui.spinBox_spiel77.value())
+            self.data_handler.insert_schein(
+                day, self.draw_numbers()[:-1],
+                self.ui.com_laufzeit.currentIndex(),
+                self.ui.com_laufzeit_tag.currentIndex(),
+                self.ui.spinBox_spiel77.value())
             self.ui.Btn_ls_loeschen.setEnabled(False)
             self.onBtn_ls_laden()
 
     def onBtn_ls_auswerten(self):
         """den Lottoschein auswerten"""
         dlg = auswertung.ui_lotto_auswertung(self.data_handler.get_schein()[
-         self.ui.edi_daten_lottoschein.textCursor().blockNumber()][0],
-         self.data_handler)
+            self.ui.edi_daten_lottoschein.textCursor().blockNumber()][0],
+            self.data_handler)
         dlg.exec_()
 
     def onBtn_gz_anzeigen(self):
@@ -331,13 +335,14 @@ class MeinDialog(QtGui.QMainWindow):
             return
         anzahl_datensaetze = len(lottodaten)
         if not self.ui.CBox_gz_kompl_ausgeben.isChecked() \
-         and anzahl_datensaetze > 10:
+                and anzahl_datensaetze > 10:
             anzahl_datensaetze -= 10
         else:
             anzahl_datensaetze = 0
-        self.data_handler.delete_ziehung(lottodaten
-         [self.ui.edi_daten_gewinnz.textCursor().blockNumber()
-         + anzahl_datensaetze][0])
+        self.data_handler.delete_ziehung(
+            lottodaten
+            [self.ui.edi_daten_gewinnz.textCursor().blockNumber()
+             + anzahl_datensaetze][0])
         self.onBtn_gz_laden()
 
     def onBtn_ls_loeschen(self):
@@ -348,8 +353,9 @@ class MeinDialog(QtGui.QMainWindow):
         lottodaten = self.data_handler.get_schein()
         if lottodaten == []:
             return
-        self.data_handler.delete_schein(lottodaten
-         [self.ui.edi_daten_lottoschein.textCursor().blockNumber()][0])
+        self.data_handler.delete_schein(
+            lottodaten
+            [self.ui.edi_daten_lottoschein.textCursor().blockNumber()][0])
         self.onBtn_ls_laden()
 
     def onBtn_ls_laden(self):
@@ -360,11 +366,11 @@ class MeinDialog(QtGui.QMainWindow):
         lottodaten = self.data_handler.get_schein()
         for schein in lottodaten:
             PlainText.appendPlainText('Datum: {0} Zahlen: {1}'
-             .format(schein[1], schein[5]))
+                                      .format(schein[1], schein[5]))
         self.ui.edi_daten_lottoschein.setPlainText(
-         PlainText.document().toPlainText())
+            PlainText.document().toPlainText())
         self.ui.edi_daten_lottoschein.moveCursor(
-         self.ui.edi_daten_lottoschein.textCursor().End)
+            self.ui.edi_daten_lottoschein.textCursor().End)
 
     def onBtn_gz_laden(self):
         """Read the Gewinnzahlen from the Database
@@ -376,11 +382,11 @@ class MeinDialog(QtGui.QMainWindow):
             lottodaten = lottodaten[-10:]
         for i in lottodaten:
             PlainText.appendPlainText('Datum: {0} Zahlen: {1}'
-             .format(i[1], i[5]))
+                                      .format(i[1], i[5]))
         self.ui.edi_daten_gewinnz.setPlainText(
-         PlainText.document().toPlainText())
+            PlainText.document().toPlainText())
         self.ui.edi_daten_gewinnz.moveCursor(
-         self.ui.edi_daten_gewinnz.textCursor().End)
+            self.ui.edi_daten_gewinnz.textCursor().End)
 
     def onCBox_gz_kompl_ausgeben(self):
         """
@@ -476,11 +482,11 @@ class MeinDialog(QtGui.QMainWindow):
         a = self.draw_numbers()
 
         if self.ui.spinBox_Zahlen[6].value() == 0 \
-         and self.ui.com_modus.currentIndex() == 0 \
-         and not (self.zahl in a):
+                and self.ui.com_modus.currentIndex() == 0 \
+                and not (self.zahl in a):
             self.ui.spinBox_Zahlen[6].setValue(self.zahl)
         elif self.zahl == self.ui.spinBox_Zahlen[6].value() \
-         or self.ui.com_modus.currentIndex() == 1:
+                or self.ui.com_modus.currentIndex() == 1:
             self.spinBox_1to7_clear(6)
         self.geaendert()
 
@@ -490,8 +496,9 @@ class MeinDialog(QtGui.QMainWindow):
 
     def onwebsite(self):
         """ open website """
-        webbrowser.open_new_tab("http://markush.cwsurf.de/"
-         "joomla_17/index.php/python/pylottoverwaltung/")
+        webbrowser.open_new_tab(
+            "http://markush.cwsurf.de/joomla_17"
+            "/index.php/python/pylottoverwaltung/")
 
     def onClose(self):
         self.ui.close()
