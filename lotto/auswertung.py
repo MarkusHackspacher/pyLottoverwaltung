@@ -27,10 +27,14 @@ except ImportError:
     Set = set
 
 from os.path import join
-from PyQt4 import QtGui, QtCore, uic
+try:
+    from PyQt5 import QtGui, QtCore, QtWidgets, uic
+except ImportError:
+    from PyQt4 import QtGui as QtWidgets
+    from PyQt4 import QtGui, QtCore, uic
 
 
-class ui_lotto_auswertung(QtGui.QDialog):
+class ui_lotto_auswertung(QtWidgets.QDialog):
     def __init__(self, rowid, data_handler):
         """open analyze dialog
         Datenauswerte Dialog oeffnen
@@ -38,7 +42,7 @@ class ui_lotto_auswertung(QtGui.QDialog):
         @type data_handler: datahandler
         @return: give close(0) back
         """
-        QtGui.QDialog.__init__(self)
+        QtWidgets.QDialog.__init__(self)
         uic.loadUi(join("lotto", "gui", "auswertung.ui"), self)
         self.setWindowIcon(QtGui.QIcon(join("misc", "pyLottoverwaltung.svg")))
         text = self.tr('record: {0}')

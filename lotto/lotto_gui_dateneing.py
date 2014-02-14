@@ -26,7 +26,13 @@ import sqlite3
 import functools
 import webbrowser
 from os.path import join
-from PyQt4 import QtGui, QtCore, uic
+try:
+    from PyQt5 import QtGui, QtCore, QtWidgets, uic
+    print ("pyQt5")
+except ImportError:
+    from PyQt4 import QtGui as QtWidgets
+    from PyQt4 import QtGui, QtCore, uic
+    print ("pyQt4")
 
 from .datahandler import Datahandler
 import lotto.auswertung as auswertung
@@ -37,7 +43,7 @@ else:
     from lotto.zufallszahl import zufallszahlen
 
 
-class MeinDialog(QtGui.QMainWindow):
+class MeinDialog(QtWidgets.QMainWindow):
     def __init__(self):
         """
         inital the main window
@@ -46,7 +52,7 @@ class MeinDialog(QtGui.QMainWindow):
         calender,
         datafield
         """
-        QtGui.QDialog.__init__(self)
+        QtWidgets.QDialog.__init__(self)
         self.ui = uic.loadUi(join("lotto", "gui", "lotto_dateneing.ui"))
         self.ui.setWindowIcon(QtGui.QIcon(
             join("misc", "pyLottoverwaltung.svg")))
@@ -61,7 +67,7 @@ class MeinDialog(QtGui.QMainWindow):
             range_highest_number = range(highest_number)
             self.range_6 = range(6)
             range_7 = range(7)
-        self.ui.Btn_Numerary_1to49 = [QtGui.QPushButton(
+        self.ui.Btn_Numerary_1to49 = [QtWidgets.QPushButton(
             self.ui.gridLayoutWidget)
             for n in range_highest_number]
         button_number = 0
@@ -74,9 +80,9 @@ class MeinDialog(QtGui.QMainWindow):
             button.setText(str(button_number))
 
         #set 6 SpinBox and 1
-        self.ui.spinBox_Zahlen = [QtGui.QSpinBox(
+        self.ui.spinBox_Zahlen = [QtWidgets.QSpinBox(
             self.ui.horizontalLayoutWidget) for n in self.range_6]
-        self.ui.Btn_delete_Number = [QtGui.QPushButton(
+        self.ui.Btn_delete_Number = [QtWidgets.QPushButton(
             self.ui.horizontalLayoutWidget_2) for n in self.range_6]
         for zahlen in range_7:
             if zahlen != 6:
@@ -94,11 +100,11 @@ class MeinDialog(QtGui.QMainWindow):
                     self.ui.Btn_delete_Number[zahlen])
             else:
                 #set extra Spinbox
-                self.ui.spinBox_Zahlen.append(QtGui.QSpinBox(
+                self.ui.spinBox_Zahlen.append(QtWidgets.QSpinBox(
                     self.ui.Lottozahlen))
                 self.ui.spinBox_Zahlen[zahlen].setGeometry(QtCore.QRect(
                     130, 360, 51, 23))
-                self.ui.Btn_delete_Number.append(QtGui.QPushButton(
+                self.ui.Btn_delete_Number.append(QtWidgets.QPushButton(
                     self.ui.Lottozahlen))
                 self.ui.Btn_delete_Number[zahlen].setGeometry(
                     QtCore.QRect(190, 360, 41, 20))
@@ -209,7 +215,7 @@ class MeinDialog(QtGui.QMainWindow):
         text = self.tr('Eingabe der Gewinnzahlen von einer Ziehung'
                        'oder des Lottoscheins\n Lizenz: GNU GPLv3\n'
                        'http://www.gnu.org/licenses/')
-        a = QtGui.QMessageBox()
+        a = QtWidgets.QMessageBox()
         a.setWindowTitle(self.tr('Info'))
         a.setText(text)
         a.setInformativeText(self.tr('Von Markus Hackspacher'))
@@ -362,7 +368,7 @@ class MeinDialog(QtGui.QMainWindow):
         """Read the Lottoschein from the Database
         loading into the QPlainTextEdit
         """
-        PlainText = QtGui.QPlainTextEdit()
+        PlainText = QtWidgets.QPlainTextEdit()
         lottodaten = self.data_handler.get_schein()
         for schein in lottodaten:
             PlainText.appendPlainText('Datum: {0} Zahlen: {1}'
@@ -376,7 +382,7 @@ class MeinDialog(QtGui.QMainWindow):
         """Read the Gewinnzahlen from the Database
         loading into the QPlainTextEdit
         """
-        PlainText = QtGui.QPlainTextEdit()
+        PlainText = QtWidgets.QPlainTextEdit()
         lottodaten = self.data_handler.get_ziehung()
         if not self.ui.CBox_gz_kompl_ausgeben.isChecked():
             lottodaten = lottodaten[-10:]
@@ -518,7 +524,7 @@ def gui(arguments):
         except:
             locale = QtCore.QLocale.system().name()
         print ("locale: {}".format(locale))
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     translator = QtCore.QTranslator()
     translator.load(join("lotto", "pylv_" + locale))
     app.installTranslator(translator)

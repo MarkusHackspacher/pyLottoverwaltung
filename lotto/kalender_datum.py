@@ -3,7 +3,7 @@
 """
 pyLottoverwaltung
 
-Copyright (C) <2012-2013> Markus Hackspacher
+Copyright (C) <2012-2014> Markus Hackspacher
 
 This file is part of pyLottoverwaltung.
 
@@ -22,10 +22,14 @@ along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 from os.path import join
-from PyQt4 import QtGui, QtCore, uic
+try:
+    from PyQt5 import QtGui, QtCore, QtWidgets, uic
+except ImportError:
+    from PyQt4 import QtGui as QtWidgets
+    from PyQt4 import QtGui, QtCore, uic
 
 
-class ui_kalender(QtGui.QDialog):
+class ui_kalender(QtWidgets.QDialog):
     def __init__(self, year, month, day):
         """open kalender dialog
         Kalender Dialog oeffnen
@@ -33,7 +37,7 @@ class ui_kalender(QtGui.QDialog):
         @type month: int
         @type day: int
         """
-        QtGui.QDialog.__init__(self)
+        QtWidgets.QDialog.__init__(self)
 
         uic.loadUi(join("lotto", "gui", "dialog_kalender.ui"), self)
         self.setWindowIcon(QtGui.QIcon(join("misc", "pyLottoverwaltung.svg")))
