@@ -70,14 +70,12 @@ class MeinDialog(QtWidgets.QMainWindow):
         self.ui.Btn_Numerary_1to49 = [QtWidgets.QPushButton(
             self.ui.gridLayoutWidget)
             for n in range_highest_number]
-        button_number = 0
-        for button in self.ui.Btn_Numerary_1to49:
+        for button_number, button in enumerate(self.ui.Btn_Numerary_1to49):
             button.setMaximumSize(QtCore.QSize(58, 58))
             self.ui.gridLayout.addWidget(
                 button, int(button_number / 7), int(button_number % 7), 1, 1)
             button.setAutoFillBackground(True)
-            button_number += 1
-            button.setText(str(button_number))
+            button.setText(str(button_number + 1))
 
         #set 6 SpinBox and 1
         self.ui.spinBox_Zahlen = [QtWidgets.QSpinBox(
