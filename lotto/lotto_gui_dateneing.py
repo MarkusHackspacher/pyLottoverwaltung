@@ -401,9 +401,9 @@ class MeinDialog(QtWidgets.QMainWindow):
     def onbtn_zufall(self):
         """ Die Zufallszahen generieren
         """
-        i_anzahl = 6
-        i_hochste = 49
-        zufallszahl = zufallszahlen(i_anzahl, i_hochste)
+        drawn_numbers = 6
+        highest = 49
+        zufallszahl = zufallszahlen(drawn_numbers, highest)
         for zahlen in self.range_6:
             self.ui.spinBox_Zahlen[zahlen].setValue(zufallszahl[zahlen])
         self.zahl = 0
