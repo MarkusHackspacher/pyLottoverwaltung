@@ -25,6 +25,7 @@ import sys
 import sqlite3
 import functools
 import webbrowser
+import random
 from os.path import join
 try:
     from PyQt5 import QtGui, QtCore, QtWidgets, uic
@@ -37,10 +38,8 @@ except ImportError:
 from .datahandler import Datahandler
 import lotto.auswertung as auswertung
 import lotto.kalender_datum as kalender_datum
-if sys.version_info >= (3, 0):
-    from lotto.randomnumbers import zufallszahlen
-else:
-    from lotto.zufallszahl import zufallszahlen
+if sys.version_info < (3, 0):
+    range = xrange
 
 
 class MeinDialog(QtWidgets.QMainWindow):
@@ -59,14 +58,9 @@ class MeinDialog(QtWidgets.QMainWindow):
 
         #array of Button from 1 to 49
         highest_number = 49
-        try:
-            range_highest_number = xrange(highest_number)
-            self.range_6 = xrange(6)
-            range_7 = xrange(7)
-        except:
-            range_highest_number = range(highest_number)
-            self.range_6 = range(6)
-            range_7 = range(7)
+        range_highest_number = range(highest_number)
+        self.range_6 = range(6)
+        range_7 = range(7)
         self.ui.Btn_Numerary_1to49 = [QtWidgets.QPushButton(
             self.ui.gridLayoutWidget)
             for n in range_highest_number]
@@ -403,7 +397,7 @@ class MeinDialog(QtWidgets.QMainWindow):
         """
         drawn_numbers = 6
         highest = 49
-        zufallszahl = zufallszahlen(drawn_numbers, highest)
+        zufallszahl = random.sample(range(1, highest + 1), drawn_numbers)
         for zahlen in self.range_6:
             self.ui.spinBox_Zahlen[zahlen].setValue(zufallszahl[zahlen])
         self.zahl = 0
