@@ -22,10 +22,10 @@ along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 import sys
+import random
 import sqlite3
 import functools
 import webbrowser
-import random
 from os.path import join
 try:
     from PyQt5 import QtGui, QtCore, QtWidgets, uic
@@ -42,10 +42,10 @@ if sys.version_info < (3, 0):
     range = xrange
 
 
-class MeinDialog(QtWidgets.QMainWindow):
+class MainDialog(QtWidgets.QMainWindow):
     def __init__(self):
         """
-        inital the main window
+        initial the main window
         1 to 49 button,
         7 spinbox,
         calender,
@@ -61,10 +61,10 @@ class MeinDialog(QtWidgets.QMainWindow):
         range_highest_number = range(highest_number)
         self.range_6 = range(6)
         range_7 = range(7)
-        self.ui.Btn_Numerary_1to49 = [QtWidgets.QPushButton(
+        self.ui.Btn_Numerals_1to49 = [QtWidgets.QPushButton(
             self.ui.gridLayoutWidget)
             for n in range_highest_number]
-        for button_number, button in enumerate(self.ui.Btn_Numerary_1to49):
+        for button_number, button in enumerate(self.ui.Btn_Numerals_1to49):
             button.setMaximumSize(QtCore.QSize(58, 58))
             self.ui.gridLayout.addWidget(
                 button, int(button_number / 7), int(button_number % 7), 1, 1)
@@ -105,12 +105,12 @@ class MeinDialog(QtWidgets.QMainWindow):
             self.ui.Btn_delete_Number[zahlen].setText("X")
 
         self.onmodus()
-        self.geaendert()
+        self.buttonchange()
         self.data_handler = Datahandler('datenbank1.sqlite')
         self.onBtn_gz_laden()
         self.onBtn_ls_laden()
 
-        # slots for datanbase funktion
+        # slots for database functions
         self.ui.Btn_gz_anzeigen.clicked.connect(self.onBtn_gz_anzeigen)
         self.ui.Btn_ls_anzeigen.clicked.connect(self.onBtn_ls_anzeigen)
         self.ui.Btn_gz_loeschen.clicked.connect(self.onBtn_gz_loeschen)
@@ -145,7 +145,7 @@ class MeinDialog(QtWidgets.QMainWindow):
         for button in range_highest_number:
             self.onEingabefeld = functools.partial(
                 self.onEingabefeld_1to49, button + 1)
-            self.ui.Btn_Numerary_1to49[button].clicked.connect(
+            self.ui.Btn_Numerals_1to49[button].clicked.connect(
                 self.onEingabefeld)
 
         self.statusBar().showMessage(self.tr('ready'))
@@ -162,7 +162,7 @@ class MeinDialog(QtWidgets.QMainWindow):
         self.ui.show()
 
     def init(self):
-        """inital variable"""
+        """initial variable"""
         self.zahl = 0
 
     def onbtn_kalender(self):
@@ -202,7 +202,7 @@ class MeinDialog(QtWidgets.QMainWindow):
         self.ui.btn_ls_auswerten.setEnabled(True)
 
     def onInfo(self):
-        """ Programm Info
+        """ Program info
         """
         text = self.tr('Eingabe der Gewinnzahlen von einer Ziehung'
                        'oder des Lottoscheins\n Lizenz: GNU GPLv3\n'
@@ -245,7 +245,7 @@ class MeinDialog(QtWidgets.QMainWindow):
                  self.ui.spinBox_Zahlen[number].setValue(
                   spinBox_Zahlen.value() + 1)
         """
-        self.geaendert()
+        self.buttonchange()
 
     def onbtn_hinzu(self):
         """drawing numbers move in database """
@@ -272,7 +272,7 @@ class MeinDialog(QtWidgets.QMainWindow):
 
     def onBtn_ls_auswerten(self):
         """den Lottoschein auswerten"""
-        dlg = auswertung.ui_lotto_auswertung(self.data_handler.get_schein()[
+        dlg = auswertung.UiLottoEvaluation(self.data_handler.get_schein()[
             self.ui.edi_daten_lottoschein.textCursor().blockNumber()][0],
             self.data_handler)
         dlg.exec_()
@@ -299,7 +299,7 @@ class MeinDialog(QtWidgets.QMainWindow):
         self.ui.spinBox_spiel77.setValue(lottodaten[block][3])
         self.ui.spinBox_super6.setValue(lottodaten[block][4])
         self.ui.com_modus.setCurrentIndex(0)
-        self.geaendert()
+        self.buttonchange()
 
     def onBtn_ls_anzeigen(self):
         """
@@ -321,7 +321,7 @@ class MeinDialog(QtWidgets.QMainWindow):
         self.ui.com_laufzeit_tag.setCurrentIndex(lottodaten[block][3])
         self.ui.spinBox_spiel77.setValue(lottodaten[block][4])
         self.ui.com_modus.setCurrentIndex(1)
-        self.geaendert()
+        self.buttonchange()
 
     def onBtn_gz_loeschen(self):
         """
@@ -429,7 +429,7 @@ class MeinDialog(QtWidgets.QMainWindow):
             self.ui.spinBox_Zahlen[6].setVisible(False)
             self.ui.Btn_delete_Number[6].setVisible(False)
             self.spinBox_1to7_clear(6)
-            self.geaendert()
+            self.buttonchange()
 
         else:
             self.ui.btn_zufall.setVisible(False)
@@ -446,13 +446,13 @@ class MeinDialog(QtWidgets.QMainWindow):
             self.ui.lab_zusatz.setVisible(True)
             self.ui.spinBox_Zahlen[6].setVisible(True)
             self.ui.Btn_delete_Number[6].setVisible(True)
-            self.geaendert()
+            self.buttonchange()
 
-    def geaendert(self):
-        """Botton colour in dependence of the valve of the Spinbox
+    def buttonchange(self):
+        """Button colour in dependence of the valve of the Spinbox
         """
         a = self.draw_numbers()
-        for button in self.ui.Btn_Numerary_1to49:
+        for button in self.ui.Btn_Numerals_1to49:
             if int(button.text()) in a:
                 button.setFlat(False)
                 button.setStyleSheet("color: red;")
@@ -486,7 +486,7 @@ class MeinDialog(QtWidgets.QMainWindow):
         elif self.zahl == self.ui.spinBox_Zahlen[6].value() \
                 or self.ui.com_modus.currentIndex() == 1:
             self.spinBox_1to7_clear(6)
-        self.geaendert()
+        self.buttonchange()
 
     def draw_numbers(self):
         """ numbers are in the draw """
@@ -520,7 +520,7 @@ def gui(arguments):
     translator = QtCore.QTranslator()
     translator.load(join("lotto", "pylv_" + locale))
     app.installTranslator(translator)
-    dialog = MeinDialog()
+    dialog = MainDialog()
     sys.exit(app.exec_())
 
 if __name__ == "__main__":

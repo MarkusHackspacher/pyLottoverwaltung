@@ -9,3 +9,5 @@ datenbank.sqlite
 datenbank1.sqlite
 pyLottoverwaltung.e4p
 lotto/dump.sql
+
+.directory

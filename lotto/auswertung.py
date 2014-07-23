@@ -34,7 +34,7 @@ except ImportError:
     from PyQt4 import QtGui, QtCore, uic
 
 
-class ui_lotto_auswertung(QtWidgets.QDialog):
+class UiLottoEvaluation(QtWidgets.QDialog):
     def __init__(self, rowid, data_handler):
         """open analyze dialog
         Datenauswerte Dialog oeffnen
