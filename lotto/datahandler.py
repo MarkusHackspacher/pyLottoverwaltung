@@ -36,23 +36,29 @@ class Datahandler(object):
         @return: none
 
         >>> data_handler = Datahandler(':memory:')
-        >>> data_handler.insert_ziehung('2013-03-13', [11, 12, 13, 14, 15, 16, 17],666, 777, 888)
+        >>> data_handler.insert_ziehung('2013-03-13', \
+[11, 12, 13, 14, 15, 16, 17],666, 777, 888)
         >>> data_handler.get_ziehung()
         [(1, u'2013-03-13', 666, 777, 888, u'11,12,13,14,15,16,17')]
-        >>> data_handler.insert_ziehung('2013-03-12', [21 ,22, 23, 24, 25, 26, 27], 222, 333, 444)
+        >>> data_handler.insert_ziehung('2013-03-12', \
+[21 ,22, 23, 24, 25, 26, 27], 222, 333, 444)
         >>> data_handler.get_ziehung(2)
         [(2, u'2013-03-12', 222, 333, 444, u'21,22,23,24,25,26,27')]
         >>> data_handler.get_ziehung()
-        [(2, u'2013-03-12', 222, 333, 444, u'21,22,23,24,25,26,27'), (1, u'2013-03-13', 666, 777, 888, u'11,12,13,14,15,16,17')]
+        [(2, u'2013-03-12', 222, 333, 444, u'21,22,23,24,25,26,27'), \
+(1, u'2013-03-13', 666, 777, 888, u'11,12,13,14,15,16,17')]
 
-        >>> data_handler.insert_schein('2013-03-13', [11, 12, 13, 14, 15, 16, 17], 2 ,0 ,888)
+        >>> data_handler.insert_schein('2013-03-13', \
+[11, 12, 13, 14, 15, 16, 17], 2 ,0 ,888)
         >>> data_handler.get_schein()
         [(1, u'2013-03-13', 2, 0, 888, u'11,12,13,14,15,16,17')]
-        >>> data_handler.insert_schein('2013-03-12', [21, 22, 23, 24, 25, 28], 1, 1, 444)
+        >>> data_handler.insert_schein('2013-03-12', \
+[21, 22, 23, 24, 25, 28], 1, 1, 444)
         >>> data_handler.get_schein(2)
         [(2, u'2013-03-12', 1, 1, 444, u'21,22,23,24,25,28')]
         >>> data_handler.get_schein()
-        [(2, u'2013-03-12', 1, 1, 444, u'21,22,23,24,25,28'), (1, u'2013-03-13', 2, 0, 888, u'11,12,13,14,15,16,17')]
+        [(2, u'2013-03-12', 1, 1, 444, u'21,22,23,24,25,28'), \
+(1, u'2013-03-13', 2, 0, 888, u'11,12,13,14,15,16,17')]
         >>> data_handler.get_id_numbers_of_ziehung(2)
         [2]
         >>> data_handler.get_id_numbers_of_ziehung(2, 3)
@@ -112,7 +118,7 @@ class Datahandler(object):
         c = self.connection.cursor()
         c.execute("""insert into lottery_drawing(d, zahl_super , zahl_spiel77,
                   zahl_spielsuper6) values (?, ?, ?, ?)""",
-                 (date, zahl_super, zahl_spiel77, zahl_spielsuper6))
+                  (date, zahl_super, zahl_spiel77, zahl_spielsuper6))
         self.connection.commit()
         c.execute("SELECT last_insert_rowid()")
         last_insert_rowid = c.fetchone()
@@ -138,7 +144,7 @@ class Datahandler(object):
         c = self.connection.cursor()
         c.execute("insert into lottery_tickets(d, "
                   "laufzeit, laufzeit_tag, scheinnr) values (?, ?, ?, ?)",
-                 (date, laufzeit, laufzeit_tag, scheinnr))
+                  (date, laufzeit, laufzeit_tag, scheinnr))
         self.connection.commit()
         c.execute("SELECT last_insert_rowid()")
         last_insert_rowid = c.fetchone()

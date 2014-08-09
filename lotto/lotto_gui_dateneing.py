@@ -56,7 +56,7 @@ class MainDialog(QtWidgets.QMainWindow):
         self.ui.setWindowIcon(QtGui.QIcon(
             join("misc", "pyLottoverwaltung.svg")))
 
-        #array of Button from 1 to 49
+        # array of Button from 1 to 49
         highest_number = 49
         range_highest_number = range(highest_number)
         self.range_6 = range(6)
@@ -71,7 +71,7 @@ class MainDialog(QtWidgets.QMainWindow):
             button.setAutoFillBackground(True)
             button.setText(str(button_number + 1))
 
-        #set 6 SpinBox and 1
+        # set 6 SpinBox and 1
         self.ui.spinBox_Zahlen = [QtWidgets.QSpinBox(
             self.ui.horizontalLayoutWidget) for n in self.range_6]
         self.ui.Btn_delete_Number = [QtWidgets.QPushButton(
@@ -91,7 +91,7 @@ class MainDialog(QtWidgets.QMainWindow):
                 self.ui.horizontalLayout_2.addWidget(
                     self.ui.Btn_delete_Number[zahlen])
             else:
-                #set extra Spinbox
+                # set extra Spinbox
                 self.ui.spinBox_Zahlen.append(QtWidgets.QSpinBox(
                     self.ui.Lottozahlen))
                 self.ui.spinBox_Zahlen[zahlen].setGeometry(QtCore.QRect(
@@ -128,7 +128,7 @@ class MainDialog(QtWidgets.QMainWindow):
         # fields fill with random numbers and give them to database
         self.ui.btn_zufall.clicked.connect(self.onbtn_zufall)
         self.ui.btn_hinzu.clicked.connect(self.onbtn_hinzu)
-       # fields of draw numbers
+        # fields of draw numbers
         for number in range_7:
             self.spinBox_clear = functools.partial(
                 self.spinBox_1to7_clear, number)
