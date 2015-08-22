@@ -6,7 +6,7 @@ for insert, get and delete data in the database
 
 pyLottoverwaltung
 
-Copyright (C) <2012-2014> Markus Hackspacher
+Copyright (C) <2012-2015> Markus Hackspacher
 
 This file is part of pyLottoverwaltung.
 
@@ -278,7 +278,7 @@ class Datahandler(object):
     def __del__(self):
         """close connection of database"""
         self.connection.close()
-        print ('database connection close')
+        print('database connection close')
 
 if __name__ == "__main__":
     """ doctest of datahandler"""

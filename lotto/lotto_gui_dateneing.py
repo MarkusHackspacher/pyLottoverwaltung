@@ -3,7 +3,7 @@
 """
 pyLottoverwaltung
 
-Copyright (C) <2012-2014> Markus Hackspacher
+Copyright (C) <2012-2015> Markus Hackspacher
 
 This file is part of pyLottoverwaltung.
 
@@ -29,11 +29,11 @@ import webbrowser
 from os.path import join
 try:
     from PyQt5 import QtGui, QtCore, QtWidgets, uic
-    print ("pyQt5")
+    print("pyQt5")
 except ImportError:
     from PyQt4 import QtGui as QtWidgets
     from PyQt4 import QtGui, QtCore, uic
-    print ("pyQt4")
+    print("pyQt4")
 
 from .datahandler import Datahandler
 import lotto.auswertung as auswertung
@@ -339,8 +339,8 @@ class MainDialog(QtWidgets.QMainWindow):
             anzahl_datensaetze = 0
         self.data_handler.delete_ziehung(
             lottodaten
-            [self.ui.edi_daten_gewinnz.textCursor().blockNumber()
-             + anzahl_datensaetze][0])
+            [self.ui.edi_daten_gewinnz.textCursor().blockNumber() +
+                anzahl_datensaetze][0])
         self.onBtn_gz_laden()
 
     def onBtn_ls_loeschen(self):
@@ -515,7 +515,7 @@ def gui(arguments):
             locale = unicode(QtCore.QLocale.system().name())
         except:
             locale = QtCore.QLocale.system().name()
-        print ("locale: {}".format(locale))
+        print("locale: {}".format(locale))
     app = QtWidgets.QApplication(sys.argv)
     translator = QtCore.QTranslator()
     translator.load(join("lotto", "pylv_" + locale))
