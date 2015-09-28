@@ -1,25 +1,25 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""
-pyLottoverwaltung
 
-Copyright (C) <2012-2015> Markus Hackspacher
+# pyLottoverwaltung
 
-This file is part of pyLottoverwaltung.
+# Copyright (C) <2012-2015> Markus Hackspacher
 
-pyLottoverwaltung is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+# This file is part of pyLottoverwaltung.
 
-pyLottoverwaltung is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Lesser General Public License for more details.
+# pyLottoverwaltung is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
 
-You should have received a copy of the GNU General Public License
-along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
-"""
+# pyLottoverwaltung is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
+
 
 import sys
 import random
@@ -489,14 +489,16 @@ class MainDialog(QtWidgets.QMainWindow):
         self.buttonchange()
 
     def draw_numbers(self):
-        """ numbers are in the draw """
+        """numbers are in the draw
+        """
         return [num_draw.value() for num_draw in self.ui.spinBox_Zahlen]
 
     def onwebsite(self):
-        """ open website """
+        """open website
+        """
         webbrowser.open_new_tab(
-            "http://markush.cwsurf.de/joomla_17"
-            "/index.php/python/pylottoverwaltung/")
+            "http://ratgeber---forum.de/wbb3/"
+            "index.php?page=Thread&threadID=4855")
 
     def onClose(self):
         self.ui.close()
@@ -504,6 +506,7 @@ class MainDialog(QtWidgets.QMainWindow):
 
 def gui(arguments):
     """open the GUI
+
     @param arguments: language (en, de)
     @type arguments: string
     @return: none
