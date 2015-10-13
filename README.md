@@ -1,6 +1,9 @@
 pyLottoverwaltung
 =================
 
+[![Build Status](https://drone.io/github.com/MarkusHackspacher/pyLottoverwaltung/status.png)]
+(https://drone.io/github.com/MarkusHackspacher/pyLottoverwaltung/latest)
+
 a programm for the german lottery "pick 6 out of 49" system.
 A goal is manage the own numbers and the numbers of the drawing.
 
