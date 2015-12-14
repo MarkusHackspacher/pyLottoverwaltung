@@ -1,8 +1,5 @@
 # coding: utf-8
 
-# the data handler
-# for insert, get and delete data in the database
-
 # pyLottoverwaltung
 
 # Copyright (C) <2012-2015> Markus Hackspacher
@@ -22,59 +19,22 @@
 # You should have received a copy of the GNU General Public License
 # along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 
+"""The data handler
+for insert, get and delete data in the database
+"""
+
 import sqlite3
-import os
-import doctest
 
 
 class Datahandler(object):
+    """
+    data handler for the data base
+    """
     def __init__(self, path):
         """class init
         @type path: string
         @return: none
-
-        >>> data_handler = Datahandler(':memory:')
-        >>> data_handler.insert_ziehung('2013-03-13', \
-[11, 12, 13, 14, 15, 16, 17],666, 777, 888)
-        >>> data_handler.get_ziehung()
-        [(1, u'2013-03-13', 666, 777, 888, u'11,12,13,14,15,16,17')]
-        >>> data_handler.insert_ziehung('2013-03-12', \
-[21 ,22, 23, 24, 25, 26, 27], 222, 333, 444)
-        >>> data_handler.get_ziehung(2)
-        [(2, u'2013-03-12', 222, 333, 444, u'21,22,23,24,25,26,27')]
-        >>> data_handler.get_ziehung()
-        [(2, u'2013-03-12', 222, 333, 444, u'21,22,23,24,25,26,27'), \
-(1, u'2013-03-13', 666, 777, 888, u'11,12,13,14,15,16,17')]
-
-        >>> data_handler.insert_schein('2013-03-13', \
-[11, 12, 13, 14, 15, 16, 17], 2 ,0 ,888)
-        >>> data_handler.get_schein()
-        [(1, u'2013-03-13', 2, 0, 888, u'11,12,13,14,15,16,17')]
-        >>> data_handler.insert_schein('2013-03-12', \
-[21, 22, 23, 24, 25, 28], 1, 1, 444)
-        >>> data_handler.get_schein(2)
-        [(2, u'2013-03-12', 1, 1, 444, u'21,22,23,24,25,28')]
-        >>> data_handler.get_schein()
-        [(2, u'2013-03-12', 1, 1, 444, u'21,22,23,24,25,28'), \
-(1, u'2013-03-13', 2, 0, 888, u'11,12,13,14,15,16,17')]
-        >>> data_handler.get_id_numbers_of_ziehung(2)
-        [2]
-        >>> data_handler.get_id_numbers_of_ziehung(2, 3)
-        'error'
-        >>> data_handler.get_id_numbers_of_ziehung()
-        'error'
-        >>> data_handler.get_id_numbers_of_ziehung(number_list=[12, 27])
-        [1, 2]
-        >>> data_handler.dump()
-        >>> data_handler.delete_ziehung(1)
-        >>> data_handler.delete_ziehung(2)
-        >>> data_handler.get_ziehung()
-        []
-        >>> data_handler.delete_schein(1)
-        >>> data_handler.delete_schein(2)
-        >>> data_handler.get_schein()
-        []
-       """
+        """
         self.connection = sqlite3.connect(path)
         self.create_tables()
 
@@ -270,14 +230,10 @@ class Datahandler(object):
         """write dump file"""
         with open('dump.sql', 'w') as f:
             for line in self.connection.iterdump():
-                f.write('%s\n' % line)
+                f.write('{}\n'.format(line))
         f.close()
 
     def __del__(self):
         """close connection of database"""
         self.connection.close()
         print('database connection close')
-
-if __name__ == "__main__":
-    """ doctest of datahandler"""
-    doctest.testmod()

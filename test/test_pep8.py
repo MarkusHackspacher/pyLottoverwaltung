@@ -30,6 +30,7 @@ class TestCodeFormat(unittest.TestCase):
         pep8style = pep8.StyleGuide(quiet=False)
         result = pep8style.check_files(['pylotto.pyw',
                                         'test/test_pep8.py',
+                                        'test/test_datahandler.py',
                                         'lotto/auswertung.py',
                                         'lotto/datahandler.py',
                                         'lotto/kalender_datum.py',

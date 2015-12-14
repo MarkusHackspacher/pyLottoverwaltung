@@ -213,10 +213,6 @@ class MainDialog(QtWidgets.QMainWindow):
         a.setInformativeText(self.tr('Von Markus Hackspacher'))
         a.exec_()
 
-    def closeEvent(self, event):
-        """ the program exit """
-        return
-
     def spinBox_1to7_clear(self, number=None, numbers=None):
         """Die SpinBoxen 1 bis 6 und Zusatzzahl löschen"""
         if number is not None:
@@ -393,7 +389,9 @@ class MainDialog(QtWidgets.QMainWindow):
         self.onBtn_gz_laden()
 
     def onbtn_zufall(self):
-        """ Die Zufallszahen generieren
+        """random numbers
+
+        @return:
         """
         drawn_numbers = 6
         highest = 49
@@ -493,7 +491,8 @@ class MainDialog(QtWidgets.QMainWindow):
         """
         return [num_draw.value() for num_draw in self.ui.spinBox_Zahlen]
 
-    def onwebsite(self):
+    @staticmethod
+    def onwebsite():
         """open website
         """
         webbrowser.open_new_tab(
