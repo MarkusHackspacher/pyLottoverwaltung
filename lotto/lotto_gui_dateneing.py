@@ -110,20 +110,20 @@ class MainDialog(QtWidgets.QMainWindow):
         self.onmodus()
         self.buttonchange()
         self.data_handler = Datahandler('datenbank1.sqlite')
-        self.onBtn_gz_laden()
-        self.onBtn_ls_laden()
+        self.onbtn_gz_laden()
+        self.onbtn_ls_laden()
 
         # slots for database functions
-        self.ui.Btn_gz_anzeigen.clicked.connect(self.onBtn_gz_anzeigen)
-        self.ui.Btn_ls_anzeigen.clicked.connect(self.onBtn_ls_anzeigen)
-        self.ui.Btn_gz_loeschen.clicked.connect(self.onBtn_gz_loeschen)
+        self.ui.Btn_gz_anzeigen.clicked.connect(self.onbtn_gz_anzeigen)
+        self.ui.Btn_ls_anzeigen.clicked.connect(self.onbtn_ls_anzeigen)
+        self.ui.Btn_gz_loeschen.clicked.connect(self.onbtn_gz_loeschen)
         self.ui.Btn_gz_loeschen.setEnabled(False)
-        self.ui.Btn_ls_loeschen.clicked.connect(self.onBtn_ls_loeschen)
+        self.ui.Btn_ls_loeschen.clicked.connect(self.onbtn_ls_loeschen)
         self.ui.Btn_ls_loeschen.setEnabled(False)
-        self.ui.btn_ls_auswerten.clicked.connect(self.onBtn_ls_auswerten)
+        self.ui.btn_ls_auswerten.clicked.connect(self.onbtn_ls_auswerten)
         self.ui.btn_ls_auswerten.setEnabled(False)
         self.ui.CBox_gz_kompl_ausgeben.clicked.connect(
-            self.onCBox_gz_kompl_ausgeben)
+            self.on_checkbox_draw_numbers_show)
         self.ui.btn_set_calender_today.clicked.connect(
             self.onbtn_set_calender_today)
         self.ui.btn_kalender.clicked.connect(self.onbtn_kalender)
@@ -134,11 +134,11 @@ class MainDialog(QtWidgets.QMainWindow):
         # fields of draw numbers
         for number in range_7:
             self.spinBox_clear = functools.partial(
-                self.spinBox_1to7_clear, number)
+                self.spinbox_1to7_clear, number)
             self.ui.Btn_delete_Number[number].clicked.connect(
                 self.spinBox_clear)
             self.focusSpinBox = functools.partial(
-                self.focusSpinBox_1to7, number)
+                self.focus_spinbox_1to7)
             self.ui.spinBox_Zahlen[number].valueChanged.connect(
                 self.focusSpinBox)
 
@@ -147,14 +147,14 @@ class MainDialog(QtWidgets.QMainWindow):
         # fields of 1 to highest number
         for button in range_highest_number:
             self.onEingabefeld = functools.partial(
-                self.onEingabefeld_1to49, button + 1)
+                self.onclick_number_box_1to49, button + 1)
             self.ui.Btn_Numerals_1to49[button].clicked.connect(
                 self.onEingabefeld)
 
         self.statusBar().showMessage(self.tr('ready'))
 
-        self.ui.actionBeenden.triggered.connect(self.onClose)
-        self.ui.actionInfo.triggered.connect(self.onInfo)
+        self.ui.actionBeenden.triggered.connect(self.onclose)
+        self.ui.actionInfo.triggered.connect(self.on_info)
         self.ui.actionGo_to_the_website.triggered.connect(self.onwebsite)
         self.ui.edi_daten_gewinnz.cursorPositionChanged.connect(
             self.ondaten_gewinnz)
@@ -204,7 +204,7 @@ class MainDialog(QtWidgets.QMainWindow):
         self.ui.Btn_ls_loeschen.setEnabled(True)
         self.ui.btn_ls_auswerten.setEnabled(True)
 
-    def onInfo(self):
+    def on_info(self):
         """ Program info
         """
         text = self.tr('Eingabe der Gewinnzahlen von einer Ziehung'
@@ -216,7 +216,7 @@ class MainDialog(QtWidgets.QMainWindow):
         a.setInformativeText(self.tr('Von Markus Hackspacher'))
         a.exec_()
 
-    def spinBox_1to7_clear(self, number=None, numbers=None):
+    def spinbox_1to7_clear(self, number=None, numbers=None):
         """Die SpinBoxen 1 bis 6 und Zusatzzahl löschen"""
         if number is not None:
             self.ui.spinBox_Zahlen[number].setValue(0)
@@ -227,12 +227,12 @@ class MainDialog(QtWidgets.QMainWindow):
                     spinBox_number.setValue(0)
                     spinBox_number.clear()
 
-    def onEingabefeld_1to49(self, zahl):
+    def onclick_number_box_1to49(self, zahl):
         """Ein Zahlenfelder 1 bis 49 wurde angeklickt"""
         self.zahl = zahl
         self.geaendert_btn()
 
-    def focusSpinBox_1to7(self, number):
+    def focus_spinbox_1to7(self):
         """Ein Auswahlfelder der 7 Gewinnzahlen oder
         Lottoscheins hat sich geaendert"""
         """
@@ -259,7 +259,7 @@ class MainDialog(QtWidgets.QMainWindow):
                 self.ui.spinBox_spiel77.value(),
                 self.ui.spinBox_super6.value())
             self.ui.Btn_gz_loeschen.setEnabled(False)
-            self.onBtn_gz_laden()
+            self.onbtn_gz_laden()
         else:
             self.data_handler.insert_schein(
                 day, self.draw_numbers()[:-1],
@@ -267,16 +267,16 @@ class MainDialog(QtWidgets.QMainWindow):
                 self.ui.com_laufzeit_tag.currentIndex(),
                 self.ui.spinBox_spiel77.value())
             self.ui.Btn_ls_loeschen.setEnabled(False)
-            self.onBtn_ls_laden()
+            self.onbtn_ls_laden()
 
-    def onBtn_ls_auswerten(self):
+    def onbtn_ls_auswerten(self):
         """den Lottoschein auswerten"""
         dlg = auswertung.UiLottoEvaluation(self.data_handler.get_schein()[
             self.ui.edi_daten_lottoschein.textCursor().blockNumber()][0],
             self.data_handler)
         dlg.exec_()
 
-    def onBtn_gz_anzeigen(self):
+    def onbtn_gz_anzeigen(self):
         """
         show drawing numbers
         Gewinnzahlen im großen Feld anzeigen
@@ -300,7 +300,7 @@ class MainDialog(QtWidgets.QMainWindow):
         self.ui.com_modus.setCurrentIndex(0)
         self.buttonchange()
 
-    def onBtn_ls_anzeigen(self):
+    def onbtn_ls_anzeigen(self):
         """
         show tip numbers
         Lottoschein im großen Feld anzeigen,
@@ -322,7 +322,7 @@ class MainDialog(QtWidgets.QMainWindow):
         self.ui.com_modus.setCurrentIndex(1)
         self.buttonchange()
 
-    def onBtn_gz_loeschen(self):
+    def onbtn_gz_loeschen(self):
         """
         delete drawing numbers from the database
         Gewinnzahlen einer Ziehung aus der Datenbank loeschen
@@ -340,9 +340,9 @@ class MainDialog(QtWidgets.QMainWindow):
             lottodaten
             [self.ui.edi_daten_gewinnz.textCursor().blockNumber() +
                 anzahl_datensaetze][0])
-        self.onBtn_gz_laden()
+        self.onbtn_gz_laden()
 
-    def onBtn_ls_loeschen(self):
+    def onbtn_ls_loeschen(self):
         """
         delete tip numbers from the database
         Lottoschein aus der Datenbank loeschen
@@ -353,23 +353,23 @@ class MainDialog(QtWidgets.QMainWindow):
         self.data_handler.delete_schein(
             lottodaten
             [self.ui.edi_daten_lottoschein.textCursor().blockNumber()][0])
-        self.onBtn_ls_laden()
+        self.onbtn_ls_laden()
 
-    def onBtn_ls_laden(self):
+    def onbtn_ls_laden(self):
         """Read the Lottoschein from the Database
         loading into the QPlainTextEdit
         """
-        PlainText = QtWidgets.QPlainTextEdit()
+        plain_text = QtWidgets.QPlainTextEdit()
         lottodaten = self.data_handler.get_schein()
         for schein in lottodaten:
-            PlainText.appendPlainText('Datum: {0} Zahlen: {1}'
-                                      .format(schein[1], schein[5]))
+            plain_text.appendPlainText('Datum: {0} Zahlen: {1}'
+                                       .format(schein[1], schein[5]))
         self.ui.edi_daten_lottoschein.setPlainText(
-            PlainText.document().toPlainText())
+            plain_text.document().toPlainText())
         self.ui.edi_daten_lottoschein.moveCursor(
             self.ui.edi_daten_lottoschein.textCursor().End)
 
-    def onBtn_gz_laden(self):
+    def onbtn_gz_laden(self):
         """Read the Gewinnzahlen from the Database
         loading into the QPlainTextEdit
         """
@@ -385,11 +385,11 @@ class MainDialog(QtWidgets.QMainWindow):
         self.ui.edi_daten_gewinnz.moveCursor(
             self.ui.edi_daten_gewinnz.textCursor().End)
 
-    def onCBox_gz_kompl_ausgeben(self):
+    def on_checkbox_draw_numbers_show(self):
         """
         CheckBox: Show the complete database in TextEdit
         """
-        self.onBtn_gz_laden()
+        self.onbtn_gz_laden()
 
     def onbtn_zufall(self):
         """random numbers
@@ -429,7 +429,7 @@ class MainDialog(QtWidgets.QMainWindow):
             self.ui.lab_zusatz.setVisible(False)
             self.ui.spinBox_Zahlen[6].setVisible(False)
             self.ui.Btn_delete_Number[6].setVisible(False)
-            self.spinBox_1to7_clear(6)
+            self.spinbox_1to7_clear(6)
             self.buttonchange()
 
         else:
@@ -475,7 +475,7 @@ class MainDialog(QtWidgets.QMainWindow):
                 number.setValue(self.zahl)
                 break
             elif self.zahl == number.value():
-                self.spinBox_1to7_clear(numbers=number.value())
+                self.spinbox_1to7_clear(numbers=number.value())
                 self.zahl = 0
 
         a = self.draw_numbers()
@@ -486,7 +486,7 @@ class MainDialog(QtWidgets.QMainWindow):
             self.ui.spinBox_Zahlen[6].setValue(self.zahl)
         elif self.zahl == self.ui.spinBox_Zahlen[6].value() \
                 or self.ui.com_modus.currentIndex() == 1:
-            self.spinBox_1to7_clear(6)
+            self.spinbox_1to7_clear(6)
         self.buttonchange()
 
     def draw_numbers(self):
@@ -502,7 +502,11 @@ class MainDialog(QtWidgets.QMainWindow):
             "http://ratgeber---forum.de/wbb3/"
             "index.php?page=Thread&threadID=4855")
 
-    def onClose(self):
+    def onclose(self):
+        """menu button close
+
+        @return:
+        """
         self.ui.close()
 
 
