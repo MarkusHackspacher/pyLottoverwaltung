@@ -43,6 +43,9 @@ if sys.version_info < (3, 0):
 
 
 class MainDialog(QtWidgets.QMainWindow):
+    """
+    initial the main window
+    """
     def __init__(self):
         """
         initial the main window
@@ -167,7 +170,7 @@ class MainDialog(QtWidgets.QMainWindow):
 
     def onbtn_kalender(self):
         """open calender dialog"""
-        dlg = kalender_datum.ui_kalender(
+        dlg = kalender_datum.CalendarUi(
             self.ui.spinBox_jahr.value(),
             self.ui.spinBox_monat.value(),
             self.ui.spinbox_tag.value())

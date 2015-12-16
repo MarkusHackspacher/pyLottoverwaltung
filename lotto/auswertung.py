@@ -35,6 +35,9 @@ except ImportError:
 
 
 class UiLottoEvaluation(QtWidgets.QDialog):
+    """
+    analyze dialog
+    """
     def __init__(self, rowid, data_handler):
         """open analyze dialog
         Datenauswerte Dialog oeffnen

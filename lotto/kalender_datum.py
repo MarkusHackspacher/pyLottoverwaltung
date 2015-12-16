@@ -28,10 +28,13 @@ except ImportError:
     from PyQt4 import QtGui, QtCore, uic
 
 
-class ui_kalender(QtWidgets.QDialog):
+class CalendarUi(QtWidgets.QDialog):
+    """
+    set Calendar UI
+    """
     def __init__(self, year, month, day):
-        """open kalender dialog
-        Kalender Dialog oeffnen
+        """open Calendar UI
+
         @type year: int
         @type month: int
         @type day: int
@@ -44,6 +47,6 @@ class ui_kalender(QtWidgets.QDialog):
 
     def kalender(self):
         """Return the date of the calender
-        @return: datum
+        @return: date
         """
         return self.calendarWidget.selectedDate()
