@@ -23,7 +23,6 @@
 
 import sys
 import random
-import sqlite3
 import functools
 import webbrowser
 from os.path import join
@@ -373,15 +372,15 @@ class MainDialog(QtWidgets.QMainWindow):
         """Read the Gewinnzahlen from the Database
         loading into the QPlainTextEdit
         """
-        PlainText = QtWidgets.QPlainTextEdit()
+        plain_text = QtWidgets.QPlainTextEdit()
         lottodaten = self.data_handler.get_ziehung()
         if not self.ui.CBox_gz_kompl_ausgeben.isChecked():
             lottodaten = lottodaten[-10:]
         for i in lottodaten:
-            PlainText.appendPlainText('Datum: {0} Zahlen: {1}'
+            plain_text.appendPlainText('Datum: {0} Zahlen: {1}'
                                       .format(i[1], i[5]))
         self.ui.edi_daten_gewinnz.setPlainText(
-            PlainText.document().toPlainText())
+            plain_text.document().toPlainText())
         self.ui.edi_daten_gewinnz.moveCursor(
             self.ui.edi_daten_gewinnz.textCursor().End)
 
