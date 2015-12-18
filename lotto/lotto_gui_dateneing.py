@@ -45,7 +45,7 @@ class MainDialog(QtWidgets.QMainWindow):
     """
     initial the main window
     """
-    def __init__(self):
+    def __init__(self, parent=None):
         """
         initial the main window
         1 to 49 button,
@@ -53,7 +53,7 @@ class MainDialog(QtWidgets.QMainWindow):
         calender,
         datafield
         """
-        QtWidgets.QDialog.__init__(self)
+        super(MainDialog, self).__init__(parent)
         self.ui = uic.loadUi(join("lotto", "gui", "lotto_dateneing.ui"))
         self.ui.setWindowIcon(QtGui.QIcon(
             join("misc", "pyLottoverwaltung.svg")))
@@ -378,7 +378,7 @@ class MainDialog(QtWidgets.QMainWindow):
             lottodaten = lottodaten[-10:]
         for i in lottodaten:
             plain_text.appendPlainText('Datum: {0} Zahlen: {1}'
-                                      .format(i[1], i[5]))
+                                       .format(i[1], i[5]))
         self.ui.edi_daten_gewinnz.setPlainText(
             plain_text.document().toPlainText())
         self.ui.edi_daten_gewinnz.moveCursor(

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="de_DE" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="de_DE">
 <context>
     <name>Dialog</name>
     <message>
@@ -16,6 +17,33 @@
         <location filename="gui/dialog_kalender.ui" line="14"/>
         <source>Calendar</source>
         <translation>Kalender</translation>
+    </message>
+</context>
+<context>
+    <name>MainDialog</name>
+    <message>
+        <location filename="lotto_gui_dateneing.py" line="153"/>
+        <source>ready</source>
+        <translation>Bereit</translation>
+    </message>
+    <message>
+        <location filename="lotto_gui_dateneing.py" line="209"/>
+        <source>Eingabe der Gewinnzahlen von einer Ziehungoder des Lottoscheins
+ Lizenz: GNU GPLv3
+http://www.gnu.org/licenses/</source>
+        <translation>Eingabe der Gewinnzahlen von einer Ziehungoder des Lottoscheins
+ Lizenz: GNU GPLv3
+http://www.gnu.org/licenses/</translation>
+    </message>
+    <message>
+        <location filename="lotto_gui_dateneing.py" line="213"/>
+        <source>Info</source>
+        <translation>Info</translation>
+    </message>
+    <message>
+        <location filename="lotto_gui_dateneing.py" line="215"/>
+        <source>Von Markus Hackspacher</source>
+        <translation>Von Markus Hackspacher</translation>
     </message>
 </context>
 <context>
@@ -211,88 +239,61 @@ calendar</source>
     </message>
 </context>
 <context>
-    <name>MeinDialog</name>
+    <name>UiLottoEvaluation</name>
     <message>
-        <location filename="lotto_gui_dateneing.py" line="197"/>
-        <source>Eingabe der Gewinnzahlen von einer Ziehungoder des Lottoscheins
- Lizenz: GNU GPLv3
-http://www.gnu.org/licenses/</source>
-        <translation>Eingabe der Gewinnzahlen von einer Ziehungoder des Lottoscheins
- Lizenz: GNU GPLv3
-http://www.gnu.org/licenses/</translation>
+        <location filename="auswertung.py" line="55"/>
+        <source>record: {0}</source>
+        <translation>Datensatz: {0}</translation>
     </message>
     <message>
-        <location filename="lotto_gui_dateneing.py" line="201"/>
-        <source>Info</source>
-        <translation>Info</translation>
-    </message>
-    <message>
-        <location filename="lotto_gui_dateneing.py" line="203"/>
-        <source>Von Markus Hackspacher</source>
-        <translation>Von Markus Hackspacher</translation>
-    </message>
-    <message>
-        <location filename="lotto_gui_dateneing.py" line="141"/>
-        <source>ready</source>
-        <translation>Bereit</translation>
-    </message>
-</context>
-<context>
-    <name>ui_lotto_auswertung</name>
-    <message>
-        <location filename="auswertung.py" line="60"/>
-        <source>No matching draws found</source>
-        <translation>Keine übereinstimmende Ziehungen gefunden</translation>
-    </message>
-    <message>
-        <location filename="auswertung.py" line="63"/>
-        <source>The following drawings found:</source>
-        <translation>Folgende Ziehungen gefunden:</translation>
-    </message>
-    <message>
-        <location filename="auswertung.py" line="92"/>
-        <source>Date: {0} | {1}, {2},{3}, {4}, {5}, {6} {7} matches: {8}</source>
-        <translation>Darum: {0} | {1}, {2},{3}, {4}, {5}, {6} {7} Übereinstimmungen: {8}</translation>
-    </message>
-    <message>
-        <location filename="auswertung.py" line="50"/>
+        <location filename="auswertung.py" line="58"/>
         <source>Date: {0} Numbers: {1}</source>
         <translation>Datum: {0} Zahlen: {1}</translation>
     </message>
     <message>
-        <location filename="auswertung.py" line="103"/>
+        <location filename="auswertung.py" line="64"/>
+        <source>No matching draws found</source>
+        <translation>Keine übereinstimmende Ziehungen gefunden</translation>
+    </message>
+    <message>
+        <location filename="auswertung.py" line="67"/>
+        <source>The following drawings found:</source>
+        <translation>Folgende Ziehungen gefunden:</translation>
+    </message>
+    <message>
+        <location filename="auswertung.py" line="98"/>
+        <source>Date: {0} | {1}, {2}, {3}, {4}, {5}, {6} {7} matches: {8}</source>
+        <translation>Darum: {0} | {1}, {2},{3}, {4}, {5}, {6} {7} Übereinstimmungen: {8}</translation>
+    </message>
+    <message>
+        <location filename="auswertung.py" line="104"/>
         <source>only match with the additional number: {0}</source>
         <translation>nur Übereinstimmend mit der Zusatzzahl: {0}</translation>
     </message>
     <message>
-        <location filename="auswertung.py" line="106"/>
+        <location filename="auswertung.py" line="107"/>
         <source>a number</source>
         <translation>einer Zahl</translation>
     </message>
     <message>
-        <location filename="auswertung.py" line="106"/>
+        <location filename="auswertung.py" line="107"/>
         <source>two numbers</source>
         <translation>zwei Zahlen</translation>
     </message>
     <message>
-        <location filename="auswertung.py" line="106"/>
+        <location filename="auswertung.py" line="107"/>
         <source>three numbers</source>
         <translation>drei Zahlen</translation>
     </message>
     <message>
-        <location filename="auswertung.py" line="106"/>
+        <location filename="auswertung.py" line="107"/>
         <source>four numbers</source>
         <translation>vier Zahlen</translation>
     </message>
     <message>
-        <location filename="auswertung.py" line="108"/>
+        <location filename="auswertung.py" line="109"/>
         <source>{} Matches with {}, plus additional number: {}</source>
         <translation>{} Übereinstimmungen mit {}, plus Zusatzzahl: {}</translation>
-    </message>
-    <message>
-        <location filename="auswertung.py" line="44"/>
-        <source>record: {0}</source>
-        <translation>Datensatz: {0}</translation>
     </message>
 </context>
 </TS>

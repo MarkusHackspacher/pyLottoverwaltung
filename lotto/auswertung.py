@@ -26,6 +26,7 @@ try:
 except ImportError:
     Set = set
 
+import sys
 from os.path import join
 try:
     from PyQt5 import QtGui, QtCore, QtWidgets, uic
@@ -33,33 +34,29 @@ except ImportError:
     from PyQt4 import QtGui as QtWidgets
     from PyQt4 import QtGui, QtCore, uic
 
+if sys.version_info < (3, 0):
+    str = unicode
+
 
 class UiLottoEvaluation(QtWidgets.QDialog):
     """
     analyze dialog
     """
-    def __init__(self, rowid, data_handler):
+    def __init__(self, rowid, data_handler, parent=None):
         """open analyze dialog
         Datenauswerte Dialog oeffnen
         @type rowid: int
         @type data_handler: datahandler
         @return: give close(0) back
         """
-        QtWidgets.QDialog.__init__(self)
+        super(UiLottoEvaluation, self).__init__(parent)
         uic.loadUi(join("lotto", "gui", "auswertung.ui"), self)
         self.setWindowIcon(QtGui.QIcon(join("misc", "pyLottoverwaltung.svg")))
         text = self.tr('record: {0}')
-        try:
-            self.edi_daten.appendPlainText(unicode(text).format(rowid))
-        except:
-            self.edi_daten.appendPlainText(text.format(rowid))
+        self.edi_daten.appendPlainText(str(text).format(rowid))
         schein = data_handler.get_schein(rowid)[0]
         text = self.tr('Date: {0} Numbers: {1}')
-        try:
-            self.edi_daten.appendPlainText(
-                unicode(text).format(schein[1], schein[5]))
-        except:
-            self.edi_daten.appendPlainText(text.format(schein[1], schein[5]))
+        self.edi_daten.appendPlainText(str(text).format(schein[1], schein[5]))
         self.edi_daten.moveCursor(self.edi_daten.textCursor().End)
         lottodaten = data_handler.get_id_numbers_of_ziehung(rowid)
         anzahl_lottodaten = len(lottodaten)
@@ -99,38 +96,21 @@ class UiLottoEvaluation(QtWidgets.QDialog):
                         text_zz = ''
                     text = self.tr('Date: {0} | {1}, {2}, {3}, {4}, {5}, {6}'
                                    ' {7} matches: {8}')
-                    try:
-                        text = unicode(text).format(
-                            ziehungsdaten[1], z[0], z[1], z[2], z[3], z[4],
-                            z[5], text_zz, anzahl_gleiche_zahl)
-                    except:
-                        text = text.format(
-                            ziehungsdaten[1], z[0], z[1], z[2], z[3], z[4],
-                            z[5], text_zz, anzahl_gleiche_zahl)
+                    text = str(text).format(ziehungsdaten[1], z[0], z[1],
+                                            z[2], z[3], z[4], z[5], text_zz,
+                                            anzahl_gleiche_zahl)
                     self.edi_daten.appendPlainText(text)
             text = self.tr('only match with the additional number: {0}')
-            try:
-                self.edi_daten.appendPlainText(
-                    unicode(text).format(uebereinstimmungen[1]))
-            except:
-                self.edi_daten.appendPlainText(
-                    text.format(uebereinstimmungen[1]))
+            self.edi_daten.appendPlainText(
+                    str(text).format(uebereinstimmungen[1]))
             text_zahl = (self.tr('a number'), self.tr('two numbers'),
                          self.tr('three numbers'), self.tr('four numbers'))
             text = self.tr('{} Matches with {}, plus additional number: {}')
             c = 0
             while c < 4:
-                try:
-                    self.edi_daten.appendPlainText(
-                        unicode(text).format(
-                            uebereinstimmungen[c + 1 * 2],
-                            unicode(text_zahl[c]),
-                            uebereinstimmungen[c + 2 * 2]))
-                except:
-                    self.edi_daten.appendPlainText(
-                        text.format(
-                            uebereinstimmungen[c + 1 * 2],
-                            text_zahl[c],
-                            uebereinstimmungen[c + 2 * 2]))
+                self.edi_daten.appendPlainText(str(text).format(
+                        uebereinstimmungen[c + 1 * 2],
+                        str(text_zahl[c]),
+                        uebereinstimmungen[c + 2 * 2]))
                 c += 1
             self.edi_daten.moveCursor(self.edi_daten.textCursor().End)
