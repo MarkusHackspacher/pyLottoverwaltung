@@ -463,9 +463,9 @@ class MainDialog(QtWidgets.QMainWindow):
                 button.setStyleSheet("color: black;")
 
     def geaendert_btn(self):
-        """in den SpinBoxen die Nummern der Zahlen 1 bis 49 anzeigen
-        wenn die Zahl abgewaehlt wird, wird auch der
-        Wert der entsprechende Spinbox geloescht
+        """Show the SpinBoxes of the numbers 1 to 49
+        if the number is deactivated, also the
+        deleted value of the corresponding spin box
         """
         a = self.draw_numbers()
 
@@ -519,10 +519,7 @@ def gui(arguments):
     if len(arguments) > 1:
         locale = arguments[1]
     else:
-        try:
-            locale = unicode(QtCore.QLocale.system().name())
-        except:
-            locale = QtCore.QLocale.system().name()
+        locale = str(QtCore.QLocale.system().name())
         print("locale: {}".format(locale))
     app = QtWidgets.QApplication(sys.argv)
     translator = QtCore.QTranslator()
