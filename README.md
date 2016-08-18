@@ -20,7 +20,6 @@ ToDo:
 -----
 
 change and remove data sets. compare the own numbers with the draw numbers.
-make the code easier to read.
 
 install:
 --------
