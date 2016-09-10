@@ -3,8 +3,6 @@ pyLottoverwaltung
 
 [![Build Status](https://drone.io/github.com/MarkusHackspacher/pyLottoverwaltung/status.png)]
 (https://drone.io/github.com/MarkusHackspacher/pyLottoverwaltung/latest)
-[![Code Issues](https://www.quantifiedcode.com/api/v1/project/bf691a6e42b547ec851b17f1938759d6/badge.svg)]
-(https://www.quantifiedcode.com/app/project/bf691a6e42b547ec851b17f1938759d6)
 
 a program for the german lottery "pick 6 out of 49" system.
 A goal is manage the own numbers and the numbers of the drawing.
