@@ -22,19 +22,19 @@ change and remove data sets. compare the own numbers with the draw numbers.
 install:
 --------
 
-The program requires [Python 2.7 or 3.x](http://www.python.org/download/) 
+The program requires [Python 3.x](http://www.python.org/download/) 
 and [Qt4 for Python](http://www.riverbankcomputing.com/software/pyqt/download)
 or [Qt5 for Python](http://www.riverbankcomputing.com/software/pyqt/download5).
 
 Start with:
-```python pylotto.pyw```
+```./start.pyw```
 
-The layout (lotto_dateneing.ui) can be manipulated using the Qt4 designer.
+The layout (lotto_dateneing.ui) can be manipulated using the Qt designer.
 
 Make the documentation as .pdf file:
 ```epydoc pylotto.pyw lotto --pdf```
 
-To translate the programm or make a translation in your language,
+To translate the program or make a translation in your language,
 insert in the complete.pro your language code.
 ```
 cd lotto
@@ -48,7 +48,7 @@ lrelease complete.pro
 Installieren:
 -------------
 
-Das Programm benötigt [Python  2.7 oder 3.x](http://www.python.org/download/) 
+Das Programm benötigt [Python 3.x](http://www.python.org/download/) 
 und [Qt4 für Python](http://www.riverbankcomputing.com/software/pyqt/download) 
 oder [Qt5 für Python](http://www.riverbankcomputing.com/software/pyqt/download5) dazu.
 
@@ -60,20 +60,8 @@ Das Layout (lotto_dateneing.ui) kann mit den Qt4-Designer bearbeitet werden.
 Dokumentation als as .pdf Datei erstellen lassen:
 ```epydoc pylotto.pyw lotto --pdf```
 
-Copyright (C) <2012-2015> Markus Hackspacher
 
-This file is part of pyLottoverwaltung.
+License
+-------
 
-pyLottoverwaltung is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-pyLottoverwaltung is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
-
+GNU GPL V3
