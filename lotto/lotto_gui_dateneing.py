@@ -40,9 +40,6 @@ except ImportError:
     from PyQt4 import QtGui, QtCore, uic
     print("pyQt4")
 
-if sys.version_info < (3, 0):
-    range = xrange
-
 
 class MainDialog(QtWidgets.QMainWindow):
     """

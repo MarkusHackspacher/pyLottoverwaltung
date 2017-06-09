@@ -20,13 +20,6 @@
 # You should have received a copy of the GNU General Public License
 # along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 
-
-try:
-    from sets import Set
-except ImportError:
-    Set = set
-
-import sys
 from os.path import join
 
 try:
@@ -34,9 +27,6 @@ try:
 except ImportError:
     from PyQt4 import QtGui as QtWidgets
     from PyQt4 import QtGui, QtCore, uic
-
-if sys.version_info < (3, 0):
-    str = unicode
 
 
 class UiLottoEvaluation(QtWidgets.QDialog):
@@ -72,18 +62,18 @@ class UiLottoEvaluation(QtWidgets.QDialog):
             uebereinstimmungen = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             for i in zahlen:
                 z.append(int(i))
-            set_schein = Set(z)
+            set_schein = set(z)
             for lottodaten_z in lottodaten:
                 ziehungsdaten = data_handler.get_ziehung(lottodaten_z)[0]
                 zahlen = ziehungsdaten[5].split(',')
                 z = []
                 for i in zahlen:
                     z.append(int(i))
-                set_ziehung = Set(z[0:6])
+                set_ziehung = set(z[0:6])
                 anzahl_gleiche_zahl = len(set_schein & set_ziehung)
 
                 if len(z) >= 7:
-                    set_zusatzzahl = Set([z[6]])
+                    set_zusatzzahl = set([z[6]])
                     zusatzzahl_vorhanden = len(set_schein & set_zusatzzahl)
                 else:
                     zusatzzahl_vorhanden = 0
