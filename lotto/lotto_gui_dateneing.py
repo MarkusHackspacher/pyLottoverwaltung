@@ -3,7 +3,7 @@
 
 # pyLottoverwaltung
 
-# Copyright (C) <2012-2015> Markus Hackspacher
+# Copyright (C) <2012-2017> Markus Hackspacher
 
 # This file is part of pyLottoverwaltung.
 
@@ -21,11 +21,17 @@
 # along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 
 
-import sys
-import random
 import functools
+import random
+import sys
 import webbrowser
 from os.path import join
+
+import lotto.auswertung as auswertung
+import lotto.kalender_datum as kalender_datum
+
+from .datahandler import Datahandler
+
 try:
     from PyQt5 import QtGui, QtCore, QtWidgets, uic
     print("pyQt5")
@@ -34,9 +40,6 @@ except ImportError:
     from PyQt4 import QtGui, QtCore, uic
     print("pyQt4")
 
-from .datahandler import Datahandler
-import lotto.auswertung as auswertung
-import lotto.kalender_datum as kalender_datum
 if sys.version_info < (3, 0):
     range = xrange
 
@@ -527,6 +530,7 @@ def gui(arguments):
     app.installTranslator(translator)
     dialog = MainDialog()
     sys.exit(app.exec_())
+
 
 if __name__ == "__main__":
     gui()

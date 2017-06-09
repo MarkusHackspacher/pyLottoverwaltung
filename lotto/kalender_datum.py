@@ -21,6 +21,7 @@
 # along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 
 from os.path import join
+
 try:
     from PyQt5 import QtGui, QtCore, QtWidgets, uic
 except ImportError:

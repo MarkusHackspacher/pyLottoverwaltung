@@ -3,7 +3,7 @@
 
 # pyLottoverwaltung
 
-# Copyright (C) <2012-2014> Markus Hackspacher
+# Copyright (C) <2012-2017> Markus Hackspacher
 
 # This file is part of pyLottoverwaltung.
 
@@ -28,8 +28,9 @@ except ImportError:
 
 import sys
 from os.path import join
+
 try:
-    from PyQt5 import QtGui, QtCore, QtWidgets, uic
+    from PyQt5 import QtGui, QtWidgets, uic
 except ImportError:
     from PyQt4 import QtGui as QtWidgets
     from PyQt4 import QtGui, QtCore, uic
