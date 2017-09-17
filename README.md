@@ -1,7 +1,6 @@
 pyLottoverwaltung
 =================
 
-[![Code Issues](https://www.quantifiedcode.com/api/v1/project/bf691a6e42b547ec851b17f1938759d6/badge.svg)](https://www.quantifiedcode.com/app/project/bf691a6e42b547ec851b17f1938759d6)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7676fec18aa7402cb99bc13bd6a31e79)](https://www.codacy.com/app/Malta/pyLottoverwaltung?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MarkusHackspacher/pyLottoverwaltung&amp;utm_campaign=Badge_Grade)
 
 a program for the german lottery "pick 6 out of 49" system.
