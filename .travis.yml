@@ -20,5 +20,5 @@ script:
 after_success:
   - coverage report -m
   - coverage xml
-  - export CODACY_PROJECT_TOKEN=67f541353e0644c49eceb0c3033a2a50
+  - export CODACY_PROJECT_TOKEN=5bacd9172ec14e95b08854b3eaf6365d
   - python-codacy-coverage -r coverage.xml
