@@ -16,7 +16,7 @@ install:
 script:
  - isort -c -rc
  - pycodestyle lotto/ tests/ *.py*
- - nosetests --with-coverage --cover-erase --cover-package=pylottosimu --cover-html
+ - nosetests --with-coverage --cover-erase --cover-package=lotto --cover-html
 after_success:
   - coverage report -m
   - coverage xml
