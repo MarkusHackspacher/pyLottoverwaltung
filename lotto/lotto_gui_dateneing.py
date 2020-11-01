@@ -33,11 +33,13 @@ import lotto.kalender_datum as kalender_datum
 from .datahandler import Datahandler
 
 try:
-    from PyQt5 import QtGui, QtCore, QtWidgets, uic
+    from PyQt5 import QtCore, QtGui, QtWidgets, uic
     print("pyQt5")
 except ImportError:
+    from PyQt4 import QtCore
+    from PyQt4 import QtGui
     from PyQt4 import QtGui as QtWidgets
-    from PyQt4 import QtGui, QtCore, uic
+    from PyQt4 import uic
     print("pyQt4")
 
 
