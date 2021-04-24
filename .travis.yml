@@ -4,7 +4,7 @@ dist: bionic
 services:
   - xvfb
 python:
-  - "3.8"
+  - "3.9"
 #  - "nightly"
 install:
   - pip install -r requirements.txt
