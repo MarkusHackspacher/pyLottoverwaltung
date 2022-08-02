@@ -1,8 +1,7 @@
 pyLottoverwaltung
 =================
 
-[![Build Status](https://travis-ci.org/MarkusHackspacher/pyLottoverwaltung.svg?branch=master)](https://travis-ci.org/MarkusHackspacher/pyLottoverwaltung)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7676fec18aa7402cb99bc13bd6a31e79)](https://www.codacy.com/app/Malta/pyLottoverwaltung?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MarkusHackspacher/pyLottoverwaltung&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://app.travis-ci.com/MarkusHackspacher/pyLottoverwaltung.svg?branch=master)](https://app.travis-ci.com/github/MarkusHackspacher/pyLottoverwaltung)
 
 a program for the german lottery "pick 6 out of 49" system.
 A goal is manage the own numbers and the numbers of the drawing.
