@@ -22,8 +22,7 @@ install:
 --------
 
 The program requires [Python 3.x](http://www.python.org/download/) 
-and [Qt4 for Python](http://www.riverbankcomputing.com/software/pyqt/download)
-or [Qt5 for Python](http://www.riverbankcomputing.com/software/pyqt/download5).
+and [Qt5 for Python](http://www.riverbankcomputing.com/software/pyqt/download5).
 
 Start with:
 ```./start.pyw```
@@ -48,8 +47,7 @@ Installieren:
 -------------
 
 Das Programm benötigt [Python 3.x](http://www.python.org/download/) 
-und [Qt4 für Python](http://www.riverbankcomputing.com/software/pyqt/download) 
-oder [Qt5 für Python](http://www.riverbankcomputing.com/software/pyqt/download5) dazu.
+und [Qt5 für Python](http://www.riverbankcomputing.com/software/pyqt/download5) dazu.
 
 Start mit: 
 ```python lotto.pyw```
