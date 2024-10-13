@@ -1,4 +1,1 @@
 PyQt5
-# unit test requirements
-pycodestyle
-isort

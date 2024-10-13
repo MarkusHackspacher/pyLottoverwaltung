@@ -631,7 +631,7 @@ calendar</string>
      <x>0</x>
      <y>0</y>
      <width>913</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuDatei">
@@ -644,7 +644,6 @@ calendar</string>
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="actionGo_to_the_website"/>
     <addaction name="actionInfo"/>
    </widget>
    <addaction name="menuDatei"/>

@@ -3,7 +3,7 @@
 
 # pyLottoverwaltung
 
-# Copyright (C) <2012-2017> Markus Hackspacher
+# Copyright (C) <2012-2024> Markus Hackspacher
 
 # This file is part of pyLottoverwaltung.
 
@@ -27,20 +27,12 @@ import sys
 import webbrowser
 from os.path import join
 
+from PyQt5 import QtCore, QtGui, QtWidgets, uic
+
 import lotto.auswertung as auswertung
 import lotto.kalender_datum as kalender_datum
 
 from .datahandler import Datahandler
-
-try:
-    from PyQt5 import QtCore, QtGui, QtWidgets, uic
-    print("pyQt5")
-except ImportError:
-    from PyQt4 import QtCore
-    from PyQt4 import QtGui
-    from PyQt4 import QtGui as QtWidgets
-    from PyQt4 import uic
-    print("pyQt4")
 
 
 class MainDialog(QtWidgets.QMainWindow):
@@ -205,17 +197,23 @@ class MainDialog(QtWidgets.QMainWindow):
         self.ui.Btn_ls_loeschen.setEnabled(True)
         self.ui.btn_ls_auswerten.setEnabled(True)
 
-    def on_info(self):
+    def on_info(self, test=None):
         """ Program info
         """
-        text = self.tr('Eingabe der Gewinnzahlen von einer Ziehung'
-                       'oder des Lottoscheins\n Lizenz: GNU GPLv3\n'
-                       'http://www.gnu.org/licenses/')
-        a = QtWidgets.QMessageBox()
-        a.setWindowTitle(self.tr('Info'))
-        a.setText(text)
-        a.setInformativeText(self.tr('Von Markus Hackspacher'))
-        a.exec_()
+        text = self.tr('Eingabe der Gewinnzahlen von einer Ziehung '
+                       'oder des Lottoscheins\n Lizenz: GNU GPLv3\n')
+        infobox = QtWidgets.QMessageBox()
+        infobox.setWindowTitle(self.tr('Info'))
+        infobox.setText(text)
+        infobox.setInformativeText('https://github.com/MarkusHackspacher/pyLottoverwaltung')
+        infobox.setStandardButtons(QtWidgets.QMessageBox.Ok)
+        websideButton = infobox.addButton(self.tr('Website'), QtWidgets.QMessageBox.ActionRole)
+        if test:
+            button = infobox.button(QtWidgets.QMessageBox.Ok)
+            QtCore.QTimer.singleShot(0, button.clicked)
+        infobox.exec()
+        if infobox.clickedButton() == websideButton:
+            self.onwebsite()
 
     def spinbox_1to7_clear(self, number=None, numbers=None):
         """Die SpinBoxen 1 bis 6 und Zusatzzahl löschen"""
@@ -275,7 +273,7 @@ class MainDialog(QtWidgets.QMainWindow):
         dlg = auswertung.UiLottoEvaluation(self.data_handler.get_schein()[
             self.ui.edi_daten_lottoschein.textCursor().blockNumber()][0],
             self.data_handler)
-        dlg.exec_()
+        dlg.exec()
 
     def onbtn_gz_anzeigen(self):
         """
@@ -472,7 +470,7 @@ class MainDialog(QtWidgets.QMainWindow):
         a = self.draw_numbers()
 
         for number in self.ui.spinBox_Zahlen:
-            if number.value() == 0 and not (self.zahl in a):
+            if number.value() == 0 and self.zahl not in a:
                 number.setValue(self.zahl)
                 break
             elif self.zahl == number.value():
@@ -483,7 +481,7 @@ class MainDialog(QtWidgets.QMainWindow):
 
         if self.ui.spinBox_Zahlen[6].value() == 0 \
                 and self.ui.com_modus.currentIndex() == 0 \
-                and not (self.zahl in a):
+                and self.zahl not in a:
             self.ui.spinBox_Zahlen[6].setValue(self.zahl)
         elif self.zahl == self.ui.spinBox_Zahlen[6].value() \
                 or self.ui.com_modus.currentIndex() == 1:
@@ -500,13 +498,10 @@ class MainDialog(QtWidgets.QMainWindow):
         """open website
         """
         webbrowser.open_new_tab(
-            "http://ratgeber---forum.de/wbb3/"
-            "index.php?page=Thread&threadID=4855")
+            "https://github.com/MarkusHackspacher/pyLottoverwaltung")
 
     def onclose(self):
         """menu button close
-
-        @return:
         """
         self.ui.close()
 
@@ -528,7 +523,7 @@ def gui(arguments):
     translator.load(join("lotto", "pylv_" + locale))
     app.installTranslator(translator)
     dialog = MainDialog()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 
 
 if __name__ == "__main__":

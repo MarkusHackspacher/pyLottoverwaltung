@@ -3,7 +3,7 @@
 
 # pyLottoverwaltung
 
-# Copyright (C) <2012-2017> Markus Hackspacher
+# Copyright (C) <2012-2024> Markus Hackspacher
 
 # This file is part of pyLottoverwaltung.
 
@@ -22,13 +22,7 @@
 
 from os.path import join
 
-try:
-    from PyQt5 import QtGui, QtWidgets, uic
-except ImportError:
-    from PyQt4 import QtCore
-    from PyQt4 import QtGui
-    from PyQt4 import QtGui as QtWidgets
-    from PyQt4 import uic
+from PyQt5 import QtGui, QtWidgets, uic
 
 
 class UiLottoEvaluation(QtWidgets.QDialog):
