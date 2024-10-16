@@ -659,11 +659,6 @@ calendar</string>
     <string>Info</string>
    </property>
   </action>
-  <action name="actionGo_to_the_website">
-   <property name="text">
-    <string>Go to the website</string>
-   </property>
-  </action>
  </widget>
  <tabstops>
   <tabstop>edi_daten_gewinnz</tabstop>
