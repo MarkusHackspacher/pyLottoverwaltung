@@ -23,7 +23,6 @@
 
 import functools
 import random
-import sys
 import webbrowser
 from os.path import join
 
@@ -511,27 +510,3 @@ class MainDialog(QtCore.QObject):
         """menu button close
         """
         self.ui.close()
-
-
-def gui(arguments):
-    """open the GUI
-
-    @param arguments: language (en, de)
-    @type arguments: string
-    @return: none
-    """
-    if len(arguments) > 1:
-        locale = arguments[1]
-    else:
-        locale = str(QtCore.QLocale.system().name())
-        print("locale: {}".format(locale))
-    app = QtWidgets.QApplication(sys.argv)
-    translator = QtCore.QTranslator()
-    translator.load(join("lotto", "pylv_" + locale))
-    app.installTranslator(translator)
-    dialog = MainDialog()
-    sys.exit(app.exec())
-
-
-if __name__ == "__main__":
-    gui()

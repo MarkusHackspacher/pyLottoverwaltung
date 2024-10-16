@@ -20,20 +20,44 @@
     </message>
 </context>
 <context>
-    <name>MainDialog</name>
+    <name>Main</name>
     <message>
-        <location filename="lotto_gui_dateneing.py" line="147"/>
-        <source>ready</source>
-        <translation>Bereit</translation>
+        <location filename="main.py" line="88"/>
+        <source>You want load a file or create a new file</source>
+        <translation>Vorhandene Datei öffnen oder neue Datei erstellen</translation>
     </message>
     <message>
-        <location filename="lotto_gui_dateneing.py" line="209"/>
-        <source>Eingabe der Gewinnzahlen von einer Ziehungoder des Lottoscheins
- Lizenz: GNU GPLv3
-http://www.gnu.org/licenses/</source>
-        <translation type="obsolete">Eingabe der Gewinnzahlen von einer Ziehungoder des Lottoscheins
- Lizenz: GNU GPLv3
-http://www.gnu.org/licenses/</translation>
+        <location filename="main.py" line="106"/>
+        <source>Question</source>
+        <translation>Frage</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="108"/>
+        <source>Open</source>
+        <translation>Öffnen</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="109"/>
+        <source>New</source>
+        <translation>Neu</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="110"/>
+        <source>Exit</source>
+        <translation>Beenden</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="113"/>
+        <source>Open Database File *.sqlite</source>
+        <translation>Öffne Datenbank Datei *.sqlite</translation>
+    </message>
+</context>
+<context>
+    <name>MainDialog</name>
+    <message>
+        <location filename="lotto_gui_dateneing.py" line="150"/>
+        <source>ready</source>
+        <translation>Bereit</translation>
     </message>
     <message>
         <location filename="lotto_gui_dateneing.py" line="206"/>
@@ -41,21 +65,19 @@ http://www.gnu.org/licenses/</translation>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="lotto_gui_dateneing.py" line="215"/>
-        <source>Von Markus Hackspacher</source>
-        <translation type="obsolete">Von Markus Hackspacher</translation>
-    </message>
-    <message>
-        <location filename="lotto_gui_dateneing.py" line="203"/>
-        <source>Eingabe der Gewinnzahlen von einer Ziehung oder des Lottoscheins
- Lizenz: GNU GPLv3
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="lotto_gui_dateneing.py" line="210"/>
+        <location filename="lotto_gui_dateneing.py" line="216"/>
         <source>Website</source>
-        <translation type="unfinished"></translation>
+        <translation>Webseite</translation>
+    </message>
+    <message>
+        <location filename="lotto_gui_dateneing.py" line="207"/>
+        <source>Handle a lottery draw&lt;br&gt;pyLottoverwaltung is free software and use GNU General Public License&lt;br&gt;&lt;a href=&quot;http://www.gnu.org/licenses/&quot;&gt;www.gnu.org/licenses&lt;/a&gt;</source>
+        <translation>verwaltung vom Tippscheinen und Ziehungen&lt;br&gt;pyLottoverwaltung ist eine free software unter der GNU General Public License&lt;br&gt;&lt;a href=&quot;http://www.gnu.org/licenses/&quot;&gt;www.gnu.org/licenses&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="lotto_gui_dateneing.py" line="211"/>
+        <source>More Information about the program at &lt;a href=&quot;https://github.com/MarkusHackspacher/pyLottoverwaltung&quot;&gt;github.com/MarkusHackspacher/pyLottoverwaltung&lt;/a&gt;</source>
+        <translation>Mehr Information auf &lt;a href=&quot;https://github.com/MarkusHackspacher/pyLottoverwaltung&quot;&gt;github.com/MarkusHackspacher/pyLottoverwaltung&lt;/a&gt;</translation>
     </message>
 </context>
 <context>
@@ -89,11 +111,6 @@ http://www.gnu.org/licenses/</translation>
         <location filename="gui/lotto_dateneing.ui" line="659"/>
         <source>Info</source>
         <translation>Info</translation>
-    </message>
-    <message>
-        <location filename="gui/lotto_dateneing.ui" line="664"/>
-        <source>Go to the website</source>
-        <translation>Webseite öffnen</translation>
     </message>
     <message>
         <location filename="gui/lotto_dateneing.ui" line="88"/>
@@ -253,57 +270,57 @@ calendar</source>
 <context>
     <name>UiLottoEvaluation</name>
     <message>
-        <location filename="auswertung.py" line="48"/>
+        <location filename="auswertung.py" line="46"/>
         <source>record: {0}</source>
         <translation>Datensatz: {0}</translation>
     </message>
     <message>
-        <location filename="auswertung.py" line="51"/>
+        <location filename="auswertung.py" line="49"/>
         <source>Date: {0} Numbers: {1}</source>
         <translation>Datum: {0} Zahlen: {1}</translation>
     </message>
     <message>
-        <location filename="auswertung.py" line="57"/>
+        <location filename="auswertung.py" line="55"/>
         <source>No matching draws found</source>
         <translation>Keine übereinstimmende Ziehungen gefunden</translation>
     </message>
     <message>
-        <location filename="auswertung.py" line="60"/>
+        <location filename="auswertung.py" line="58"/>
         <source>The following drawings found:</source>
         <translation>Folgende Ziehungen gefunden:</translation>
     </message>
     <message>
-        <location filename="auswertung.py" line="90"/>
+        <location filename="auswertung.py" line="88"/>
         <source>Date: {0} | {1}, {2}, {3}, {4}, {5}, {6} {7} matches: {8}</source>
         <translation>Darum: {0} | {1}, {2},{3}, {4}, {5}, {6} {7} Übereinstimmungen: {8}</translation>
     </message>
     <message>
-        <location filename="auswertung.py" line="96"/>
+        <location filename="auswertung.py" line="94"/>
         <source>only match with the additional number: {0}</source>
         <translation>nur Übereinstimmend mit der Zusatzzahl: {0}</translation>
     </message>
     <message>
-        <location filename="auswertung.py" line="99"/>
+        <location filename="auswertung.py" line="97"/>
         <source>a number</source>
         <translation>einer Zahl</translation>
     </message>
     <message>
-        <location filename="auswertung.py" line="99"/>
+        <location filename="auswertung.py" line="97"/>
         <source>two numbers</source>
         <translation>zwei Zahlen</translation>
     </message>
     <message>
-        <location filename="auswertung.py" line="99"/>
+        <location filename="auswertung.py" line="97"/>
         <source>three numbers</source>
         <translation>drei Zahlen</translation>
     </message>
     <message>
-        <location filename="auswertung.py" line="99"/>
+        <location filename="auswertung.py" line="97"/>
         <source>four numbers</source>
         <translation>vier Zahlen</translation>
     </message>
     <message>
-        <location filename="auswertung.py" line="101"/>
+        <location filename="auswertung.py" line="99"/>
         <source>{} Matches with {}, plus additional number: {}</source>
         <translation>{} Übereinstimmungen mit {}, plus Zusatzzahl: {}</translation>
     </message>

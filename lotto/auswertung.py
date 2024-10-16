@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 # pyLottoverwaltung
@@ -28,7 +27,6 @@ except ImportError:
     from PyQt5 import QtGui, QtWidgets, uic
 
 
-
 class UiLottoEvaluation(QtWidgets.QDialog):
     """
     analyze dialog
@@ -48,7 +46,8 @@ class UiLottoEvaluation(QtWidgets.QDialog):
         schein = data_handler.get_schein(rowid)[0]
         text = self.tr('Date: {0} Numbers: {1}')
         self.edi_daten.appendPlainText(str(text).format(schein[1], schein[5]))
-        self.edi_daten.moveCursor(self.edi_daten.textCursor().MoveOperation.End)
+        self.edi_daten.moveCursor(self.edi_daten.textCursor()
+                                  .MoveOperation.End)
         lottodaten = data_handler.get_id_numbers_of_ziehung(rowid)
         anzahl_lottodaten = len(lottodaten)
         if anzahl_lottodaten == 0:
@@ -104,4 +103,5 @@ class UiLottoEvaluation(QtWidgets.QDialog):
                         str(text_zahl[c]),
                         uebereinstimmungen[c + 2 * 2]))
                 c += 1
-            self.edi_daten.moveCursor(self.edi_daten.textCursor().MoveOperation.End)
+            self.edi_daten.moveCursor(self.edi_daten.textCursor().
+                                      MoveOperation.End)

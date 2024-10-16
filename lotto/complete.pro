@@ -1,6 +1,7 @@
  SOURCES         = lotto_gui_dateneing.py \
-                   auswertung.py
- FORMS           = gui/lotto_dateneing.ui \
+                   auswertung.py \
+                   main.py
+FORMS           = gui/lotto_dateneing.ui \
                    gui/auswertung.ui \
                    gui/dialog_kalender.ui
  TRANSLATIONS    = pylv_de.ts 

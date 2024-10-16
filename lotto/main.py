@@ -21,26 +21,24 @@ You should have received a copy of the GNU General Public License
 along with Archerank2.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import functools
 import logging
 import os
 import sys
-from os.path import join
 
 try:
     from PyQt6 import QtGui, QtWidgets
-    from PyQt6.QtCore import (PYQT_VERSION_STR, QDir, QLocale, QObject, Qt,
-                              QTimer, QTranslator)
-    from PyQt6.QtWidgets import (QDockWidget, QFileDialog, QMessageBox,
-                                 QPushButton, QTableView, QVBoxLayout, QWidget)
+    from PyQt6.QtCore import (PYQT_VERSION_STR, QDir, QLocale, Qt,
+                              QTranslator)
+    from PyQt6.QtWidgets import (QFileDialog, QMessageBox,
+                                 )
     LeftDockWidgetArea = Qt.DockWidgetArea.LeftDockWidgetArea
     RightDockWidgetArea = Qt.DockWidgetArea.RightDockWidgetArea
 except ImportError as err:
     from PyQt5 import QtGui, QtWidgets
     from PyQt5.Qt import PYQT_VERSION_STR
-    from PyQt5.QtCore import QDir, QLocale, QObject, Qt, QTimer, QTranslator
-    from PyQt5.QtWidgets import (QDockWidget, QFileDialog, QMessageBox,
-                                 QPushButton, QTableView, QVBoxLayout, QWidget)
+    from PyQt5.QtCore import QDir, QLocale, Qt, QTranslator
+    from PyQt5.QtWidgets import (QFileDialog, QMessageBox,
+                                 )
     LeftDockWidgetArea, RightDockWidgetArea = Qt.LeftDockWidgetArea, Qt.RightDockWidgetArea
     print(f"main.py: ImportError {err=}, {type(err)=}")
 except Exception as err:
@@ -49,13 +47,6 @@ except Exception as err:
 
 from lotto import VERSION_STR
 from lotto.lotto_gui_dateneing import MainDialog
-
-import_mailmerge = True
-try:
-    from mailmerge import MailMerge
-except ImportError:
-    print('Not found docx-mailmerge, no export docx possible')
-    import_mailmerge = False
 
 
 class Main(QtWidgets.QApplication):
@@ -76,9 +67,10 @@ class Main(QtWidgets.QApplication):
             locale = arguments.language
         else:
             locale = str(QLocale.system().name())
-        logging.info(f'locale: {locale}')
         translator = QTranslator(self)
-        translator.load(join(f'pylv_{locale}'))
+        if not translator.load(f'pylv_{locale}', directory='lotto'):
+            logging.info('no Translation file load, use default')
+        logging.info(f'locale: {locale}, QTranslator: {translator.language()}')
         self.installTranslator(translator)
         self.initDataBase(arguments.database)
         self.dialog = MainDialog(self)
@@ -125,7 +117,6 @@ class Main(QtWidgets.QApplication):
             return
         else:
             return "exit"
-
 
     def main_loop(self):
         """application start
