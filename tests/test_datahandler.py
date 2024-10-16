@@ -2,7 +2,7 @@
 
 # pyLottoverwaltung
 
-# Copyright (C) <2015> Markus Hackspacher
+# Copyright (C) <2015-2024> Markus Hackspacher
 
 # This file is part of pyLottoverwaltung.
 
