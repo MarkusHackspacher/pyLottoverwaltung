@@ -36,7 +36,7 @@ To translate the program or make a translation in your language,
 insert in the complete.pro your language code.
 ```
 cd lotto
-pylupdate4 complete.pro
+pylupdate5 complete.pro
 ```
 translate your language file: pylv_xx.ts, and produce the .ts translation files with
 ```
@@ -52,7 +52,7 @@ und [Qt5 für Python](http://www.riverbankcomputing.com/software/pyqt/download5)
 Start mit: 
 ```python lotto.pyw```
 
-Das Layout (lotto_dateneing.ui) kann mit den Qt4-Designer bearbeitet werden.
+Das Layout (lotto_dateneing.ui) kann mit den Qt-Designer bearbeitet werden.
 
 Dokumentation als as .pdf Datei erstellen lassen:
 ```epydoc pylotto.pyw lotto --pdf```
