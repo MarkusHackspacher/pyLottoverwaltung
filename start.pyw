@@ -21,8 +21,15 @@ You should have received a copy of the GNU General Public License
 along with pyLottoverwaltung.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import sys
+import argparse
 
-from lotto.lotto_gui_dateneing import gui
+from lotto import main
 
-gui(sys.argv)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-db', '--database', help='file of the database')
+    parser.add_argument('-l', '--language', help='ISO code of language, de for Germany')
+    parser.add_argument('-log', type=int, help='logging level', choices=[1, 2, 3, 4, 5], default=3)
+    args = parser.parse_args()
+    app = main.Main(args)
+    app.main_loop()

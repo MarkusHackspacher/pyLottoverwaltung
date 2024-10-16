@@ -27,7 +27,10 @@ import sys
 import webbrowser
 from os.path import join
 
-from PyQt5 import QtCore, QtGui, QtWidgets, uic
+try:
+    from PyQt6 import QtCore, QtGui, QtWidgets, uic
+except ImportError:
+    from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 import lotto.auswertung as auswertung
 import lotto.kalender_datum as kalender_datum
@@ -35,7 +38,7 @@ import lotto.kalender_datum as kalender_datum
 from .datahandler import Datahandler
 
 
-class MainDialog(QtWidgets.QMainWindow):
+class MainDialog(QtCore.QObject):
     """
     initial the main window
     """
@@ -144,11 +147,10 @@ class MainDialog(QtWidgets.QMainWindow):
             self.ui.Btn_Numerals_1to49[button].clicked.connect(
                 self.onEingabefeld)
 
-        self.statusBar().showMessage(self.tr('ready'))
+        self.ui.statusBar().showMessage(self.tr('ready'))
 
-        self.ui.actionBeenden.triggered.connect(self.onclose)
-        self.ui.actionInfo.triggered.connect(self.on_info)
-        self.ui.actionGo_to_the_website.triggered.connect(self.onwebsite)
+        self.ui.actionBeenden.triggered.connect(self.onClose)
+        self.ui.actionInfo.triggered.connect(self.onInfo)
         self.ui.edi_daten_gewinnz.cursorPositionChanged.connect(
             self.ondaten_gewinnz)
         self.ui.edi_daten_lottoschein.cursorPositionChanged.connect(
@@ -167,7 +169,7 @@ class MainDialog(QtWidgets.QMainWindow):
             self.ui.spinBox_jahr.value(),
             self.ui.spinBox_monat.value(),
             self.ui.spinbox_tag.value())
-        if dlg.exec_() == 1:
+        if dlg.exec() == 1:
             self.ui.spinbox_tag.setValue(dlg.kalender().day())
             self.ui.spinBox_monat.setValue(dlg.kalender().month())
             self.ui.spinBox_jahr.setValue(dlg.kalender().year())
@@ -197,23 +199,28 @@ class MainDialog(QtWidgets.QMainWindow):
         self.ui.Btn_ls_loeschen.setEnabled(True)
         self.ui.btn_ls_auswerten.setEnabled(True)
 
-    def on_info(self, test=None):
+    def onInfo(self, test=None):
         """ Program info
         """
-        text = self.tr('Eingabe der Gewinnzahlen von einer Ziehung '
-                       'oder des Lottoscheins\n Lizenz: GNU GPLv3\n')
         infobox = QtWidgets.QMessageBox()
         infobox.setWindowTitle(self.tr('Info'))
-        infobox.setText(text)
-        infobox.setInformativeText('https://github.com/MarkusHackspacher/pyLottoverwaltung')
-        infobox.setStandardButtons(QtWidgets.QMessageBox.Ok)
-        websideButton = infobox.addButton(self.tr('Website'), QtWidgets.QMessageBox.ActionRole)
+        infobox.setText(self.tr(
+            'Handle a lottery draw<br>'
+            'pyLottoverwaltung is free software and use GNU General Public License<br>'
+            '<a href="http://www.gnu.org/licenses/">www.gnu.org/licenses</a>'))
+        infobox.setInformativeText(self.tr(
+            'More Information about the program at '
+            '<a href="https://github.com/MarkusHackspacher/pyLottoverwaltung">'
+            'github.com/MarkusHackspacher/pyLottoverwaltung</a>'))
+        infobox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
+        websideButton = infobox.addButton(self.tr('Website'),
+                                          QtWidgets.QMessageBox.ButtonRole.ActionRole)
         if test:
-            button = infobox.button(QtWidgets.QMessageBox.Ok)
+            button = infobox.button(QtWidgets.QMessageBox.StandardButton.Ok)
             QtCore.QTimer.singleShot(0, button.clicked)
         infobox.exec()
         if infobox.clickedButton() == websideButton:
-            self.onwebsite()
+            self.onWebsite()
 
     def spinbox_1to7_clear(self, number=None, numbers=None):
         """Die SpinBoxen 1 bis 6 und Zusatzzahl löschen"""
@@ -253,7 +260,7 @@ class MainDialog(QtWidgets.QMainWindow):
             self.ui.spinbox_tag.value())
         if self.ui.com_modus.currentIndex() == 0:
             self.data_handler.insert_ziehung(
-                day, self.draw_numbers(),
+                day, self.drawNumbers(),
                 self.ui.spinBox_superz.value(),
                 self.ui.spinBox_spiel77.value(),
                 self.ui.spinBox_super6.value())
@@ -261,7 +268,7 @@ class MainDialog(QtWidgets.QMainWindow):
             self.onbtn_gz_laden()
         else:
             self.data_handler.insert_schein(
-                day, self.draw_numbers()[:-1],
+                day, self.drawNumbers()[:-1],
                 self.ui.com_laufzeit.currentIndex(),
                 self.ui.com_laufzeit_tag.currentIndex(),
                 self.ui.spinBox_spiel77.value())
@@ -366,7 +373,7 @@ class MainDialog(QtWidgets.QMainWindow):
         self.ui.edi_daten_lottoschein.setPlainText(
             plain_text.document().toPlainText())
         self.ui.edi_daten_lottoschein.moveCursor(
-            self.ui.edi_daten_lottoschein.textCursor().End)
+            self.ui.edi_daten_lottoschein.textCursor().MoveOperation.End)
 
     def onbtn_gz_laden(self):
         """Read the Gewinnzahlen from the Database
@@ -382,7 +389,7 @@ class MainDialog(QtWidgets.QMainWindow):
         self.ui.edi_daten_gewinnz.setPlainText(
             plain_text.document().toPlainText())
         self.ui.edi_daten_gewinnz.moveCursor(
-            self.ui.edi_daten_gewinnz.textCursor().End)
+            self.ui.edi_daten_gewinnz.textCursor().MoveOperation.End)
 
     def on_checkbox_draw_numbers_show(self):
         """
@@ -451,7 +458,7 @@ class MainDialog(QtWidgets.QMainWindow):
     def buttonchange(self):
         """Button colour in dependence of the valve of the Spinbox
         """
-        a = self.draw_numbers()
+        a = self.drawNumbers()
         for button in self.ui.Btn_Numerals_1to49:
             if int(button.text()) in a:
                 button.setFlat(False)
@@ -467,7 +474,7 @@ class MainDialog(QtWidgets.QMainWindow):
         if the number is deactivated, also the
         deleted value of the corresponding spin box
         """
-        a = self.draw_numbers()
+        a = self.drawNumbers()
 
         for number in self.ui.spinBox_Zahlen:
             if number.value() == 0 and self.zahl not in a:
@@ -477,7 +484,7 @@ class MainDialog(QtWidgets.QMainWindow):
                 self.spinbox_1to7_clear(numbers=number.value())
                 self.zahl = 0
 
-        a = self.draw_numbers()
+        a = self.drawNumbers()
 
         if self.ui.spinBox_Zahlen[6].value() == 0 \
                 and self.ui.com_modus.currentIndex() == 0 \
@@ -488,19 +495,19 @@ class MainDialog(QtWidgets.QMainWindow):
             self.spinbox_1to7_clear(6)
         self.buttonchange()
 
-    def draw_numbers(self):
+    def drawNumbers(self):
         """numbers are in the draw
         """
         return [num_draw.value() for num_draw in self.ui.spinBox_Zahlen]
 
     @staticmethod
-    def onwebsite():
+    def onWebsite():
         """open website
         """
         webbrowser.open_new_tab(
             "https://github.com/MarkusHackspacher/pyLottoverwaltung")
 
-    def onclose(self):
+    def onClose(self):
         """menu button close
         """
         self.ui.close()

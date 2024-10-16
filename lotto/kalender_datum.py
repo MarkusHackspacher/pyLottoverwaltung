@@ -22,7 +22,10 @@
 
 from os.path import join
 
-from PyQt5 import QtCore, QtGui, QtWidgets, uic
+try:
+    from PyQt6 import QtCore, QtGui, QtWidgets, uic
+except ImportError:
+    from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 
 class CalendarUi(QtWidgets.QDialog):
