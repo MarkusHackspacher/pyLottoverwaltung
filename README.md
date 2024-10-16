@@ -43,6 +43,21 @@ translate your language file: pylv_xx.ts, and produce the .ts translation files 
 lrelease complete.pro
 ```
 
+Usage
+-----
+
+```bash
+usage: archerrank2.py [-h] [-db DATABASE] [-l LANGUAGE] [-log {1,2,3,4,5}]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -db DATABASE, --database DATABASE
+                        file of the database
+  -l LANGUAGE, --language LANGUAGE
+                        ISO code of language, de for Germany
+  -log {1,2,3,4,5}      logging level
+```
+
 Installieren:
 -------------
 
