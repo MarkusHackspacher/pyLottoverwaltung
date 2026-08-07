@@ -22,7 +22,14 @@ install:
 --------
 
 The program requires [Python 3.x](http://www.python.org/download/) 
-and [Qt5 for Python](http://www.riverbankcomputing.com/software/pyqt/download5).
+and Qt6 for Python.
+
+Install pyqt6:
+
+```bash
+pip3 install -r requirements.txt
+```
+
 
 Start with:
 ```./start.pyw```
