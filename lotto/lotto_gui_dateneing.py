@@ -239,20 +239,14 @@ class MainDialog(QtCore.QObject):
 
     def focus_spinbox_1to7(self):
         """Ein Auswahlfelder der 7 Gewinnzahlen oder
-        Lottoscheins hat sich geaendert"""
-        """
-        for spinBox_Zahlen in self.ui.spinBox_Zahlen:
-            if (self.ui.spinBox_Zahlen[number].value() ==
-             spinBox_Zahlen.value() and not
-             self.ui.spinBox_Zahlen[number] == spinBox_Zahlen
-             and not self.ui.spinBox_Zahlen[number].value() == 0):
-                 self.ui.spinBox_Zahlen[number].setValue(
-                  spinBox_Zahlen.value() + 1)
+        Lottoscheins hat sich geaendert
         """
         self.buttonchange()
 
     def onbtn_hinzu(self):
-        """drawing numbers move in database """
+        """
+        drawing numbers move in database
+        """
         day = '{0:4}-{1:02}-{2:02}'.format(
             self.ui.spinBox_jahr.value(),
             self.ui.spinBox_monat.value(),
@@ -275,7 +269,9 @@ class MainDialog(QtCore.QObject):
             self.onbtn_ls_laden()
 
     def onbtn_ls_auswerten(self):
-        """den Lottoschein auswerten"""
+        """
+        den Lottoschein auswerten
+        """
         dlg = auswertung.UiLottoEvaluation(self.data_handler.get_schein()[
             self.ui.edi_daten_lottoschein.textCursor().blockNumber()][0],
             self.data_handler)
